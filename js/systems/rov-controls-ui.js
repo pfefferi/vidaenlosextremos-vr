@@ -43,14 +43,23 @@ ROV.controlsUI = {
     switchTab: function (tabName) {
         this.currentTab = tabName;
 
-        // UI
+        // UI Tabs
         document.querySelectorAll('.tab-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.tab === tabName);
         });
 
+        // UI Views
         document.querySelectorAll('.controls-view').forEach(v => {
             v.classList.toggle('active', v.id === `view-${tabName}`);
         });
+
+        // Dynamic Footer Hints
+        const isGP = tabName === 'gamepad';
+        const gpClose = document.getElementById('hint-gp-close');
+        const gpSwitch = document.getElementById('hint-gp-switch');
+
+        if (gpClose) gpClose.style.display = isGP ? 'inline-block' : 'none';
+        if (gpSwitch) gpSwitch.style.display = isGP ? 'inline-block' : 'none';
     }
 };
 
@@ -64,10 +73,21 @@ window.addEventListener('keydown', (e) => {
         }
     }
 
-    // Nueva funcionalidad: Switch tab con TAB
+    // Switch tab con TAB
     if (e.code === 'Tab' && ROV.state.isControlsOpen) {
         e.preventDefault();
         const next = ROV.controlsUI.currentTab === 'gamepad' ? 'keyboard' : 'gamepad';
         ROV.controlsUI.switchTab(next);
     }
 });
+
+// Hook en el loop del Gamepad para el botón B (Cerrar)
+// Se llama desde rov-controls.js pero aquí capturamos la lógica de cierre si el overlay está abierto
+ROV.controlsUI.checkGPExit = function (gp) {
+    if (!ROV.state.isControlsOpen) return;
+
+    // Botón B (Index 1) para cerrar
+    if (gp.buttons[1].pressed) {
+        ROV.controlsUI.toggle(false);
+    }
+};

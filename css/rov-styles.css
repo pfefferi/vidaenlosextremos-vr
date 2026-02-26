@@ -480,8 +480,8 @@ body {
 #controls-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(5, 5, 10, 0.98);
-    backdrop-filter: blur(20px);
+    background: rgba(5, 5, 8, 0.98);
+    backdrop-filter: blur(25px);
     z-index: 3000;
     /* Superar todo */
     display: flex;
@@ -503,43 +503,44 @@ body {
 
 .controls-header {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding-bottom: 20px;
-    margin-bottom: 5vh;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 25px;
+    margin-bottom: 6vh;
 }
 
 .controls-title {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 900;
-    letter-spacing: 4px;
+    letter-spacing: 6px;
     text-transform: uppercase;
-    color: #00ff00;
+    color: #ffffff;
+    opacity: 0.9;
 }
 
 .controls-tabs {
     display: flex;
-    gap: 30px;
+    gap: 15px;
 }
 
 .tab-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #aaa;
-    font-size: 16px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
     cursor: pointer;
-    padding: 12px 30px;
-    transition: all 0.2s;
-    border-radius: 4px;
+    padding: 10px 24px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
 }
 
 .tab-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
     color: #fff;
 }
 
@@ -551,7 +552,7 @@ body {
 
 .controls-content {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     flex: 1;
     display: flex;
     justify-content: center;
@@ -561,13 +562,13 @@ body {
 .controls-view {
     display: none;
     width: 100%;
-    animation: fadeIn 0.3s ease forwards;
+    animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes fadeIn {
+@keyframes slideInUp {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(20px);
     }
 
     to {
@@ -583,67 +584,85 @@ body {
 .mapping-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8vh 10%;
+    gap: 10vh 8%;
     width: 100%;
 }
 
 .mapping-section h3 {
-    font-size: 20px;
-    color: #00ff00;
-    margin-bottom: 25px;
-    border-left: 4px solid #00ff00;
-    padding-left: 15px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    font-weight: 900;
 }
 
 .mapping-item {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    font-size: 22px;
-    font-weight: 500;
+    margin-bottom: 24px;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .mapping-key {
-    background: #fff;
-    color: #000;
-    padding: 6px 14px;
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
     font-weight: 900;
-    margin-right: 20px;
-    min-width: 50px;
+    margin-right: 25px;
+    min-width: 60px;
     text-align: center;
-    box-shadow: 0 4px 0 #888;
-    font-size: 18px;
+    font-size: 16px;
     display: inline-block;
-}
-
-.mapping-label {
-    color: #eee;
     text-transform: uppercase;
 }
 
+.mapping-label {
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Footer & Hints */
 .controls-footer {
-    margin-top: 5vh;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 6vh;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.footer-hints {
+    display: flex;
     gap: 40px;
-    font-size: 14px;
-    color: #888;
 }
 
 .footer-hint {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+}
+
+.hint-key {
+    background: #fff;
+    color: #000;
+    padding: 2px 8px;
+    font-weight: 900;
+    border-radius: 2px;
+    font-size: 11px;
 }
 
 .ui-hidden {
     opacity: 0;
     pointer-events: none;
-}

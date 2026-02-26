@@ -159,54 +159,56 @@
         </div>
 
         <div class="controls-content">
-            <!-- Gamepad View (Grid Style) -->
+            <!-- Gamepad View -->
             <div class="controls-view active" id="view-gamepad">
                 <div class="mapping-grid">
                     <div class="mapping-section">
-                        <h3>MOVEMENT</h3>
+                        <h3>PILOTING & NAVIGATION</h3>
                         <div class="mapping-item"><span class="mapping-key">L-STICK</span> <span
-                                class="mapping-label">SURGE / SWAY</span></div>
-                        <div class="mapping-item"><span class="mapping-key">R2 / R-TRIG</span> <span
+                                class="mapping-label">MOVE SURGE/SWAY</span></div>
+                        <div class="mapping-item"><span class="mapping-key">R-STICK</span> <span
+                                class="mapping-label">CAMERA PAN/TILT</span></div>
+                        <div class="mapping-item"><span class="mapping-key">R2 / RT</span> <span
                                 class="mapping-label">ASCEND</span></div>
-                        <div class="mapping-item"><span class="mapping-key">L2 / L-TRIG</span> <span
+                        <div class="mapping-item"><span class="mapping-key">L2 / LT</span> <span
                                 class="mapping-label">DESCEND</span></div>
                     </div>
                     <div class="mapping-section">
-                        <h3>SYSTEMS</h3>
-                        <div class="mapping-item"><span class="mapping-key">R-STICK</span> <span
-                                class="mapping-label">CAMERA LOOK</span></div>
+                        <h3>MISSION & SYSTEMS</h3>
+                        <div class="mapping-item"><span class="mapping-key">BTN A</span> <span
+                                class="mapping-label">SCAN / NEXT HUD</span></div>
                         <div class="mapping-item"><span class="mapping-key">R1 / L1</span> <span
                                 class="mapping-label">ZOOM IN / OUT</span></div>
-                        <div class="mapping-item"><span class="mapping-key">BUTTON A</span> <span
-                                class="mapping-label">SCAN / HUD MODE</span></div>
-                        <div class="mapping-item"><span class="mapping-key">BUTTON Y</span> <span
+                        <div class="mapping-item"><span class="mapping-key">BTN Y</span> <span
                                 class="mapping-label">TOGGLE LIGHTS</span></div>
+                        <div class="mapping-item"><span class="mapping-key">BTN X</span> <span
+                                class="mapping-label">RESET POSITION</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Keyboard View (Grid Style) -->
+            <!-- Keyboard View -->
             <div class="controls-view" id="view-keyboard">
                 <div class="mapping-grid">
                     <div class="mapping-section">
-                        <h3>MOVEMENT</h3>
+                        <h3>PILOTING & NAVIGATION</h3>
                         <div class="mapping-item"><span class="mapping-key">W A S D</span> <span
-                                class="mapping-label">SURGE / SWAY</span></div>
+                                class="mapping-label">MOVE SURGE/SWAY</span></div>
+                        <div class="mapping-item"><span class="mapping-key">ARROWS</span> <span
+                                class="mapping-label">CAMERA PAN/TILT</span></div>
                         <div class="mapping-item"><span class="mapping-key">SPACE / E</span> <span
                                 class="mapping-label">ASCEND</span></div>
                         <div class="mapping-item"><span class="mapping-key">SHIFT / Q</span> <span
                                 class="mapping-label">DESCEND</span></div>
-                        <div class="mapping-item"><span class="mapping-key">ARROWS</span> <span
-                                class="mapping-label">PAN / TILT</span></div>
                     </div>
                     <div class="mapping-section">
-                        <h3>MISSION</h3>
+                        <h3>MISSION & SYSTEMS</h3>
                         <div class="mapping-item"><span class="mapping-key">ENTER</span> <span
                                 class="mapping-label">SCAN WAYPOINT</span></div>
-                        <div class="mapping-item"><span class="mapping-key">H</span> <span class="mapping-label">HUD
-                                VISIBILITY</span></div>
                         <div class="mapping-item"><span class="mapping-key">L</span> <span class="mapping-label">TOGGLE
                                 LIGHTS</span></div>
+                        <div class="mapping-item"><span class="mapping-key">H</span> <span class="mapping-label">HUD
+                                VISIBILITY</span></div>
                         <div class="mapping-item"><span class="mapping-key">R</span> <span class="mapping-label">RESET
                                 POSITION</span></div>
                     </div>
@@ -215,8 +217,13 @@
         </div>
 
         <div class="controls-footer">
-            <div class="footer-hint"><span class="mapping-key">ESC</span> CLOSE OVERLAY</div>
-            <div class="footer-hint"><span class="mapping-key">TAB</span> SWITCH INPUT</div>
+            <div class="footer-hints">
+                <div class="footer-hint"><span class="hint-key">ESC</span> <span class="hint-key" id="hint-gp-close"
+                        style="display:none">BTN B</span> CLOSE</div>
+                <div class="footer-hint"><span class="hint-key">TAB</span> <span class="hint-key" id="hint-gp-switch"
+                        style="display:none">DPAD</span> SWITCH</div>
+            </div>
+            <div>VER. DEPLOYED</div>
         </div>
     </div>
 

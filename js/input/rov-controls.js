@@ -9,6 +9,11 @@ function updateGamepad() {
         const gp = gamepads[i];
         if (!gp || !gp.connected) continue;
 
+        // Check for UI Exit (Gamepad B button)
+        if (ROV.controlsUI && ROV.controlsUI.checkGPExit) {
+            ROV.controlsUI.checkGPExit(gp);
+        }
+
         anyActive = true;
         processGamepadInput(gp);
     }
