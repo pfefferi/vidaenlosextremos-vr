@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initGyroToggle();
     loadIcons();
+    checkVersion();
 
     fetch('../data/dives.json')
         .then(res => {
@@ -153,4 +154,18 @@ function loadIcons() {
             console.log("[Loader] SVG Icons Injected");
         })
         .catch(err => console.error("[Loader] Icons Error:", err));
+}
+
+function checkVersion() {
+    fetch('../data/version.json')
+        .then(res => res.json())
+        .then(ver => {
+            console.log(
+                `%c 🚀 DEPLOYED VERSION: ${ver.hash} \n%c 📅 ${ver.timestamp} \n%c 💬 "${ver.message}"`,
+                "color: #00ff00; font-weight: bold; font-size: 14px;",
+                "color: #888; font-style: italic;",
+                "color: #aaa;"
+            );
+        })
+        .catch(() => console.warn("[Loader] Version tracking not found"));
 }
