@@ -70,7 +70,8 @@
             <div id="help-toggle" class="icon-btn hidable" onclick="ROV.controlsUI.toggle()" title="Controls (ESC)">
                 <svg>
                     <use href="#icon-help"></use>
-                </svg></div>
+                </svg>
+            </div>
             <div id="back-to-menu" class="icon-btn hidable" onclick="window.location.href='../index.html'"
                 title="Salir"><svg>
                     <use href="#icon-exit"></use>
@@ -158,57 +159,64 @@
         </div>
 
         <div class="controls-content">
-            <!-- Gamepad View -->
+            <!-- Gamepad View (Grid Style) -->
             <div class="controls-view active" id="view-gamepad">
-                <svg class="mapping-diagram" viewBox="0 0 800 450">
-                    <path
-                        d="M250 120 Q200 120 180 170 L150 320 Q150 370 200 390 L300 370 L500 370 L600 390 Q650 370 650 320 L620 170 Q600 120 550 120 Z"
-                        stroke="#fff" stroke-width="2" fill="none" opacity="0.3" />
-                    <circle cx="280" cy="220" r="35" stroke="#00ff00" stroke-width="2" opacity="0.8" />
-                    <text x="210" y="225" fill="#00ff00" font-size="12" text-anchor="end" font-weight="bold">MOVE</text>
-                    <line x1="215" y1="220" x2="245" y2="220" stroke="#00ff00" stroke-width="1" opacity="0.5" />
-                    <text x="180" y="140" fill="#fff" font-size="11" text-anchor="end">ZOOM OUT (L1)</text>
-                    <text x="180" y="100" fill="#fff" font-size="11" text-anchor="end">DESCEND (L2)</text>
-                    <circle cx="520" cy="220" r="35" stroke="#00ff00" stroke-width="2" opacity="0.8" />
-                    <text x="590" y="225" fill="#00ff00" font-size="12" text-anchor="start"
-                        font-weight="bold">LOOK</text>
-                    <line x1="555" y1="220" x2="585" y2="220" stroke="#00ff00" stroke-width="1" opacity="0.5" />
-                    <text x="620" y="140" fill="#fff" font-size="11" text-anchor="start">ZOOM IN (R1)</text>
-                    <text x="620" y="100" fill="#fff" font-size="11" text-anchor="start">ASCEND (R2)</text>
-                    <g transform="translate(580, 280)" fill="#fff" font-size="11">
-                        <text x="0" y="0">SCAN [A]</text>
-                        <text x="0" y="25">HUD [A]</text>
-                        <text x="0" y="50">RESET [X]</text>
-                        <text x="0" y="75">LIGHTS [Y]</text>
-                    </g>
-                </svg>
+                <div class="mapping-grid">
+                    <div class="mapping-section">
+                        <h3>MOVEMENT</h3>
+                        <div class="mapping-item"><span class="mapping-key">L-STICK</span> <span
+                                class="mapping-label">SURGE / SWAY</span></div>
+                        <div class="mapping-item"><span class="mapping-key">R2 / R-TRIG</span> <span
+                                class="mapping-label">ASCEND</span></div>
+                        <div class="mapping-item"><span class="mapping-key">L2 / L-TRIG</span> <span
+                                class="mapping-label">DESCEND</span></div>
+                    </div>
+                    <div class="mapping-section">
+                        <h3>SYSTEMS</h3>
+                        <div class="mapping-item"><span class="mapping-key">R-STICK</span> <span
+                                class="mapping-label">CAMERA LOOK</span></div>
+                        <div class="mapping-item"><span class="mapping-key">R1 / L1</span> <span
+                                class="mapping-label">ZOOM IN / OUT</span></div>
+                        <div class="mapping-item"><span class="mapping-key">BUTTON A</span> <span
+                                class="mapping-label">SCAN / HUD MODE</span></div>
+                        <div class="mapping-item"><span class="mapping-key">BUTTON Y</span> <span
+                                class="mapping-label">TOGGLE LIGHTS</span></div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Keyboard View -->
+            <!-- Keyboard View (Grid Style) -->
             <div class="controls-view" id="view-keyboard">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; padding: 0 40px;">
-                    <div>
-                        <h3 style="color:#00ff00; border-bottom: 1px solid rgba(0,255,0,0.3); padding-bottom: 10px;">
-                            PILOTING</h3>
-                        <p style="margin: 15px 0;"><span class="footer-key">W A S D</span> MOVE SURGE/SWAY</p>
-                        <p style="margin: 15px 0;"><span class="footer-key">SPACE / E</span> ASCEND</p>
-                        <p style="margin: 15px 0;"><span class="footer-key">SHIFT / Q</span> DESCEND</p>
-                        <p style="margin: 15px 0;"><span class="footer-key">ARROWS</span> CAMERA PAN/TILT</p>
+                <div class="mapping-grid">
+                    <div class="mapping-section">
+                        <h3>MOVEMENT</h3>
+                        <div class="mapping-item"><span class="mapping-key">W A S D</span> <span
+                                class="mapping-label">SURGE / SWAY</span></div>
+                        <div class="mapping-item"><span class="mapping-key">SPACE / E</span> <span
+                                class="mapping-label">ASCEND</span></div>
+                        <div class="mapping-item"><span class="mapping-key">SHIFT / Q</span> <span
+                                class="mapping-label">DESCEND</span></div>
+                        <div class="mapping-item"><span class="mapping-key">ARROWS</span> <span
+                                class="mapping-label">PAN / TILT</span></div>
                     </div>
-                    <div>
-                        <h3 style="color:#00ff00; border-bottom: 1px solid rgba(0,255,0,0.3); padding-bottom: 10px;">
-                            MISSION</h3>
-                        <p style="margin: 15px 0;"><span class="footer-key">ENTER</span> SCAN WAYPOINT</p>
-                        <p style="margin: 15px 0;"><span class="footer-key">L</span> TOGGLE LIGHTS</p>
-                        <p style="margin: 15px 0;"><span class="footer-key">H</span> HUD VISIBILITY</p>
-                        <p style="margin: 15px 0;"><span class="footer-key">R</span> RESET POSITION</p>
+                    <div class="mapping-section">
+                        <h3>MISSION</h3>
+                        <div class="mapping-item"><span class="mapping-key">ENTER</span> <span
+                                class="mapping-label">SCAN WAYPOINT</span></div>
+                        <div class="mapping-item"><span class="mapping-key">H</span> <span class="mapping-label">HUD
+                                VISIBILITY</span></div>
+                        <div class="mapping-item"><span class="mapping-key">L</span> <span class="mapping-label">TOGGLE
+                                LIGHTS</span></div>
+                        <div class="mapping-item"><span class="mapping-key">R</span> <span class="mapping-label">RESET
+                                POSITION</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="controls-footer">
-            <span class="footer-key">ESC</span> CLOSE OVERLAY
+            <div class="footer-hint"><span class="mapping-key">ESC</span> CLOSE OVERLAY</div>
+            <div class="footer-hint"><span class="mapping-key">TAB</span> SWITCH INPUT</div>
         </div>
     </div>
 

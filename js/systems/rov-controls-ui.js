@@ -63,4 +63,11 @@ window.addEventListener('keydown', (e) => {
             ROV.controlsUI.toggle(true);
         }
     }
+
+    // Nueva funcionalidad: Switch tab con TAB
+    if (e.code === 'Tab' && ROV.state.isControlsOpen) {
+        e.preventDefault();
+        const next = ROV.controlsUI.currentTab === 'gamepad' ? 'keyboard' : 'gamepad';
+        ROV.controlsUI.switchTab(next);
+    }
 });
