@@ -55,11 +55,18 @@ ROV.controlsUI = {
 
         // Dynamic Footer Hints
         const isGP = tabName === 'gamepad';
+
+        // Gamepad Specific Hints
         const gpClose = document.getElementById('hint-gp-close');
         const gpSwitch = document.getElementById('hint-gp-switch');
-
         if (gpClose) gpClose.style.display = isGP ? 'inline-block' : 'none';
         if (gpSwitch) gpSwitch.style.display = isGP ? 'inline-block' : 'none';
+
+        // Keyboard Specific Hints
+        const kbClose = document.getElementById('hint-kb-close');
+        const kbSwitch = document.getElementById('hint-kb-switch');
+        if (kbClose) kbClose.style.display = isGP ? 'none' : 'inline-block';
+        if (kbSwitch) kbSwitch.style.display = isGP ? 'none' : 'inline-block';
     }
 };
 

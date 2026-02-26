@@ -37,35 +37,38 @@ function processGamepadInput(gp) {
 
     const { state, config } = ROV;
 
-    // A. MOVIMIENTO
+    // A. MOVIMIENTO (Sway/Surge con LS)
     const lx = Math.abs(gp.axes[0]) > 0.1 ? gp.axes[0] : 0;
     const ly = Math.abs(gp.axes[1]) > 0.1 ? -gp.axes[1] : 0;
 
+    // ELEVAR/DESCENDER (Ahora en L1/R1 - Indices 4/5)
     let heave = 0;
-    if (gp.buttons[6].pressed) heave = -1; // L2
-    if (gp.buttons[7].pressed) heave = 1;  // R2
+    if (gp.buttons[4].pressed) heave = -1; // L1 (Descend)
+    if (gp.buttons[5].pressed) heave = 1;  // R1 (Ascend)
 
     if (lx !== 0 || ly !== 0 || heave !== 0) {
         ROV.physics.applyMove(ly, lx, heave, true);
     }
 
-    // B. ROTACIÓN
+    // B. ROTACIÓN (RS - Invertido Y por petición de usuario)
     handleGamepadRotation(gp);
 
     // C. ACCIONES DISCRETAS
     const db = state.debounce;
 
-    // Log de actividad (Opcional - Útil para debug)
-    if (gp.buttons[0].pressed) console.log(`[Input] Button 0 (A) pressed on slot ${gp.index}`);
-
+    // ZOOM (Ahora en L2/R2 - Indices 6/7 para mayor control analógico/suave)
     let fov = ROV.refs.cam.getAttribute('camera').fov;
-    if (gp.buttons[5].pressed) fov = Math.max(5, fov - 1); // R1
-    if (gp.buttons[4].pressed) fov = Math.min(140, fov + 1); // L1
+    if (gp.buttons[7].pressed) fov = Math.max(5, fov - 1); // R2 (Zoom In)
+    if (gp.buttons[6].pressed) fov = Math.min(140, fov + 1); // L2 (Zoom Out)
     if (fov !== ROV.refs.cam.getAttribute('camera').fov) {
         ROV.refs.cam.setAttribute('camera', 'fov', fov);
     }
 
-    // --- BOTÓN CONTEXTUAL (A/X) ---
+    // CAMBIO DE VELOCIDAD (D-Pad Up/Down - Indices 12/13)
+    if (gp.buttons[12].pressed && !db.speed) { ROV.actions.changeSpeed(1); triggerDebounce('speed'); }
+    if (gp.buttons[13].pressed && !db.speed) { ROV.actions.changeSpeed(-1); triggerDebounce('speed'); }
+
+    // --- BOTÓN CONTEXTUAL (A) ---
     if (gp.buttons[0].pressed && !db.action) {
         if (ROV.state.activeWaypoint) {
             ROV.actions.scanWaypoint();
@@ -75,16 +78,16 @@ function processGamepadInput(gp) {
         triggerDebounce('action');
     }
 
-    if (gp.buttons[15].pressed && !db.speed) { ROV.actions.changeSpeed(1); triggerDebounce('speed'); }
-    if (gp.buttons[14].pressed && !db.speed) { ROV.actions.changeSpeed(-1); triggerDebounce('speed'); }
-    if (gp.buttons[3].pressed && !db.light) { ROV.actions.toggleLights(); triggerDebounce('light'); }
-    if (gp.buttons[2].pressed && !db.reset) { ROV.actions.resetPosition(); triggerDebounce('reset'); }
+    // OTROS BOTONES
+    if (gp.buttons[3].pressed && !db.light) { ROV.actions.toggleLights(); triggerDebounce('light'); } // Y
+    if (gp.buttons[8].pressed && !db.reset) { ROV.actions.resetPosition(); triggerDebounce('reset'); } // Share/Select
+    if (gp.buttons[9].pressed && !db.reset) { ROV.actions.resetPosition(); triggerDebounce('reset'); } // Options/Start
 }
 
 function handleGamepadRotation(gp) {
     const { rig, pivot } = ROV.refs;
     let rawRx = gp.axes[2];
-    let rawRy = gp.axes[3];
+    let rawRy = -gp.axes[3]; // <--- INVERTIDO POR PETICIÓN DE USUARIO
 
     if (Math.abs(rawRx) < ROV.config.deadzone) rawRx = 0;
     if (Math.abs(rawRy) < ROV.config.deadzone) rawRy = 0;
