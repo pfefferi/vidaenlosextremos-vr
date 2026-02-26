@@ -60,6 +60,10 @@
             <div id="reset-pos" class="icon-btn hidable" title="Resetear Posición"><svg>
                     <use href="#icon-refresh"></use>
                 </svg></div>
+            <div id="help-toggle" class="icon-btn hidable" onclick="ROV.controlsUI.toggle()" title="Controls (ESC)">
+                <svg>
+                    <use href="#icon-help"></use>
+                </svg></div>
             <div id="back-to-menu" class="icon-btn hidable" onclick="window.location.href='../index.html'"
                 title="Salir"><svg>
                     <use href="#icon-exit"></use>
@@ -153,6 +157,79 @@
 
         <a-light type="hemisphere" intensity="0.4" groundColor="#000"></a-light>
     </a-scene>
+    <!-- CONTROLS OVERLAY -->
+    <div id="controls-overlay">
+        <div class="controls-header">
+            <div class="controls-title">MISSION CONTROLS</div>
+            <div class="controls-tabs">
+                <button class="tab-btn active" data-tab="gamepad">GAMEPAD</button>
+                <button class="tab-btn" data-tab="keyboard">KEYBOARD</button>
+            </div>
+        </div>
+
+        <div class="controls-content">
+            <!-- Gamepad View -->
+            <div class="controls-view active" id="view-gamepad">
+                <svg class="mapping-diagram" viewBox="0 0 800 450">
+                    <!-- Stylized Controller Body -->
+                    <path
+                        d="M250 120 Q200 120 180 170 L150 320 Q150 370 200 390 L300 370 L500 370 L600 390 Q650 370 650 320 L620 170 Q600 120 550 120 Z"
+                        stroke="#fff" stroke-width="2" fill="none" opacity="0.3" />
+
+                    <!-- Left Side -->
+                    <circle cx="280" cy="220" r="35" stroke="#00ff00" stroke-width="2" opacity="0.8" />
+                    <text x="210" y="225" fill="#00ff00" font-size="12" text-anchor="end" font-weight="bold">MOVE</text>
+                    <line x1="215" y1="220" x2="245" y2="220" stroke="#00ff00" stroke-width="1" opacity="0.5" />
+
+                    <text x="180" y="140" fill="#fff" font-size="11" text-anchor="end">ZOOM OUT (L1)</text>
+                    <text x="180" y="100" fill="#fff" font-size="11" text-anchor="end">DESCEND (L2)</text>
+
+                    <!-- Right Side -->
+                    <circle cx="520" cy="220" r="35" stroke="#00ff00" stroke-width="2" opacity="0.8" />
+                    <text x="590" y="225" fill="#00ff00" font-size="12" text-anchor="start"
+                        font-weight="bold">LOOK</text>
+                    <line x1="555" y1="220" x2="585" y2="220" stroke="#00ff00" stroke-width="1" opacity="0.5" />
+
+                    <text x="620" y="140" fill="#fff" font-size="11" text-anchor="start">ZOOM IN (R1)</text>
+                    <text x="620" y="100" fill="#fff" font-size="11" text-anchor="start">ASCEND (R2)</text>
+
+                    <!-- Buttons -->
+                    <g transform="translate(580, 280)" fill="#fff" font-size="11">
+                        <text x="0" y="0">SCAN [A]</text>
+                        <text x="0" y="25">HUD [A]</text>
+                        <text x="0" y="50">RESET [X]</text>
+                        <text x="0" y="75">LIGHTS [Y]</text>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Keyboard View -->
+            <div class="controls-view" id="view-keyboard">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; padding: 0 40px;">
+                    <div>
+                        <h3 style="color:#00ff00; border-bottom: 1px solid rgba(0,255,0,0.3); padding-bottom: 10px;">
+                            PILOTING</h3>
+                        <p style="margin: 15px 0;"><span class="footer-key">W A S D</span> MOVE SURGE/SWAY</p>
+                        <p style="margin: 15px 0;"><span class="footer-key">SPACE / E</span> ASCEND</p>
+                        <p style="margin: 15px 0;"><span class="footer-key">SHIFT / Q</span> DESCEND</p>
+                        <p style="margin: 15px 0;"><span class="footer-key">ARROWS</span> CAMERA PAN/TILT</p>
+                    </div>
+                    <div>
+                        <h3 style="color:#00ff00; border-bottom: 1px solid rgba(0,255,0,0.3); padding-bottom: 10px;">
+                            MISSION</h3>
+                        <p style="margin: 15px 0;"><span class="footer-key">ENTER</span> SCAN WAYPOINT</p>
+                        <p style="margin: 15px 0;"><span class="footer-key">L</span> TOGGLE LIGHTS</p>
+                        <p style="margin: 15px 0;"><span class="footer-key">H</span> HUD VISIBILITY</p>
+                        <p style="margin: 15px 0;"><span class="footer-key">R</span> RESET POSITION</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-footer">
+            <span class="footer-key">ESC</span> CLOSE OVERLAY
+        </div>
+    </div>
 
     <!-- SVG Icons are now loaded dynamically from assets/icons.html -->
 
@@ -169,6 +246,7 @@
     <script src="../js/input/rov-input-keyboard.js"></script>
     <script src="../js/input/rov-controls.js"></script>
 
+    <script src="../js/systems/rov-controls-ui.js"></script>
     <script src="../js/loader.js"></script>
     <script src="../js/rov-main.js"></script>
 

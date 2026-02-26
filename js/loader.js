@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initGyroToggle();
     loadIcons();
     checkVersion();
+    if (ROV.controlsUI) ROV.controlsUI.init();
 
     fetch('../data/dives.json')
         .then(res => {
