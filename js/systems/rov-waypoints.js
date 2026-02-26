@@ -1,20 +1,20 @@
 // js/systems/rov-waypoints.js
 
 ROV.waypoints = {
-    list: [], 
+    list: [],
     uiBtn: null,
     uiExplore: null, // Referencia al texto Explore
-    
-    init: function() {
+
+    init: function () {
         ROV.state.activeWaypoint = null;
 
         // Referencias DOM
         this.uiBtn = document.getElementById('btn-scan');
         this.uiExplore = document.getElementById('explore-label');
-        
+
         if (this.uiBtn) {
             this.uiBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); 
+                e.stopPropagation();
                 ROV.actions.scanWaypoint();
             });
         }
@@ -32,17 +32,17 @@ ROV.waypoints = {
             .catch(err => console.error("[Waypoints] Error:", err));
     },
 
-    spawn: function(data) {
+    spawn: function (data) {
         const scene = document.querySelector('a-scene');
-        
+
         data.forEach(wpData => {
             // 1. Crear Entidad 3D
             const el = document.createElement('a-entity');
-            
+
             // Estado inicial: Esfera blanca pequeña y transparente (Ghost)
             el.setAttribute('geometry', 'primitive: sphere; radius: 0.15');
             el.setAttribute('material', 'color: #FFFFFF; shader: flat; opacity: 0.4; transparent: true');
-            el.setAttribute('scale', '0.3 0.3 0.3'); 
+            el.setAttribute('scale', '0.3 0.3 0.3');
             el.setAttribute('position', wpData.position);
             scene.appendChild(el);
 
@@ -57,7 +57,7 @@ ROV.waypoints = {
         });
     },
 
-    update: function() {
+    update: function () {
         if (!ROV.refs.rig || this.list.length === 0) return;
 
         const currentPos = ROV.refs.rig.object3D.position;
@@ -65,11 +65,11 @@ ROV.waypoints = {
 
         this.list.forEach(wp => {
             const dist = currentPos.distanceTo(wp.pos);
-            const isClose = dist < 2; 
+            const isClose = dist < 3.5;
 
             if (isClose !== wp.active) {
                 wp.active = isClose;
-                
+
                 if (isClose) {
                     // Cerca: Transformar en Diamante
                     wp.el.setAttribute('geometry', 'primitive: octahedron; radius: 0.2');
@@ -95,7 +95,7 @@ ROV.waypoints = {
         this.syncUI(foundCandidate);
     },
 
-    syncUI: function(activeId) {
+    syncUI: function (activeId) {
         if (activeId) {
             // MOSTRAR
             if (this.uiBtn && this.uiBtn.classList.contains('ui-hidden')) {
@@ -114,9 +114,9 @@ ROV.waypoints = {
             }
         }
     },
-    
+
     // Método helper para buscar datos por ID
-    getDataById: function(id) {
+    getDataById: function (id) {
         const found = this.list.find(item => item.id === id);
         return found ? found.data : null;
     }
