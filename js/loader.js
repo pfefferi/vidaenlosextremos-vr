@@ -163,7 +163,7 @@ function checkVersion() {
         .then(ver => {
             console.log(
                 `%c 🛠️ BUILD BASE HASH: ${ver.hash} \n%c 💬 "${ver.message}"`,
-                "color: #aaa; font-weight: bold; font-size: 12px;",
+                "color: #aaa; font-weight: bold; font-size: 11px;",
                 "color: #888; font-style: italic;"
             );
 
@@ -172,12 +172,16 @@ function checkVersion() {
                 .then(res => res.json())
                 .then(github => {
                     const remoteHash = github.sha.substring(0, 7);
-                    const isSynced = remoteHash === ver.hash;
+                    const parentHash = (github.parents && github.parents[0]) ? github.parents[0].sha.substring(0, 7) : "";
+
+                    // it is synced if our build base is the remote hash OR the parent of the remote hash 
+                    // (since hashes are embedded one-commit-behind)
+                    const isSynced = (ver.hash === remoteHash) || (ver.hash === parentHash);
                     const syncColor = isSynced ? "#00ff00" : "#ffaa00";
                     const syncIcon = isSynced ? "✅" : "⚠️";
 
                     console.log(
-                        `%c ${syncIcon} LATEST REMOTE REPO: ${remoteHash} \n%c Status: ${isSynced ? 'SYNCED' : 'AWAITING REFRESH/DEPLOY'}`,
+                        `%c ${syncIcon} REMOTE REPOSITORY: ${remoteHash} \n%c Status: ${isSynced ? 'UP TO DATE' : 'STALE (AWAITING DEPLOY)'}`,
                         `color: ${syncColor}; font-weight: bold; font-size: 14px;`,
                         `color: ${syncColor}; font-style: italic;`
                     );
