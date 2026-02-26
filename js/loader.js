@@ -181,9 +181,10 @@ function checkVersion() {
                     const syncIcon = isSynced ? "✅" : "⚠️";
 
                     console.log(
-                        `%c ${syncIcon} REMOTE REPOSITORY: ${remoteHash} \n%c Status: ${isSynced ? 'UP TO DATE' : 'STALE (AWAITING DEPLOY)'}`,
+                        `%c ${syncIcon} REMOTE REPOSITORY: ${remoteHash} \n%c Status: ${isSynced ? 'UP TO DATE' : 'STALE (AWAITING DEPLOY)'} \n%c Last Updated: ${ver.timestamp}`,
                         `color: ${syncColor}; font-weight: bold; font-size: 14px;`,
-                        `color: ${syncColor}; font-style: italic;`
+                        `color: ${syncColor}; font-style: italic;`,
+                        "color: #888; font-size: 10px;"
                     );
                 })
                 .catch(() => console.log("%c 🌐 REMOTE: Could not reach GitHub API", "color: #ff4444;"));
