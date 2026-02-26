@@ -1,5 +1,5 @@
 ﻿{
-    "message":  "Fix: CSS syntax error in controls overlay",
-    "timestamp":  "2026-02-26 20:24:51",
-    "hash":  "50b80c6"
+    "message":  "Input: Advanced mapping overhaul (Inverted camera, swapped L1/L2, added speed/zoom keys)",
+    "timestamp":  "2026-02-26 20:27:43",
+    "hash":  "d13e570"
 }

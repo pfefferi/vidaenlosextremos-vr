@@ -162,11 +162,27 @@ function checkVersion() {
         .then(res => res.json())
         .then(ver => {
             console.log(
-                `%c 🚀 DEPLOYED VERSION: ${ver.hash} \n%c 📅 ${ver.timestamp} \n%c 💬 "${ver.message}"`,
-                "color: #00ff00; font-weight: bold; font-size: 14px;",
-                "color: #888; font-style: italic;",
-                "color: #aaa;"
+                `%c 🛠️ BUILD BASE HASH: ${ver.hash} \n%c 💬 "${ver.message}"`,
+                "color: #aaa; font-weight: bold; font-size: 12px;",
+                "color: #888; font-style: italic;"
             );
+
+            // Fetch latest from GitHub to detect sync status
+            fetch('https://api.github.com/repos/pfefferi/vidaenlosextremos-vr/commits/main')
+                .then(res => res.json())
+                .then(github => {
+                    const remoteHash = github.sha.substring(0, 7);
+                    const isSynced = remoteHash === ver.hash;
+                    const syncColor = isSynced ? "#00ff00" : "#ffaa00";
+                    const syncIcon = isSynced ? "✅" : "⚠️";
+
+                    console.log(
+                        `%c ${syncIcon} LATEST REMOTE REPO: ${remoteHash} \n%c Status: ${isSynced ? 'SYNCED' : 'AWAITING REFRESH/DEPLOY'}`,
+                        `color: ${syncColor}; font-weight: bold; font-size: 14px;`,
+                        `color: ${syncColor}; font-style: italic;`
+                    );
+                })
+                .catch(() => console.log("%c 🌐 REMOTE: Could not reach GitHub API", "color: #ff4444;"));
         })
         .catch(() => console.warn("[Loader] Version tracking not found"));
 }

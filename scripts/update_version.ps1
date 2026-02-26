@@ -9,4 +9,4 @@ $json = @{
 } | ConvertTo-Json
 
 $json | Out-File -FilePath "./data/version.json" -Encoding utf8
-Write-Host "Version updated: $msg ($hash)"
+Write-Host "Build Base Hash set to: $hash ($msg)"
