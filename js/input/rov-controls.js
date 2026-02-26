@@ -3,18 +3,18 @@
 // --- 1. GAMEPAD INPUT ---
 function updateGamepad() {
     const gamepads = navigator.getGamepads();
-    let gp = null;
+    let anyActive = false;
 
-    // Buscar el primer gamepad conectado
     for (let i = 0; i < gamepads.length; i++) {
-        if (gamepads[i] && gamepads[i].connected) {
-            gp = gamepads[i];
-            break;
-        }
+        const gp = gamepads[i];
+        if (!gp || !gp.connected) continue;
+
+        anyActive = true;
+        processGamepadInput(gp);
     }
+}
 
-    if (!gp) return;
-
+function processGamepadInput(gp) {
     // BLOQUEO POR MODAL (Prioridad Máxima)
     if (ROV.state.isLogbookOpen) {
         // Permitir cerrar con botón B (índice 1) o Start (9)
@@ -49,6 +49,9 @@ function updateGamepad() {
 
     // C. ACCIONES DISCRETAS
     const db = state.debounce;
+
+    // Log de actividad (Opcional - Útil para debug)
+    if (gp.buttons[0].pressed) console.log(`[Input] Button 0 (A) pressed on slot ${gp.index}`);
 
     let fov = ROV.refs.cam.getAttribute('camera').fov;
     if (gp.buttons[5].pressed) fov = Math.max(5, fov - 1); // R1
