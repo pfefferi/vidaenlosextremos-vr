@@ -28,8 +28,8 @@
 
 .right-grid-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px 10px;
+    grid-template-columns: repeat(3, minmax(60px, auto));
+    gap: 12px 15px;
     align-items: end;
     pointer-events: auto;
 }
