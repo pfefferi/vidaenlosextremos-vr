@@ -41,9 +41,8 @@
             </button>
         </div>
 
-        <!-- HAMBURGER MENU -->
         <div id="system-menu-toggle">
-            <button class="icon-btn" onclick="ROV.controlsUI.toggleMenu()" title="System Menu">
+            <button class="icon-btn" onclick="ROV.controlsUI.toggleMenu(true)" title="System Menu">
                 <svg>
                     <use href="#icon-menu"></use>
                 </svg>
@@ -55,17 +54,15 @@
             </div>
             <div class="data-row"><span class="data-label">ID</span><span class="data-val" id="ui-id">--</span></div>
             <div class="data-row"><span class="data-label">BEARING</span><span class="data-val"><span
-                        id="head-val">000</span> °</span></div>
+                        id="ui-bearing">000</span> °</span></div>
             <div class="data-row"><span class="data-label">DEPTH</span><span class="data-val"><span
-                        id="depth-val">0.00</span> M</span></div>
-            <div class="data-row"><span class="data-label">TEMP</span><span class="data-val" id="ui-temp">0.00</span> °C
-            </div>
-            <div class="data-row"><span class="data-label">SALINITY</span><span class="data-val"
-                    id="ui-salinity">00.00</span> PSU</div>
-            <div class="data-row"><span class="data-label">O2 CON</span><span class="data-val" id="ui-o2">000</span> µM
-            </div>
-            <div class="data-row"><span class="data-label">SPEED</span><span class="data-val" id="speed-val">1.0</span>
-            </div>
+                        id="ui-depth">0.00</span> M</span></div>
+            <div class="data-row"><span class="data-label">TEMP</span><span class="data-val"><span
+                        id="ui-temp">0.00</span> °C</span></div>
+            <div class="data-row"><span class="data-label">SALINITY</span><span class="data-val"><span
+                        id="ui-salinity">00.00</span> PSU</span></div>
+            <div class="data-row"><span class="data-label">O2 CON</span><span class="data-val"><span
+                        id="ui-o2">000</span> µM</span></div>
         </div>
 
         <div id="date-block" class="hidable">--/--/--</div>
@@ -75,7 +72,6 @@
 
         <div id="controls-container" class="hidable">
 
-            <!-- LEFT DPAD -->
             <div class="control-group">
                 <div class="btn" id="move-up"><svg>
                         <use href="#icon-arrow-up"></use>
@@ -93,25 +89,21 @@
                 </div>
             </div>
 
-            <!-- RIGHT 3-COLUMN GRID -->
             <div class="right-grid-layout">
-                <!-- Header spanning Col 1+2 -->
+
                 <div class="grid-header-explore ui-hidden" id="explore-label">EXPLORE</div>
-                <!-- Scan Button in Header row Col 3 -->
-                <div class="grid-col ui-hidden" id="btn-scan"
-                    style="grid-row: 1; grid-column: 3; display: flex; justify-content: center;">
-                    <button class="btn" title="Scan Waypoint">
+
+                <div class="grid-header-scan">
+                    <div class="btn ui-hidden" id="btn-scan">
                         <svg>
                             <use href="#icon-scan"></use>
                         </svg>
-                    </button>
+                    </div>
                 </div>
 
-                <!-- Column 1: Zoom -->
-                <div class="grid-col"
-                    style="display: flex; flex-direction: column; align-items: center; grid-row: 2; grid-column: 1;">
+                <div class="grid-header-zoom">
                     <div class="label">ZOOM</div>
-                    <div class="btn" id="zoom-in" style="margin-bottom: 8px;"><svg>
+                    <div class="btn" id="zoom-in"><svg>
                             <use href="#icon-plus"></use>
                         </svg></div>
                     <div class="btn" id="zoom-out"><svg>
@@ -119,27 +111,13 @@
                         </svg></div>
                 </div>
 
-                <!-- Column 2: Drive (Vertical) -->
-                <div class="grid-col"
-                    style="display: flex; flex-direction: column; align-items: center; grid-row: 2; grid-column: 2;">
+                <div class="grid-header-depth">
                     <div class="label">DRIVE</div>
-                    <div class="btn" id="ascend" style="margin-bottom: 8px;"><svg>
+                    <div class="btn" id="depth-up"><svg>
                             <use href="#icon-chevrons-up"></use>
                         </svg></div>
-                    <div class="btn" id="descend"><svg>
+                    <div class="btn" id="depth-down"><svg>
                             <use href="#icon-chevrons-down"></use>
-                        </svg></div>
-                </div>
-
-                <!-- Column 3: Speed -->
-                <div class="grid-col"
-                    style="display: flex; flex-direction: column; align-items: center; grid-row: 2; grid-column: 3;">
-                    <div class="label">SPEED</div>
-                    <div class="btn" id="speed-plus" style="margin-bottom: 8px;"><svg>
-                            <use href="#icon-arrow-up"></use>
-                        </svg></div>
-                    <div class="btn" id="speed-minus"><svg>
-                            <use href="#icon-arrow-down"></use>
                         </svg></div>
                 </div>
             </div>
@@ -155,7 +133,7 @@
                     </svg>
                     <span>Mission Controls</span>
                 </div>
-                <div class="menu-item" id="gyro-toggle">
+                <div class="menu-item" id="menu-gyro">
                     <svg>
                         <use href="#icon-gyro"></use>
                     </svg>
@@ -290,47 +268,52 @@
         </div>
     </div>
 
-    <!-- A-FRAME -->
+    <!-- A-FRAME SCENE -->
     <a-scene embedded physics="debug: false; gravity: 0"
-        renderer="antialias: true; colorManagement: true; logarithmicDepthBuffer: true" cursor="rayOrigin: mouse"
-        raycaster="objects: .collidable">
+        renderer="colorManagement: true; physicallyCorrectLights: true; antialias: true; logarithmicDepthBuffer: true"
+        cursor="rayOrigin: mouse" raycaster="objects: .collidable">
 
+        <a-assets>
+            <a-asset-item id="rov-model" src="../assets/models/rov_model.glb"></a-asset-item>
+        </a-assets>
+
+        <!-- Environment -->
         <a-sky color="#020408"></a-sky>
 
-        <!-- RIG STRUCTURE (Faithful restoration) -->
-        <a-entity id="camera-rig">
-            <a-entity id="cam-pivot">
-                <a-entity id="main-camera" camera="near: 0.1; far: 4000" look-controls="pointerLockEnabled: false"
-                    wasd-controls="enabled: false">
-                    <!-- ROV LIGHTS -->
-                    <a-entity id="rov-lights">
-                        <a-light type="ambient" intensity="0.3" color="#445"></a-light>
-                        <a-light id="rov-spot" type="spot" color="#fff" intensity="2.5" distance="50" angle="45"
-                            position="0 0.5 -1"></a-light>
-                        <a-light id="rov-point" type="point" color="#fff" intensity="0.8" distance="15"
-                            position="0 0.5 -0.5"></a-light>
-                    </a-entity>
+        <!-- Camera Rig -->
+        <a-entity id="camera-rig" position="0 2 10">
+            <a-entity id="main-camera" camera="near: 0.1; far: 1000" look-controls="pointerLockEnabled: false"
+                wasd-controls="enabled: false">
+                <!-- ROV Body Integrated -->
+                <a-entity id="rov-visual" gltf-model="#rov-model" position="0 -1.2 -1.5" rotation="0 180 0"
+                    scale="1 1 1">
+                </a-entity>
+
+                <!-- Lights -->
+                <a-entity id="rov-lights">
+                    <a-light type="spot" color="#fff" intensity="2" distance="30" angle="45"
+                        position="0 0.5 -1"></a-light>
+                    <a-light type="spot" color="#fff" intensity="2" distance="30" angle="45"
+                        position="-1 0.5 -1"></a-light>
+                    <a-light type="spot" color="#fff" intensity="2" distance="30" angle="45"
+                        position="1 0.5 -1"></a-light>
                 </a-entity>
             </a-entity>
         </a-entity>
 
-        <a-entity id="map-entity" gltf-model="" position="0 0 0" class="collidable"></a-entity>
+        <!-- Deep Sea Map (Loaded dynamically) -->
+        <a-entity id="map-entity" gltf-model="" position="0 0 0" scale="1 1 1" class="collidable"></a-entity>
+
     </a-scene>
 
-    <!-- Scripts (Correct Order & Paths) -->
     <script src="../js/core/rov-init.js"></script>
     <script src="../js/core/rov-state.js"></script>
-    <script src="../js/core/rov-settings.js"></script>
-    <script src="../js/core/rov-dom.js"></script>
     <script src="../js/systems/rov-physics.js"></script>
     <script src="../js/systems/rov-actions.js"></script>
     <script src="../js/systems/rov-controls-ui.js"></script>
-    <script src="../js/systems/rov-waypoints.js"></script>
-    <script src="../js/systems/rov-model-handler.js"></script>
-    <script src="../js/systems/rov-modal.js"></script>
-    <script src="../js/input/rov-controls.js"></script>
+    <script src="../js/core/rov-controls.js"></script>
     <script src="../js/loader.js"></script>
-    <script src="../js/rov-main.js"></script>
+
 </body>
 
 </html>

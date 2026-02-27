@@ -6,11 +6,11 @@ ROV.modelHandler = {
      * Se ejecuta cuando el modelo .glb/.gltf termina de cargar.
      * Busca texturas 'materialX_diffuse' y las aplica, luego centra y escala.
      */
-    setupModel: function (mesh, explicitPath) {
+    setupModel: function (mesh) {
         if (!mesh) return;
 
         const mapEntity = ROV.refs.mapEntity;
-        const currentSrc = explicitPath || mapEntity.getAttribute('gltf-model') || "";
+        const currentSrc = mapEntity.getAttribute('gltf-model');
         const basePath = currentSrc.substring(0, currentSrc.lastIndexOf('/') + 1);
 
         console.log(`[ModelHandler] Path base detectado: ${basePath}`);

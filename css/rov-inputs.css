@@ -28,7 +28,7 @@
 
 .right-grid-layout {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 12px 10px;
     align-items: end;
     pointer-events: auto;
