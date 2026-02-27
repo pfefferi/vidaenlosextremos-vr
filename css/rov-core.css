@@ -38,6 +38,7 @@ body {
     backdrop-filter: blur(2px);
     transition: all 0.2s ease;
     pointer-events: auto;
+    line-height: 1;
     /* Re-enable clicks for buttons */
 }
 

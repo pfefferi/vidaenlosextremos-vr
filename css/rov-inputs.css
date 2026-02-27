@@ -26,7 +26,11 @@
 .grid-header-explore {
     grid-column: 1 / span 2;
     font-weight: bold;
+    font-family: var(--font-main);
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 45px;
 }
 
