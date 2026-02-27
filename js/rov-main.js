@@ -8,8 +8,9 @@ let frameCounter = 0; // Para optimizar actualizaciones de UI
 if (ROV.refs && ROV.refs.mapEntity) {
     ROV.refs.mapEntity.addEventListener('model-loaded', () => {
         const mesh = ROV.refs.mapEntity.getObject3D('mesh');
+        const modelPath = ROV.refs.mapEntity.getAttribute('gltf-model');
         if (ROV.modelHandler) {
-            ROV.modelHandler.setupModel(mesh);
+            ROV.modelHandler.setupModel(mesh, modelPath);
         }
 
         // Feedback visual en consola debug

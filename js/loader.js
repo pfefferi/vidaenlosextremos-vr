@@ -189,7 +189,7 @@ function checkVersion() {
                         `color: ${syncColor}; font-size: 11px; font-weight: bold;`
                     );
                 })
-                .catch(() => console.log("%c 🌐 REMOTE: Could not reach GitHub API", "color: #ff4444;"));
+                .catch(() => console.log("%c 🌐 REMOTE: Repository sync status unavailable (API Limit)", "color: #888;"));
         })
         .catch(() => console.warn("[Loader] Version tracking not found"));
 }
