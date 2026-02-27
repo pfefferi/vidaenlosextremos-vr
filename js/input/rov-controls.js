@@ -68,20 +68,27 @@ function processGamepadInput(gp) {
     if (gp.buttons[12].pressed && !db.speed) { ROV.actions.changeSpeed(1); triggerDebounce('speed'); }
     if (gp.buttons[13].pressed && !db.speed) { ROV.actions.changeSpeed(-1); triggerDebounce('speed'); }
 
-    // --- BOTÓN CONTEXTUAL (A) ---
+    // --- BOTONES DE ACCIÓN ---
+    // BTN A (Square / BTN 2) -> Alternar HUD
+    if (gp.buttons[2].pressed && !db.hud) {
+        ROV.actions.cycleHUD();
+        triggerDebounce('hud');
+    }
+
+    // BTN Cross (X / BTN 0) -> ACCIÓN CONTEXTUAL (Scan)
     if (gp.buttons[0].pressed && !db.action) {
         if (ROV.state.activeWaypoint) {
             ROV.actions.scanWaypoint();
-        } else {
-            ROV.actions.cycleHUD();
         }
         triggerDebounce('action');
     }
 
-    // OTROS BOTONES
-    if (gp.buttons[3].pressed && !db.light) { ROV.actions.toggleLights(); triggerDebounce('light'); } // Y
+    // BOTONES DE SISTEMA
+    if (gp.buttons[3].pressed && !db.light) { ROV.actions.toggleLights(); triggerDebounce('light'); } // Y / Triangle
     if (gp.buttons[8].pressed && !db.reset) { ROV.actions.resetPosition(); triggerDebounce('reset'); } // Share/Select
-    if (gp.buttons[9].pressed && !db.reset) { ROV.actions.resetPosition(); triggerDebounce('reset'); } // Options/Start
+
+    // START/OPTIONS (BTN 9) se captura en rov-controls-ui.js para el menú, 
+    // pero mantenemos debounce aquí si fuera necesario para otras lógicas.
 }
 
 function handleGamepadRotation(gp) {

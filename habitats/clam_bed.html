@@ -52,29 +52,11 @@
         <div id="coords-block" class="hidable">X: 0.00 Y: 0.00 Z: 0.00</div>
 
         <div class="top-left-ctrls">
-            <div id="hud-toggle" class="icon-btn" title="Ocultar HUD"><svg>
+            <div id="hud-toggle" class="icon-btn" title="Toggle HUD"><svg>
                     <use href="#icon-eye"></use>
                 </svg></div>
-            <div id="gyro-toggle" class="icon-btn hidable" title="Giroscopio"><svg>
-                    <use href="#icon-gyro"></use>
-                </svg></div>
-            <div id="fullscreen-toggle" class="icon-btn hidable" title="Pantalla Completa"><svg>
-                    <use href="#icon-maximize"></use>
-                </svg></div>
-            <div id="light-toggle" class="icon-btn hidable" title="Luces"><svg>
+            <div id="light-toggle" class="icon-btn" title="Lights"><svg>
                     <use href="#icon-light"></use>
-                </svg></div>
-            <div id="reset-pos" class="icon-btn hidable" title="Resetear Posición"><svg>
-                    <use href="#icon-refresh"></use>
-                </svg></div>
-            <div id="help-toggle" class="icon-btn hidable" onclick="ROV.controlsUI.toggle()" title="Controls (ESC)">
-                <svg>
-                    <use href="#icon-help"></use>
-                </svg>
-            </div>
-            <div id="back-to-menu" class="icon-btn hidable" onclick="window.location.href='../index.html'"
-                title="Salir"><svg>
-                    <use href="#icon-exit"></use>
                 </svg></div>
         </div>
 
@@ -148,6 +130,31 @@
         <a-light type="hemisphere" intensity="0.4" groundColor="#000"></a-light>
     </a-scene>
 
+    <!-- SYSTEM MENU -->
+    <div id="system-menu">
+        <div class="menu-title">System Navigation</div>
+        <div class="menu-items">
+            <div class="menu-item" id="menu-controls">
+                <svg>
+                    <use href="#icon-help"></use>
+                </svg>
+                <span>Mission Controls</span>
+            </div>
+            <div class="menu-item" id="menu-gyro">
+                <svg>
+                    <use href="#icon-gyro"></use>
+                </svg>
+                <span>Toggle Gyroscope</span>
+            </div>
+            <div class="menu-item danger" id="menu-fleet">
+                <svg>
+                    <use href="#icon-exit"></use>
+                </svg>
+                <span>Return to Fleet</span>
+            </div>
+        </div>
+    </div>
+
     <!-- CONTROLS OVERLAY -->
     <div id="controls-overlay">
         <div class="controls-header">
@@ -159,7 +166,6 @@
         </div>
 
         <div class="controls-content">
-            <!-- Gamepad View -->
             <div class="controls-view active" id="view-gamepad">
                 <div class="mapping-grid">
                     <div class="mapping-section">
@@ -175,19 +181,18 @@
                     </div>
                     <div class="mapping-section">
                         <h3>MISSION & SYSTEMS</h3>
+                        <div class="mapping-item"><span class="mapping-key">BTN X</span> <span
+                                class="mapping-label">TOGGLE HUD</span></div>
                         <div class="mapping-item"><span class="mapping-key">BTN A</span> <span
-                                class="mapping-label">SCAN / NEXT HUD</span></div>
+                                class="mapping-label">CONTEXT ACTION (SCAN)</span></div>
                         <div class="mapping-item"><span class="mapping-key">D-PAD ↑/↓</span> <span
                                 class="mapping-label">SPEED +/-</span></div>
                         <div class="mapping-item"><span class="mapping-key">BTN Y</span> <span
                                 class="mapping-label">TOGGLE LIGHTS</span></div>
-                        <div class="mapping-item"><span class="mapping-key">START</span> <span
-                                class="mapping-label">RESET POSITION</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Keyboard View -->
             <div class="controls-view" id="view-keyboard">
                 <div class="mapping-grid">
                     <div class="mapping-section">
@@ -207,8 +212,8 @@
                                 class="mapping-label">SCAN WAYPOINT</span></div>
                         <div class="mapping-item"><span class="mapping-key">1 / 2</span> <span
                                 class="mapping-label">SPEED +/-</span></div>
-                        <div class="mapping-item"><span class="mapping-key">L / H</span> <span
-                                class="mapping-label">LIGHTS / HUD</span></div>
+                        <div class="mapping-item"><span class="mapping-key">M / H</span> <span
+                                class="mapping-label">MENU / HUD</span></div>
                         <div class="mapping-item"><span class="mapping-key">R</span> <span class="mapping-label">RESET
                                 POSITION</span></div>
                     </div>
@@ -218,12 +223,11 @@
 
         <div class="controls-footer">
             <div class="footer-hints">
-                <div class="footer-hint"><span class="hint-key" id="hint-kb-close">ESC</span> <span class="hint-key"
-                        id="hint-gp-close" style="display:none">BTN B</span> CLOSE</div>
-                <div class="footer-hint"><span class="hint-key" id="hint-kb-switch">TAB</span> <span class="hint-key"
-                        id="hint-gp-switch" style="display:none">DPAD</span> SWITCH</div>
+                <div class="footer-hint"><span class="hint-key" id="kb-hints">ESC / M</span> <span class="hint-key"
+                        id="gp-hints" style="display:none">BTN B_SHORT</span> CLOSE / MENU</div>
+                <div class="footer-hint">TAB SWITCH INPUT</div>
             </div>
-            <div>VER. DEPLOYED</div>
+            <div id="version-display">VER. DEPLOYED</div>
         </div>
     </div>
 

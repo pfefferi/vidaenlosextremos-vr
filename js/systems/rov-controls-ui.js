@@ -2,34 +2,60 @@
 
 ROV.controlsUI = {
     overlay: null,
+    menu: null,
     currentTab: 'gamepad',
+    _lastStart: false,
 
     init: function () {
         this.overlay = document.getElementById('controls-overlay');
+        this.menu = document.getElementById('system-menu');
         this.setupEventListeners();
     },
 
     setupEventListeners: function () {
-        const tabs = document.querySelectorAll('.tab-btn');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                this.switchTab(tab.dataset.tab);
+        // Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.switchTab(btn.dataset.tab);
             });
         });
 
-        const closeBtn = document.getElementById('close-controls');
-        if (closeBtn) closeBtn.onclick = () => this.toggle(false);
+        // Menu items
+        const menuFleet = document.getElementById('menu-fleet');
+        const menuControls = document.getElementById('menu-controls');
+        const menuGyro = document.getElementById('menu-gyro');
+
+        if (menuFleet) {
+            menuFleet.onclick = () => {
+                window.location.href = '../index.html';
+            };
+        }
+
+        if (menuControls) {
+            menuControls.onclick = () => {
+                this.toggleMenu(false);
+                this.toggle(true);
+            };
+        }
+
+        if (menuGyro) {
+            menuGyro.onclick = () => {
+                if (window.ROV && ROV.actions && ROV.actions.toggleGyro) {
+                    ROV.actions.toggleGyro();
+                    this.toggleMenu(false);
+                }
+            };
+        }
     },
 
     toggle: function (show) {
         if (!this.overlay) this.init();
-
         const force = (show !== undefined) ? show : !this.overlay.classList.contains('active');
 
         if (force) {
             this.overlay.classList.add('active');
             ROV.state.isControlsOpen = true;
-            // Detectar si hay gamepad para poner el tab por defecto
+            // Default to gamepad if available
             const gamepads = navigator.getGamepads();
             let hasGP = false;
             for (let i = 0; i < gamepads.length; i++) { if (gamepads[i]) hasGP = true; }
@@ -40,61 +66,76 @@ ROV.controlsUI = {
         }
     },
 
+    toggleMenu: function (show) {
+        if (!this.menu) this.init();
+        const force = (show !== undefined) ? show : !this.menu.classList.contains('active');
+        this.menu.classList.toggle('active', force);
+        ROV.state.isMenuOpen = force;
+    },
+
     switchTab: function (tabName) {
         this.currentTab = tabName;
-
-        // UI Tabs
-        document.querySelectorAll('.tab-btn').forEach(b => {
-            b.classList.toggle('active', b.dataset.tab === tabName);
-        });
-
-        // UI Views
-        document.querySelectorAll('.controls-view').forEach(v => {
-            v.classList.toggle('active', v.id === `view-${tabName}`);
-        });
-
-        // Dynamic Footer Hints
         const isGP = tabName === 'gamepad';
 
-        // Gamepad Specific Hints
-        const gpClose = document.getElementById('hint-gp-close');
-        const gpSwitch = document.getElementById('hint-gp-switch');
-        if (gpClose) gpClose.style.display = isGP ? 'inline-block' : 'none';
-        if (gpSwitch) gpSwitch.style.display = isGP ? 'inline-block' : 'none';
+        // UI Tabs & Views
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabName));
+        document.querySelectorAll('.controls-view').forEach(v => v.classList.toggle('active', v.id === `view-${tabName}`));
 
-        // Keyboard Specific Hints
-        const kbClose = document.getElementById('hint-kb-close');
-        const kbSwitch = document.getElementById('hint-kb-switch');
-        if (kbClose) kbClose.style.display = isGP ? 'none' : 'inline-block';
-        if (kbSwitch) kbSwitch.style.display = isGP ? 'none' : 'inline-block';
+        // Hints Toggling
+        const gpHints = document.getElementById('gp-hints');
+        const kbHints = document.getElementById('kb-hints');
+        if (gpHints) gpHints.style.display = isGP ? 'flex' : 'none';
+        if (kbHints) kbHints.style.display = isGP ? 'none' : 'flex';
+
+        if (isGP) this.updateGPIcons();
+    },
+
+    updateGPIcons: function () {
+        const gpView = document.getElementById('view-gamepad');
+        if (!gpView) return;
+
+        const keys = gpView.querySelectorAll('.mapping-key');
+        keys.forEach(k => {
+            const txt = k.innerText.trim();
+            if (txt === 'BTN Y') k.innerHTML = '<svg class="gp-hint-svg"><use href="#gp-triangle"></use></svg>';
+            if (txt === 'BTN B') k.innerHTML = '<svg class="gp-hint-svg"><use href="#gp-circle"></use></svg>';
+            if (txt === 'BTN X') k.innerHTML = '<svg class="gp-hint-svg"><use href="#gp-square"></use></svg>';
+            if (txt === 'BTN A') k.innerHTML = '<svg class="gp-hint-svg"><use href="#gp-cross"></use></svg>';
+            if (txt === 'DPAD ↑') k.innerHTML = '<svg class="gp-hint-svg"><use href="#gp-dpad-up"></use></svg>';
+            if (txt === 'DPAD ↓') k.innerHTML = '<svg class="gp-hint-svg"><use href="#gp-dpad-down"></use></svg>';
+            // Small variants for hints
+            if (txt === 'BTN B_SHORT') k.innerHTML = '<svg class="hint-key"><use href="#gp-circle"></use></svg>';
+        });
+    },
+
+    checkGPExit: function (gp) {
+        // BTN B (Index 1) to exit overlay
+        if (ROV.state.isControlsOpen && gp.buttons[1].pressed) {
+            this.toggle(false);
+        }
+
+        // START/OPTIONS (Index 9) to toggle System Menu
+        const startPressed = gp.buttons[9].pressed;
+        if (startPressed && !this._lastStart) {
+            this.toggleMenu();
+        }
+        this._lastStart = startPressed;
     }
 };
 
-// Hook en el input de teclado (rov-input-keyboard.js debería manejarlo globalmente pero aquí va el Esc)
+// Global shortcuts
 window.addEventListener('keydown', (e) => {
     if (e.code === 'Escape') {
-        if (ROV.state.isControlsOpen) {
-            ROV.controlsUI.toggle(false);
-        } else if (!ROV.state.isLogbookOpen) {
-            ROV.controlsUI.toggle(true);
-        }
+        if (ROV.state.isControlsOpen) ROV.controlsUI.toggle(false);
+        else if (ROV.state.isMenuOpen) ROV.controlsUI.toggleMenu(false);
+        else ROV.controlsUI.toggleMenu(true);
     }
-
-    // Switch tab con TAB
+    if (e.code === 'KeyM') {
+        ROV.controlsUI.toggleMenu();
+    }
     if (e.code === 'Tab' && ROV.state.isControlsOpen) {
         e.preventDefault();
         const next = ROV.controlsUI.currentTab === 'gamepad' ? 'keyboard' : 'gamepad';
         ROV.controlsUI.switchTab(next);
     }
 });
-
-// Hook en el loop del Gamepad para el botón B (Cerrar)
-// Se llama desde rov-controls.js pero aquí capturamos la lógica de cierre si el overlay está abierto
-ROV.controlsUI.checkGPExit = function (gp) {
-    if (!ROV.state.isControlsOpen) return;
-
-    // Botón B (Index 1) para cerrar
-    if (gp.buttons[1].pressed) {
-        ROV.controlsUI.toggle(false);
-    }
-};

@@ -57,7 +57,6 @@ body {
     pointer-events: none;
 }
 
-/* CORRECCIÓN: Coordenadas en BLANCO (#fff) */
 #coords-block {
     position: absolute;
     bottom: 20px;
@@ -67,11 +66,9 @@ body {
     font-weight: bold;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
     color: #fff;
-    /* Antes estaba #00FFFF */
     pointer-events: none;
     z-index: 10;
 }
-
 
 .top-left-ctrls {
     position: absolute;
@@ -81,35 +78,6 @@ body {
     gap: 15px;
     pointer-events: auto;
     transition: all 0.5s ease;
-}
-
-.icon-btn {
-    width: 45px;
-    height: 45px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1.5px solid #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: #fff;
-}
-
-.icon-btn.active svg {
-    stroke: #00ff00;
-    filter: drop-shadow(0 0 5px #00ff00);
-}
-
-.icon-btn svg,
-.btn svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
 }
 
 #debug-console {
@@ -123,6 +91,58 @@ body {
     text-shadow: 1px 1px 2px #000;
 }
 
+/* BOTONES */
+.btn,
+.icon-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(2px);
+    transition: all 0.2s ease;
+}
+
+.icon-btn {
+    width: 45px;
+    height: 45px;
+}
+
+.btn {
+    width: clamp(40px, 13vw, 55px);
+    height: clamp(40px, 13vw, 55px);
+}
+
+.btn:active,
+.icon-btn:active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0.95);
+}
+
+.btn svg,
+.icon-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.label {
+    font-size: 10px;
+    opacity: 0.9;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+}
+
 /* CONTROLES PRINCIPALES */
 #controls-container {
     position: absolute;
@@ -130,7 +150,6 @@ body {
     left: 15px;
     right: 15px;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
     pointer-events: none;
@@ -145,45 +164,6 @@ body {
     pointer-events: auto;
 }
 
-#controls-container .row {
-    display: flex;
-    gap: 8px;
-    pointer-events: auto;
-    align-items: flex-end;
-}
-
-/* ESTILO DE BOTONES (.btn) */
-.btn {
-    width: clamp(40px, 13vw, 55px);
-    height: clamp(40px, 13vw, 55px);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1.5px solid #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    cursor: pointer;
-    backdrop-filter: blur(2px);
-    transition: all 0.2s ease;
-}
-
-.btn:active {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(0.95);
-}
-
-.label {
-    font-size: 10px;
-    opacity: 0.9;
-    margin-bottom: 3px;
-    text-transform: uppercase;
-    color: #fff;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px #000;
-}
-
-/* GRILLA 3x3 */
 .right-grid-layout {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -192,62 +172,30 @@ body {
     pointer-events: auto;
 }
 
-/* Celda A1-A2: Header "EXPLORE" */
 .grid-header-explore {
     grid-column: 1 / span 2;
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
-    text-shadow: 1px 1px 2px #000;
-
     height: clamp(40px, 13vw, 55px);
-
-    opacity: 1;
-    transition: opacity 0.3s ease;
+    text-transform: uppercase;
 }
 
-/* Celda A3: Botón SCAN */
-.grid-header-scan {
-    grid-column: 3;
-    display: flex;
-    justify-content: center;
-}
-
-#btn-scan {
-    opacity: 1;
-    transform: scale(1);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Aseguramos que sea blanco */
-    color: #fff;
-    border-color: #fff;
-}
-
-/* OCULTO */
-#btn-scan.ui-hidden,
-.grid-header-explore.ui-hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-}
-
-#btn-scan.ui-hidden {
-    transform: scale(0.5);
-}
-
-/* Feedback de activación (Scan) */
-/* Al activarse se invierte: Fondo Blanco, Icono Negro */
-.btn.scan-active {
+#btn-scan.scan-active {
     background-color: #fff !important;
     color: #000 !important;
-    border-color: #fff !important;
-    transform: scale(1.1);
 }
 
-/* LANDSCAPE */
+/* UI HIDING */
+.ui-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+}
+
 @media (orientation: landscape) {
     #controls-container {
         bottom: 20px;
@@ -264,31 +212,20 @@ body {
     }
 
     #debug-console {
-        position: absolute;
         left: 285px;
-    }
-
-    .btn {
-        width: 55px;
-        height: 55px;
     }
 }
 
-/* --- BITÁCORA / MODAL SYSTEM (Fase 1) --- */
-
-/* Fondo oscuro de bloqueo */
+/* --- MODAL BITÁCORA --- */
 #modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    z-index: 200;
-    /* Por encima del HUD */
-
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
     display: flex;
     justify-content: center;
     align-items: center;
-
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -299,192 +236,29 @@ body {
     pointer-events: auto;
 }
 
-/* Tarjeta contenedora */
 #modal-card {
     width: 90%;
     max-width: 500px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    color: #333;
+    background: rgba(255, 255, 255, 0.95);
+    color: #111;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    padding: 25px;
-
+    padding: 30px;
     transform: translateY(20px);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    /* Fuente limpia, no Courier */
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    transition: transform 0.3s ease;
+    font-family: 'Inter', sans-serif;
 }
 
 #modal-overlay.active #modal-card {
     transform: translateY(0);
 }
 
-/* Elementos temporales del esqueleto */
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-}
-
-.modal-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #111;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.modal-close-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #999;
-    transition: color 0.2s;
-}
-
-.modal-close-btn:hover {
-    color: #000;
-}
-
-.modal-body {
-    min-height: 100px;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #555;
-}
-
-/* --- UI KIT BITÁCORA (Fase 2) --- */
-
-/* 1. Tipografía y Estructura */
-.modal-meta-tags {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.modal-tag {
-    font-size: 0.7rem;
-    font-weight: 800;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: #eee;
-    color: #555;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.modal-tag.warning {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.modal-tag.info {
-    background: #d1ecf1;
-    color: #0c5460;
-}
-
-.modal-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #444;
-    margin-bottom: 20px;
-    border-left: 3px solid #00ff00;
-    /* Toque Sci-Fi sutil */
-    padding-left: 12px;
-}
-
-/* 2. Video Responsive (16:9) */
-.video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%;
-    /* 16:9 Aspect Ratio */
-    height: 0;
-    overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    background: #000;
-}
-
-.video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-.media-caption {
-    font-size: 0.8rem;
-    color: #777;
-    margin-top: -10px;
-    margin-bottom: 15px;
-    font-style: italic;
-    text-align: right;
-}
-
-/* 3. Galería de Imágenes (Grid) */
-.modal-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.gallery-item {
-    position: relative;
-    border-radius: 6px;
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-    /* Cuadradas */
-    cursor: pointer;
-    background: #eee;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-/* 4. Gráficos (Fondo blanco/borde) */
-.chart-container {
-    background: #fff;
-    border: 1px solid #eee;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.chart-container img {
-    max-width: 100%;
-    height: auto;
-}
-
-
-
-/* --- CONTROLS OVERLAY (Premium Settings Style) --- */
+/* --- CONTROLS OVERLAY --- */
 #controls-overlay {
     position: fixed;
     inset: 0;
     background: rgba(5, 5, 8, 0.98);
     backdrop-filter: blur(25px);
     z-index: 3000;
-    /* Superar todo */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -494,7 +268,7 @@ body {
     pointer-events: none;
     transition: opacity 0.3s ease;
     padding: 5%;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 #controls-overlay.active {
@@ -507,75 +281,38 @@ body {
     max-width: 1100px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 25px;
-    margin-bottom: 6vh;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .controls-title {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 900;
-    letter-spacing: 6px;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    color: #ffffff;
-    opacity: 0.9;
-}
-
-.controls-tabs {
-    display: flex;
-    gap: 15px;
 }
 
 .tab-btn {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.5);
-    font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
     cursor: pointer;
-    padding: 10px 24px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 10px 20px;
     border-radius: 2px;
-}
-
-.tab-btn:hover {
-    border-color: rgba(255, 255, 255, 0.5);
-    color: #fff;
 }
 
 .tab-btn.active {
     background: #fff;
     color: #000;
-    border-color: #fff;
-}
-
-.controls-content {
-    width: 100%;
-    max-width: 1100px;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .controls-view {
     display: none;
     width: 100%;
-    animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    max-width: 1100px;
 }
 
 .controls-view.active {
@@ -585,85 +322,112 @@ body {
 .mapping-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10vh 8%;
-    width: 100%;
+    gap: 40px;
 }
 
 .mapping-section h3 {
-    font-size: 14px;
+    font-size: 12px;
     color: rgba(255, 255, 255, 0.4);
-    margin-bottom: 30px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 10px;
+    margin-bottom: 20px;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 900;
+    letter-spacing: 2px;
 }
 
 .mapping-item {
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
-    font-size: 20px;
+    margin-bottom: 15px;
+    font-size: 18px;
     font-weight: 600;
 }
 
 .mapping-key {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    padding: 8px 16px;
+    padding: 5px 12px;
     border-radius: 4px;
-    font-weight: 900;
-    margin-right: 25px;
+    margin-right: 20px;
     min-width: 60px;
     text-align: center;
-    font-size: 16px;
-    display: inline-block;
-    text-transform: uppercase;
 }
 
-.mapping-label {
-    color: rgba(255, 255, 255, 0.85);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+/* HINTS SVG */
+.gp-hint-svg {
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    margin-right: 12px;
+    stroke-width: 2.5;
 }
 
-/* Footer & Hints */
-.controls-footer {
-    margin-top: 6vh;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    width: 100%;
-    max-width: 1100px;
+.mapping-key svg {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    stroke-width: 3;
+}
+
+/* --- SYSTEM MENU (Sidebar) --- */
+#system-menu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100%;
+    background: rgba(5, 5, 8, 0.95);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 2500;
+    padding: 40px;
     display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.3);
+    flex-direction: column;
+    gap: 30px;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+#system-menu.active {
+    right: 0;
+}
+
+.menu-title {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
-    letter-spacing: 2px;
 }
 
-.footer-hints {
-    display: flex;
-    gap: 40px;
-}
-
-.footer-hint {
+.menu-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px 20px;
+    border-radius: 4px;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.hint-key {
-    background: #fff;
-    color: #000;
-    padding: 2px 8px;
-    font-weight: 900;
-    border-radius: 2px;
-    font-size: 11px;
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(-5px);
 }
 
-.ui-hidden {
-    opacity: 0;
-    pointer-events: none;
+.menu-item.danger {
+    color: #ff4444;
+}
+
+.menu-item svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2.5;
+}
