@@ -86,14 +86,47 @@ ROV.modal = {
     },
 
     _buildGallery: function (images) {
-        // images: Array [{src, caption}]
-        let items = images.map(img => `
-            <div class="gallery-item" title="${img.caption || ''}">
-                <img src="${img.src}" alt="${img.caption || 'Log image'}" loading="lazy">
+        if (!images || images.length === 0) return '';
+
+        // 1. Featured Image (First image by default)
+        const featured = images[0];
+        const mainHtml = `
+            <div class="gallery-main" id="gallery-main">
+                <img src="${featured.src}" id="gallery-featured-img" alt="${featured.caption || 'Focus image'}">
+                <div class="gallery-caption" id="gallery-featured-caption">${featured.caption || ''}</div>
+            </div>
+        `;
+
+        // 2. Thumbnails Row
+        const thumbs = images.map((img, idx) => `
+            <div class="gallery-thumb ${idx === 0 ? 'active' : ''}" 
+                 onclick="ROV.modal.updateGalleryFocus('${img.src}', '${img.caption || ''}', this)">
+                <img src="${img.src}" alt="Thumbnail ${idx + 1}" loading="lazy">
             </div>
         `).join('');
 
-        return `<div class="modal-gallery">${items}</div>`;
+        const thumbsHtml = `<div class="gallery-thumbs-row">${thumbs}</div>`;
+
+        return `<div class="modal-gallery-v2">${mainHtml}${thumbsHtml}</div>`;
+    },
+
+    updateGalleryFocus: function (src, caption, thumbEl) {
+        const featuredImg = document.getElementById('gallery-featured-img');
+        const featuredCaption = document.getElementById('gallery-featured-caption');
+
+        if (featuredImg) {
+            featuredImg.style.opacity = '0';
+            setTimeout(() => {
+                featuredImg.src = src;
+                featuredImg.style.opacity = '1';
+                if (featuredCaption) featuredCaption.innerText = caption;
+            }, 200);
+        }
+
+        // Update active state in thumbnails
+        const allThumbs = thumbEl.parentElement.querySelectorAll('.gallery-thumb');
+        allThumbs.forEach(t => t.classList.remove('active'));
+        if (thumbEl) thumbEl.classList.add('active');
     },
 
     _buildChart: function (src, caption) {
