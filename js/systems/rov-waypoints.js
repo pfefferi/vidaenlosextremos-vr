@@ -61,23 +61,33 @@ ROV.waypoints = {
         if (!ROV.refs.rig || this.list.length === 0) return;
 
         const currentPos = ROV.refs.rig.object3D.position;
-        let foundCandidate = null;
+        let nearestWp = null;
+        let minDistance = 2.0; // THRESHOLD: Reduced from 3.5 to 2.0
 
+        // 1. Encontrar el más cercano dentro del umbral
         this.list.forEach(wp => {
             const dist = currentPos.distanceTo(wp.pos);
-            const isClose = dist < 3.5;
+            if (dist < minDistance) {
+                minDistance = dist;
+                nearestWp = wp;
+            }
+        });
 
-            if (isClose !== wp.active) {
-                wp.active = isClose;
+        // 2. Actualizar estados y animaciones
+        this.list.forEach(wp => {
+            const isTarget = nearestWp && wp.id === nearestWp.id;
 
-                if (isClose) {
-                    // Cerca: Transformar en Diamante
+            if (isTarget !== wp.active) {
+                wp.active = isTarget;
+
+                if (isTarget) {
+                    // Cerca y es el más cercano: Transformar en Diamante
                     wp.el.setAttribute('geometry', 'primitive: octahedron; radius: 0.2');
                     wp.el.setAttribute('scale', '0.45 0.85 0.45');
                     wp.el.setAttribute('material', 'opacity: 0.6');
                     wp.el.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 4000; easing: linear');
                 } else {
-                    // Lejos: Volver a Esfera
+                    // Lejos o no es el más cercano: Volver a Esfera
                     wp.el.setAttribute('geometry', 'primitive: sphere; radius: 0.15');
                     wp.el.setAttribute('scale', '0.3 0.3 0.3');
                     wp.el.setAttribute('material', 'opacity: 0.4');
@@ -85,13 +95,13 @@ ROV.waypoints = {
                     wp.el.object3D.rotation.set(0, 0, 0);
                 }
             }
-            if (isClose) foundCandidate = wp.id;
         });
 
-        // Actualizar Estado Global
+        // 3. Actualizar Estado Global
+        const foundCandidate = nearestWp ? nearestWp.id : null;
         ROV.state.activeWaypoint = foundCandidate;
 
-        // Sincronizar UI
+        // 4. Sincronizar UI
         this.syncUI(foundCandidate);
     },
 
