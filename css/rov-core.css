@@ -70,6 +70,7 @@ body {
 }
 
 .label {
+    font-family: var(--font-main);
     font-size: 10px;
     opacity: 0.9;
     margin-bottom: 3px;

@@ -66,9 +66,4 @@
     #telemetry-block {
         bottom: 150px;
     }
-
-    .top-left-ctrls,
-    #debug-console {
-        left: 280px;
-    }
 }
