@@ -131,12 +131,14 @@
     padding: 6px 12px;
     border-radius: 4px;
     margin-right: 20px;
-    min-width: 70px;
+    width: 100px;
+    height: 36px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-size: 13px;
+    flex-shrink: 0;
 }
 
 .mapping-label {
