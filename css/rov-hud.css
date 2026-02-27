@@ -51,20 +51,20 @@
 
 .top-left-ctrls {
     position: absolute;
-    top: 30px;
-    left: 30px;
+    top: 20px;
+    left: 20px;
     display: flex;
-    gap: 15px;
+    gap: 12px;
     pointer-events: auto;
     transition: all 0.5s ease;
 }
 
 #debug-console {
     position: absolute;
-    top: 90px;
-    left: 30px;
+    top: 80px;
+    left: 20px;
     font-size: 10px;
-    color: #fff;
+    color: rgba(255, 255, 255, 0.7);
     max-width: 280px;
     transition: all 0.5s ease;
     text-shadow: 1px 1px 2px #000;
