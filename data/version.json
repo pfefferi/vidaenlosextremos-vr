@@ -1,5 +1,5 @@
 ﻿{
-    "message":  "UI: Added hamburger menu, refined top navigation, and standardized Mission Controls overlay",
-    "timestamp":  "2026-02-26 22:00:32",
-    "hash":  "21b4166"
+    "message":  "Fix UI Regressions: Restored IDs, fixed landscape offsets, and model loading dependencies",
+    "timestamp":  "2026-02-26 22:07:39",
+    "hash":  "6994d31"
 }
