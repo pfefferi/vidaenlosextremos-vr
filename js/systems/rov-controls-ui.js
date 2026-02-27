@@ -87,6 +87,16 @@ ROV.controlsUI = {
         if (gpHints) gpHints.style.display = isGP ? 'flex' : 'none';
         if (kbHints) kbHints.style.display = isGP ? 'none' : 'flex';
 
+        // Update Switch Input Hint
+        const switchKey = document.getElementById('switch-key');
+        if (switchKey) {
+            if (isGP) {
+                switchKey.innerHTML = '<svg class="gp-hint-svg" style="width:20px;height:20px;vertical-align:middle;"><use href="#gp-select"></use></svg>';
+            } else {
+                switchKey.innerHTML = 'TAB';
+            }
+        }
+
         if (isGP) this.updateGPIcons();
     },
 
@@ -112,6 +122,16 @@ ROV.controlsUI = {
         // BTN B (Index 1) to exit overlay
         if (ROV.state.isControlsOpen && gp.buttons[1].pressed) {
             this.toggle(false);
+        }
+
+        // BTN Select (Index 8) to switch tabs
+        if (ROV.state.isControlsOpen && gp.buttons[8].pressed && !ROV.state.debounce.tabSwitch) {
+            const next = this.currentTab === 'gamepad' ? 'keyboard' : 'gamepad';
+            this.switchTab(next);
+
+            // Simple debounce for tab switch
+            ROV.state.debounce.tabSwitch = true;
+            setTimeout(() => ROV.state.debounce.tabSwitch = false, 300);
         }
 
         // START/OPTIONS (Index 9) to toggle System Menu

@@ -20,10 +20,9 @@ window.addEventListener('keydown', (e) => {
         // 3. ACCIONES NORMALES (Solo si el modal está cerrado)
         switch (e.code) {
             case 'Enter': ROV.actions.scanWaypoint(); break;
-            case 'KeyL': ROV.actions.toggleLights(); break;
+            case 'KeyF': ROV.actions.toggleLights(); break;
             case 'KeyH': ROV.actions.cycleHUD(); break;
             case 'KeyR': ROV.actions.resetPosition(); break;
-            case 'KeyF': ROV.actions.toggleFullscreen(); break;
             case 'Digit1': ROV.actions.changeSpeed(-1); break;
             case 'Digit2': ROV.actions.changeSpeed(1); break;
         }
@@ -55,7 +54,7 @@ ROV.updateKeyboard = function () {
     // 4. MOVIMIENTO VERTICAL
     let heave = 0;
     if (keyState['Space']) heave = 1; // Subir
-    if (keyState['KeyC']) heave = -1; // Bajar (Más estándar en simuladores)
+    if (keyState['ShiftLeft'] || keyState['ShiftRight']) heave = -1; // Bajar (Shift)
 
     // 5. ZOOM (NUEVO: E / Q)
     let fov = ROV.refs.cam.getAttribute('camera').fov;
