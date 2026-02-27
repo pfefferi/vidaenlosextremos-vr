@@ -1,0 +1,42 @@
+/* ==========================================================================
+   BASE STYLES & RESETS
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    touch-action: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #000;
+    color: var(--text-main);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    overflow-x: hidden;
+}
+
+/* Scrollbar styling for desktop if needed */
+body::-webkit-scrollbar {
+    width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #000;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--border-white);
+    border-radius: 3px;
+}
+
+/* Hidden Utility */
+.ui-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+}

@@ -13,10 +13,7 @@
 }
 
 body {
-    margin: 0;
     overflow: hidden;
-    background-color: #000;
-    font-family: 'Courier New', monospace;
 }
 
 #ui-layer {

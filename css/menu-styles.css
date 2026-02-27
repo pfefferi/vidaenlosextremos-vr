@@ -1,33 +1,13 @@
 /* ==========================================================================
-   VARIABLES & DESIGN TOKENS
+   MISSION MENU SPECIFIC STYLES
    ========================================================================== */
-:root {
-    --soi-blue: #00a3e0;
-    --glass-bg: rgba(0, 15, 30, 0.8);
-    --border-white: rgba(255, 255, 255, 0.2);
-    --text-main: #ffffff;
-    --transition-speed: 0.3s;
-}
-
-/* ==========================================================================
-   BASE STYLES
-   ========================================================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
     padding-bottom: 50px;
-    
-    font-family: 'JetBrains Mono', monospace;
     background: radial-gradient(circle at center, #001a33 0%, #000000 100%);
-    color: var(--text-main);
     overflow-y: auto;
 }
 
@@ -69,7 +49,8 @@ h1 {
    MISSION GRID LAYOUT
    ========================================================================== */
 .mission-grid {
-    flex: 1; /* Permite que el grid crezca y empuje al footer */
+    flex: 1;
+    /* Permite que el grid crezca y empuje al footer */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -97,7 +78,7 @@ h1 {
 }
 
 /* Card Interaction States */
-.mission-card:hover, 
+.mission-card:hover,
 .mission-card.is-touching {
     transform: translateY(-10px);
     border-color: #fff;
@@ -128,10 +109,16 @@ h1 {
     transition: opacity 0.5s ease-in-out;
 }
 
-.img-env { z-index: 1; }
-.img-closeup { z-index: 2; opacity: 0; }
+.img-env {
+    z-index: 1;
+}
 
-.mission-card:hover .img-closeup, 
+.img-closeup {
+    z-index: 2;
+    opacity: 0;
+}
+
+.mission-card:hover .img-closeup,
 .mission-card.is-touching .img-closeup {
     opacity: 1;
 }
@@ -185,7 +172,7 @@ h1 {
     opacity: 0.6;
 }
 
-.mission-card:not(.disabled):hover .launch-btn, 
+.mission-card:not(.disabled):hover .launch-btn,
 .mission-card:not(.disabled).is-touching .launch-btn {
     background: #fff;
     color: #000;
@@ -208,8 +195,21 @@ footer {
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */
 @media (max-width: 768px) {
-    header { margin-top: 30px; }
-    h1 { font-size: 1.2rem; }
-    .mission-grid { margin-top: 40px; gap: 20px; }
-    .mission-card { width: 100%; max-width: 340px; }
+    header {
+        margin-top: 30px;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .mission-grid {
+        margin-top: 40px;
+        gap: 20px;
+    }
+
+    .mission-card {
+        width: 100%;
+        max-width: 340px;
+    }
 }
