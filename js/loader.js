@@ -158,33 +158,35 @@ function loadIcons() {
 }
 
 function checkVersion() {
-    fetch('../data/version.json')
+    // Cache bust local version file
+    fetch(`../data/version.json?t=${Date.now()}`)
         .then(res => res.json())
         .then(ver => {
             console.log(
-                `%c 🛠️ BUILD BASE HASH: ${ver.hash} \n%c 💬 "${ver.message}"`,
+                `%c 🛠️ BUILD BASE HASH: ${ver.hash} \n%c 💬 "${ver.message}" \n%c 📅 Build Time: ${ver.timestamp}`,
                 "color: #aaa; font-weight: bold; font-size: 11px;",
-                "color: #888; font-style: italic;"
+                "color: #888; font-style: italic;",
+                "color: #888; font-size: 10px;"
             );
 
             // Fetch latest from GitHub to detect sync status
-            fetch('https://api.github.com/repos/pfefferi/vidaenlosextremos-vr/commits/main')
+            // No cache bust here as GitHub API is usually real-time, but we add headers just in case
+            fetch('https://api.github.com/repos/pfefferi/vidaenlosextremos-vr/commits/main', { cache: 'no-store' })
                 .then(res => res.json())
                 .then(github => {
                     const remoteHash = github.sha.substring(0, 7);
+                    const remoteDate = new Date(github.commit.committer.date).toLocaleString();
                     const parentHash = (github.parents && github.parents[0]) ? github.parents[0].sha.substring(0, 7) : "";
 
-                    // it is synced if our build base is the remote hash OR the parent of the remote hash 
-                    // (since hashes are embedded one-commit-behind)
                     const isSynced = (ver.hash === remoteHash) || (ver.hash === parentHash);
                     const syncColor = isSynced ? "#00ff00" : "#ffaa00";
                     const syncIcon = isSynced ? "✅" : "⚠️";
 
                     console.log(
-                        `%c ${syncIcon} REMOTE REPOSITORY: ${remoteHash} \n%c Status: ${isSynced ? 'UP TO DATE' : 'STALE (AWAITING DEPLOY)'} \n%c Last Updated: ${ver.timestamp}`,
+                        `%c ${syncIcon} REMOTE REPOSITORY: ${remoteHash} \n%c Status: ${isSynced ? 'UP TO DATE' : 'STALE (AWAITING DEPLOY)'} \n%c Remote Push Time: ${remoteDate}`,
                         `color: ${syncColor}; font-weight: bold; font-size: 14px;`,
                         `color: ${syncColor}; font-style: italic;`,
-                        "color: #888; font-size: 10px;"
+                        `color: ${syncColor}; font-size: 11px; font-weight: bold;`
                     );
                 })
                 .catch(() => console.log("%c 🌐 REMOTE: Could not reach GitHub API", "color: #ff4444;"));
