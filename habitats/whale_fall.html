@@ -31,19 +31,20 @@
 
     <div id="ui-layer">
 
-        <div id="telemetry-block" class="hidable">
-            <div class="data-row"><span class="data-label">SITE</span><span class="data-val"
+        <div id="telemetry-block" class="hidable telemetry-grid">
+            <div class="telemetry-row"><span class="telemetry-label">SITE</span><span class="telemetry-value"
                     id="ui-title">LOADING...</span></div>
-            <div class="data-row"><span class="data-label">ID</span><span class="data-val" id="ui-id">...</span></div>
-            <div class="data-row"><span class="data-label">HEADING</span><span class="data-val"><span
+            <div class="telemetry-row"><span class="telemetry-label">ID</span><span class="telemetry-value"
+                    id="ui-id">...</span></div>
+            <div class="telemetry-row"><span class="telemetry-label">HEADING</span><span class="telemetry-value"><span
                         id="head-val">000</span> °</span></div>
-            <div class="data-row"><span class="data-label">DEPTH</span><span class="data-val"><span
+            <div class="telemetry-row"><span class="telemetry-label">DEPTH</span><span class="telemetry-value"><span
                         id="depth-val">0</span> M</span></div>
-            <div class="data-row"><span class="data-label">TEMP.</span><span class="data-val"><span
+            <div class="telemetry-row"><span class="telemetry-label">TEMP.</span><span class="telemetry-value"><span
                         id="ui-temp">0.00</span> °C</span></div>
-            <div class="data-row"><span class="data-label">SALINITY</span><span class="data-val"><span
+            <div class="telemetry-row"><span class="telemetry-label">SALINITY</span><span class="telemetry-value"><span
                         id="ui-salinity">00.00</span> PSU</span></div>
-            <div class="data-row"><span class="data-label">O2 CON</span><span class="data-val"><span
+            <div class="telemetry-row"><span class="telemetry-label">O2 CON</span><span class="telemetry-value"><span
                         id="ui-o2">000</span> µM</span></div>
         </div>
 
@@ -63,208 +64,209 @@
 
         <div id="controls-container" class="hidable">
 
-            <div class="control-group">
-                <div class="btn" id="move-up"><svg>
-                        <use href="#icon-arrow-up"></use>
-                    </svg></div>
-                <div class="row">
-                    <div class="btn" id="move-left"><svg>
+            <div id="controls-container" class="hidable">
+
+                <div class="control-grid d-pad">
+                    <div class="btn up" id="move-up"><svg>
+                            <use href="#icon-arrow-up"></use>
+                        </svg></div>
+                    <div class="btn left" id="move-left"><svg>
                             <use href="#icon-arrow-left"></use>
                         </svg></div>
-                    <div class="btn" id="move-down"><svg>
+                    <div class="btn down" id="move-down"><svg>
                             <use href="#icon-arrow-down"></use>
                         </svg></div>
-                    <div class="btn" id="move-right"><svg>
+                    <div class="btn right" id="move-right"><svg>
                             <use href="#icon-arrow-right"></use>
                         </svg></div>
                 </div>
-            </div>
 
-            <div class="right-grid-layout">
+                <div class="control-grid right-side-grid">
 
-                <div class="grid-header-explore ui-hidden" id="explore-label">EXPLORE</div>
+                    <div class="grid-header-explore ui-hidden" id="explore-label">EXPLORE</div>
 
-                <div class="grid-header-scan">
-                    <div class="btn ui-hidden" id="btn-scan">
-                        <svg>
-                            <use href="#icon-scan"></use>
-                        </svg>
+                    <div class="grid-header-scan">
+                        <div class="btn ui-hidden" id="btn-scan">
+                            <svg>
+                                <use href="#icon-scan"></use>
+                            </svg>
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <span class="label">SPD <span id="speed-val"
-                            style="color:#00ff00; font-size:0.8em;">1.0</span></span>
-                    <div class="btn" id="speed-plus"><svg>
-                            <use href="#icon-plus"></use>
-                        </svg></div>
-                    <div class="btn" id="speed-minus" style="margin-top:5px;"><svg>
-                            <use href="#icon-minus"></use>
-                        </svg></div>
-                </div>
+                    <div class="flex-col">
+                        <span class="label">SPD <span id="speed-val"
+                                style="color:#00ff00; font-size:0.8em;">1.0</span></span>
+                        <div class="btn" id="speed-plus"><svg>
+                                <use href="#icon-plus"></use>
+                            </svg></div>
+                        <div class="btn" id="speed-minus" style="margin-top:5px;"><svg>
+                                <use href="#icon-minus"></use>
+                            </svg></div>
+                    </div>
 
-                <div class="control-group">
-                    <span class="label">ZOM</span>
-                    <div class="btn" id="zoom-in"><svg>
-                            <use href="#icon-zoom-in"></use>
-                        </svg></div>
-                    <div class="btn" id="zoom-out" style="margin-top:5px;"><svg>
-                            <use href="#icon-zoom-out"></use>
-                        </svg></div>
-                </div>
+                    <div class="flex-col">
+                        <span class="label">ZOM</span>
+                        <div class="btn" id="zoom-in"><svg>
+                                <use href="#icon-zoom-in"></use>
+                            </svg></div>
+                        <div class="btn" id="zoom-out" style="margin-top:5px;"><svg>
+                                <use href="#icon-zoom-out"></use>
+                            </svg></div>
+                    </div>
 
-                <div class="control-group">
-                    <span class="label">VRT</span>
-                    <div class="btn" id="ascend"><svg>
-                            <use href="#icon-chevrons-up"></use>
-                        </svg></div>
-                    <div class="btn" id="descend" style="margin-top:5px;"><svg>
-                            <use href="#icon-chevrons-down"></use>
-                        </svg></div>
+                    <div class="flex-col">
+                        <span class="label">VRT</span>
+                        <div class="btn" id="ascend"><svg>
+                                <use href="#icon-chevrons-up"></use>
+                            </svg></div>
+                        <div class="btn" id="descend" style="margin-top:5px;"><svg>
+                                <use href="#icon-chevrons-down"></use>
+                            </svg></div>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
-    </div>
 
-    <a-scene renderer="antialias: true; colorManagement: true;" vr-mode-ui="enabled: false">
-        <a-sky color="#050505"></a-sky>
-        <a-grid opacity="0.1" cellColor="#fff"></a-grid>
+        <a-scene renderer="antialias: true; colorManagement: true;" vr-mode-ui="enabled: false">
+            <a-sky color="#050505"></a-sky>
+            <a-grid opacity="0.1" cellColor="#fff"></a-grid>
 
-        <a-entity id="map-entity" position="0 0 0"></a-entity>
+            <a-entity id="map-entity" position="0 0 0"></a-entity>
 
-        <a-entity id="camera-rig" position="0 1.6 5">
-            <a-entity id="cam-pivot" rotation="0 0 0">
-                <a-entity id="main-camera" camera="fov: 80"
-                    look-controls="magicWindowTrackingEnabled: false; touchEnabled: true;">
-                    <a-light id="rov-spot" type="spot" intensity="2.5" distance="50" angle="45"></a-light>
-                    <a-light id="rov-point" type="point" intensity="0.8" distance="15" position="0 0 -1"></a-light>
+            <a-entity id="camera-rig" position="0 1.6 5">
+                <a-entity id="cam-pivot" rotation="0 0 0">
+                    <a-entity id="main-camera" camera="fov: 80"
+                        look-controls="magicWindowTrackingEnabled: false; touchEnabled: true;">
+                        <a-light id="rov-spot" type="spot" intensity="2.5" distance="50" angle="45"></a-light>
+                        <a-light id="rov-point" type="point" intensity="0.8" distance="15" position="0 0 -1"></a-light>
+                    </a-entity>
                 </a-entity>
             </a-entity>
-        </a-entity>
 
-        <a-light type="hemisphere" intensity="0.4" groundColor="#000"></a-light>
-    </a-scene>
-    <!-- SYSTEM MENU -->
-    <div id="system-menu">
-        <div class="menu-title">System Navigation</div>
-        <div class="menu-items">
-            <div class="menu-item" id="menu-controls">
-                <svg>
-                    <use href="#icon-help"></use>
-                </svg>
-                <span>Mission Controls</span>
-            </div>
-            <div class="menu-item" id="menu-gyro">
-                <svg>
-                    <use href="#icon-gyro"></use>
-                </svg>
-                <span>Toggle Gyroscope</span>
-            </div>
-            <div class="menu-item danger" id="menu-fleet">
-                <svg>
-                    <use href="#icon-exit"></use>
-                </svg>
-                <span>Return to Fleet</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONTROLS OVERLAY -->
-    <div id="controls-overlay">
-        <div class="controls-header">
-            <div class="controls-title">MISSION CONTROLS</div>
-            <div class="controls-tabs">
-                <button class="tab-btn active" data-tab="gamepad">GAMEPAD</button>
-                <button class="tab-btn" data-tab="keyboard">KEYBOARD</button>
-            </div>
-        </div>
-
-        <div class="controls-content">
-            <div class="controls-view active" id="view-gamepad">
-                <div class="mapping-grid">
-                    <div class="mapping-section">
-                        <h3>PILOTING & NAVIGATION</h3>
-                        <div class="mapping-item"><span class="mapping-key">L-STICK</span> <span
-                                class="mapping-label">MOVE SURGE/SWAY</span></div>
-                        <div class="mapping-item"><span class="mapping-key">R-STICK</span> <span
-                                class="mapping-label">CAMERA LOOK (INV.)</span></div>
-                        <div class="mapping-item"><span class="mapping-key">R1 / L1</span> <span
-                                class="mapping-label">ASCEND / DESCEND</span></div>
-                        <div class="mapping-item"><span class="mapping-key">R2 / L2</span> <span
-                                class="mapping-label">ZOOM IN / OUT</span></div>
-                    </div>
-                    <div class="mapping-section">
-                        <h3>MISSION & SYSTEMS</h3>
-                        <div class="mapping-item"><span class="mapping-key">BTN X</span> <span
-                                class="mapping-label">TOGGLE HUD</span></div>
-                        <div class="mapping-item"><span class="mapping-key">BTN A</span> <span
-                                class="mapping-label">CONTEXT ACTION (SCAN)</span></div>
-                        <div class="mapping-item"><span class="mapping-key">D-PAD ↑/↓</span> <span
-                                class="mapping-label">SPEED +/-</span></div>
-                        <div class="mapping-item"><span class="mapping-key">BTN Y</span> <span
-                                class="mapping-label">TOGGLE LIGHTS</span></div>
-                    </div>
+            <a-light type="hemisphere" intensity="0.4" groundColor="#000"></a-light>
+        </a-scene>
+        <!-- SYSTEM MENU -->
+        <div id="system-menu">
+            <div class="menu-title">System Navigation</div>
+            <div class="menu-items">
+                <div class="menu-item" id="menu-controls">
+                    <svg>
+                        <use href="#icon-help"></use>
+                    </svg>
+                    <span>Mission Controls</span>
                 </div>
-            </div>
-
-            <div class="controls-view" id="view-keyboard">
-                <div class="mapping-grid">
-                    <div class="mapping-section">
-                        <h3>PILOTING & NAVIGATION</h3>
-                        <div class="mapping-item"><span class="mapping-key">W A S D</span> <span
-                                class="mapping-label">MOVE SURGE/SWAY</span></div>
-                        <div class="mapping-item"><span class="mapping-key">ARROWS</span> <span
-                                class="mapping-label">CAMERA PAN/TILT</span></div>
-                        <div class="mapping-item"><span class="mapping-key">SPACE / C</span> <span
-                                class="mapping-label">ASCEND / DESCEND</span></div>
-                        <div class="mapping-item"><span class="mapping-key">E / Q</span> <span
-                                class="mapping-label">ZOOM IN / OUT</span></div>
-                    </div>
-                    <div class="mapping-section">
-                        <h3>MISSION & SYSTEMS</h3>
-                        <div class="mapping-item"><span class="mapping-key">ENTER</span> <span
-                                class="mapping-label">SCAN WAYPOINT</span></div>
-                        <div class="mapping-item"><span class="mapping-key">1 / 2</span> <span
-                                class="mapping-label">SPEED +/-</span></div>
-                        <div class="mapping-item"><span class="mapping-key">M / H</span> <span
-                                class="mapping-label">MENU / HUD</span></div>
-                        <div class="mapping-item"><span class="mapping-key">R</span> <span class="mapping-label">RESET
-                                POSITION</span></div>
-                    </div>
+                <div class="menu-item" id="menu-gyro">
+                    <svg>
+                        <use href="#icon-gyro"></use>
+                    </svg>
+                    <span>Toggle Gyroscope</span>
+                </div>
+                <div class="menu-item danger" id="menu-fleet">
+                    <svg>
+                        <use href="#icon-exit"></use>
+                    </svg>
+                    <span>Return to Fleet</span>
                 </div>
             </div>
         </div>
 
-        <div class="controls-footer">
-            <div class="footer-hints">
-                <div class="footer-hint"><span class="hint-key" id="kb-hints">ESC / M</span> <span class="hint-key"
-                        id="gp-hints" style="display:none">BTN B_SHORT</span> CLOSE / MENU</div>
-                <div class="footer-hint">TAB SWITCH INPUT</div>
+        <!-- CONTROLS OVERLAY -->
+        <div id="controls-overlay">
+            <div class="controls-header">
+                <div class="controls-title">MISSION CONTROLS</div>
+                <div class="controls-tabs">
+                    <button class="tab-btn active" data-tab="gamepad">GAMEPAD</button>
+                    <button class="tab-btn" data-tab="keyboard">KEYBOARD</button>
+                </div>
             </div>
-            <div id="version-display">VER. DEPLOYED</div>
+
+            <div class="controls-content">
+                <div class="controls-view active" id="view-gamepad">
+                    <div class="mapping-grid">
+                        <div class="mapping-section">
+                            <h3>PILOTING & NAVIGATION</h3>
+                            <div class="mapping-item"><span class="mapping-key">L-STICK</span> <span
+                                    class="mapping-label">MOVE SURGE/SWAY</span></div>
+                            <div class="mapping-item"><span class="mapping-key">R-STICK</span> <span
+                                    class="mapping-label">CAMERA LOOK (INV.)</span></div>
+                            <div class="mapping-item"><span class="mapping-key">R1 / L1</span> <span
+                                    class="mapping-label">ASCEND / DESCEND</span></div>
+                            <div class="mapping-item"><span class="mapping-key">R2 / L2</span> <span
+                                    class="mapping-label">ZOOM IN / OUT</span></div>
+                        </div>
+                        <div class="mapping-section">
+                            <h3>MISSION & SYSTEMS</h3>
+                            <div class="mapping-item"><span class="mapping-key">BTN X</span> <span
+                                    class="mapping-label">TOGGLE HUD</span></div>
+                            <div class="mapping-item"><span class="mapping-key">BTN A</span> <span
+                                    class="mapping-label">CONTEXT ACTION (SCAN)</span></div>
+                            <div class="mapping-item"><span class="mapping-key">D-PAD ↑/↓</span> <span
+                                    class="mapping-label">SPEED +/-</span></div>
+                            <div class="mapping-item"><span class="mapping-key">BTN Y</span> <span
+                                    class="mapping-label">TOGGLE LIGHTS</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls-view" id="view-keyboard">
+                    <div class="mapping-grid">
+                        <div class="mapping-section">
+                            <h3>PILOTING & NAVIGATION</h3>
+                            <div class="mapping-item"><span class="mapping-key">W A S D</span> <span
+                                    class="mapping-label">MOVE SURGE/SWAY</span></div>
+                            <div class="mapping-item"><span class="mapping-key">ARROWS</span> <span
+                                    class="mapping-label">CAMERA PAN/TILT</span></div>
+                            <div class="mapping-item"><span class="mapping-key">SPACE / C</span> <span
+                                    class="mapping-label">ASCEND / DESCEND</span></div>
+                            <div class="mapping-item"><span class="mapping-key">E / Q</span> <span
+                                    class="mapping-label">ZOOM IN / OUT</span></div>
+                        </div>
+                        <div class="mapping-section">
+                            <h3>MISSION & SYSTEMS</h3>
+                            <div class="mapping-item"><span class="mapping-key">ENTER</span> <span
+                                    class="mapping-label">SCAN WAYPOINT</span></div>
+                            <div class="mapping-item"><span class="mapping-key">1 / 2</span> <span
+                                    class="mapping-label">SPEED +/-</span></div>
+                            <div class="mapping-item"><span class="mapping-key">M / H</span> <span
+                                    class="mapping-label">MENU / HUD</span></div>
+                            <div class="mapping-item"><span class="mapping-key">R</span> <span
+                                    class="mapping-label">RESET
+                                    POSITION</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls-footer">
+                <div class="footer-hints">
+                    <div class="footer-hint"><span class="hint-key" id="kb-hints">ESC / M</span> <span class="hint-key"
+                            id="gp-hints" style="display:none">BTN B_SHORT</span> CLOSE / MENU</div>
+                    <div class="footer-hint">TAB SWITCH INPUT</div>
+                </div>
+                <div id="version-display">VER. DEPLOYED</div>
+            </div>
         </div>
-    </div>
 
-    <!-- SVG Icons are now loaded dynamically from assets/icons.html -->
+        <!-- SVG Icons are now loaded dynamically from assets/icons.html -->
 
-    <script src="../js/core/rov-init.js"></script>
-    <script src="../js/core/rov-settings.js"></script>
-    <script src="../js/core/rov-state.js"></script>
-    <script src="../js/core/rov-dom.js"></script>
+        <script src="../js/core/rov-init.js"></script>
+        <script src="../js/core/rov-settings.js"></script>
+        <script src="../js/core/rov-state.js"></script>
+        <script src="../js/core/rov-dom.js"></script>
 
-    <script src="../js/systems/rov-physics.js"></script>
-    <script src="../js/systems/rov-actions.js"></script>
-    <script src="../js/systems/rov-model-handler.js"></script>
-    <script src="../js/systems/rov-waypoints.js"></script>
-    <script src="../js/systems/rov-modal.js"></script>
-    <script src="../js/input/rov-input-keyboard.js"></script>
-    <script src="../js/input/rov-controls.js"></script>
+        <script src="../js/systems/rov-physics.js"></script>
+        <script src="../js/systems/rov-actions.js"></script>
+        <script src="../js/systems/rov-model-handler.js"></script>
+        <script src="../js/systems/rov-waypoints.js"></script>
+        <script src="../js/systems/rov-modal.js"></script>
+        <script src="../js/input/rov-input-keyboard.js"></script>
+        <script src="../js/input/rov-controls.js"></script>
 
-    <script src="../js/systems/rov-controls-ui.js"></script>
-    <script src="../js/loader.js"></script>
-    <script src="../js/rov-main.js"></script>
+        <script src="../js/systems/rov-controls-ui.js"></script>
+        <script src="../js/loader.js"></script>
+        <script src="../js/rov-main.js"></script>
 
 </body>
 

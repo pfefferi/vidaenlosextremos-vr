@@ -11,40 +11,26 @@
     transition: all 0.5s ease;
 }
 
-.control-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    pointer-events: auto;
-}
-
-/* Fix for broken D-pad layout */
-.control-group .row {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.right-grid-layout {
+/* Side Grids */
+.control-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     gap: 12px 10px;
-    align-items: end;
     pointer-events: auto;
+    align-items: end;
+}
+
+.right-side-grid {
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .grid-header-explore {
     grid-column: 1 / span 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
     font-weight: bold;
-    height: clamp(40px, 13vw, 55px);
-    text-transform: uppercase;
+    text-align: center;
+    height: 45px;
 }
 
+/* Interaction States */
 #btn-scan.scan-active {
     background-color: #fff !important;
     color: #000 !important;

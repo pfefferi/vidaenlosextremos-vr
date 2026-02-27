@@ -63,6 +63,8 @@
     color: #fff;
     font-weight: bold;
     text-shadow: 1px 1px 2px #000;
+    font-family: var(--font-mono);
+    /* Keep technical labels mono */
 }
 
 /* Glassmorphism Classes */
@@ -76,4 +78,54 @@
 .dark-overlay {
     background: var(--glass-bg-dark);
     backdrop-filter: blur(var(--overlay-blur));
+}
+
+/* MODULAR LAYOUT COMPONENTS */
+
+/* D-Pad Pattern */
+.d-pad {
+    display: grid;
+    grid-template-areas:
+        ". up ."
+        "left down right";
+    gap: 10px;
+}
+
+.d-pad .up {
+    grid-area: up;
+}
+
+.d-pad .down {
+    grid-area: down;
+}
+
+.d-pad .left {
+    grid-area: left;
+}
+
+.d-pad .right {
+    grid-area: right;
+}
+
+/* Telemetry Grid Pattern */
+.telemetry-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: var(--font-mono);
+}
+
+.telemetry-row {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.telemetry-label {
+    width: 100px;
+    opacity: 0.7;
+}
+
+.telemetry-value {
+    font-weight: bold;
 }

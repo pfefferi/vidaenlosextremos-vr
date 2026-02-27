@@ -15,8 +15,31 @@ body {
     min-height: 100vh;
     background-color: #000;
     color: var(--text-main);
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-family: var(--font-main);
     overflow-x: hidden;
+}
+
+/* Layout Utilities */
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Scrollbar styling for desktop if needed */
