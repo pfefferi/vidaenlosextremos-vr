@@ -1,5 +1,5 @@
 ﻿{
-    "message":  "System: Synced version report",
-    "timestamp":  "2026-02-26 21:40:26",
-    "hash":  "8acb61a"
+    "message":  "feat: restore mouse drag camera controls and consolidate rotation logic",
+    "timestamp":  "2026-02-27 01:23:39",
+    "hash":  "809e9a2"
 }

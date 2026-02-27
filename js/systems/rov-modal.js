@@ -4,15 +4,15 @@ ROV.modal = {
     title: null,
     body: null,
 
-    init: function() {
+    init: function () {
         this.overlay = document.getElementById('modal-overlay');
         this.title = document.getElementById('m-title');
         this.body = document.getElementById('m-body');
     },
 
     // Acepta el objeto de datos COMPLETO del waypoint
-    open: function(waypointData) {
-        if (!this.overlay) this.init(); 
+    open: function (waypointData) {
+        if (!this.overlay) this.init();
 
         // 1. Bloquear Inputs (Physics)
         ROV.state.isLogbookOpen = true;
@@ -21,7 +21,7 @@ ROV.modal = {
         this.body.innerHTML = '';
 
         // 3. Renderizar Título
-        if(this.title) this.title.innerText = waypointData.title || "SYSTEM ENTRY";
+        if (this.title) this.title.innerText = waypointData.title || "SYSTEM ENTRY";
 
         // 4. Renderizar Contenido (Pattern Matching)
         const content = waypointData.content || {};
@@ -56,25 +56,25 @@ ROV.modal = {
         console.log("[MODAL] Rendered:", waypointData.id);
     },
 
-    close: function() {
+    close: function () {
         if (!this.overlay) return;
-        
+
         // Limpiar contenido al cerrar (detiene videos)
         setTimeout(() => {
-            if(!this.overlay.classList.contains('active')) {
-                this.body.innerHTML = ''; 
+            if (!this.overlay.classList.contains('active')) {
+                this.body.innerHTML = '';
             }
-        }, 300); 
+        }, 500); // Aumentado para coincidir con la transición CSS
 
         this.overlay.classList.remove('active');
-        
+
         // Liberar Inputs
         ROV.state.isLogbookOpen = false;
     },
 
     // --- BUILDERS (HTML Generators) ---
 
-    _buildYoutube: function(id, caption) {
+    _buildYoutube: function (id, caption) {
         return `
             <div class="video-wrapper">
                 <iframe src="https://www.youtube.com/embed/${id}?rel=0&modestbranding=1" 
@@ -85,7 +85,7 @@ ROV.modal = {
         `;
     },
 
-    _buildGallery: function(images) {
+    _buildGallery: function (images) {
         // images: Array [{src, caption}]
         let items = images.map(img => `
             <div class="gallery-item" title="${img.caption || ''}">
@@ -96,7 +96,7 @@ ROV.modal = {
         return `<div class="modal-gallery">${items}</div>`;
     },
 
-    _buildChart: function(src, caption) {
+    _buildChart: function (src, caption) {
         return `
             <div class="chart-container">
                 <img src="${src}" alt="Scientific Data">
