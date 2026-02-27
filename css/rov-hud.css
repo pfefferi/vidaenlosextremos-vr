@@ -16,7 +16,8 @@
 }
 
 .data-label {
-    width: 100px;
+    opacity: 0.6;
+    font-size: 11px;
 }
 
 .data-val {
