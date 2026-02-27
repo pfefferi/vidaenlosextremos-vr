@@ -126,25 +126,26 @@
 
         </div>
 
-        <a-scene renderer="antialias: true; colorManagement: true;" vr-mode-ui="enabled: false">
-            <a-sky color="#050505"></a-sky>
-            <a-grid opacity="0.1" cellColor="#fff"></a-grid>
+    </div>
 
-            <a-entity id="map-entity" position="0 0 0"></a-entity>
+    <a-scene renderer="antialias: true; colorManagement: true;" vr-mode-ui="enabled: false">
+        <a-sky color="#050505"></a-sky>
+        <a-grid opacity="0.1" cellColor="#fff"></a-grid>
 
-            <a-entity id="camera-rig" position="0 1.6 5">
-                <a-entity id="cam-pivot" rotation="0 0 0">
-                    <a-entity id="main-camera" camera="fov: 80"
-                        look-controls="magicWindowTrackingEnabled: false; touchEnabled: true;">
-                        <a-light id="rov-spot" type="spot" intensity="2.5" distance="50" angle="45"></a-light>
-                        <a-light id="rov-point" type="point" intensity="0.8" distance="15" position="0 0 -1"></a-light>
-                    </a-entity>
+        <a-entity id="map-entity" position="0 0 0"></a-entity>
+
+        <a-entity id="camera-rig" position="0 1.6 5">
+            <a-entity id="cam-pivot" rotation="0 0 0">
+                <a-entity id="main-camera" camera="fov: 80"
+                    look-controls="magicWindowTrackingEnabled: false; touchEnabled: true;">
+                    <a-light id="rov-spot" type="spot" intensity="2.5" distance="50" angle="45"></a-light>
+                    <a-light id="rov-point" type="point" intensity="0.8" distance="15" position="0 0 -1"></a-light>
                 </a-entity>
             </a-entity>
+        </a-entity>
 
-            <a-light type="hemisphere" intensity="0.4" groundColor="#000"></a-light>
-        </a-scene>
-    </div>
+        <a-light type="hemisphere" intensity="0.4" groundColor="#000"></a-light>
+    </a-scene>
     <!-- SYSTEM MENU -->
     <div id="system-menu">
         <div class="menu-title">System Navigation</div>
