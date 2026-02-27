@@ -110,16 +110,8 @@ function handleGamepadRotation(gp) {
         }
     }
 
-    let currentRigY = (rig.getAttribute('rotation') || { y: 0 }).y;
-    let currentPivotX = (pivot.getAttribute('rotation') || { x: 0 }).x;
-
-    if (finalRx !== 0) {
-        rig.setAttribute('rotation', { x: 0, y: currentRigY - (finalRx * 2.0), z: 0 });
-    }
-    if (finalRy !== 0) {
-        let newX = currentPivotX + (finalRy * 1.5);
-        newX = Math.max(-80, Math.min(80, newX));
-        pivot.setAttribute('rotation', { x: newX, y: 0, z: 0 });
+    if (finalRx !== 0 || finalRy !== 0) {
+        ROV.actions.look(-finalRx * 2.0, finalRy * 1.5);
     }
 }
 
@@ -167,51 +159,89 @@ function triggerDebounce(key) {
 })();
 
 
-// --- 3. ROTACIÓN TÁCTIL (Touch Look) ---
-function initTouchRotation() {
+// --- 3. ROTACIÓN (Touch & Mouse Look) ---
+function initRotationControls() {
     const zone = document.body;
 
+    // Estado compartido para el arrastre
+    const dragData = {
+        active: false,
+        lastX: 0,
+        lastY: 0,
+        isTouch: false
+    };
+
+    const applyRotation = (deltaX, deltaY, isTouch) => {
+        if (ROV.state.isLogbookOpen) return;
+        const sensitivity = isTouch ? ROV.config.touchSensitivity : ROV.config.mouseSensitivity;
+
+        // Rotación Horizontal (Yaw)
+        if (Math.abs(deltaX) > Math.abs(deltaY) * 0.65) {
+            if (Math.abs(deltaX) > 0.5) {
+                ROV.actions.look(-deltaX * sensitivity, 0);
+            }
+        }
+        // Rotación Vertical (Pitch)
+        else {
+            if (Math.abs(deltaY) > 0.5) {
+                ROV.actions.look(0, -deltaY * sensitivity);
+            }
+        }
+    };
+
+    // --- MOUSE EVENTS ---
+    zone.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return; // Solo click izquierdo
+        if (e.target.closest('.ui-clickable') || e.target.tagName === 'BUTTON' || e.target.closest('#btn-scan')) return;
+
+        dragData.active = true;
+        dragData.lastX = e.clientX;
+        dragData.lastY = e.clientY;
+        dragData.isTouch = false;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!dragData.active || dragData.isTouch) return;
+
+        const deltaX = e.clientX - dragData.lastX;
+        const deltaY = e.clientY - dragData.lastY;
+
+        dragData.lastX = e.clientX;
+        dragData.lastY = e.clientY;
+
+        applyRotation(deltaX, deltaY, false);
+    });
+
+    window.addEventListener('mouseup', () => {
+        dragData.active = false;
+    });
+
+    // --- TOUCH EVENTS ---
     zone.addEventListener('touchstart', (e) => {
-        if (e.target.closest('.ui-clickable') || e.target.tagName === 'BUTTON') return;
-        // Evitar conflicto con botón contextual
-        if (e.target.closest('#btn-scan')) return;
+        if (e.target.closest('.ui-clickable') || e.target.tagName === 'BUTTON' || e.target.closest('#btn-scan')) return;
 
         const touch = e.touches[0];
-        ROV.state.touchLook.dragging = true;
-        ROV.state.touchLook.lastX = touch.clientX;
-        ROV.state.touchLook.lastY = touch.clientY;
+        dragData.active = true;
+        dragData.lastX = touch.clientX;
+        dragData.lastY = touch.clientY;
+        dragData.isTouch = true;
     }, { passive: false });
 
     zone.addEventListener('touchmove', (e) => {
-        // Si el modal está abierto, no rotar cámara
-        if (ROV.state.isLogbookOpen) return;
-
-        if (!ROV.state.touchLook.dragging) return;
+        if (!dragData.active || !dragData.isTouch) return;
         if (e.cancelable) e.preventDefault();
 
         const touch = e.touches[0];
-        const deltaX = touch.clientX - ROV.state.touchLook.lastX;
-        const deltaY = touch.clientY - ROV.state.touchLook.lastY;
+        const deltaX = touch.clientX - dragData.lastX;
+        const deltaY = touch.clientY - dragData.lastY;
 
-        ROV.state.touchLook.lastX = touch.clientX;
-        ROV.state.touchLook.lastY = touch.clientY;
+        dragData.lastX = touch.clientX;
+        dragData.lastY = touch.clientY;
 
-        const { rig, pivot } = ROV.refs;
-        const sensitivity = ROV.config.touchSensitivity;
-
-        if (Math.abs(deltaX) > Math.abs(deltaY) * 0.65) {
-            if (Math.abs(deltaX) > 1) {
-                const curY = rig.getAttribute('rotation').y;
-                rig.setAttribute('rotation', { x: 0, y: curY - (deltaX * sensitivity), z: 0 });
-            }
-        } else {
-            if (Math.abs(deltaY) > 1) {
-                const curX = pivot.getAttribute('rotation').x;
-                let newX = Math.max(-80, Math.min(80, curX - (deltaY * sensitivity)));
-                pivot.setAttribute('rotation', { x: newX, y: 0, z: 0 });
-            }
-        }
+        applyRotation(deltaX, deltaY, true);
     }, { passive: false });
 
-    zone.addEventListener('touchend', () => { ROV.state.touchLook.dragging = false; });
+    zone.addEventListener('touchend', () => {
+        dragData.active = false;
+    });
 }

@@ -5,6 +5,7 @@ ROV.config = {
     baseDepth: 0,
     deadzone: 0.15,
     touchSensitivity: 0.15,
+    mouseSensitivity: 0.2, // Nuevo: Sensibilidad para el ratón
     baseZoomSpeed: 0.8,
 
     // baseMoveSpeed se calculará dinámicamente al cargar el modelo en el Main

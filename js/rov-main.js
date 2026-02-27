@@ -22,10 +22,10 @@ if (ROV.refs && ROV.refs.mapEntity) {
 
 // 2. Inicialización del Sistema
 function initSystem() {
-    // Inicializar rotación táctil (si existe en controles)
-    if (typeof initTouchRotation === 'function') {
-        initTouchRotation();
-        console.log("[Main] Touch Controls Ready");
+    // Inicializar rotación táctil y ratón (si existe en controles)
+    if (typeof initRotationControls === 'function') {
+        initRotationControls();
+        console.log("[Main] Rotation Controls Ready (Touch + Mouse)");
     }
 
     // Configurar cámara (Desactivar conflictos nativos)

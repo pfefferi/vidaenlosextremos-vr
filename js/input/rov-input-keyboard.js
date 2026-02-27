@@ -82,12 +82,6 @@ ROV.updateKeyboard = function () {
     if (keyState['ArrowDown']) rotPitch = -1;
 
     if (rotYaw !== 0 || rotPitch !== 0) {
-        const currentRigY = (rig.getAttribute('rotation') || { y: 0 }).y;
-        rig.setAttribute('rotation', { x: 0, y: currentRigY + rotYaw * camSpeed, z: 0 });
-
-        const currentPivotX = (pivot.getAttribute('rotation') || { x: 0 }).x;
-        let newX = currentPivotX + rotPitch * camSpeed;
-        newX = Math.max(-80, Math.min(80, newX));
-        pivot.setAttribute('rotation', { x: newX, y: 0, z: 0 });
+        ROV.actions.look(rotYaw * camSpeed, rotPitch * camSpeed);
     }
 };
