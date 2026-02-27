@@ -64,69 +64,66 @@
 
         <div id="controls-container" class="hidable">
 
-            <div id="controls-container" class="hidable">
+            <div class="control-grid d-pad">
+                <div class="btn up" id="move-up"><svg>
+                        <use href="#icon-arrow-up"></use>
+                    </svg></div>
+                <div class="btn left" id="move-left"><svg>
+                        <use href="#icon-arrow-left"></use>
+                    </svg></div>
+                <div class="btn down" id="move-down"><svg>
+                        <use href="#icon-arrow-down"></use>
+                    </svg></div>
+                <div class="btn right" id="move-right"><svg>
+                        <use href="#icon-arrow-right"></use>
+                    </svg></div>
+            </div>
 
-                <div class="control-grid d-pad">
-                    <div class="btn up" id="move-up"><svg>
-                            <use href="#icon-arrow-up"></use>
+            <div class="control-grid right-side-grid">
+
+                <div class="grid-header-explore ui-hidden" id="explore-label">EXPLORE</div>
+
+                <div class="grid-header-scan">
+                    <div class="btn ui-hidden" id="btn-scan">
+                        <svg>
+                            <use href="#icon-scan"></use>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="flex-col">
+                    <span class="label">SPD <span id="speed-val"
+                            style="color:#00ff00; font-size:0.8em;">1.0</span></span>
+                    <div class="btn" id="speed-plus"><svg>
+                            <use href="#icon-plus"></use>
                         </svg></div>
-                    <div class="btn left" id="move-left"><svg>
-                            <use href="#icon-arrow-left"></use>
-                        </svg></div>
-                    <div class="btn down" id="move-down"><svg>
-                            <use href="#icon-arrow-down"></use>
-                        </svg></div>
-                    <div class="btn right" id="move-right"><svg>
-                            <use href="#icon-arrow-right"></use>
+                    <div class="btn" id="speed-minus" style="margin-top:5px;"><svg>
+                            <use href="#icon-minus"></use>
                         </svg></div>
                 </div>
 
-                <div class="control-grid right-side-grid">
+                <div class="flex-col">
+                    <span class="label">ZOM</span>
+                    <div class="btn" id="zoom-in"><svg>
+                            <use href="#icon-zoom-in"></use>
+                        </svg></div>
+                    <div class="btn" id="zoom-out" style="margin-top:5px;"><svg>
+                            <use href="#icon-zoom-out"></use>
+                        </svg></div>
+                </div>
 
-                    <div class="grid-header-explore ui-hidden" id="explore-label">EXPLORE</div>
-
-                    <div class="grid-header-scan">
-                        <div class="btn ui-hidden" id="btn-scan">
-                            <svg>
-                                <use href="#icon-scan"></use>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="flex-col">
-                        <span class="label">SPD <span id="speed-val"
-                                style="color:#00ff00; font-size:0.8em;">1.0</span></span>
-                        <div class="btn" id="speed-plus"><svg>
-                                <use href="#icon-plus"></use>
-                            </svg></div>
-                        <div class="btn" id="speed-minus" style="margin-top:5px;"><svg>
-                                <use href="#icon-minus"></use>
-                            </svg></div>
-                    </div>
-
-                    <div class="flex-col">
-                        <span class="label">ZOM</span>
-                        <div class="btn" id="zoom-in"><svg>
-                                <use href="#icon-zoom-in"></use>
-                            </svg></div>
-                        <div class="btn" id="zoom-out" style="margin-top:5px;"><svg>
-                                <use href="#icon-zoom-out"></use>
-                            </svg></div>
-                    </div>
-
-                    <div class="flex-col">
-                        <span class="label">VRT</span>
-                        <div class="btn" id="ascend"><svg>
-                                <use href="#icon-chevrons-up"></use>
-                            </svg></div>
-                        <div class="btn" id="descend" style="margin-top:5px;"><svg>
-                                <use href="#icon-chevrons-down"></use>
-                            </svg></div>
-                    </div>
-
+                <div class="flex-col">
+                    <span class="label">VRT</span>
+                    <div class="btn" id="ascend"><svg>
+                            <use href="#icon-chevrons-up"></use>
+                        </svg></div>
+                    <div class="btn" id="descend" style="margin-top:5px;"><svg>
+                            <use href="#icon-chevrons-down"></use>
+                        </svg></div>
                 </div>
 
             </div>
+
         </div>
 
         <a-scene renderer="antialias: true; colorManagement: true;" vr-mode-ui="enabled: false">
