@@ -55,13 +55,10 @@
             <div id="hud-toggle" class="icon-btn" title="Toggle HUD"><svg>
                     <use href="#icon-eye"></use>
                 </svg></div>
-            <div id="light-toggle" class="icon-btn" title="Lights"><svg>
-                    <use href="#icon-light"></use>
-                </svg></div>
         </div>
 
         <div class="top-right-ctrls">
-            <div id="menu-toggle" class="icon-btn" title="Menu" onclick="ROV.controlsUI.toggleMenu()"><svg>
+            <div id="menu-toggle" class="icon-btn hidable" title="Menu" onclick="ROV.controlsUI.toggleMenu()"><svg>
                     <use href="#icon-menu"></use>
                 </svg></div>
         </div>
@@ -121,6 +118,15 @@
                         </svg></div>
                     <div class="btn" id="descend" style="margin-top:5px;"><svg>
                             <use href="#icon-chevrons-down"></use>
+                        </svg></div>
+                </div>
+
+                <div class="flex-col">
+                    <div class="btn" id="reset-pos" title="Reset Position"><svg>
+                            <use href="#icon-refresh"></use>
+                        </svg></div>
+                    <div class="btn" id="light-toggle" title="Toggle Lights" style="margin-top:5px;"><svg>
+                            <use href="#icon-light"></use>
                         </svg></div>
                 </div>
             </div>
