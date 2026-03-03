@@ -56,7 +56,11 @@
         <div id="coords-block" class="hidable">X: 0.00 Y: 0.00 Z: 0.00</div>
 
         <div class="top-left-ctrls">
-            <!-- HUD toggle moved to right grid for alignment -->
+            <div id="hud-toggle" class="icon-btn" title="Toggle HUD" data-i18n="ui.toggle_hud" data-i18n-attr="title">
+                <svg>
+                    <use href="#icon-eye"></use>
+                </svg>
+            </div>
         </div>
 
         <div class="top-right-ctrls">
@@ -90,15 +94,10 @@
                 <div class="grid-header-explore ui-hidden" id="explore-label" data-i18n="ui.explore">EXPLORE</div>
 
                 <div class="flex-col">
+                    <span class="label">&nbsp;</span>
                     <div class="btn ui-hidden" id="btn-scan" style="margin-bottom:5px;">
                         <svg>
                             <use href="#icon-scan"></use>
-                        </svg>
-                    </div>
-                    <div id="hud-toggle" class="btn" title="Toggle HUD" data-i18n="ui.toggle_hud" data-i18n-attr="title"
-                        style="margin-bottom:5px;">
-                        <svg>
-                            <use href="#icon-eye"></use>
                         </svg>
                     </div>
                     <div class="btn" id="reset-pos" title="Reset Position" data-i18n="ui.reset_position"
