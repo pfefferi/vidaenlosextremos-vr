@@ -40,7 +40,7 @@ ROV.waypoints = {
 
         const missionKey = site.replace(/_/g, "-");
 
-        fetch('../data/waypoints.json')
+        fetch('data/waypoints.json')
             .then(res => res.json())
             .then(data => {
                 const points = data[missionKey];
@@ -55,7 +55,7 @@ ROV.waypoints = {
         const hud = document.createElement('div');
         hud.id = 'mission-counter';
         hud.style.position = 'fixed';
-        hud.style.top = '30px';
+        hud.style.top = '80px';
         hud.style.right = '30px';
         hud.style.padding = '12px 20px';
         hud.style.background = 'rgba(0, 0, 0, 0.6)';
