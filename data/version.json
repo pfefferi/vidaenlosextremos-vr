@@ -1,5 +1,5 @@
 ﻿{
-    "message":  "Cleanup: removed unused/missing visual assets",
-    "timestamp":  "2026-03-03 16:04:30",
-    "hash":  "48ca7fd"
+    "message":  "Feat(visual): implement precision world-space box fade with protected core",
+    "timestamp":  "2026-03-03 17:57:38",
+    "hash":  "af4540d"
 }
