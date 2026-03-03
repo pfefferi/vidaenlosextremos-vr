@@ -25,6 +25,13 @@ ROV.modelHandler = {
 
                 materials.forEach(mat => {
                     mat.side = THREE.DoubleSide;
+
+                    // Blending Fix: Smooth edges
+                    mat.transparent = true;
+                    mat.depthWrite = true;
+                    mat.alphaTest = 0.5;
+                    mat.opacity = 0.95;
+
                     // Buscar patrón "materialXX" en el nombre del nodo
                     const match = node.name.match(/material(\d+)/i);
                     if (match) {
@@ -86,7 +93,7 @@ ROV.modelHandler = {
         // Inyectamos el shader de fade-out en los materiales originales del escaneo
         if (typeof ROV.blender !== 'undefined' && typeof ROV.blender.applyEdgeFade === 'function') {
             // El fade empieza un poco antes del borde físico del modelo
-            ROV.blender.applyEdgeFade(model, modelRadius * 1.5);
+            ROV.blender.applyEdgeFade(mesh, modelRadius * 1.5);
         }
 
         // Limpieza de capas anteriores si quedase alguna
