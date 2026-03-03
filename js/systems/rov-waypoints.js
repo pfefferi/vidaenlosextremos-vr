@@ -19,11 +19,17 @@ ROV.waypoints = {
             });
         }
 
-        const path = window.location.pathname;
-        const pageName = path.split("/").pop().split(".")[0];
-        const missionKey = pageName.replace(/_/g, "-");
+        const urlParams = new URLSearchParams(window.location.search);
+        let site = urlParams.get('site');
 
-        fetch('../data/waypoints.json')
+        if (!site) {
+            const path = window.location.pathname;
+            site = path.split("/").pop().split(".")[0];
+        }
+
+        const missionKey = site.replace(/_/g, "-");
+
+        fetch('./data/waypoints.json')
             .then(res => res.json())
             .then(data => {
                 const points = data[missionKey];
