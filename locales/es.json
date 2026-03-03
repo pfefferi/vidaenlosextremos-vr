@@ -7,7 +7,8 @@
         "launch": "INICIAR INMERSIÓN",
         "coming_soon": "PRÓXIMAMENTE",
         "footer": "EST. 2026 | Lisandro Scarrone",
-        "gaming_mode": "MODO MISIÓN"
+        "gaming_mode": "MODO MISIÓN",
+        "language": "IDIOMA"
     },
     "habitats": {
         "whale_fall": "Whale Fall (Caída de Ballena)",

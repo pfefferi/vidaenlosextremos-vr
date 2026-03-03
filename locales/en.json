@@ -7,7 +7,8 @@
         "launch": "LAUNCH DIVE",
         "coming_soon": "COMING SOON",
         "footer": "EST. 2026 | Lisandro Scarrone",
-        "gaming_mode": "MISSION MODE"
+        "gaming_mode": "MISSION MODE",
+        "language": "LANGUAGE"
     },
     "habitats": {
         "whale_fall": "The Whale Fall",
