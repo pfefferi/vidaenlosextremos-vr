@@ -155,8 +155,7 @@
         fog="type: linear; color: #001015; far: 30; near: 0">
 
         <a-assets>
-            <img id="silt-skirt-img" src="assets/images/silt_alpha_skirt.png">
-            <img id="blob-shadow-img" src="assets/images/blob_shadow.png">
+            <!-- Assets will be assigned dynamically by rov-model-handler.js -->
         </a-assets>
 
         <a-sky color="#00050a"></a-sky>
@@ -164,16 +163,14 @@
 
         <a-entity id="map-entity" position="0 0 0"></a-entity>
 
-        <!-- Soft Continuity Sandwich -->
+        <!-- Zero-Seam Continuity System -->
         <a-entity id="floor-system">
             <a-circle id="extended-floor" radius="100" rotation="-90 0 0"
                 material="color: #4e5846; roughness: 1; metalness: 0; opacity: 0" visible="false"></a-circle>
 
-            <a-circle id="blob-shadow" radius="12" rotation="-90 0 0"
-                material="src: #blob-shadow-img; transparent: true; opacity: 0.6" visible="false"></a-circle>
-
+            <!-- Blend Skirt: Uses 'radial-blend' shader with 1:1 model texture sample -->
             <a-circle id="alpha-skirt" radius="10" rotation="-90 0 0"
-                material="src: #silt-skirt-img; transparent: true; opacity: 0" visible="false"></a-circle>
+                material="shader: radial-blend; transparent: true; opacity: 0" visible="false"></a-circle>
         </a-entity>
 
         <a-entity id="camera-rig" position="0 1.6 5">
@@ -358,6 +355,7 @@
 
     <script src="js/systems/rov-physics.js"></script>
     <script src="js/systems/rov-actions.js"></script>
+    <script src="js/systems/rov-visual-blender.js"></script>
     <script src="js/systems/rov-model-handler.js"></script>
     <script src="js/systems/rov-waypoints.js"></script>
     <script src="js/systems/rov-modal.js"></script>
