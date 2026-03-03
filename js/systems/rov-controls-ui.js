@@ -146,6 +146,9 @@ ROV.controlsUI = {
 // Global shortcuts
 window.addEventListener('keydown', (e) => {
     if (e.code === 'Escape') {
+        // PRIORIDAD: Si el modal está abierto, no hacemos nada aquí (ya se encarga rov-input-keyboard.js de cerrarlo)
+        if (ROV.state.isLogbookOpen) return;
+
         if (ROV.state.isControlsOpen) ROV.controlsUI.toggle(false);
         else if (ROV.state.isMenuOpen) ROV.controlsUI.toggleMenu(false);
         else ROV.controlsUI.toggleMenu(true);

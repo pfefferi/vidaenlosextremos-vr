@@ -24,7 +24,7 @@
 }
 
 .grid-header-explore {
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 4;
     font-weight: bold;
     font-family: var(--font-main);
     text-align: center;
