@@ -90,7 +90,12 @@ ROV.actions = {
                 ROV.modal.open(fullData || { title: "UNKNOWN DATA", content: {} });
             }
 
-            // 3. Feedback Visual: Parpadeo del botón
+            // 3. Gamification: Marcar como visitado
+            if (ROV.waypoints && ROV.waypoints.markAsVisited) {
+                ROV.waypoints.markAsVisited(wpId);
+            }
+
+            // 4. Feedback Visual: Parpadeo del botón
             const btn = document.getElementById('btn-scan');
             if (btn) {
                 // Flash blanco momentáneo
