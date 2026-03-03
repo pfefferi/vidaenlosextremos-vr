@@ -27,6 +27,11 @@
     align-items: center;
 }
 
+.right-side-grid>.flex-col {
+    grid-row: 3;
+    /* Ensure all control pillars stay in the same horizontal row */
+}
+
 .grid-header-explore {
     grid-column: 4;
     grid-row: 1;

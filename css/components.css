@@ -181,8 +181,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--border-white);
+    background-color: rgba(255, 255, 255, 0.15);
+    /* Slightly darker base */
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    /* More visible border */
     transition: .4s;
     border-radius: 18px;
 }
@@ -197,11 +199,13 @@
     background-color: white;
     transition: .4s;
     border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 input:checked+.slider {
-    background-color: var(--color-accent);
-    border-color: var(--color-accent);
+    background-color: #00aaff;
+    /* Use brand blue directly or via variable */
+    border-color: #00aaff;
 }
 
 input:checked+.slider:before {

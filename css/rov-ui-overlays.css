@@ -468,7 +468,7 @@
     letter-spacing: 5px;
     color: rgba(255, 255, 255, 0.3);
     text-transform: uppercase;
-    text-align: center;
+    width: 100%;
 }
 
 .sidebar-selector {
