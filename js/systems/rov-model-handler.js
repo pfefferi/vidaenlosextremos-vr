@@ -6,30 +6,30 @@ ROV.modelHandler = {
      * Se ejecuta cuando el modelo .glb/.gltf termina de cargar.
      * Busca texturas 'materialX_diffuse' y las aplica, luego centra y escala.
      */
-    setupModel: function(mesh) {
+    setupModel: function (mesh) {
         if (!mesh) return;
 
         const mapEntity = ROV.refs.mapEntity;
         const currentSrc = mapEntity.getAttribute('gltf-model');
         const basePath = currentSrc.substring(0, currentSrc.lastIndexOf('/') + 1);
-        
+
         console.log(`[ModelHandler] Path base detectado: ${basePath}`);
 
         // 1. Carga Manual de Texturas (Fix para modelos sin texturas embebidas)
         const loader = new THREE.TextureLoader();
-        
+
         mesh.traverse(node => {
             if (node.isMesh) {
                 // Asegurar doble cara para ver paredes desde adentro si hace falta
                 const materials = Array.isArray(node.material) ? node.material : [node.material];
-                
+
                 materials.forEach(mat => {
                     mat.side = THREE.DoubleSide;
                     // Buscar patrón "materialXX" en el nombre del nodo
                     const match = node.name.match(/material(\d+)/i);
                     if (match) {
                         const textureUrl = `${basePath}textures/material${match[1]}_diffuse.jpeg`;
-                        
+
                         // Cargar textura asíncronamente
                         loader.load(textureUrl, (tex) => {
                             tex.encoding = THREE.sRGBEncoding;
@@ -50,29 +50,51 @@ ROV.modelHandler = {
         const bbox = new THREE.Box3().setFromObject(mesh);
         const size = new THREE.Vector3();
         bbox.getSize(size);
-        
+
         const maxDim = Math.max(size.x, size.y, size.z);
         const targetSize = 20; // Tamaño objetivo en metros aprox
         const scaleFactor = targetSize / maxDim;
-        
+
         // Aplicar escala
         mapEntity.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`);
-        
+
         // Calcular centro para posicionarlo en 0,0,0
         const center = new THREE.Vector3();
         bbox.getCenter(center);
-        
+
         // Ajuste de posición (El -2 en Y y -10 en Z son offsets estéticos para que quede frente a cámara)
-        mapEntity.setAttribute('position', { 
-            x: -center.x * scaleFactor, 
-            y: (-center.y * scaleFactor) - 2, 
-            z: (-center.z * scaleFactor) - 10 
+        const finalPosY = (-center.y * scaleFactor) - 2;
+        mapEntity.setAttribute('position', {
+            x: -center.x * scaleFactor,
+            y: finalPosY,
+            z: (-center.z * scaleFactor) - 10
         });
 
-        // 3. Ajuste dinámico de velocidad base según el tamaño del modelo
+        // 3. Suelo Extendido y Niebla Dinámica (BLURRY TRANSITION)
+        const extendedFloor = document.getElementById('extended-floor');
+        if (extendedFloor) {
+            // Posicionamos el suelo justo en la base del modelo
+            // size.y * scaleFactor es la altura total del modelo. center.y es el centro local.
+            const floorY = finalPosY - (size.y * scaleFactor / 2);
+            extendedFloor.setAttribute('position', { x: 0, y: floorY, z: 0 });
+            extendedFloor.setAttribute('visible', 'true');
+
+            // Animación suave de aparición para evitar pop-in
+            extendedFloor.setAttribute('animation', 'property: material.opacity; from: 0; to: 1; dur: 2000');
+        }
+
+        // Ajustar niebla según escala (Para que en modelos grandes no se vea el borde)
+        const scene = document.querySelector('a-scene');
+        if (scene) {
+            const fogFar = Math.max(30, targetSize * 1.5);
+            const fogNear = fogFar * 0.1;
+            scene.setAttribute('fog', { far: fogFar, near: fogNear });
+        }
+
+        // 4. Ajuste dinámico de velocidad base según el tamaño del modelo
         // Modelos grandes necesitan moverse más rápido
         ROV.config.baseMoveSpeed = 0.02 + (Math.log10(maxDim + 1) * 0.03);
-        
-        console.log(`[ModelHandler] Modelo listo. Escala: ${scaleFactor.toFixed(4)}`);
+
+        console.log(`[ModelHandler] Modelo listo. Escala: ${scaleFactor.toFixed(4)}. Fog Far: ${Math.max(30, targetSize * 1.5)}`);
     }
 };
