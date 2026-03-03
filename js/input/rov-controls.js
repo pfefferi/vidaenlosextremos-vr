@@ -84,7 +84,6 @@ function processGamepadInput(gp) {
     }
 
     // BOTONES DE SISTEMA
-    if (gp.buttons[3].pressed && !db.light) { ROV.actions.toggleLights(); triggerDebounce('light'); } // Y / Triangle
     if (gp.buttons[8].pressed && !db.reset) { ROV.actions.resetPosition(); triggerDebounce('reset'); } // Share/Select
 
     // START/OPTIONS (BTN 9) se captura en rov-controls-ui.js para el menú, 
@@ -132,7 +131,6 @@ function triggerDebounce(key) {
     };
 
     bindClick('hud-toggle', ROV.actions.cycleHUD);
-    bindClick('light-toggle', ROV.actions.toggleLights);
     bindClick('fullscreen-toggle', ROV.actions.toggleFullscreen);
     bindClick('reset-pos', ROV.actions.resetPosition);
     bindClick('speed-plus', () => ROV.actions.changeSpeed(1));

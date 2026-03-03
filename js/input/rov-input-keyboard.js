@@ -31,7 +31,6 @@ window.addEventListener('keydown', (e) => {
         // 3. ACCIONES NORMALES (Solo si el modal está cerrado)
         switch (e.code) {
             case 'Enter': ROV.actions.scanWaypoint(); break;
-            case 'KeyF': ROV.actions.toggleLights(); break;
             case 'KeyH': ROV.actions.cycleHUD(); break;
             case 'KeyR': ROV.actions.resetPosition(); break;
             case 'Digit1': ROV.actions.changeSpeed(-1); break;

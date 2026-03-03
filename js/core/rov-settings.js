@@ -1,7 +1,7 @@
 // rov-settings.js
 // Configuración estática y constantes
 ROV.config = {
-    speedLevels: [0.1, 0.2, 0.4, 0.6, 0.8, 1.0, 1.5, 2.0, 3.0],
+    speedLevels: [0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 1.0, 1.5],
     baseDepth: 0,
     deadzone: 0.15,
     touchSensitivity: 0.15,

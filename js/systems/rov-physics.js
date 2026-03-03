@@ -9,7 +9,7 @@ ROV.physics = {
      * @param {number} heave - Movimiento vertical arriba/abajo (-1 a 1)
      * @param {boolean} isTurbo - Si se aplica multiplicador extra (ej. stick analógico)
      */
-    applyMove: function(surge, sway, heave, isTurbo = false) {
+    applyMove: function (surge, sway, heave, isTurbo = false) {
         const refs = ROV.refs;
         const conf = ROV.config;
         const state = ROV.state;
@@ -18,7 +18,7 @@ ROV.physics = {
 
         // Datos actuales
         const rot = refs.cam.getAttribute('rotation'); // Rotación cámara
-        const rigRot = refs.rig.getAttribute('rotation') || {x:0, y:0, z:0};
+        const rigRot = refs.rig.getAttribute('rotation') || { x: 0, y: 0, z: 0 };
         const currentPos = refs.rig.getAttribute('position');
         const fov = refs.cam.getAttribute('camera').fov;
 
@@ -46,8 +46,22 @@ ROV.physics = {
 
         // Heave (Vertical)
         if (heave !== 0) {
-            // Ajuste leve: vertical suele ser un poco más lento (0.7 u 0.8)
+            // Ajuste leve: vertical suele ser un poco más lento (0.8)
             currentPos.y += heave * currentSpeed * 0.8;
+        }
+
+        // --- SOLID FLOOR BOUNDARY ---
+        // Extraemos el límite de la configuración. loader.js debería estar inyectando
+        // ROV.config.startPosition.y desde el JSON de la misión.
+        // Si no existe, usamos ROV.config.baseDepth (que por defecto es 0).
+        let floorLimit = ROV.config.baseDepth || 0;
+        if (ROV.config.startPosition && typeof ROV.config.startPosition.y !== 'undefined') {
+            // Limite estricto: no puede bajar más de 0.05 metros desde su spawn original
+            floorLimit = ROV.config.startPosition.y - 0.05;
+        }
+
+        if (currentPos.y < floorLimit) {
+            currentPos.y = floorLimit;
         }
 
         // 4. Aplicar al DOM
@@ -55,7 +69,7 @@ ROV.physics = {
     },
 
     // Helper para UI de velocidad
-    updateSpeedUI: function() {
+    updateSpeedUI: function () {
         if (ROV.refs.speedValText) {
             ROV.refs.speedValText.innerText = ROV.config.speedLevels[ROV.state.currentLevelIndex].toFixed(1);
         }

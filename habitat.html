@@ -108,10 +108,6 @@
                         data-i18n-attr="title"><svg>
                             <use href="#icon-refresh"></use>
                         </svg></div>
-                    <div class="btn" id="light-toggle" title="Toggle Lights" data-i18n="ui.toggle_lights"
-                        data-i18n-attr="title"><svg>
-                            <use href="#icon-light"></use>
-                        </svg></div>
                 </div>
 
                 <div class="flex-col">
@@ -175,9 +171,10 @@
 
         <a-entity id="camera-rig" position="0 1.6 5">
             <a-entity id="cam-pivot" rotation="0 0 0">
-                <a-entity id="main-camera" camera="fov: 80"
+                <a-entity id="main-camera" camera="fov: 50"
                     look-controls="magicWindowTrackingEnabled: false; touchEnabled: true;">
-                    <a-light id="rov-spot" type="spot" intensity="2.5" distance="50" angle="45"></a-light>
+
+                    <a-light id="rov-omni" type="point" intensity="2.5" distance="40" position="0 0 0"></a-light>
                     <a-light id="rov-point" type="point" intensity="0.8" distance="15" position="0 0 -1"></a-light>
                 </a-entity>
             </a-entity>
@@ -268,10 +265,6 @@
                                     <use href="#gp-square"></use>
                                 </svg></span><span class="mapping-label" data-i18n="ui.toggle_hud">TOGGLE HUD</span>
                         </div>
-                        <div class="mapping-item"><span class="mapping-key"><svg class="gp-hint-svg">
-                                    <use href="#gp-triangle"></use>
-                                </svg></span><span class="mapping-label" data-i18n="ui.toggle_lights">TOGGLE
-                                LIGHTS</span></div>
                         <div class="mapping-item"><span class="mapping-key">SELECT</span><span class="mapping-label"
                                 data-i18n="ui.reset_position">RESET POSITION</span></div>
                         <div class="mapping-item"><span class="mapping-key">START</span><span class="mapping-label"
@@ -315,9 +308,6 @@
                         <div class="mapping-item"><span class="mapping-key">H</span><span class="mapping-label"
                                 data-i18n="ui.toggle_hud">TOGGLE
                                 HUD</span></div>
-                        <div class="mapping-item"><span class="mapping-key">F</span><span class="mapping-label"
-                                data-i18n="ui.toggle_lights">TOGGLE
-                                LIGHTS</span></div>
                         <div class="mapping-item"><span class="mapping-key">R</span><span class="mapping-label"
                                 data-i18n="ui.reset_position">RESET
                                 POSITION</span></div>

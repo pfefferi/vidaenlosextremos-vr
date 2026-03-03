@@ -2,19 +2,6 @@
 // Centraliza las acciones discretas (On/Off, Toggles, Resets)
 
 ROV.actions = {
-    toggleLights: function () {
-        ROV.state.lightsOn = !ROV.state.lightsOn;
-
-        // Actualizar DOM
-        if (ROV.refs.rovSpot) ROV.refs.rovSpot.setAttribute('light', 'intensity', ROV.state.lightsOn ? 2.5 : 0);
-        if (ROV.refs.rovPoint) ROV.refs.rovPoint.setAttribute('light', 'intensity', ROV.state.lightsOn ? 0.8 : 0);
-
-        // Feedback visual en botón UI
-        if (ROV.refs.lightToggle) {
-            ROV.refs.lightToggle.style.color = ROV.state.lightsOn ? "#fff" : "#ff4444";
-        }
-    },
-
     cycleHUD: function () {
         ROV.state.hudMode = (ROV.state.hudMode + 1) % 3;
 
