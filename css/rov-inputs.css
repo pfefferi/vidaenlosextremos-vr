@@ -32,9 +32,19 @@
     align-items: center;
     justify-content: center;
     height: 45px;
-    letter-spacing: 2px;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 3px;
+    font-size: 14px;
+    color: #00aaff;
+    /* Match beacon color */
+    text-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
+    font-weight: 900;
+}
+
+.grid-header-explore div[data-i18n="ui.explore"] {
+    background: rgba(0, 170, 255, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 170, 255, 0.3);
 }
 
 /* Explore Pulse Animation (Hint) */
