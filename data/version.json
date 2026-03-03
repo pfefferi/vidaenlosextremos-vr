@@ -1,5 +1,5 @@
 ﻿{
-    "message":  "feat: restore mouse drag camera controls and consolidate rotation logic",
-    "timestamp":  "2026-02-27 01:23:39",
-    "hash":  "809e9a2"
+    "message":  "Cleanup: removed unused/missing visual assets",
+    "timestamp":  "2026-03-03 16:04:30",
+    "hash":  "48ca7fd"
 }
