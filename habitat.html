@@ -91,8 +91,14 @@
 
             <div class="control-grid right-side-grid">
 
-                <div class="grid-header-explore ui-hidden" id="explore-label" data-i18n="ui.explore"
-                    style="grid-column: 4; text-align: center;">EXPLORE</div>
+                <div class="grid-header-explore ui-hidden" id="explore-label"
+                    style="display: grid; grid-template-columns: repeat(4, 1fr); width: 100%;">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div data-i18n="ui.explore" style="display: flex; justify-content: center; align-items: center;">
+                        EXPLORE</div>
+                </div>
 
                 <div class="flex-col">
                     <span class="label">&nbsp;</span>
@@ -128,12 +134,12 @@
                 </div>
 
                 <div class="flex-col">
-                    <span class="label" data-i18n="ui.vertical">VRT</span>
                     <div class="btn ui-hidden" id="btn-scan" style="margin-bottom:5px;">
                         <svg>
                             <use href="#icon-scan"></use>
                         </svg>
                     </div>
+                    <span class="label" data-i18n="ui.vertical">VRT</span>
                     <div class="btn" id="ascend"><svg>
                             <use href="#icon-chevrons-up"></use>
                         </svg></div>
