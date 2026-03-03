@@ -472,6 +472,18 @@
     text-align: center;
 }
 
+.sidebar-selector {
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.sidebar-selector .lang-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 10px;
+}
+
 .menu-items {
     display: flex;
     flex-direction: column;

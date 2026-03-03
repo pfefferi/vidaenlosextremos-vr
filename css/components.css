@@ -129,3 +129,32 @@
 .telemetry-value {
     font-weight: bold;
 }
+/* Language Toggle */
+.lang-selector {
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid var(--border-white);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.5;
+}
+
+.lang-btn:hover {
+    opacity: 1;
+    border-color: #fff;
+}
+
+.lang-btn.active {
+    opacity: 1;
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+}
