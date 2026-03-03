@@ -28,7 +28,9 @@
         "toggle_lights": "Alternar Luces",
         "speed": "VEL",
         "zoom": "ZOM",
-        "vertical": "VRT"
+        "vertical": "VRT",
+        "mission_analyzed": "MUESTRAS ANALIZADAS",
+        "mission_complete": "¡MISIÓN COMPLETADA!"
     },
     "controls": {
         "title": "CONTROLES DE MISIÓN",

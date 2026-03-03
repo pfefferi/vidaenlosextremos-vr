@@ -28,7 +28,9 @@
         "toggle_lights": "Toggle Lights",
         "speed": "SPD",
         "zoom": "ZOM",
-        "vertical": "VRT"
+        "vertical": "VRT",
+        "mission_analyzed": "SAMPLES ANALYZED",
+        "mission_complete": "MISSION COMPLETE!"
     },
     "controls": {
         "title": "MISSION CONTROLS",

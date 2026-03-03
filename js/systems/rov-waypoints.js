@@ -69,7 +69,9 @@ ROV.waypoints = {
         hud.style.letterSpacing = '2px';
         hud.style.zIndex = '1000';
         hud.style.transition = 'all 0.3s ease';
-        hud.innerHTML = 'SAMPLES ANALYZED: <span id="visited-count">0</span> / <span id="total-count">0</span>';
+
+        const label = ROV.localization.t("ui.mission_analyzed");
+        hud.innerHTML = `${label}: <span id="visited-count">0</span> / <span id="total-count">0</span>`;
 
         document.body.appendChild(hud);
         this.missionHUD = hud;
@@ -145,6 +147,19 @@ ROV.waypoints = {
         this.list.forEach(wp => {
             const isTarget = nearestWp && wp.id === nearestWp.id;
 
+            // Permanent state for visited waypoints
+            if (wp.visited) {
+                if (wp.beam.getAttribute('visible') !== false) {
+                    wp.beam.setAttribute('visible', false);
+                    wp.ring.setAttribute('visible', false);
+                    wp.sphere.setAttribute('geometry', 'primitive: octahedron; radius: 0.2');
+                    wp.sphere.setAttribute('scale', '0.45 0.85 0.45');
+                    wp.sphere.setAttribute('material', 'opacity: 0.8');
+                    wp.sphere.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 4000; easing: linear');
+                }
+                return; // Skip proximity updates for visited points
+            }
+
             if (isTarget !== wp.active) {
                 wp.active = isTarget;
 
@@ -202,7 +217,8 @@ ROV.waypoints = {
         if (this.missionHUD) {
             this.missionHUD.style.borderColor = this.config.colorVisited;
             this.missionHUD.style.boxShadow = `0 0 20px ${this.config.colorVisited}44`;
-            this.missionHUD.innerHTML += '<br><span style="color:' + this.config.colorVisited + '; display:block; margin-top:5px;">MISSION COMPLETE!</span>';
+            const msg = ROV.localization.t("ui.mission_complete");
+            this.missionHUD.innerHTML += `<br><span style="color:${this.config.colorVisited}; display:block; margin-top:5px;">${msg}</span>`;
         }
         console.log("MISSION COMPLETE!");
     },

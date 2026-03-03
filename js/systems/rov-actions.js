@@ -107,6 +107,13 @@ ROV.actions = {
                     btn.style.color = "#FFFFFF";
                 }, 150);
             }
+
+            // 4. Explore Button Success Animation
+            const exploreLabel = document.querySelector('.grid-header-explore div[data-i18n="ui.explore"]');
+            if (exploreLabel) {
+                exploreLabel.classList.add('explore-success');
+                setTimeout(() => exploreLabel.classList.remove('explore-success'), 600);
+            }
         }
     },
 
