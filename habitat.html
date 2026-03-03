@@ -91,15 +91,11 @@
 
             <div class="control-grid right-side-grid">
 
-                <div class="grid-header-explore ui-hidden" id="explore-label" data-i18n="ui.explore">EXPLORE</div>
+                <div class="grid-header-explore ui-hidden" id="explore-label" data-i18n="ui.explore"
+                    style="grid-column: 4; text-align: center;">EXPLORE</div>
 
                 <div class="flex-col">
                     <span class="label">&nbsp;</span>
-                    <div class="btn ui-hidden" id="btn-scan" style="margin-bottom:5px;">
-                        <svg>
-                            <use href="#icon-scan"></use>
-                        </svg>
-                    </div>
                     <div class="btn" id="reset-pos" title="Reset Position" data-i18n="ui.reset_position"
                         data-i18n-attr="title" style="margin-bottom:5px;"><svg>
                             <use href="#icon-refresh"></use>
@@ -111,7 +107,7 @@
                 </div>
 
                 <div class="flex-col">
-                    <span class="label"><span data-i18n="ui.speed">SPD</span> <span id="speed-val"
+                    <span class="label"><span data-i18n="ui.speed">VEL</span> <span id="speed-val"
                             style="color:#00ff00; font-size:0.8em;">1.0</span></span>
                     <div class="btn" id="speed-plus"><svg>
                             <use href="#icon-plus"></use>
@@ -133,6 +129,11 @@
 
                 <div class="flex-col">
                     <span class="label" data-i18n="ui.vertical">VRT</span>
+                    <div class="btn ui-hidden" id="btn-scan" style="margin-bottom:5px;">
+                        <svg>
+                            <use href="#icon-scan"></use>
+                        </svg>
+                    </div>
                     <div class="btn" id="ascend"><svg>
                             <use href="#icon-chevrons-up"></use>
                         </svg></div>

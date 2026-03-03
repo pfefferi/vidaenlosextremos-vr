@@ -8,10 +8,21 @@ window.addEventListener('keydown', (e) => {
     keyState[e.code] = true;
 
     if (!e.repeat) {
-        // 1. PRIORIDAD: Si el modal está abierto, ESC lo cierra.
-        if (ROV.state.isLogbookOpen && e.code === 'Escape') {
-            ROV.modal.close();
-            return; // Cortamos aquí.
+        if (e.code === 'Escape') {
+            if (ROV.state.isLogbookOpen) {
+                ROV.modal.close();
+                return;
+            }
+            if (ROV.state.isControlsOpen) {
+                ROV.controlsUI.toggle(false);
+                return;
+            }
+            if (ROV.state.isMenuOpen) {
+                ROV.controlsUI.toggleMenu(false);
+                return;
+            }
+            ROV.controlsUI.toggleMenu(true);
+            return;
         }
 
         // 2. BLOQUEO: Si el modal está abierto, IGNORAR resto de teclas
