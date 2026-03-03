@@ -98,9 +98,9 @@ ROV.waypoints = {
 
             // 2. Vertical Beam (Visible from afar)
             const beam = document.createElement('a-entity');
-            beam.setAttribute('geometry', 'primitive: cylinder; radius: 0.05; height: 100');
             beam.setAttribute('material', `color: ${this.config.colorDefault}; shader: flat; opacity: 0.08; transparent: true`);
             beam.setAttribute('position', '0 50 0'); // Long beam up
+            beam.setAttribute('visible', ROV.state.gamifiedMode); // Initial state
             container.appendChild(beam);
 
             // 3. Sonar Pulse Ring (Effect)
@@ -108,6 +108,7 @@ ROV.waypoints = {
             ring.setAttribute('geometry', 'primitive: ring; radiusInner: 0.1; radiusOuter: 0.12');
             ring.setAttribute('material', `color: ${this.config.colorDefault}; shader: flat; opacity: 0.6; transparent: true`);
             ring.setAttribute('rotation', '-90 0 0');
+            ring.setAttribute('visible', ROV.state.gamifiedMode); // Initial state
             ring.setAttribute('animation__scale', 'property: scale; from: 1 1 1; to: 20 20 20; dur: 3000; loop: true; easing: easeOutQuad');
             ring.setAttribute('animation__fade', 'property: material.opacity; from: 0.6; to: 0; dur: 3000; loop: true; easing: easeOutQuad');
             container.appendChild(ring);
@@ -180,8 +181,10 @@ ROV.waypoints = {
                     wp.sphere.removeAttribute('animation');
                     wp.sphere.object3D.rotation.set(0, 0, 0);
 
-                    wp.beam.setAttribute('visible', true);
-                    wp.ring.setAttribute('visible', true);
+                    wp.sphere.object3D.rotation.set(0, 0, 0);
+
+                    wp.beam.setAttribute('visible', ROV.state.gamifiedMode);
+                    wp.ring.setAttribute('visible', ROV.state.gamifiedMode);
                 }
             }
         });
@@ -219,8 +222,33 @@ ROV.waypoints = {
             this.missionHUD.style.boxShadow = `0 0 20px ${this.config.colorVisited}44`;
             const msg = ROV.localization.t("ui.mission_complete");
             this.missionHUD.innerHTML += `<br><span style="color:${this.config.colorVisited}; display:block; margin-top:5px;">${msg}</span>`;
+
+            // Auto-hide complete message if mode is switched off? No, leave it.
+            this.missionHUD.style.display = ROV.state.gamifiedMode ? 'block' : 'none';
         }
         console.log("MISSION COMPLETE!");
+    },
+
+    toggleGamifiedMode: function (enabled) {
+        ROV.state.gamifiedMode = enabled;
+        console.log("[Waypoints] Gamified Mode:", enabled);
+
+        // Update HUD
+        if (this.missionHUD) {
+            this.missionHUD.style.display = enabled ? 'block' : 'none';
+        }
+
+        // Update all active waypoints helpers
+        this.list.forEach(wp => {
+            // Only update unvisited points (visited points have helpers hidden anyway)
+            if (!wp.visited) {
+                // If we are NOT in proximity, show/hide beams based on mode
+                if (!wp.active) {
+                    wp.beam.setAttribute('visible', enabled);
+                    wp.ring.setAttribute('visible', enabled);
+                }
+            }
+        });
     },
 
     syncUI: function (activeId) {

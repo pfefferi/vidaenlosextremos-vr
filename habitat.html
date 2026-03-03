@@ -177,6 +177,18 @@
         <div class="menu-close-btn" onclick="ROV.controlsUI.toggleMenu(false)"><svg>
                 <use href="#icon-close"></use>
             </svg></div>
+
+        <!-- GAMIFICATION TOGGLE -->
+        <div class="menu-title" data-i18n="menu.gaming_mode"
+            style="display: flex; justify-content: space-between; align-items: center;">
+            MISSION MODE
+            <label class="toggle-switch">
+                <input type="checkbox" id="gamified-mode-check" checked
+                    onchange="ROV.waypoints.toggleGamifiedMode(this.checked)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
         <div class="menu-title" data-i18n="menu.language">LANGUAGE</div>
         <div class="lang-selector sidebar-selector">
             <button class="lang-btn" onclick="ROV.localization.setLanguage('es')" data-lang="es">ES</button>
