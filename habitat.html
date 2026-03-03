@@ -153,14 +153,28 @@
 
     <a-scene renderer="antialias: true; colorManagement: true;" vr-mode-ui="enabled: false"
         fog="type: linear; color: #001015; far: 30; near: 0">
+
+        <a-assets>
+            <img id="silt-skirt-img" src="assets/images/silt_alpha_skirt.png">
+            <img id="blob-shadow-img" src="assets/images/blob_shadow.png">
+        </a-assets>
+
         <a-sky color="#00050a"></a-sky>
         <a-grid opacity="0.1" cellColor="#fff"></a-grid>
 
         <a-entity id="map-entity" position="0 0 0"></a-entity>
 
-        <!-- Extended Floor (Initially hidden, positioned by JS) -->
-        <a-circle id="extended-floor" radius="100" rotation="-90 0 0"
-            material="color: #4e5846; roughness: 1; metalness: 0; opacity: 0" visible="false"></a-circle>
+        <!-- Soft Continuity Sandwich -->
+        <a-entity id="floor-system">
+            <a-circle id="extended-floor" radius="100" rotation="-90 0 0"
+                material="color: #4e5846; roughness: 1; metalness: 0; opacity: 0" visible="false"></a-circle>
+
+            <a-circle id="blob-shadow" radius="12" rotation="-90 0 0"
+                material="src: #blob-shadow-img; transparent: true; opacity: 0.6" visible="false"></a-circle>
+
+            <a-circle id="alpha-skirt" radius="10" rotation="-90 0 0"
+                material="src: #silt-skirt-img; transparent: true; opacity: 0" visible="false"></a-circle>
+        </a-entity>
 
         <a-entity id="camera-rig" position="0 1.6 5">
             <a-entity id="cam-pivot" rotation="0 0 0">

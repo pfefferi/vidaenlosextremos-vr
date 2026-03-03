@@ -70,17 +70,36 @@ ROV.modelHandler = {
             z: (-center.z * scaleFactor) - 10
         });
 
-        // 3. Suelo Extendido y Niebla Dinámica (BLURRY TRANSITION)
+        // 3. Capas de Continuidad Visual (Soft Continuity Sandwich)
+        const floorY = finalPosY - (size.y * scaleFactor / 2);
+        const modelRadius = Math.max(size.x, size.z) * scaleFactor / 2;
+
+        // A. Suelo Infinito
         const extendedFloor = document.getElementById('extended-floor');
         if (extendedFloor) {
-            // Posicionamos el suelo justo en la base del modelo
-            // size.y * scaleFactor es la altura total del modelo. center.y es el centro local.
-            const floorY = finalPosY - (size.y * scaleFactor / 2);
             extendedFloor.setAttribute('position', { x: 0, y: floorY, z: 0 });
             extendedFloor.setAttribute('visible', 'true');
-
-            // Animación suave de aparición para evitar pop-in
             extendedFloor.setAttribute('animation', 'property: material.opacity; from: 0; to: 1; dur: 2000');
+        }
+
+        // B. Sombra de Contacto (Blob Shadow)
+        const blobShadow = document.getElementById('blob-shadow');
+        if (blobShadow) {
+            // Un pelín por encima del suelo para evitar Z-fighting
+            blobShadow.setAttribute('position', { x: 0, y: floorY + 0.01, z: 0 });
+            blobShadow.setAttribute('radius', modelRadius * 1.6); // Cubre la base
+            blobShadow.setAttribute('visible', 'true');
+        }
+
+        // C. Skirt de Textura (Alpha Skirt)
+        const alphaSkirt = document.getElementById('alpha-skirt');
+        if (alphaSkirt) {
+            // Un pelín por encima de la sombra
+            alphaSkirt.setAttribute('position', { x: 0, y: floorY + 0.02, z: 0 });
+            // El skirt debe ser lo suficientemente grande para suavizar los bordes irregulares
+            alphaSkirt.setAttribute('radius', modelRadius * 2.2);
+            alphaSkirt.setAttribute('visible', 'true');
+            alphaSkirt.setAttribute('animation', 'property: material.opacity; from: 0; to: 0.95; dur: 2500');
         }
 
         // Ajustar niebla según escala (Para que en modelos grandes no se vea el borde)
