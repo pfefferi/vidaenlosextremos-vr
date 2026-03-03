@@ -37,18 +37,18 @@ function initSystem() {
         });
     }
 
-    // --- NUEVO: Inicializar Waypoints ---
+    // 4. Inicializar Localización
+    if (ROV.localization) {
+        ROV.localization.init();
+    }
+
+    // 5. Inicializar Waypoints
     if (ROV.waypoints) {
         ROV.waypoints.init();
     }
 
     // Iniciar el loop
     updateLoop();
-
-    // Nueva: Inicializar Localización
-    if (ROV.localization) {
-        ROV.localization.init();
-    }
 }
 
 // 3. Bucle Principal (60 FPS)
