@@ -37,7 +37,7 @@
 
         <div id="telemetry-block" class="hidable telemetry-grid">
             <div class="telemetry-row"><span class="telemetry-label">SITE</span><span class="telemetry-value"
-                    id="ui-title" data-i18n="ui.loading">LOADING...</span></div>
+                    id="ui-title">LOADING...</span></div>
             <div class="telemetry-row"><span class="telemetry-label">ID</span><span class="telemetry-value"
                     id="ui-id">...</span></div>
             <div class="telemetry-row"><span class="telemetry-label">HEADING</span><span class="telemetry-value"><span
@@ -56,11 +56,7 @@
         <div id="coords-block" class="hidable">X: 0.00 Y: 0.00 Z: 0.00</div>
 
         <div class="top-left-ctrls">
-            <div id="hud-toggle" class="icon-btn" title="Toggle HUD" data-i18n="ui.toggle_hud" data-i18n-attr="title">
-                <svg>
-                    <use href="#icon-eye"></use>
-                </svg>
-            </div>
+            <!-- HUD toggle moved to right grid for alignment -->
         </div>
 
         <div class="top-right-ctrls">
@@ -93,12 +89,26 @@
 
                 <div class="grid-header-explore ui-hidden" id="explore-label" data-i18n="ui.explore">EXPLORE</div>
 
-                <div class="grid-header-scan">
-                    <div class="btn ui-hidden" id="btn-scan">
+                <div class="flex-col">
+                    <div class="btn ui-hidden" id="btn-scan" style="margin-bottom:5px;">
                         <svg>
                             <use href="#icon-scan"></use>
                         </svg>
                     </div>
+                    <div id="hud-toggle" class="btn" title="Toggle HUD" data-i18n="ui.toggle_hud" data-i18n-attr="title"
+                        style="margin-bottom:5px;">
+                        <svg>
+                            <use href="#icon-eye"></use>
+                        </svg>
+                    </div>
+                    <div class="btn" id="reset-pos" title="Reset Position" data-i18n="ui.reset_position"
+                        data-i18n-attr="title" style="margin-bottom:5px;"><svg>
+                            <use href="#icon-refresh"></use>
+                        </svg></div>
+                    <div class="btn" id="light-toggle" title="Toggle Lights" data-i18n="ui.toggle_lights"
+                        data-i18n-attr="title"><svg>
+                            <use href="#icon-light"></use>
+                        </svg></div>
                 </div>
 
                 <div class="flex-col">
@@ -129,17 +139,6 @@
                         </svg></div>
                     <div class="btn" id="descend" style="margin-top:5px;"><svg>
                             <use href="#icon-chevrons-down"></use>
-                        </svg></div>
-                </div>
-
-                <div class="flex-col">
-                    <div class="btn" id="reset-pos" title="Reset Position" data-i18n="ui.reset_position"
-                        data-i18n-attr="title"><svg>
-                            <use href="#icon-refresh"></use>
-                        </svg></div>
-                    <div class="btn" id="light-toggle" title="Toggle Lights" data-i18n="ui.toggle_lights"
-                        data-i18n-attr="title" style="margin-top:5px;"><svg>
-                            <use href="#icon-light"></use>
                         </svg></div>
                 </div>
 
