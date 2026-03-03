@@ -21,13 +21,16 @@
 }
 
 .right-side-grid {
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(4, 60px);
+    /* Strict parity between all columns */
     justify-content: end;
+    align-items: center;
 }
 
 .grid-header-explore {
     grid-column: 4;
-    /* Direct alignment with the 4th column (Scan) */
+    grid-row: 1;
+    /* First row */
     font-weight: bold;
     font-family: var(--font-main);
     text-align: center;
@@ -35,11 +38,25 @@
     align-items: center;
     justify-content: center;
     letter-spacing: 2px;
-    font-size: 13px;
+    font-size: 12px;
     color: #00aaff;
     /* Match beacon color */
     text-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
     font-weight: 900;
+    width: 60px;
+    /* Match column width */
+    overflow: visible;
+    /* Allow text to overflow symmetrically if long */
+    white-space: nowrap;
+    height: 30px;
+}
+
+/* Explicit placement for the scan button in the 2nd row */
+#btn-scan {
+    grid-column: 4;
+    grid-row: 2;
+    justify-self: center;
+    margin-bottom: 5px;
 }
 
 .grid-header-explore div[data-i18n="ui.explore"] {
