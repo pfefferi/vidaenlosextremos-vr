@@ -70,7 +70,7 @@ ROV.modelHandler = {
             z: (-center.z * scaleFactor) - 10
         });
 
-        // 3. Capas de Continuidad Visual (Zero-Seam Strategy)
+        // 3. Capas de Continuidad Visual (Advanced Shader Injection)
         const floorY = finalPosY - (size.y * scaleFactor / 2);
         const modelRadius = Math.max(size.x, size.z) * scaleFactor / 2;
 
@@ -82,42 +82,16 @@ ROV.modelHandler = {
             extendedFloor.setAttribute('animation', 'property: material.opacity; from: 0; to: 1; dur: 2000');
         }
 
-        // B. Skirt de Continuidad con Textura Real
-        const alphaSkirt = document.getElementById('alpha-skirt');
-        if (alphaSkirt) {
-            // Intentar extraer la primera textura del modelo cargado para un match del 100%
-            let modelTexture = null;
-            model.traverse((node) => {
-                if (!modelTexture && node.isMesh && node.material && node.material.map) {
-                    modelTexture = node.material.map;
-                    // Forzar repetición para el tiling del shader
-                    modelTexture.wrapS = THREE.RepeatWrapping;
-                    modelTexture.wrapT = THREE.RepeatWrapping;
-                }
-            });
-
-            alphaSkirt.setAttribute('position', { x: 0, y: floorY + 0.01, z: 0 });
-            // El skirt se extiende un 150% más allá del modelo para un fade ultra suave
-            alphaSkirt.setAttribute('radius', modelRadius * 2.5);
-
-            if (modelTexture) {
-                // Aplicar la textura nativa y configurar el shader
-                const mesh = alphaSkirt.getObject3D('mesh');
-                if (mesh && mesh.material) {
-                    // Esperar a que el shader esté listo si es necesario
-                    alphaSkirt.setAttribute('material', {
-                        shader: 'radial-blend',
-                        src: modelTexture.image,
-                        tiling: { x: 6, y: 6 }, // Ajuste de grano
-                        transparent: true,
-                        opacity: 0
-                    });
-                }
-            }
-
-            alphaSkirt.setAttribute('visible', 'true');
-            alphaSkirt.setAttribute('animation', 'property: material.opacity; from: 0; to: 1; dur: 2500');
+        // B. Active Edge-Fade (Difuminación Directa del Modelo)
+        // Inyectamos el shader de fade-out en los materiales originales del escaneo
+        if (typeof ROV.blender !== 'undefined' && typeof ROV.blender.applyEdgeFade === 'function') {
+            // El fade empieza un poco antes del borde físico del modelo
+            ROV.blender.applyEdgeFade(model, modelRadius * 1.5);
         }
+
+        // Limpieza de capas anteriores si quedase alguna
+        const alphaSkirt = document.getElementById('alpha-skirt');
+        if (alphaSkirt) alphaSkirt.setAttribute('visible', 'false');
 
         // Ajustar niebla según escala (Para que en modelos grandes no se vea el borde)
         const scene = document.querySelector('a-scene');
