@@ -30,6 +30,11 @@ ROV.waypoints = {
         // Inyectar HUD de Misión
         this.createMissionHUD();
 
+        // Sync initial state to UI
+        const checkbox = document.getElementById('gamified-mode-check');
+        if (checkbox) checkbox.checked = ROV.state.gamifiedMode;
+        if (this.missionHUD) this.missionHUD.style.display = ROV.state.gamifiedMode ? 'block' : 'none';
+
         const urlParams = new URLSearchParams(window.location.search);
         let site = urlParams.get('site');
 
