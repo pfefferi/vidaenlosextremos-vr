@@ -21,7 +21,7 @@ if (ROV.refs && ROV.refs.mapEntity) {
 }
 
 // 2. Inicialización del Sistema
-function initSystem() {
+async function initSystem() {
     // Inicializar rotación táctil y ratón (si existe en controles)
     if (typeof initRotationControls === 'function') {
         initRotationControls();
@@ -37,9 +37,9 @@ function initSystem() {
         });
     }
 
-    // 4. Inicializar Localización
+    // 4. Inicializar Localización (Vital: Await para evitar race conditions en UI)
     if (ROV.localization) {
-        ROV.localization.init();
+        await ROV.localization.init();
     }
 
     // 5. Inicializar Waypoints

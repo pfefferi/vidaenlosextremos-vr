@@ -54,27 +54,40 @@ ROV.waypoints = {
 
         const hud = document.createElement('div');
         hud.id = 'mission-counter';
-        hud.style.position = 'fixed';
-        hud.style.top = '80px';
-        hud.style.right = '30px';
-        hud.style.padding = '12px 20px';
-        hud.style.background = 'rgba(0, 0, 0, 0.6)';
+        // Estilos base (Mantenemos glassmorphism pero quitamos el posicionamiento fixed rígido)
+        hud.style.padding = '10px 16px';
+        hud.style.background = 'rgba(0, 0, 0, 0.4)';
         hud.style.backdropFilter = 'blur(10px)';
-        hud.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+        hud.style.border = '1px solid rgba(255, 255, 255, 0.15)';
         hud.style.borderRadius = '4px';
         hud.style.color = '#fff';
         hud.style.fontFamily = "'Inter', sans-serif";
-        hud.style.fontSize = '12px';
+        hud.style.fontSize = '11px';
         hud.style.fontWeight = '800';
-        hud.style.letterSpacing = '2px';
-        hud.style.zIndex = '1000';
+        hud.style.letterSpacing = '1px';
         hud.style.transition = 'all 0.3s ease';
+        hud.style.marginRight = '10px'; // Separación del botón menú
 
-        const label = ROV.localization.t("ui.mission_analyzed");
-        hud.innerHTML = `${label}: <span id="visited-count">0</span> / <span id="total-count">0</span>`;
+        // Usamos data-i18n para el label para que el sistema de localización lo maneje automáticamente
+        hud.innerHTML = `<span data-i18n="ui.mission_analyzed"></span>: <span id="visited-count">0</span> / <span id="total-count">0</span>`;
 
-        document.body.appendChild(hud);
+        // Inyectar en el contenedor top-right para que herede el layout flex
+        const container = document.querySelector('.top-right-ctrls');
+        if (container) {
+            // Lo insertamos al inicio (antes del botón menú) para que quede a la izquierda
+            container.insertBefore(hud, container.firstChild);
+        } else {
+            // Fallback por si acaso
+            hud.style.position = 'fixed';
+            hud.style.top = '30px';
+            hud.style.right = '90px';
+            document.body.appendChild(hud);
+        }
+
         this.missionHUD = hud;
+
+        // Forzar actualización de traducciones en el nuevo elemento
+        if (ROV.localization) ROV.localization.updateDOM();
     },
 
     spawn: function (data) {

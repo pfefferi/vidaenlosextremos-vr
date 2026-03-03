@@ -49,6 +49,8 @@
     right: 30px;
     display: flex;
     gap: 15px;
+    align-items: center;
+    /* Asegura que el contador y el menú estén alineados */
     pointer-events: auto;
 }
 

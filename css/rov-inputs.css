@@ -14,7 +14,8 @@
 /* Side Grids */
 .control-grid {
     display: grid;
-    gap: 12px 10px;
+    gap: 10px;
+    /* Matches vertical gap for a perfect square grid feel */
     pointer-events: auto;
     align-items: end;
 }
@@ -25,16 +26,16 @@
 }
 
 .grid-header-explore {
-    grid-column: 1 / span 4;
+    grid-column: 4;
+    /* Direct alignment with the 4th column (Scan) */
     font-weight: bold;
     font-family: var(--font-main);
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 45px;
-    letter-spacing: 3px;
-    font-size: 14px;
+    letter-spacing: 2px;
+    font-size: 13px;
     color: #00aaff;
     /* Match beacon color */
     text-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
