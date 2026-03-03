@@ -29,7 +29,7 @@ ROV.waypoints = {
 
         const missionKey = site.replace(/_/g, "-");
 
-        fetch('./data/waypoints.json')
+        fetch('data/waypoints.json')
             .then(res => res.json())
             .then(data => {
                 const points = data[missionKey];

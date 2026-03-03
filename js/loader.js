@@ -1,18 +1,21 @@
 // loader.js
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("[Loader] URL:", window.location.href);
+    console.log("[Loader] Search:", window.location.search);
+
     const urlParams = new URLSearchParams(window.location.search);
     let site = urlParams.get('site');
 
     if (!site) {
-        // Fallback to filename for backward compatibility
+        console.warn("[Loader] 'site' parameter missing, falling back to pathname");
         const path = window.location.pathname;
         site = path.split("/").pop().split(".")[0];
     }
 
     const jsonKey = site.replace(/_/g, "-");
+    console.log(`[Loader] Target Mission: ${jsonKey}`);
 
-    console.log(`[Loader] Init: ${jsonKey}`);
     const debugConsole = document.getElementById('debug-console');
 
     initGyroToggle();
@@ -20,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkVersion();
     if (ROV.controlsUI) ROV.controlsUI.init();
 
-    fetch('./data/dives.json')
+    fetch('data/dives.json')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             return res.json();
@@ -152,7 +155,7 @@ function loadModelDirectly(url) {
 }
 
 function loadIcons() {
-    fetch('./assets/icons.html')
+    fetch('assets/icons.html')
         .then(res => res.text())
         .then(html => {
             const div = document.createElement('div');
@@ -166,7 +169,7 @@ function loadIcons() {
 
 function checkVersion() {
     // Cache bust local version file
-    fetch(`./data/version.json?t=${Date.now()}`)
+    fetch(`data/version.json?t=${Date.now()}`)
         .then(res => res.json())
         .then(ver => {
             console.log(
