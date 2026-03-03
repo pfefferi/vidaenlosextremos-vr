@@ -34,9 +34,14 @@
 
     <div class="bg-overlay"></div>
 
+    <div class="lang-selector">
+        <button class="lang-btn" data-lang="en" onclick="ROV.localization.setLanguage('en')">EN</button>
+        <button class="lang-btn" data-lang="es" onclick="ROV.localization.setLanguage('es')">ES</button>
+    </div>
+
     <header>
-        <h1>VIDA EN LOS EXTREMOS</h1>
-        <div class="expedition-tag">Expedición FKt251206 Bravo | R/V Falkor (too)</div>
+        <h1 data-i18n="menu.title">VIDA EN LOS EXTREMOS</h1>
+        <div class="expedition-tag" data-i18n="menu.expedition">Expedición FKt251206 Bravo | R/V Falkor (too)</div>
     </header>
 
     <main class="mission-grid">
@@ -47,10 +52,11 @@
                 <img src="assets/images/whale_fall_close.jpg" alt="Detalle Whale Fall" class="card-img img-closeup">
             </div>
             <div class="card-body">
-                <div class="dive-id">DIVE S0883</div>
-                <div class="dive-title">The Whale Fall</div>
-                <div class="dive-stats"><span>PROFUNDIDAD: 3895 m</span></div>
-                <div class="launch-btn">LAUNCH DIVE</div>
+                <div class="dive-id"><span data-i18n="menu.dive_id">DIVE</span> S0883</div>
+                <div class="dive-title" data-i18n="habitats.whale_fall">The Whale Fall</div>
+                <div class="dive-stats"><span style="display:inline"><span data-i18n="menu.depth">PROFUNDIDAD</span>:
+                        3895 m</span></div>
+                <div class="launch-btn" data-i18n="menu.launch">LAUNCH DIVE</div>
             </div>
         </a>
 
@@ -60,10 +66,11 @@
                 <img src="assets/images/clam_bed_close.jpg" alt="Detalle Clam Bed" class="card-img img-closeup">
             </div>
             <div class="card-body">
-                <div class="dive-id">DIVE S0889</div>
-                <div class="dive-title">Vesicomyidae Clam Bed</div>
-                <div class="dive-stats"><span>PROFUNDIDAD: 618 m</span></div>
-                <div class="launch-btn">LAUNCH DIVE</div>
+                <div class="dive-id"><span data-i18n="menu.dive_id">DIVE</span> S0889</div>
+                <div class="dive-title" data-i18n="habitats.clam_bed">Vesicomyidae Clam Bed</div>
+                <div class="dive-stats"><span style="display:inline"><span data-i18n="menu.depth">PROFUNDIDAD</span>:
+                        618 m</span></div>
+                <div class="launch-btn" data-i18n="menu.launch">LAUNCH DIVE</div>
             </div>
         </a>
 
@@ -73,26 +80,37 @@
                 <img src="assets/images/giant_corals_close.jpg" alt="Detalle Giant Corals" class="card-img img-closeup">
             </div>
             <div class="card-body">
-                <div class="dive-id">DIVE S0892</div>
-                <div class="dive-title">Giant Corals Bed</div>
-                <div class="dive-stats"><span>PROFUNDIDAD: 483 m</span></div>
-                <div class="launch-btn">COMING SOON</div>
+                <div class="dive-id"><span data-i18n="menu.dive_id">DIVE</span> S0892</div>
+                <div class="dive-title" data-i18n="habitats.giant_corals">Giant Corals Bed</div>
+                <div class="dive-stats"><span style="display:inline"><span data-i18n="menu.depth">PROFUNDIDAD</span>:
+                        483 m</span></div>
+                <div class="launch-btn" data-i18n="menu.coming_soon">COMING SOON</div>
             </div>
         </div>
 
     </main>
 
     <footer>
-        <p>EST. 2026 | Lisandro Scarrone</p>
+        <p data-i18n="menu.footer">EST. 2026 | Lisandro Scarrone</p>
     </footer>
 
+    <script src="js/systems/localization.js"></script>
     <script>
+        // Initialize localization
+        document.addEventListener('DOMContentLoaded', () => {
+            ROV.localization.init();
+        });
+
         document.querySelectorAll('.mission-card:not(.disabled)').forEach(card => {
             card.addEventListener('touchstart', function () { this.classList.add('is-touching'); }, { passive: true });
             card.addEventListener('touchend', function () { this.classList.remove('is-touching'); }, { passive: true });
             card.addEventListener('touchcancel', function () { this.classList.remove('is-touching'); }, { passive: true });
         });
     </script>
+
+</body>
+
+</html>
 
 </body>
 

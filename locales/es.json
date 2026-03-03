@@ -1,0 +1,49 @@
+{
+    "menu": {
+        "title": "VIDA EN LOS EXTREMOS",
+        "expedition": "Expedición FKt251206 Bravo | R/V Falkor (too)",
+        "dive_id": "INMERSIÓN",
+        "depth": "PROFUNDIDAD",
+        "launch": "INICIAR INMERSIÓN",
+        "coming_soon": "PRÓXIMAMENTE",
+        "footer": "EST. 2026 | Lisandro Scarrone"
+    },
+    "habitats": {
+        "whale_fall": "Whale Fall (Caída de Ballena)",
+        "clam_bed": "Bancos de Almejas Vesicomyidae",
+        "giant_corals": "Lecho de Corales Gigantes"
+    },
+    "ui": {
+        "loading": "CARGANDO...",
+        "system_log": "REGISTRO DEL SISTEMA",
+        "scanning_data": "Escaneando datos...",
+        "toggle_hud": "Alternar HUD",
+        "menu": "Menú",
+        "system_navigation": "Navegación del Sistema",
+        "mission_controls": "Controles de Misión",
+        "toggle_gyro": "Alternar Giroscopio",
+        "return_to_fleet": "Volver a la Flota",
+        "explore": "EXPLORAR",
+        "reset_position": "Restablecer Posición",
+        "toggle_lights": "Alternar Luces",
+        "speed": "VEL",
+        "zoom": "ZOM",
+        "vertical": "VRT"
+    },
+    "controls": {
+        "title": "CONTROLES DE MISIÓN",
+        "gamepad": "MANDO (GAMEPAD)",
+        "keyboard": "TECLADO",
+        "piloting_nav": "PILOTAJE Y NAVEGACIÓN",
+        "mission_systems": "MISIÓN Y SISTEMAS",
+        "move_strafe": "AVANZAR / DESPLAZAMIENTO LATERAL",
+        "camera_look": "VISTA DE CÁMARA",
+        "ascend_descend": "ASCENDER / DESCENDER",
+        "zoom_in_out": "ACERCAR / ALEJAR ZOOM",
+        "speed_inc_dec": "VELOCIDAD +/−",
+        "scan_waypoint": "ESCANEAR PUNTO DE INTERÉS",
+        "open_menu": "ABRIR MENÚ",
+        "close": "CERRAR",
+        "switch_input": "CAMBIAR ENTRADA"
+    }
+}

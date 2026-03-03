@@ -44,6 +44,11 @@ function initSystem() {
 
     // Iniciar el loop
     updateLoop();
+
+    // Nueva: Inicializar Localización
+    if (ROV.localization) {
+        ROV.localization.init();
+    }
 }
 
 // 3. Bucle Principal (60 FPS)

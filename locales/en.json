@@ -1,0 +1,49 @@
+{
+    "menu": {
+        "title": "VIDA EN LOS EXTREMOS",
+        "expedition": "Expedition FKt251206 Bravo | R/V Falkor (too)",
+        "dive_id": "DIVE",
+        "depth": "DEPTH",
+        "launch": "LAUNCH DIVE",
+        "coming_soon": "COMING SOON",
+        "footer": "EST. 2026 | Lisandro Scarrone"
+    },
+    "habitats": {
+        "whale_fall": "The Whale Fall",
+        "clam_bed": "Vesicomyidae Clam Bed",
+        "giant_corals": "Giant Corals Bed"
+    },
+    "ui": {
+        "loading": "LOADING...",
+        "system_log": "SYSTEM LOG",
+        "scanning_data": "Scanning data...",
+        "toggle_hud": "Toggle HUD",
+        "menu": "Menu",
+        "system_navigation": "System Navigation",
+        "mission_controls": "Mission Controls",
+        "toggle_gyro": "Toggle Gyroscope",
+        "return_to_fleet": "Return to Fleet",
+        "explore": "EXPLORE",
+        "reset_position": "Reset Position",
+        "toggle_lights": "Toggle Lights",
+        "speed": "SPD",
+        "zoom": "ZOM",
+        "vertical": "VRT"
+    },
+    "controls": {
+        "title": "MISSION CONTROLS",
+        "gamepad": "GAMEPAD",
+        "keyboard": "KEYBOARD",
+        "piloting_nav": "PILOTING & NAVIGATION",
+        "mission_systems": "MISSION & SYSTEMS",
+        "move_strafe": "MOVE FORWARD / STRAFE",
+        "camera_look": "CAMERA LOOK",
+        "ascend_descend": "ASCEND / DESCEND",
+        "zoom_in_out": "ZOOM IN / OUT",
+        "speed_inc_dec": "SPEED +/−",
+        "scan_waypoint": "SCAN WAYPOINT",
+        "open_menu": "OPEN MENU",
+        "close": "CLOSE",
+        "switch_input": "SWITCH INPUT"
+    }
+}
