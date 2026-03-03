@@ -45,5 +45,31 @@
         "open_menu": "ABRIR MENÚ",
         "close": "CERRAR",
         "switch_input": "CAMBIAR ENTRADA"
+    },
+    "waypoints": {
+        "whale_fall": {
+            "vertebra": {
+                "title": "Muestreo de Vértebra",
+                "description": "Extracción de vértebra de ballena utilizando el brazo del ROV SuBastian.",
+                "caption": "Clip: Momento de la extracción - R/V Falkor (too)"
+            },
+            "lab": {
+                "title": "Procesamiento en Laboratorio",
+                "description": "Daniel y Pepe sosteniendo la muestra recuperada previo a su procesamiento.",
+                "thumb1": "Daniel y Pepe sacando la muestra del SuBastian.",
+                "thumb2": "Detalle de la vertebra",
+                "thumb3": "Detalle de la estructura ósea en el laboratorio."
+            },
+            "isopods": {
+                "title": "Ecología: Isópodos",
+                "description": "Close-up de isópodos realizando el 'trencito' sobre el coral.",
+                "caption": "Macrofotografía in situ"
+            },
+            "edna": {
+                "title": "Resultados eDNA",
+                "description": "Análisis de ADN ambiental de la columna de agua durante el dive S0883.",
+                "caption": "Distribución de taxones por lecturas de secuenciación."
+            }
+        }
     }
 }

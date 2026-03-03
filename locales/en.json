@@ -45,5 +45,31 @@
         "open_menu": "OPEN MENU",
         "close": "CLOSE",
         "switch_input": "SWITCH INPUT"
+    },
+    "waypoints": {
+        "whale_fall": {
+            "vertebra": {
+                "title": "Vertebra Sampling",
+                "description": "Extraction of a whale vertebra using the ROV SuBastian's arm.",
+                "caption": "Clip: Moment of extraction - R/V Falkor (too)"
+            },
+            "lab": {
+                "title": "Laboratory Processing",
+                "description": "Daniel and Pepe holding the recovered sample prior to processing.",
+                "thumb1": "Daniel and Pepe taking the sample out of SuBastian.",
+                "thumb2": "Detail of the vertebra",
+                "thumb3": "Detail of the bone structure in the laboratory."
+            },
+            "isopods": {
+                "title": "Ecology: Isopods",
+                "description": "Close-up of isopods performing a 'train' over the coral.",
+                "caption": "In-situ macrophotography"
+            },
+            "edna": {
+                "title": "eDNA Results",
+                "description": "Environmental DNA analysis of the water column during dive S0883.",
+                "caption": "Taxon distribution by sequencing reads."
+            }
+        }
     }
 }

@@ -2,67 +2,81 @@
   "whale-fall": [
     {
       "id": "wp-vertebra-sample",
-      "position": { "x": -7.76, "y": -1.84, "z": -10.91},
-      "title": "Muestreo de Vértebra",
+      "position": {
+        "x": -7.76,
+        "y": -1.84,
+        "z": -10.91
+      },
+      "title": "waypoints.whale_fall.vertebra.title",
       "icon": "video",
       "content": {
-        "description": "Extracción de vértebra de ballena utilizando el brazo del ROV SuBastian.",
+        "description": "waypoints.whale_fall.vertebra.description",
         "youtube_id": "NqnWDBwp-k8?si=pxZNd__l8gX2lmRS",
-        "video_caption": "Clip: Momento de la extracción - R/V Falkor (too)"
+        "video_caption": "waypoints.whale_fall.vertebra.caption"
       }
     },
     {
       "id": "wp-lab-photo",
-      "position": { "x": 2.74, "y": -1.84, "z": -10.50},
-      "title": "Procesamiento en Laboratorio",
+      "position": {
+        "x": 2.74,
+        "y": -1.84,
+        "z": -10.50
+      },
+      "title": "waypoints.whale_fall.lab.title",
       "icon": "image",
       "content": {
-        "description": "Daniel y Pepe sosteniendo la muestra recuperada previo a su procesamiento.",
+        "description": "waypoints.whale_fall.lab.description",
         "gallery": [
-          { "src": "../assets/photos/labo_vertebra.jpg", "caption": "Daniel y Pepe sacando la muestra del SuBastian." },
-          { "src": "../assets/photos/labo_vertebra2.jpg", "caption": "Detalle de la vertebra" },
-          { "src": "../assets/photos/labo_vertebra3.jpg", "caption": "Detalle de la estructura ósea en el laboratorio." }
+          {
+            "src": "../assets/photos/labo_vertebra.jpg",
+            "caption": "waypoints.whale_fall.lab.thumb1"
+          },
+          {
+            "src": "../assets/photos/labo_vertebra2.jpg",
+            "caption": "waypoints.whale_fall.lab.thumb2"
+          },
+          {
+            "src": "../assets/photos/labo_vertebra3.jpg",
+            "caption": "waypoints.whale_fall.lab.thumb3"
+          }
         ]
       }
     },
     {
       "id": "wp-isopods",
-      "position": { "x": 6.26, "y": -1.84, "z": -10.44 },
-      "title": "Ecología: Isópodos",
+      "position": {
+        "x": 6.26,
+        "y": -1.84,
+        "z": -10.44
+      },
+      "title": "waypoints.whale_fall.isopods.title",
       "icon": "eye",
       "content": {
-        "description": "Close-up de isópodos realizando el 'trencito' sobre el coral.",
+        "description": "waypoints.whale_fall.isopods.description",
         "gallery": [
-          { "src": "../assets/photos/isopods_macro.jpg", "caption": "Macrofotografía in situ" }
+          {
+            "src": "../assets/photos/isopods_macro.jpg",
+            "caption": "waypoints.whale_fall.isopods.caption"
+          }
         ]
       }
     },
-    
     {
       "id": "wp-edna",
-      "position": { "x": -1.19, "y": -1.84, "z": -9.14 },
-      "title": "Resultados eDNA",
+      "position": {
+        "x": -1.19,
+        "y": -1.84,
+        "z": -9.14
+      },
+      "title": "waypoints.whale_fall.edna.title",
       "icon": "chart",
       "content": {
-        "description": "Análisis de ADN ambiental de la columna de agua durante el dive S0883.",
+        "description": "waypoints.whale_fall.edna.description",
         "image_chart": "../assets/charts/edna_pie_chart.png",
-        "chart_caption": "Distribución de taxones por lecturas de secuenciación."
+        "chart_caption": "waypoints.whale_fall.edna.caption"
       }
     }
   ],
   "clam-bed": [],
   "giant-corals": []
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

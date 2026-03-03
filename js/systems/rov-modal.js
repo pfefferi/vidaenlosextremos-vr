@@ -21,7 +21,7 @@ ROV.modal = {
         this.body.innerHTML = '';
 
         // 3. Renderizar Título
-        if (this.title) this.title.innerText = waypointData.title || "SYSTEM ENTRY";
+        if (this.title) this.title.innerText = ROV.localization.t(waypointData.title) || "SYSTEM ENTRY";
 
         // 4. Renderizar Contenido (Pattern Matching)
         const content = waypointData.content || {};
@@ -30,7 +30,8 @@ ROV.modal = {
         // --- A. Descripción (Texto) ---
         // Ahora es lo primero que se ve
         if (content.description) {
-            htmlBuffer += `<div class="modal-desc" style="margin-top: 0;">${content.description}</div>`;
+            const desc = ROV.localization.t(content.description);
+            htmlBuffer += `<div class="modal-desc" style="margin-top: 0;">${desc}</div>`;
         }
 
         // --- B. Video YouTube ---
@@ -81,7 +82,7 @@ ROV.modal = {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen></iframe>
             </div>
-            ${caption ? `<div class="media-caption">${caption}</div>` : ''}
+            ${caption ? `<div class="media-caption">${ROV.localization.t(caption)}</div>` : ''}
         `;
     },
 
@@ -92,8 +93,8 @@ ROV.modal = {
         const featured = images[0];
         const mainHtml = `
             <div class="gallery-main" id="gallery-main">
-                <img src="${featured.src}" id="gallery-featured-img" alt="${featured.caption || 'Focus image'}">
-                <div class="gallery-caption" id="gallery-featured-caption">${featured.caption || ''}</div>
+                <img src="${featured.src}" id="gallery-featured-img" alt="${ROV.localization.t(featured.caption) || 'Focus image'}">
+                <div class="gallery-caption" id="gallery-featured-caption">${ROV.localization.t(featured.caption) || ''}</div>
             </div>
         `;
 
@@ -119,7 +120,7 @@ ROV.modal = {
             setTimeout(() => {
                 featuredImg.src = src;
                 featuredImg.style.opacity = '1';
-                if (featuredCaption) featuredCaption.innerText = caption;
+                if (featuredCaption) featuredCaption.innerText = ROV.localization.t(caption);
             }, 200);
         }
 
@@ -133,7 +134,7 @@ ROV.modal = {
         return `
             <div class="chart-container">
                 <img src="${src}" alt="Scientific Data">
-                ${caption ? `<div class="media-caption" style="text-align:center; margin-top:5px;">${caption}</div>` : ''}
+                ${caption ? `<div class="media-caption" style="text-align:center; margin-top:5px;">${ROV.localization.t(caption)}</div>` : ''}
             </div>
         `;
     }
