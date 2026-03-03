@@ -1,5 +1,5 @@
 ﻿{
-    "message":  "Build: synchronize version with precision box fade update",
-    "timestamp":  "2026-03-03 18:07:14",
-    "hash":  "059092b"
+    "message":  "feat(core): Reinstate spotlight abstraction, scale tweaks, and strict floor boundaries",
+    "timestamp":  "2026-03-03 18:10:28",
+    "hash":  "6711e73"
 }
