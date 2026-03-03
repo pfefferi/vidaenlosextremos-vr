@@ -1,20 +1,16 @@
 // loader.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("[Loader] URL:", window.location.href);
-    console.log("[Loader] Search:", window.location.search);
-
     const urlParams = new URLSearchParams(window.location.search);
     let site = urlParams.get('site');
 
     if (!site) {
-        console.warn("[Loader] 'site' parameter missing, falling back to pathname");
         const path = window.location.pathname;
         site = path.split("/").pop().split(".")[0];
     }
 
     const jsonKey = site.replace(/_/g, "-");
-    console.log(`[Loader] Target Mission: ${jsonKey}`);
+    console.log(`[Loader] Init: ${jsonKey}`);
 
     const debugConsole = document.getElementById('debug-console');
 
@@ -178,28 +174,6 @@ function checkVersion() {
                 "color: #888; font-style: italic;",
                 "color: #888; font-size: 10px;"
             );
-
-            // Fetch latest from GitHub to detect sync status
-            // No cache bust here as GitHub API is usually real-time, but we add headers just in case
-            fetch('https://api.github.com/repos/pfefferi/vidaenlosextremos-vr/commits/main', { cache: 'no-store' })
-                .then(res => res.json())
-                .then(github => {
-                    const remoteHash = github.sha.substring(0, 7);
-                    const remoteDate = new Date(github.commit.committer.date).toLocaleString();
-                    const parentHash = (github.parents && github.parents[0]) ? github.parents[0].sha.substring(0, 7) : "";
-
-                    const isSynced = (ver.hash === remoteHash) || (ver.hash === parentHash);
-                    const syncColor = isSynced ? "#00ff00" : "#ffaa00";
-                    const syncIcon = isSynced ? "✅" : "⚠️";
-
-                    console.log(
-                        `%c ${syncIcon} REMOTE REPOSITORY: ${remoteHash} \n%c Status: ${isSynced ? 'UP TO DATE' : 'STALE (AWAITING DEPLOY)'} \n%c Remote Push Time: ${remoteDate}`,
-                        `color: ${syncColor}; font-weight: bold; font-size: 14px;`,
-                        `color: ${syncColor}; font-style: italic;`,
-                        `color: ${syncColor}; font-size: 11px; font-weight: bold;`
-                    );
-                })
-                .catch(() => console.log("%c 🌐 REMOTE: Could not reach GitHub API", "color: #ff4444;"));
         })
         .catch(() => console.warn("[Loader] Version tracking not found"));
 }
