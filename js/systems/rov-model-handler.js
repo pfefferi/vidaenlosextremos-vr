@@ -79,7 +79,6 @@ ROV.modelHandler = {
 
         // 3. Capas de Continuidad Visual (Advanced Shader Injection)
         const floorY = finalPosY - (size.y * scaleFactor / 2);
-        const modelRadius = Math.max(size.x, size.z) * scaleFactor / 2;
 
         // A. Suelo Infinito
         const extendedFloor = document.getElementById('extended-floor');
@@ -91,9 +90,10 @@ ROV.modelHandler = {
 
         // B. Active Edge-Fade (Difuminación Directa del Modelo)
         // Inyectamos el shader de fade-out en los materiales originales del escaneo
-        if (typeof ROV.blender !== 'undefined' && typeof ROV.blender.applyEdgeFade === 'function') {
-            // El fade empieza un poco antes del borde físico del modelo
-            ROV.blender.applyEdgeFade(mesh, modelRadius * 1.5);
+        if (typeof ROV.blender !== 'undefined' && typeof ROV.blender.applyBoxFade === 'function') {
+            // Precise Whale Fall limits: X[-10, 10], Z[-11.98, -7.98]
+            // We use a safe 0.5 fade distance to ensure the core remains 100% solid and entirely untampered mathematically.
+            ROV.blender.applyBoxFade(mesh, -10, 10, -11.98, -7.98, 0.5);
         }
 
         // Limpieza de capas anteriores si quedase alguna

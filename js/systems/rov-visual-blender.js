@@ -70,6 +70,94 @@ ROV.blender = {
         });
       }
     });
+  },
+
+  /**
+   * Injects a rectangular alpha-fade logic into model materials based on world coordinates.
+   * Fades the model to transparency at specified X/Z limits.
+   * @param {THREE.Object3D} model - The GLTF model to modify.
+   * @param {number} minX - The minimum X coordinate boundary.
+   * @param {number} maxX - The maximum X coordinate boundary.
+   * @param {number} minZ - The minimum Z coordinate boundary.
+   * @param {number} maxZ - The maximum Z coordinate boundary.
+   * @param {number} fadeDistance - How many units before the edge the fade begins.
+   */
+  applyBoxFade: function (model, minX, maxX, minZ, maxZ, fadeDistance = 1.5) {
+    if (!model) return;
+
+    console.log(`[Blender] Applying Box-Fade (X: ${minX} to ${maxX}, Z: ${minZ} to ${maxZ}, dist: ${fadeDistance})`);
+
+    model.traverse((node) => {
+      if (node.isMesh && node.material) {
+        const materials = Array.isArray(node.material) ? node.material : [node.material];
+
+        materials.forEach((mat) => {
+          // Force transparency support and depth sorting
+          mat.transparent = true;
+          mat.depthWrite = true; // MUST keep depth for proper layering
+
+          mat.onBeforeCompile = (shader) => {
+            // 1. Define uniforms
+            shader.uniforms.uMinX = { value: minX };
+            shader.uniforms.uMaxX = { value: maxX };
+            shader.uniforms.uMinZ = { value: minZ };
+            shader.uniforms.uMaxZ = { value: maxZ };
+            shader.uniforms.uFadeDist = { value: fadeDistance };
+
+            // 2. Inject Varying for world position
+            shader.vertexShader = shader.vertexShader.replace(
+              '#include <common>',
+              `#include <common>
+               varying vec3 vWorldPos;`
+            );
+
+            shader.vertexShader = shader.vertexShader.replace(
+              '#include <worldpos_vertex>',
+              `#include <worldpos_vertex>
+               vWorldPos = (modelMatrix * vec4(transformed, 1.0)).xyz;`
+            );
+
+            // 3. Inject Fragment shader logic
+            shader.fragmentShader = shader.fragmentShader.replace(
+              '#include <common>',
+              `#include <common>
+               varying vec3 vWorldPos;
+               uniform float uMinX;
+               uniform float uMaxX;
+               uniform float uMinZ;
+               uniform float uMaxZ;
+               uniform float uFadeDist;`
+            );
+
+            // Calculate distance to the defined borders
+            const fadeCode = `
+              #include <dithering_fragment>
+              
+              // Find the distance to the nearest X boundary
+              float distX = min(vWorldPos.x - uMinX, uMaxX - vWorldPos.x);
+              
+              // Find the distance to the nearest Z boundary
+              float distZ = min(vWorldPos.z - uMinZ, uMaxZ - vWorldPos.z);
+              
+              // The closest boundary determines the fade (alpha)
+              float distToEdge = min(distX, distZ);
+              
+              // Smooth transition to 0 alpha when distToEdge is small
+              float edgeAlpha = smoothstep(0.0, uFadeDist, distToEdge);
+              
+              gl_FragColor.a *= edgeAlpha;
+            `;
+
+            shader.fragmentShader = shader.fragmentShader.replace(
+              '#include <dithering_fragment>',
+              fadeCode
+            );
+          };
+
+          mat.needsUpdate = true;
+        });
+      }
+    });
   }
 };
 
