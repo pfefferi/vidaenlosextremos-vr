@@ -52,26 +52,24 @@
     "waypoints": {
         "whale_fall": {
             "vertebra": {
-                "title": "Muestreo de Vértebra",
-                "description": "Extracción de vértebra de ballena utilizando el brazo del ROV SuBastian.",
-                "caption": "Clip: Momento de la extracción - R/V Falkor (too)"
-            },
-            "lab": {
-                "title": "Procesamiento en Laboratorio",
-                "description": "Daniel y Pepe sosteniendo la muestra recuperada previo a su procesamiento.",
-                "thumb1": "Daniel y Pepe sacando la muestra del SuBastian.",
-                "thumb2": "Detalle de la vertebra",
-                "thumb3": "Detalle de la estructura ósea en el laboratorio."
+                "title": "La Vértebra: Un Monumento del Abismo",
+                "description": "Esta vértebra es una cápsula del tiempo. Cuando una ballena muere, se convierte en un 'oasis' en el desierto de las profundidades marinas, sustentando la vida durante décadas. A casi 4.000 metros de profundidad (3.895m), la presión extrema y la temperatura de 2,4°C crean un entorno único donde esta caída de ballena fue hallada en sus etapas finales de sucesión. El hueso se está integrando activamente al lecho marino mediante un lento proceso de mineralización, proporcionando una superficie 'dura' poco común en la vasta llanura abisal de sedimentos blandos, donde corales y otras formas de vida sésil finalmente pueden anclarse y crecer."
             },
             "isopods": {
-                "title": "Ecología: Isópodos",
-                "description": "Close-up de isópodos realizando el 'trencito' sobre el coral.",
-                "caption": "Macrofotografía in situ"
+                "title": "El 'Trencito': Polizones de las Profundidades",
+                "description": "Conocidos como el 'Trencito de Isópodos' por la audiencia mundial del livestream, estas pequeñas criaturas fueron capturadas en un raro momento estacionario. Durante la exploración en vivo de la inmersión S0883, miles de espectadores quedaron cautivados por una pequeña rama de coral batial unida al hueso de ballena. Sirvió como lugar de descanso para diminutos isópodos, de no más de 2 cm de tamaño, vistos perfectamente alineados uno tras otro. Estos organismos forman parte de una comunidad bentónica especializada adaptada al entorno de alta presión y baja energía de las profundidades del Atlántico Sur."
             },
-            "edna": {
-                "title": "Resultados eDNA",
-                "description": "Análisis de ADN ambiental de la columna de agua durante el dive S0883.",
-                "caption": "Distribución de taxones por lecturas de secuenciación."
+            "subastian": {
+                "title": "Tecnología en el Abismo: SuBastian",
+                "description": "Solo podemos ver las profundidades gracias a SuBastian, un ROV de última generación capaz de una precisión extrema en el entorno más hostil de la Tierra. El modelo 3D que estás explorando ahora es un 'gemelo digital' creado mediante fotogrametría, un proceso complejo liderado por el piloto Ben Erwin. Al procesar meticulosamente miles de imágenes de alta resolución, se reconstruyó el sitio para permitir que científicos y el público visiten el abismo virtualmente. Los brazos robóticos de SuBastian permiten la recolección quirúrgica de muestras biológicas frágiles, asegurando que la integridad del ecosistema circundante permanezca intacta."
+            },
+            "lab": {
+                "title": "El Puente: Del Lecho Marino al Laboratorio",
+                "description": "Cada muestra es una carrera contra el tiempo. En el momento en que una vértebra sale del SuBastian, se traslada rápidamente a la Sala Fría para preservar sus firmas biológicas y químicas. Los científicos José Isola (Equipo de Geología) y Daniel Lauretta (Equipo de Taxonomía Bentónica) se encargan de la recuperación, asegurando que no se pierda ningún dato durante la transición desde el abismo hasta la superficie. Este esfuerzo interdisciplinario es crucial; después de la recuperación, las muestras son analizadas por los equipos de Ecología Bentónica y Taxonomía Bentónica para identificar especies y descubrir los secretos de la biodiversidad de las profundidades marinas, todo mientras se mantienen en almacenamiento en frío de alta prioridad a +2°C."
+            },
+            "mission": {
+                "title": "Expedición FKt251206: 'Guardianes Invisibles'",
+                "description": "Exploramos no solo para encontrar cosas, sino para comprender a los 'Guardianes Invisibles' de nuestro planeta. Liderada por la científica jefa María Emilia Bravo, esta misión exploró cómo los ecosistemas de las profundidades marinas regulan nuestro clima. Al consumir metano del fondo marino, estas comunidades especializadas evitan que potentes gases de efecto invernadero llegen a la atmósfera. Esta expedición conecta la oscura llanura abisal del Atlántico sudoccidental con el clima global, demostrando que mapear lo desconocido es fundamental para comprender la supervivencia de nuestro planeta."
             }
         }
     }

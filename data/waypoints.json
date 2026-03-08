@@ -10,9 +10,7 @@
       "title": "waypoints.whale_fall.vertebra.title",
       "icon": "video",
       "content": {
-        "description": "waypoints.whale_fall.vertebra.description",
-        "youtube_id": "NqnWDBwp-k8?si=pxZNd__l8gX2lmRS",
-        "video_caption": "waypoints.whale_fall.vertebra.caption"
+        "description": "waypoints.whale_fall.vertebra.description"
       }
     },
     {
@@ -29,15 +27,15 @@
         "gallery": [
           {
             "src": "../assets/photos/labo_vertebra.jpg",
-            "caption": "waypoints.whale_fall.lab.thumb1"
+            "caption": ""
           },
           {
             "src": "../assets/photos/labo_vertebra2.jpg",
-            "caption": "waypoints.whale_fall.lab.thumb2"
+            "caption": ""
           },
           {
             "src": "../assets/photos/labo_vertebra3.jpg",
-            "caption": "waypoints.whale_fall.lab.thumb3"
+            "caption": ""
           }
         ]
       }
@@ -52,28 +50,33 @@
       "title": "waypoints.whale_fall.isopods.title",
       "icon": "eye",
       "content": {
-        "description": "waypoints.whale_fall.isopods.description",
-        "gallery": [
-          {
-            "src": "../assets/photos/isopods_macro.jpg",
-            "caption": "waypoints.whale_fall.isopods.caption"
-          }
-        ]
+        "description": "waypoints.whale_fall.isopods.description"
       }
     },
     {
-      "id": "wp-edna",
+      "id": "wp-subastian",
       "position": {
         "x": -1.19,
         "y": -1.84,
         "z": -9.14
       },
-      "title": "waypoints.whale_fall.edna.title",
-      "icon": "chart",
+      "title": "waypoints.whale_fall.subastian.title",
+      "icon": "tool",
       "content": {
-        "description": "waypoints.whale_fall.edna.description",
-        "image_chart": "../assets/charts/edna_pie_chart.png",
-        "chart_caption": "waypoints.whale_fall.edna.caption"
+        "description": "waypoints.whale_fall.subastian.description"
+      }
+    },
+    {
+      "id": "wp-mission-overview",
+      "position": {
+        "x": 11.26,
+        "y": -1.84,
+        "z": -10.0
+      },
+      "title": "waypoints.whale_fall.mission.title",
+      "icon": "award",
+      "content": {
+        "description": "waypoints.whale_fall.mission.description"
       }
     }
   ],
