@@ -19,7 +19,7 @@ ROV.blender = {
    * @param {number} padding - Fraction of bounds to add as padding for fade space (default 0.15).
    * @returns {{ texture: THREE.CanvasTexture, bounds: Object }}
    */
-  generateSilhouetteMask: function (mesh, resolution = 512, blurPasses = 4, blurRadius = 8, padding = 0.15) {
+  generateSilhouetteMask: function (mesh, resolution = 512, blurPasses = 4, blurRadius = 16, padding = 0.30) {
     // 1. Ensure world matrices are fully up-to-date
     mesh.updateWorldMatrix(true, true);
 
@@ -248,6 +248,7 @@ ROV.blender = {
              float maskV = (vWorldPos.z - uBoundsMinZ) / (uBoundsMaxZ - uBoundsMinZ);
              vec2 maskUV = clamp(vec2(maskU, maskV), 0.0, 1.0);
              float maskAlpha = texture2D(uMaskTex, maskUV).r;
+             maskAlpha = pow(maskAlpha, 3.0); // Steepen curve: center stays solid, edges drop fast
              gl_FragColor.a *= maskAlpha;`
           );
         };
