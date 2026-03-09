@@ -19,7 +19,7 @@ ROV.blender = {
    * @param {number} padding - Fraction of bounds to add as padding for fade space (default 0.05).
    * @returns {{ texture: THREE.CanvasTexture, bounds: {minX: number, maxX: number, minZ: number, maxZ: number} }}
    */
-  generateSilhouetteMask: function (mesh, resolution = 512, blurPasses = 4, blurRadius = 8, padding = 0.05) {
+  generateSilhouetteMask: function (mesh, resolution = 512, blurPasses = 4, blurRadius = 8, padding = 0.15) {
     // 1. Ensure world matrices are up-to-date (critical after entity scale/position changes)
     mesh.updateWorldMatrix(true, true);
 
@@ -114,7 +114,20 @@ ROV.blender = {
       }
     });
 
-    // 4. Apply box blur for soft edges
+    // 4. Solidify interior: threshold any non-zero pixel to full white
+    // This closes sub-pixel gaps between triangles in photogrammetry meshes
+    const solidifyData = ctx.getImageData(0, 0, resolution, resolution);
+    const pixels = solidifyData.data;
+    for (let i = 0; i < pixels.length; i += 4) {
+      const val = pixels[i] > 0 ? 255 : 0;
+      pixels[i] = val;
+      pixels[i + 1] = val;
+      pixels[i + 2] = val;
+      pixels[i + 3] = 255;
+    }
+    ctx.putImageData(solidifyData, 0, 0);
+
+    // 5. Apply box blur for soft edges
     this._boxBlur(ctx, resolution, resolution, blurRadius, blurPasses);
 
     // 5. Create Three.js texture from canvas
