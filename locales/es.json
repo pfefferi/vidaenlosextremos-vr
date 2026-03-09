@@ -53,11 +53,13 @@
         "whale_fall": {
             "vertebra": {
                 "title": "La Vértebra: Un Monumento del Abismo",
-                "description": "Esta vértebra es una cápsula del tiempo. Cuando una ballena muere, se convierte en un 'oasis' en el desierto de las profundidades marinas, sustentando la vida durante décadas. A casi 4.000 metros de profundidad (3.895m), la presión extrema y la temperatura de 2,4°C crean un entorno único donde esta caída de ballena fue hallada en sus etapas finales de sucesión. El hueso se está integrando activamente al lecho marino mediante un lento proceso de mineralización, proporcionando una superficie 'dura' poco común en la vasta llanura abisal de sedimentos blandos, donde corales y otras formas de vida sésil finalmente pueden anclarse y crecer."
+                "description": "Esta vértebra es una cápsula del tiempo. Cuando una ballena muere, se convierte en un 'oasis' en el desierto de las profundidades marinas, sustentando la vida durante décadas. A casi 4.000 metros de profundidad (3.895m), la presión extrema y la temperatura de 2,4°C crean un entorno único donde esta caída de ballena fue hallada en sus etapas finales de sucesión. El hueso se está integrando activamente al lecho marino mediante un lento proceso de mineralización, proporcionando una superficie 'dura' poco común en la vasta llanura abisal de sedimentos blandos, donde corales y otras formas de vida sésil finalmente pueden anclarse y crecer.",
+                "caption": "Clip: Momento de la extracción - R/V Falkor (too)"
             },
             "isopods": {
                 "title": "El 'Trencito': Polizones de las Profundidades",
-                "description": "Conocidos como el 'Trencito de Isópodos' por la audiencia mundial del livestream, estas pequeñas criaturas fueron capturadas en un raro momento estacionario. Durante la exploración en vivo de la inmersión S0883, miles de espectadores quedaron cautivados por una pequeña rama de coral batial unida al hueso de ballena. Sirvió como lugar de descanso para diminutos isópodos, de no más de 2 cm de tamaño, vistos perfectamente alineados uno tras otro. Estos organismos forman parte de una comunidad bentónica especializada adaptada al entorno de alta presión y baja energía de las profundidades del Atlántico Sur."
+                "description": "Conocidos como el 'Trencito de Isópodos' por la audiencia mundial del livestream, estas pequeñas criaturas fueron capturadas en un raro momento estacionario. Durante la exploración en vivo de la inmersión S0883, miles de espectadores quedaron cautivados por una pequeña rama de coral batial unida al hueso de ballena. Sirvió como lugar de descanso para diminutos isópodos, de no más de 2 cm de tamaño, vistos perfectamente alineados uno tras otro. Estos organismos forman parte de una comunidad bentónica especializada adaptada al entorno de alta presión y baja energía de las profundidades del Atlántico Sur.",
+                "caption": "Macrofotografía in situ"
             },
             "subastian": {
                 "title": "Tecnología en el Abismo: SuBastian",
@@ -65,7 +67,10 @@
             },
             "lab": {
                 "title": "El Puente: Del Lecho Marino al Laboratorio",
-                "description": "Cada muestra es una carrera contra el tiempo. En el momento en que una vértebra sale del SuBastian, se traslada rápidamente a la Sala Fría para preservar sus firmas biológicas y químicas. Los científicos José Isola (Equipo de Geología) y Daniel Lauretta (Equipo de Taxonomía Bentónica) se encargan de la recuperación, asegurando que no se pierda ningún dato durante la transición desde el abismo hasta la superficie. Este esfuerzo interdisciplinario es crucial; después de la recuperación, las muestras son analizadas por los equipos de Ecología Bentónica y Taxonomía Bentónica para identificar especies y descubrir los secretos de la biodiversidad de las profundidades marinas, todo mientras se mantienen en almacenamiento en frío de alta prioridad a +2°C."
+                "description": "Cada muestra es una carrera contra el tiempo. En el momento en que una vértebra sale del SuBastian, se traslada rápidamente a la Sala Fría para preservar sus firmas biológicas y químicas. Los científicos José Isola (Equipo de Geología) y Daniel Lauretta (Equipo de Taxonomía Bentónica) se encargan de la recuperación, asegurando que no se pierda ningún dato durante la transición desde el abismo hasta la superficie. Este esfuerzo interdisciplinario es crucial; después de la recuperación, las muestras son analizadas por los equipos de Ecología Bentónica y Taxonomía Bentónica para identificar especies y descubrir los secretos de la biodiversidad de las profundidades marinas, todo mientras se mantienen en almacenamiento en frío de alta prioridad a +2°C.",
+                "thumb1": "José Isola y Daniel Lauretta recuperando la muestra del SuBastian.",
+                "thumb2": "Detalle de la vértebra de ballena.",
+                "thumb3": "Detalle de la estructura ósea en el laboratorio."
             },
             "mission": {
                 "title": "Expedición FKt251206: 'Guardianes Invisibles'",

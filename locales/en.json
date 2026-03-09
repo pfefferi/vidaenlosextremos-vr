@@ -53,11 +53,13 @@
         "whale_fall": {
             "vertebra": {
                 "title": "The Vertebra: A Monument of the Abyss",
-                "description": "This vertebra is a snapshot of time. When a whale dies, it becomes an 'oasis' in the desert of the deep sea, sustaining life for decades. At nearly 4,000 meters deep (3,895m), the extreme pressure and 2.4°C temperature create a unique environment where this whale fall was found in its later stages of succession. The bone is actively integrating back into the seafloor through a slow process of mineralization, providing a rare 'hard' surface in the vast, soft-sediment abyssal plain where corals and other sessile life can finally anchor and grow."
+                "description": "This vertebra is a snapshot of time. When a whale dies, it becomes an 'oasis' in the desert of the deep sea, sustaining life for decades. At nearly 4,000 meters deep (3,895m), the extreme pressure and 2.4°C temperature create a unique environment where this whale fall was found in its later stages of succession. The bone is actively integrating back into the seafloor through a slow process of mineralization, providing a rare 'hard' surface in the vast, soft-sediment abyssal plain where corals and other sessile life can finally anchor and grow.",
+                "caption": "Clip: Moment of extraction - R/V Falkor (too)"
             },
             "isopods": {
                 "title": "The 'Trencito': Deep-Sea Hitchhikers",
-                "description": "Known as the 'Trencito de Isópodos' (Isopod Train) by the global livestream audience, these small creatures were captured in a rare, stationary moment. During the live exploration of Dive S0883, thousands of viewers were captivated by a small branch of bathyal coral attached to the whale bone. It served as a resting ground for tiny isopods, no more than 2cm in size, seen perfectly aligned one after the other. These organisms are part of a specialized benthic community adapted to the high-pressure, low-energy environment of the South Atlantic depths."
+                "description": "Known as the 'Trencito de Isópodos' (Isopod Train) by the global livestream audience, these small creatures were captured in a rare, stationary moment. During the live exploration of Dive S0883, thousands of viewers were captivated by a small branch of bathyal coral attached to the whale bone. It served as a resting ground for tiny isopods, no more than 2cm in size, seen perfectly aligned one after the other. These organisms are part of a specialized benthic community adapted to the high-pressure, low-energy environment of the South Atlantic depths.",
+                "caption": "In-situ macrophotography"
             },
             "subastian": {
                 "title": "Technology in the Abyss: SuBastian",
@@ -65,7 +67,10 @@
             },
             "lab": {
                 "title": "The Bridge: From Seafloor to Lab",
-                "description": "Every sample is a race against time. The moment a vertebra leaves SuBastian, it is rushed to the Cold Room to preserve its biological and chemical signatures. Scientists José Isola (Geology Team) and Daniel Lauretta (Benthic Taxonomy Team) handle the recovery, ensuring no data is lost during the transition from the abyss to the surface. This interdisciplinary effort is crucial; after recovery, the samples are analyzed by the Benthic Ecology and Benthic Taxonomy teams to identify species and unlock the secrets of deep-sea biodiversity, all while kept in high-priority cold storage at +2°C."
+                "description": "Every sample is a race against time. The moment a vertebra leaves SuBastian, it is rushed to the Cold Room to preserve its biological and chemical signatures. Scientists José Isola (Geology Team) and Daniel Lauretta (Benthic Taxonomy Team) handle the recovery, ensuring no data is lost during the transition from the abyss to the surface. This interdisciplinary effort is crucial; after recovery, the samples are analyzed by the Benthic Ecology and Benthic Taxonomy teams to identify species and unlock the secrets of deep-sea biodiversity, all while kept in high-priority cold storage at +2°C.",
+                "thumb1": "José Isola and Daniel Lauretta recovering the sample from SuBastian.",
+                "thumb2": "Detail of the whale vertebra.",
+                "thumb3": "Detail of the bone structure in the laboratory."
             },
             "mission": {
                 "title": "Expedition FKt251206: 'Invisible Guardians'",
