@@ -10,7 +10,8 @@
       "title": "waypoints.whale_fall.vertebra.title",
       "icon": "video",
       "content": {
-        "description": "waypoints.whale_fall.vertebra.description"
+        "description": "waypoints.whale_fall.vertebra.description",
+        "youtube_id": "NqnWDBwp-k8?si=pxZNd__l8gX2lmRS"
       }
     },
     {
@@ -50,7 +51,13 @@
       "title": "waypoints.whale_fall.isopods.title",
       "icon": "eye",
       "content": {
-        "description": "waypoints.whale_fall.isopods.description"
+        "description": "waypoints.whale_fall.isopods.description",
+        "gallery": [
+          {
+            "src": "../assets/photos/isopods_macro.jpg",
+            "caption": ""
+          }
+        ]
       }
     },
     {
@@ -69,7 +76,7 @@
     {
       "id": "wp-mission-overview",
       "position": {
-        "x": 11.26,
+        "x": 9.26,
         "y": -1.84,
         "z": -10.0
       },

@@ -116,6 +116,7 @@
 .modal-desc {
     margin-bottom: 25px;
     font-weight: 400;
+    text-align: justify;
 }
 
 .video-wrapper {
