@@ -52,29 +52,29 @@
     "waypoints": {
         "whale_fall": {
             "vertebra": {
-                "title": "The Vertebra: A Monument of the Abyss",
-                "description": "This vertebra is a snapshot of time. When a whale dies, it becomes an 'oasis' in the desert of the deep sea, sustaining life for decades. At nearly 4,000 meters deep (3,895m), the extreme pressure and 2.4°C temperature create a unique environment where this whale fall was found in its later stages of succession. The bone is actively integrating back into the seafloor through a slow process of mineralization, providing a rare 'hard' surface in the vast, soft-sediment abyssal plain where corals and other sessile life can finally anchor and grow.",
+                "title": "The Whale Vertebra",
+                "description": "When a whale dies and sinks, its skeleton becomes a nutrient source that sustains deep-sea life for decades. This vertebra was found at 3,895 m depth, in water at 2.4 °C, during a late stage of ecological succession. The bone is slowly mineralizing back into the seafloor, and its hard surface provides an anchor point for corals and other sessile organisms in an otherwise soft-sediment environment.",
                 "caption": "Clip: Moment of extraction - R/V Falkor (too)"
             },
             "isopods": {
-                "title": "The 'Trencito': Deep-Sea Hitchhikers",
-                "description": "Known as the 'Trencito de Isópodos' (Isopod Train) by the global livestream audience, these small creatures were captured in a rare, stationary moment. During the live exploration of Dive S0883, thousands of viewers were captivated by a small branch of bathyal coral attached to the whale bone. It served as a resting ground for tiny isopods, no more than 2cm in size, seen perfectly aligned one after the other. These organisms are part of a specialized benthic community adapted to the high-pressure, low-energy environment of the South Atlantic depths.",
+                "title": "The Isopod Train",
+                "description": "These tiny crustaceans, each under 2 cm, were spotted lined up along a branch of bathyal coral attached to the whale bone during Dive S0883. They are part of a specialized benthic community adapted to the high-pressure, low-energy conditions of the deep South Atlantic.",
                 "caption": "In-situ macrophotography"
             },
             "subastian": {
-                "title": "Technology in the Abyss: SuBastian",
-                "description": "We can only see the deep thanks to SuBastian, a state-of-the-art ROV capable of extreme precision in the most hostile environment on Earth. The 3D model you are exploring now is a 'digital twin' created through photogrammetry, a complex process led by pilot Ben Erwin. By meticulously processing thousands of high-resolution images, the site was reconstructed to allow scientists and the public to visit the abyss virtually. SuBastian’s robotic arms allow for the surgical collection of fragile biological samples while ensuring the integrity of the ecosystem remains intact."
+                "title": "ROV SuBastian",
+                "description": "SuBastian is the ROV used to explore and sample these sites. The 3D model you are navigating is a digital twin built from photogrammetry — thousands of high-resolution images processed under the lead of pilot Ben Erwin. SuBastian's robotic arms enable precise collection of fragile biological samples with minimal disturbance to the surrounding ecosystem."
             },
             "lab": {
-                "title": "The Bridge: From Seafloor to Lab",
-                "description": "Every sample is a race against time. The moment a vertebra leaves SuBastian, it is rushed to the Cold Room to preserve its biological and chemical signatures. Scientists José Isola (Geology Team) and Daniel Lauretta (Benthic Taxonomy Team) handle the recovery, ensuring no data is lost during the transition from the abyss to the surface. This interdisciplinary effort is crucial; after recovery, the samples are analyzed by the Benthic Ecology and Benthic Taxonomy teams to identify species and unlock the secrets of deep-sea biodiversity, all while kept in high-priority cold storage at +2°C.",
-                "thumb1": "José Isola and Daniel Lauretta recovering the sample from SuBastian.",
+                "title": "From Seafloor to Lab",
+                "description": "Once a sample surfaces, it is moved to the Cold Room immediately to preserve its biological and chemical signatures. A multidisciplinary team handles the recovery and analysis; the Benthic Ecology and Taxonomy teams then work to identify species and study deep-sea biodiversity, keeping everything in cold storage at +2 °C.",
+                "thumb1": "José Isola and Daniel Lauretta handling the vertebra after recovery.",
                 "thumb2": "Detail of the whale vertebra.",
                 "thumb3": "Detail of the bone structure in the laboratory."
             },
             "mission": {
-                "title": "Expedition FKt251206: 'Invisible Guardians'",
-                "description": "We explore not just to find things, but to understand the 'Invisible Guardians' of our planet. Led by Chief Scientist María Emilia Bravo, this mission explored how deep-sea ecosystems regulate our climate. By consuming methane from the seafloor, these specialized communities prevent potent greenhouse gases from reaching the atmosphere. This expedition connects the dark abyssal plain of the SW Atlantic to the global climate, proving that mapping the unknown is fundamental to understanding our planet's survival."
+                "title": "Expedition FKt251206",
+                "description": "Led by Chief Scientist María Emilia Bravo, this expedition studied how deep-sea communities help regulate climate by consuming methane from the seafloor before it reaches the atmosphere. The research links the abyssal plain of the SW Atlantic to global climate processes and highlights the importance of mapping these ecosystems."
             }
         }
     }
