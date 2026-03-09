@@ -139,6 +139,13 @@ ROV.blender = {
 
     console.log(`[Blender] Silhouette mask generated (${resolution}x${resolution})`);
 
+    // DEBUG: Show mask canvas in corner
+    canvas.style.cssText = 'position:fixed;bottom:10px;left:10px;width:200px;height:200px;z-index:9999;border:2px solid red;image-rendering:pixelated;';
+    canvas.id = 'debug-mask-canvas';
+    const old = document.getElementById('debug-mask-canvas');
+    if (old) old.remove();
+    document.body.appendChild(canvas);
+
     return { texture, bounds };
   },
 
@@ -203,7 +210,12 @@ ROV.blender = {
              float maskV = (vWorldPos.z - uBoundsMinZ) / (uBoundsMaxZ - uBoundsMinZ);
              vec2 maskUV = clamp(vec2(maskU, maskV), 0.0, 1.0);
              float maskAlpha = texture2D(uMaskTex, maskUV).r;
-             gl_FragColor.a *= maskAlpha;`
+             // DEBUG: bright red outline where mask transitions
+             if (maskAlpha > 0.05 && maskAlpha < 0.95) {
+               gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+             } else {
+               gl_FragColor.a *= maskAlpha;
+             }`
           );
         };
 
