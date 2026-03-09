@@ -1,104 +1,111 @@
 /* global THREE, ROV */
 
 /**
- * ROV Visual Blender System v2.0
+ * ROV Visual Blender System v2.1
  * Auto-generates a silhouette mask from model geometry and applies it as an edge fade.
- * No hardcoded coordinates — works for any model shape.
+ * Uses two-pass vertex projection for guaranteed bounds/drawing consistency.
  */
 ROV.blender = {
 
   /**
    * Generates a top-down silhouette mask from the model's actual geometry.
-   * Projects all triangles onto the XZ plane, renders them white-on-black,
-   * then blurs the edges for a smooth fade gradient.
+   * PASS 1: Collects all world-space XZ vertex positions to compute precise bounds.
+   * PASS 2: Projects triangles onto canvas using those same bounds.
    *
    * @param {THREE.Object3D} mesh - The loaded GLTF model.
    * @param {number} resolution - Canvas resolution in pixels (default 512).
    * @param {number} blurPasses - Number of box-blur passes for edge softness (default 4).
    * @param {number} blurRadius - Pixel radius per blur pass (default 8).
-   * @param {number} padding - Fraction of bounds to add as padding for fade space (default 0.05).
-   * @returns {{ texture: THREE.CanvasTexture, bounds: {minX: number, maxX: number, minZ: number, maxZ: number} }}
+   * @param {number} padding - Fraction of bounds to add as padding for fade space (default 0.15).
+   * @returns {{ texture: THREE.CanvasTexture, bounds: Object }}
    */
   generateSilhouetteMask: function (mesh, resolution = 512, blurPasses = 4, blurRadius = 8, padding = 0.15) {
-    // 1. Ensure world matrices are up-to-date (critical after entity scale/position changes)
+    // 1. Ensure world matrices are fully up-to-date
     mesh.updateWorldMatrix(true, true);
 
-    // Compute world-space bounding box
-    const bbox = new THREE.Box3().setFromObject(mesh);
-    const minX = bbox.min.x;
-    const maxX = bbox.max.x;
-    const minZ = bbox.min.z;
-    const maxZ = bbox.max.z;
+    // ========== PASS 1: Compute bounds from EXACT same vertices used for drawing ==========
+    let wMinX = Infinity, wMaxX = -Infinity;
+    let wMinZ = Infinity, wMaxZ = -Infinity;
+    const tmpV = new THREE.Vector3();
 
-    // Add padding so the fade has room to dissolve outside the geometry
-    const rangeX = maxX - minX;
-    const rangeZ = maxZ - minZ;
+    mesh.traverse((node) => {
+      if (!node.isMesh || !node.geometry) return;
+      node.updateWorldMatrix(true, false);
+      const posAttr = node.geometry.attributes.position;
+      if (!posAttr) return;
+
+      for (let i = 0; i < posAttr.count; i++) {
+        tmpV.set(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
+        tmpV.applyMatrix4(node.matrixWorld);
+        if (tmpV.x < wMinX) wMinX = tmpV.x;
+        if (tmpV.x > wMaxX) wMaxX = tmpV.x;
+        if (tmpV.z < wMinZ) wMinZ = tmpV.z;
+        if (tmpV.z > wMaxZ) wMaxZ = tmpV.z;
+      }
+    });
+
+    // Add padding for fade space
+    const rangeX = wMaxX - wMinX;
+    const rangeZ = wMaxZ - wMinZ;
     const padX = rangeX * padding;
     const padZ = rangeZ * padding;
 
     const bounds = {
-      minX: minX - padX,
-      maxX: maxX + padX,
-      minZ: minZ - padZ,
-      maxZ: maxZ + padZ
+      minX: wMinX - padX,
+      maxX: wMaxX + padX,
+      minZ: wMinZ - padZ,
+      maxZ: wMaxZ + padZ
     };
 
     const bWidth = bounds.maxX - bounds.minX;
     const bHeight = bounds.maxZ - bounds.minZ;
 
-    // DEBUG: Log all coordinate data
-    console.log('[Blender] Raw bbox:', JSON.stringify({ minX, maxX, minZ, maxZ }));
-    console.log('[Blender] Padded bounds:', JSON.stringify(bounds));
-    console.log('[Blender] Bounds size: W=' + bWidth.toFixed(2) + ' H=' + bHeight.toFixed(2));
-    if (mesh.parent) {
-      console.log('[Blender] Parent pos:', mesh.parent.position.toArray().map(v => v.toFixed(2)));
-      console.log('[Blender] Parent scale:', mesh.parent.scale.toArray().map(v => v.toFixed(4)));
-    }
+    // DEBUG
+    console.log('[Blender] Vertex extents:', JSON.stringify({
+      minX: wMinX.toFixed(2), maxX: wMaxX.toFixed(2),
+      minZ: wMinZ.toFixed(2), maxZ: wMaxZ.toFixed(2),
+      spanX: rangeX.toFixed(2), spanZ: rangeZ.toFixed(2)
+    }));
+    console.log('[Blender] Padded bounds:', JSON.stringify({
+      minX: bounds.minX.toFixed(2), maxX: bounds.maxX.toFixed(2),
+      minZ: bounds.minZ.toFixed(2), maxZ: bounds.maxZ.toFixed(2)
+    }));
 
-    // 2. Create offscreen canvas
+    // ========== PASS 2: Project and draw triangles ==========
     const canvas = document.createElement('canvas');
     canvas.width = resolution;
     canvas.height = resolution;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-    // Start with black (fully transparent in our mask)
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, resolution, resolution);
-
-    // 3. Project and draw triangles
     ctx.fillStyle = '#ffffff';
 
     mesh.traverse((node) => {
       if (!node.isMesh || !node.geometry) return;
 
-      // Ensure world matrix is up to date
-      node.updateWorldMatrix(true, false);
       const worldMatrix = node.matrixWorld;
-
-      const geometry = node.geometry;
-      const posAttr = geometry.attributes.position;
+      const posAttr = node.geometry.attributes.position;
       if (!posAttr) return;
 
-      const index = geometry.index;
-      const vertex = new THREE.Vector3();
+      const index = node.geometry.index;
+      const v = new THREE.Vector3();
 
-      // Helper: project a vertex index to canvas pixel coords
-      const projectToCanvas = (vi) => {
-        vertex.set(posAttr.getX(vi), posAttr.getY(vi), posAttr.getZ(vi));
-        vertex.applyMatrix4(worldMatrix);
-        // Map world XZ to canvas pixels
-        const px = ((vertex.x - bounds.minX) / bWidth) * resolution;
-        const py = ((vertex.z - bounds.minZ) / bHeight) * resolution;
+      // Project vertex to canvas pixel coords
+      // Canvas Y=0 is top, texture V=0 is bottom → flip Y so they match
+      const project = (vi) => {
+        v.set(posAttr.getX(vi), posAttr.getY(vi), posAttr.getZ(vi));
+        v.applyMatrix4(worldMatrix);
+        const px = ((v.x - bounds.minX) / bWidth) * resolution;
+        const py = (1.0 - (v.z - bounds.minZ) / bHeight) * resolution; // V-FLIP
         return { x: px, y: py };
       };
 
       if (index) {
-        // Indexed geometry: draw triangles from index buffer
         for (let i = 0; i < index.count; i += 3) {
-          const a = projectToCanvas(index.getX(i));
-          const b = projectToCanvas(index.getX(i + 1));
-          const c = projectToCanvas(index.getX(i + 2));
-
+          const a = project(index.getX(i));
+          const b = project(index.getX(i + 1));
+          const c = project(index.getX(i + 2));
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -107,12 +114,10 @@ ROV.blender = {
           ctx.fill();
         }
       } else {
-        // Non-indexed: every 3 vertices form a triangle
         for (let i = 0; i < posAttr.count; i += 3) {
-          const a = projectToCanvas(i);
-          const b = projectToCanvas(i + 1);
-          const c = projectToCanvas(i + 2);
-
+          const a = project(i);
+          const b = project(i + 1);
+          const c = project(i + 2);
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -123,8 +128,7 @@ ROV.blender = {
       }
     });
 
-    // 4. Solidify interior: threshold any non-zero pixel to full white
-    // This closes sub-pixel gaps between triangles in photogrammetry meshes
+    // 3. Solidify interior (close sub-pixel gaps)
     const solidifyData = ctx.getImageData(0, 0, resolution, resolution);
     const pixels = solidifyData.data;
     for (let i = 0; i < pixels.length; i += 4) {
@@ -136,10 +140,10 @@ ROV.blender = {
     }
     ctx.putImageData(solidifyData, 0, 0);
 
-    // 5. Apply box blur for soft edges
+    // 4. Blur edges
     this._boxBlur(ctx, resolution, resolution, blurRadius, blurPasses);
 
-    // 5. Create Three.js texture from canvas
+    // 5. Create texture
     const texture = new THREE.CanvasTexture(canvas);
     texture.wrapS = THREE.ClampToEdgeWrapping;
     texture.wrapT = THREE.ClampToEdgeWrapping;
@@ -148,7 +152,7 @@ ROV.blender = {
 
     console.log(`[Blender] Silhouette mask generated (${resolution}x${resolution})`);
 
-    // DEBUG: Show mask canvas in corner (z-index must beat A-Frame's overlay)
+    // DEBUG: Show mask canvas in corner
     canvas.style.cssText = 'position:fixed;bottom:10px;left:10px;width:256px;height:256px;z-index:99999999;border:3px solid red;image-rendering:pixelated;pointer-events:none;';
     canvas.id = 'debug-mask-canvas';
     const old = document.getElementById('debug-mask-canvas');
@@ -163,13 +167,11 @@ ROV.blender = {
 
   /**
    * DEBUG: Creates a visible wireframe rectangle in the 3D scene at the mask bounds.
-   * @param {{ minX: number, maxX: number, minZ: number, maxZ: number }} bounds
    */
   _debugDrawBounds: function (bounds) {
     const scene = document.querySelector('a-scene');
     if (!scene) return;
 
-    // Remove previous debug entity
     const old = document.getElementById('debug-bounds-wireframe');
     if (old) old.remove();
 
@@ -190,9 +192,6 @@ ROV.blender = {
 
   /**
    * Applies the generated silhouette mask as an alpha fade to all model materials.
-   *
-   * @param {THREE.Object3D} mesh - The GLTF model.
-   * @param {{ texture: THREE.CanvasTexture, bounds: Object }} maskData - Output from generateSilhouetteMask.
    */
   applyMaskFade: function (mesh, maskData) {
     if (!mesh || !maskData) return;
@@ -209,7 +208,6 @@ ROV.blender = {
         mat.depthWrite = true;
 
         mat.onBeforeCompile = (shader) => {
-          console.log('[Blender] DEBUG: onBeforeCompile fired for material:', mat.name || mat.uuid);
           // 1. Uniforms
           shader.uniforms.uMaskTex = { value: texture };
           shader.uniforms.uBoundsMinX = { value: bounds.minX };
@@ -283,7 +281,7 @@ ROV.blender = {
           for (let dx = -radius; dx <= radius; dx++) {
             const nx = x + dx;
             if (nx >= 0 && nx < w) {
-              sum += src[(y * w + nx) * 4]; // Red channel only
+              sum += src[(y * w + nx) * 4];
               count++;
             }
           }
