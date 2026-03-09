@@ -152,15 +152,15 @@ ROV.blender = {
 
     console.log(`[Blender] Silhouette mask generated (${resolution}x${resolution})`);
 
-    // DEBUG: Show mask canvas in corner
-    canvas.style.cssText = 'position:fixed;bottom:10px;left:10px;width:256px;height:256px;z-index:99999999;border:3px solid red;image-rendering:pixelated;pointer-events:none;';
-    canvas.id = 'debug-mask-canvas';
-    const old = document.getElementById('debug-mask-canvas');
-    if (old) old.remove();
-    document.body.appendChild(canvas);
+    // DEBUG: Show mask canvas in corner (uncomment to re-enable)
+    // canvas.style.cssText = 'position:fixed;bottom:10px;left:10px;width:256px;height:256px;z-index:99999999;border:3px solid red;image-rendering:pixelated;pointer-events:none;';
+    // canvas.id = 'debug-mask-canvas';
+    // const old = document.getElementById('debug-mask-canvas');
+    // if (old) old.remove();
+    // document.body.appendChild(canvas);
 
-    // DEBUG: Draw wireframe at bounds in 3D scene
-    this._debugDrawBounds(bounds);
+    // DEBUG: Draw wireframe at bounds in 3D scene (uncomment to re-enable)
+    // this._debugDrawBounds(bounds);
 
     return { texture, bounds };
   },
@@ -248,12 +248,7 @@ ROV.blender = {
              float maskV = (vWorldPos.z - uBoundsMinZ) / (uBoundsMaxZ - uBoundsMinZ);
              vec2 maskUV = clamp(vec2(maskU, maskV), 0.0, 1.0);
              float maskAlpha = texture2D(uMaskTex, maskUV).r;
-             // DEBUG: bright red outline where mask transitions
-             if (maskAlpha > 0.05 && maskAlpha < 0.95) {
-               gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-             } else {
-               gl_FragColor.a *= maskAlpha;
-             }`
+             gl_FragColor.a *= maskAlpha;`
           );
         };
 

@@ -79,13 +79,13 @@ ROV.modelHandler = {
         // 3. Capas de Continuidad Visual (Advanced Shader Injection)
         const floorY = finalPosY - (size.y * scaleFactor / 2);
 
-        // A. Suelo Infinito (DISABLED for edge-fade testing)
-        // const extendedFloor = document.getElementById('extended-floor');
-        // if (extendedFloor) {
-        //     extendedFloor.setAttribute('position', { x: 0, y: floorY, z: 0 });
-        //     extendedFloor.setAttribute('visible', 'true');
-        //     extendedFloor.setAttribute('animation', 'property: material.opacity; from: 0; to: 1; dur: 2000');
-        // }
+        // A. Suelo Infinito
+        const extendedFloor = document.getElementById('extended-floor');
+        if (extendedFloor) {
+            extendedFloor.setAttribute('position', { x: 0, y: floorY, z: 0 });
+            extendedFloor.setAttribute('visible', 'true');
+            extendedFloor.setAttribute('animation', 'property: material.opacity; from: 0; to: 1; dur: 2000');
+        }
 
         // Force world matrix propagation so blender sees correct transformed coordinates
         mapEntity.object3D.updateMatrixWorld(true);
