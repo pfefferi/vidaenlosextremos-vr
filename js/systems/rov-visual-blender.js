@@ -46,6 +46,15 @@ ROV.blender = {
     const bWidth = bounds.maxX - bounds.minX;
     const bHeight = bounds.maxZ - bounds.minZ;
 
+    // DEBUG: Log all coordinate data
+    console.log('[Blender] Raw bbox:', JSON.stringify({ minX, maxX, minZ, maxZ }));
+    console.log('[Blender] Padded bounds:', JSON.stringify(bounds));
+    console.log('[Blender] Bounds size: W=' + bWidth.toFixed(2) + ' H=' + bHeight.toFixed(2));
+    if (mesh.parent) {
+      console.log('[Blender] Parent pos:', mesh.parent.position.toArray().map(v => v.toFixed(2)));
+      console.log('[Blender] Parent scale:', mesh.parent.scale.toArray().map(v => v.toFixed(4)));
+    }
+
     // 2. Create offscreen canvas
     const canvas = document.createElement('canvas');
     canvas.width = resolution;
@@ -146,7 +155,37 @@ ROV.blender = {
     if (old) old.remove();
     document.body.appendChild(canvas);
 
+    // DEBUG: Draw wireframe at bounds in 3D scene
+    this._debugDrawBounds(bounds);
+
     return { texture, bounds };
+  },
+
+  /**
+   * DEBUG: Creates a visible wireframe rectangle in the 3D scene at the mask bounds.
+   * @param {{ minX: number, maxX: number, minZ: number, maxZ: number }} bounds
+   */
+  _debugDrawBounds: function (bounds) {
+    const scene = document.querySelector('a-scene');
+    if (!scene) return;
+
+    // Remove previous debug entity
+    const old = document.getElementById('debug-bounds-wireframe');
+    if (old) old.remove();
+
+    const centerX = (bounds.minX + bounds.maxX) / 2;
+    const centerZ = (bounds.minZ + bounds.maxZ) / 2;
+    const width = bounds.maxX - bounds.minX;
+    const depth = bounds.maxZ - bounds.minZ;
+
+    const el = document.createElement('a-entity');
+    el.id = 'debug-bounds-wireframe';
+    el.setAttribute('position', { x: centerX, y: 0, z: centerZ });
+    el.setAttribute('geometry', { primitive: 'plane', width: width, height: depth });
+    el.setAttribute('rotation', '-90 0 0');
+    el.setAttribute('material', { color: 'red', wireframe: true, opacity: 1 });
+    scene.appendChild(el);
+    console.log(`[Blender] DEBUG wireframe at center (${centerX.toFixed(2)}, ${centerZ.toFixed(2)}), size ${width.toFixed(2)}x${depth.toFixed(2)}`);
   },
 
   /**
