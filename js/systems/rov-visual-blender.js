@@ -139,8 +139,8 @@ ROV.blender = {
 
     console.log(`[Blender] Silhouette mask generated (${resolution}x${resolution})`);
 
-    // DEBUG: Show mask canvas in corner
-    canvas.style.cssText = 'position:fixed;bottom:10px;left:10px;width:200px;height:200px;z-index:9999;border:2px solid red;image-rendering:pixelated;';
+    // DEBUG: Show mask canvas in corner (z-index must beat A-Frame's overlay)
+    canvas.style.cssText = 'position:fixed;bottom:10px;left:10px;width:256px;height:256px;z-index:99999999;border:3px solid red;image-rendering:pixelated;pointer-events:none;';
     canvas.id = 'debug-mask-canvas';
     const old = document.getElementById('debug-mask-canvas');
     if (old) old.remove();
@@ -170,6 +170,7 @@ ROV.blender = {
         mat.depthWrite = true;
 
         mat.onBeforeCompile = (shader) => {
+          console.log('[Blender] DEBUG: onBeforeCompile fired for material:', mat.name || mat.uuid);
           // 1. Uniforms
           shader.uniforms.uMaskTex = { value: texture };
           shader.uniforms.uBoundsMinX = { value: bounds.minX };
