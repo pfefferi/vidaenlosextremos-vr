@@ -1,188 +1,251 @@
-/* global AFRAME, THREE, ROV */
+/* global THREE, ROV */
 
 /**
- * ROV Visual Blender System
- * Handles advanced shader injection for visual continuity.
+ * ROV Visual Blender System v2.0
+ * Auto-generates a silhouette mask from model geometry and applies it as an edge fade.
+ * No hardcoded coordinates — works for any model shape.
  */
 ROV.blender = {
+
   /**
-   * Injects an alpha-fade logic into model materials.
-   * Fades the model to transparency as it reaches its radial limits.
-   * @param {THREE.Object3D} model - The GLTF model to modify.
-   * @param {number} fadeRadius - The distance from center where fading begins.
+   * Generates a top-down silhouette mask from the model's actual geometry.
+   * Projects all triangles onto the XZ plane, renders them white-on-black,
+   * then blurs the edges for a smooth fade gradient.
+   *
+   * @param {THREE.Object3D} mesh - The loaded GLTF model.
+   * @param {number} resolution - Canvas resolution in pixels (default 512).
+   * @param {number} blurPasses - Number of box-blur passes for edge softness (default 4).
+   * @param {number} blurRadius - Pixel radius per blur pass (default 8).
+   * @param {number} padding - Fraction of bounds to add as padding for fade space (default 0.05).
+   * @returns {{ texture: THREE.CanvasTexture, bounds: {minX: number, maxX: number, minZ: number, maxZ: number} }}
    */
-  applyEdgeFade: function (model, fadeRadius = 8) {
-    if (!model) return;
+  generateSilhouetteMask: function (mesh, resolution = 512, blurPasses = 4, blurRadius = 8, padding = 0.05) {
+    // 1. Compute world-space bounding box
+    const bbox = new THREE.Box3().setFromObject(mesh);
+    const minX = bbox.min.x;
+    const maxX = bbox.max.x;
+    const minZ = bbox.min.z;
+    const maxZ = bbox.max.z;
 
-    console.log(`[Blender] Applying Edge-Fade (Radius: ${fadeRadius})`);
+    // Add padding so the fade has room to dissolve outside the geometry
+    const rangeX = maxX - minX;
+    const rangeZ = maxZ - minZ;
+    const padX = rangeX * padding;
+    const padZ = rangeZ * padding;
 
-    model.traverse((node) => {
-      if (node.isMesh && node.material) {
-        const materials = Array.isArray(node.material) ? node.material : [node.material];
+    const bounds = {
+      minX: minX - padX,
+      maxX: maxX + padX,
+      minZ: minZ - padZ,
+      maxZ: maxZ + padZ
+    };
 
-        materials.forEach((mat) => {
-          // Force transparency support
-          mat.transparent = true;
-          mat.depthWrite = true; // Keep depth for proper layering
+    const bWidth = bounds.maxX - bounds.minX;
+    const bHeight = bounds.maxZ - bounds.minZ;
 
-          mat.onBeforeCompile = (shader) => {
-            // 1. Define uniforms
-            shader.uniforms.uFadeRadius = { value: fadeRadius };
-            shader.uniforms.uFadeStart = { value: fadeRadius * 0.6 }; // Fade starts at 60% of radius
+    // 2. Create offscreen canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = resolution;
+    canvas.height = resolution;
+    const ctx = canvas.getContext('2d');
 
-            // 2. Inject Varying for world position
-            shader.vertexShader = shader.vertexShader.replace(
-              '#include <common>',
-              `#include <common>
-                             varying vec3 vWorldPos;`
-            );
+    // Start with black (fully transparent in our mask)
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, resolution, resolution);
 
-            shader.vertexShader = shader.vertexShader.replace(
-              '#include <worldpos_vertex>',
-              `#include <worldpos_vertex>
-                             vWorldPos = (modelMatrix * vec4(transformed, 1.0)).xyz;`
-            );
+    // 3. Project and draw triangles
+    ctx.fillStyle = '#ffffff';
 
-            // 3. Inject Fragment shader logic
-            shader.fragmentShader = shader.fragmentShader.replace(
-              '#include <common>',
-              `#include <common>
-                             varying vec3 vWorldPos;
-                             uniform float uFadeRadius;
-                             uniform float uFadeStart;`
-            );
+    mesh.traverse((node) => {
+      if (!node.isMesh || !node.geometry) return;
 
-            // Calculate distance from world 0,0 (xz plane) and apply to alpha
-            const fadeCode = `
-                            #include <dithering_fragment>
-                            float distFromCenter = length(vWorldPos.xz);
-                            float edgeAlpha = 1.0 - smoothstep(uFadeStart, uFadeRadius, distFromCenter);
-                            gl_FragColor.a *= edgeAlpha;
-                        `;
+      // Ensure world matrix is up to date
+      node.updateWorldMatrix(true, false);
+      const worldMatrix = node.matrixWorld;
 
-            shader.fragmentShader = shader.fragmentShader.replace(
-              '#include <dithering_fragment>',
-              fadeCode
-            );
-          };
+      const geometry = node.geometry;
+      const posAttr = geometry.attributes.position;
+      if (!posAttr) return;
 
-          mat.needsUpdate = true;
-        });
+      const index = geometry.index;
+      const vertex = new THREE.Vector3();
+
+      // Helper: project a vertex index to canvas pixel coords
+      const projectToCanvas = (vi) => {
+        vertex.set(posAttr.getX(vi), posAttr.getY(vi), posAttr.getZ(vi));
+        vertex.applyMatrix4(worldMatrix);
+        // Map world XZ to canvas pixels
+        const px = ((vertex.x - bounds.minX) / bWidth) * resolution;
+        const py = ((vertex.z - bounds.minZ) / bHeight) * resolution;
+        return { x: px, y: py };
+      };
+
+      if (index) {
+        // Indexed geometry: draw triangles from index buffer
+        for (let i = 0; i < index.count; i += 3) {
+          const a = projectToCanvas(index.getX(i));
+          const b = projectToCanvas(index.getX(i + 1));
+          const c = projectToCanvas(index.getX(i + 2));
+
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.lineTo(c.x, c.y);
+          ctx.closePath();
+          ctx.fill();
+        }
+      } else {
+        // Non-indexed: every 3 vertices form a triangle
+        for (let i = 0; i < posAttr.count; i += 3) {
+          const a = projectToCanvas(i);
+          const b = projectToCanvas(i + 1);
+          const c = projectToCanvas(i + 2);
+
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.lineTo(c.x, c.y);
+          ctx.closePath();
+          ctx.fill();
+        }
       }
     });
+
+    // 4. Apply box blur for soft edges
+    this._boxBlur(ctx, resolution, resolution, blurRadius, blurPasses);
+
+    // 5. Create Three.js texture from canvas
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = THREE.ClampToEdgeWrapping;
+    texture.wrapT = THREE.ClampToEdgeWrapping;
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+
+    console.log(`[Blender] Silhouette mask generated (${resolution}x${resolution})`);
+
+    return { texture, bounds };
   },
 
   /**
-   * Injects a rectangular alpha-fade logic into model materials based on world coordinates.
-   * Fades the model to transparency at specified X/Z limits.
-   * @param {THREE.Object3D} model - The GLTF model to modify.
-   * @param {number} minX - The minimum X coordinate boundary.
-   * @param {number} maxX - The maximum X coordinate boundary.
-   * @param {number} minZ - The minimum Z coordinate boundary.
-   * @param {number} maxZ - The maximum Z coordinate boundary.
-   * @param {number} fadeDistance - How many units before the edge the fade begins.
+   * Applies the generated silhouette mask as an alpha fade to all model materials.
+   *
+   * @param {THREE.Object3D} mesh - The GLTF model.
+   * @param {{ texture: THREE.CanvasTexture, bounds: Object }} maskData - Output from generateSilhouetteMask.
    */
-  applyBoxFade: function (model, minX, maxX, minZ, maxZ, fadeDistance = 1.5) {
-    if (!model) return;
+  applyMaskFade: function (mesh, maskData) {
+    if (!mesh || !maskData) return;
 
-    console.log(`[Blender] Applying Box-Fade (X: ${minX} to ${maxX}, Z: ${minZ} to ${maxZ}, dist: ${fadeDistance})`);
+    const { texture, bounds } = maskData;
 
-    model.traverse((node) => {
-      if (node.isMesh && node.material) {
-        const materials = Array.isArray(node.material) ? node.material : [node.material];
+    mesh.traverse((node) => {
+      if (!node.isMesh || !node.material) return;
 
-        materials.forEach((mat) => {
-          // Force transparency support and depth sorting
-          mat.transparent = true;
-          mat.depthWrite = true; // MUST keep depth for proper layering
+      const materials = Array.isArray(node.material) ? node.material : [node.material];
 
-          mat.onBeforeCompile = (shader) => {
-            // 1. Define uniforms
-            shader.uniforms.uMinX = { value: minX };
-            shader.uniforms.uMaxX = { value: maxX };
-            shader.uniforms.uMinZ = { value: minZ };
-            shader.uniforms.uMaxZ = { value: maxZ };
-            shader.uniforms.uFadeDist = { value: fadeDistance };
+      materials.forEach((mat) => {
+        mat.transparent = true;
+        mat.depthWrite = true;
 
-            // 2. Inject Varying for world position
-            shader.vertexShader = shader.vertexShader.replace(
-              '#include <common>',
-              `#include <common>
-               varying vec3 vWorldPos;`
-            );
+        mat.onBeforeCompile = (shader) => {
+          // 1. Uniforms
+          shader.uniforms.uMaskTex = { value: texture };
+          shader.uniforms.uBoundsMinX = { value: bounds.minX };
+          shader.uniforms.uBoundsMaxX = { value: bounds.maxX };
+          shader.uniforms.uBoundsMinZ = { value: bounds.minZ };
+          shader.uniforms.uBoundsMaxZ = { value: bounds.maxZ };
 
-            shader.vertexShader = shader.vertexShader.replace(
-              '#include <worldpos_vertex>',
-              `#include <worldpos_vertex>
-               vWorldPos = (modelMatrix * vec4(transformed, 1.0)).xyz;`
-            );
+          // 2. Vertex: pass world position to fragment
+          shader.vertexShader = shader.vertexShader.replace(
+            '#include <common>',
+            `#include <common>
+             varying vec3 vWorldPos;`
+          );
 
-            // 3. Inject Fragment shader logic
-            shader.fragmentShader = shader.fragmentShader.replace(
-              '#include <common>',
-              `#include <common>
-               varying vec3 vWorldPos;
-               uniform float uMinX;
-               uniform float uMaxX;
-               uniform float uMinZ;
-               uniform float uMaxZ;
-               uniform float uFadeDist;`
-            );
+          shader.vertexShader = shader.vertexShader.replace(
+            '#include <worldpos_vertex>',
+            `#include <worldpos_vertex>
+             vWorldPos = (modelMatrix * vec4(transformed, 1.0)).xyz;`
+          );
 
-            // Calculate distance to the defined borders
-            const fadeCode = `
-              #include <dithering_fragment>
-              
-              // Find the distance to the nearest X boundary
-              float distX = min(vWorldPos.x - uMinX, uMaxX - vWorldPos.x);
-              
-              // Find the distance to the nearest Z boundary
-              float distZ = min(vWorldPos.z - uMinZ, uMaxZ - vWorldPos.z);
-              
-              // The closest boundary determines the fade (alpha)
-              float distToEdge = min(distX, distZ);
-              
-              // Smooth transition to 0 alpha when distToEdge is small
-              float edgeAlpha = smoothstep(0.0, uFadeDist, distToEdge);
-              
-              gl_FragColor.a *= edgeAlpha;
-            `;
+          // 3. Fragment: sample mask and apply alpha
+          shader.fragmentShader = shader.fragmentShader.replace(
+            '#include <common>',
+            `#include <common>
+             varying vec3 vWorldPos;
+             uniform sampler2D uMaskTex;
+             uniform float uBoundsMinX;
+             uniform float uBoundsMaxX;
+             uniform float uBoundsMinZ;
+             uniform float uBoundsMaxZ;`
+          );
 
-            shader.fragmentShader = shader.fragmentShader.replace(
-              '#include <dithering_fragment>',
-              fadeCode
-            );
-          };
+          shader.fragmentShader = shader.fragmentShader.replace(
+            '#include <dithering_fragment>',
+            `#include <dithering_fragment>
+             // Map world XZ position to mask UV [0,1]
+             float maskU = (vWorldPos.x - uBoundsMinX) / (uBoundsMaxX - uBoundsMinX);
+             float maskV = (vWorldPos.z - uBoundsMinZ) / (uBoundsMaxZ - uBoundsMinZ);
+             vec2 maskUV = clamp(vec2(maskU, maskV), 0.0, 1.0);
+             float maskAlpha = texture2D(uMaskTex, maskUV).r;
+             gl_FragColor.a *= maskAlpha;`
+          );
+        };
 
-          mat.needsUpdate = true;
-        });
-      }
+        mat.needsUpdate = true;
+      });
     });
+
+    console.log('[Blender] Mask fade applied to model materials');
+  },
+
+  /**
+   * Multi-pass box blur on canvas ImageData.
+   * @private
+   */
+  _boxBlur: function (ctx, w, h, radius, passes) {
+    for (let p = 0; p < passes; p++) {
+      const imageData = ctx.getImageData(0, 0, w, h);
+      const src = imageData.data;
+      const dst = new Uint8ClampedArray(src.length);
+
+      // Horizontal pass
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          let sum = 0, count = 0;
+          for (let dx = -radius; dx <= radius; dx++) {
+            const nx = x + dx;
+            if (nx >= 0 && nx < w) {
+              sum += src[(y * w + nx) * 4]; // Red channel only
+              count++;
+            }
+          }
+          dst[(y * w + x) * 4] = sum / count;
+          dst[(y * w + x) * 4 + 1] = sum / count;
+          dst[(y * w + x) * 4 + 2] = sum / count;
+          dst[(y * w + x) * 4 + 3] = 255;
+        }
+      }
+
+      // Vertical pass
+      const dst2 = new Uint8ClampedArray(src.length);
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          let sum = 0, count = 0;
+          for (let dy = -radius; dy <= radius; dy++) {
+            const ny = y + dy;
+            if (ny >= 0 && ny < h) {
+              sum += dst[(ny * w + x) * 4];
+              count++;
+            }
+          }
+          dst2[(y * w + x) * 4] = sum / count;
+          dst2[(y * w + x) * 4 + 1] = sum / count;
+          dst2[(y * w + x) * 4 + 2] = sum / count;
+          dst2[(y * w + x) * 4 + 3] = 255;
+        }
+      }
+
+      ctx.putImageData(new ImageData(dst2, w, h), 0, 0);
+    }
   }
 };
-
-// Also keep the old radial-blend for general plane use if needed
-AFRAME.registerShader('radial-blend', {
-  schema: {
-    src: { type: 'map', is: 'uniform' },
-    opacity: { type: 'number', is: 'uniform', default: 1.0 },
-    tiling: { type: 'vec2', is: 'uniform', default: { x: 4, y: 4 } }
-  },
-  vertexShader: `
-        varying vec2 vUv;
-        void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
-    `,
-  fragmentShader: `
-        varying vec2 vUv;
-        uniform sampler2D src;
-        uniform float opacity;
-        uniform vec2 tiling;
-        void main() {
-            vec2 tiledUv = vUv * tiling;
-            vec4 texColor = texture2D(src, tiledUv);
-            float dist = distance(vUv, vec2(0.5, 0.5));
-            float alpha = smoothstep(0.5, 0.2, dist);
-            gl_FragColor = vec4(texColor.rgb, texColor.a * alpha * opacity);
-        }
-    `
-});

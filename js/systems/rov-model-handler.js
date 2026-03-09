@@ -26,11 +26,9 @@ ROV.modelHandler = {
                 materials.forEach(mat => {
                     mat.side = THREE.DoubleSide;
 
-                    // Blending Fix: Smooth edges
+                    // Transparency support (alpha handled by silhouette mask shader)
                     mat.transparent = true;
                     mat.depthWrite = true;
-                    mat.alphaTest = 0.5;
-                    mat.opacity = 0.95;
 
                     // Buscar patrón "materialXX" en el nombre del nodo
                     const match = node.name.match(/material(\d+)/i);
@@ -88,17 +86,13 @@ ROV.modelHandler = {
             extendedFloor.setAttribute('animation', 'property: material.opacity; from: 0; to: 1; dur: 2000');
         }
 
-        // B. Active Edge-Fade (Difuminación Directa del Modelo)
-        // Inyectamos el shader de fade-out en los materiales originales del escaneo
-        if (typeof ROV.blender !== 'undefined' && typeof ROV.blender.applyBoxFade === 'function') {
-            // Precise Whale Fall limits: X[-10, 10], Z[-11.98, -7.98]
-            // We use a safe 0.5 fade distance to ensure the core remains 100% solid and entirely untampered mathematically.
-            ROV.blender.applyBoxFade(mesh, -10, 10, -11.98, -7.98, 0.5);
+        // B. Auto-Generated Silhouette Mask (Edge Fade from actual geometry)
+        if (typeof ROV.blender !== 'undefined') {
+            const maskData = ROV.blender.generateSilhouetteMask(mesh);
+            ROV.blender.applyMaskFade(mesh, maskData);
         }
 
-        // Limpieza de capas anteriores si quedase alguna
-        const alphaSkirt = document.getElementById('alpha-skirt');
-        if (alphaSkirt) alphaSkirt.setAttribute('visible', 'false');
+
 
         // Ajustar niebla según escala (Para que en modelos grandes no se vea el borde)
         const scene = document.querySelector('a-scene');
