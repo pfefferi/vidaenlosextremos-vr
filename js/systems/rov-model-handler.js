@@ -82,6 +82,8 @@ ROV.modelHandler = {
         // A. Suelo Infinito
         const extendedFloor = document.getElementById('extended-floor');
         if (extendedFloor) {
+            const floorColor = (ROV.config && ROV.config.floorColor) || '#4e5846';
+            extendedFloor.setAttribute('material', 'color', floorColor);
             extendedFloor.setAttribute('position', { x: 0, y: floorY, z: 0 });
             extendedFloor.setAttribute('visible', 'true');
             extendedFloor.setAttribute('animation', 'property: material.opacity; from: 0; to: 1; dur: 2000');

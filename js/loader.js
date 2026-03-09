@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Coordenadas de Spawn
                 ROV.config.startPosition = diveData.start_position || { x: 0, y: 2, z: 10 };
                 ROV.config.startRotation = diveData.start_rotation || { x: 0, y: 0, z: 0 };
+                ROV.config.floorColor = diveData.floor_color || '#4e5846';
             }
 
             // 2. Aplicar Posición Inicial Inmediatamente
