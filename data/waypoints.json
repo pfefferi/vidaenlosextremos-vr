@@ -28,15 +28,15 @@
         "description": "waypoints.whale_fall.lab.description",
         "gallery": [
           {
-            "src": "../assets/photos/labo_vertebra.jpg",
+            "src": "./assets/photos/labo_vertebra.jpg",
             "caption": "waypoints.whale_fall.lab.thumb1"
           },
           {
-            "src": "../assets/photos/labo_vertebra2.jpg",
+            "src": "./assets/photos/labo_vertebra2.jpg",
             "caption": "waypoints.whale_fall.lab.thumb2"
           },
           {
-            "src": "../assets/photos/labo_vertebra3.jpg",
+            "src": "./assets/photos/labo_vertebra3.jpg",
             "caption": "waypoints.whale_fall.lab.thumb3"
           }
         ]
@@ -55,7 +55,7 @@
         "description": "waypoints.whale_fall.isopods.description",
         "gallery": [
           {
-            "src": "../assets/photos/isopods_macro.jpg",
+            "src": "./assets/photos/isopods_macro.jpg",
             "caption": "waypoints.whale_fall.isopods.caption"
           }
         ]
