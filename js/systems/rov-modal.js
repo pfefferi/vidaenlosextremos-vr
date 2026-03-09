@@ -27,26 +27,25 @@ ROV.modal = {
         const content = waypointData.content || {};
         let htmlBuffer = '';
 
-        // --- A. Descripción (Texto) ---
-        // Ahora es lo primero que se ve
-        if (content.description) {
-            const desc = ROV.localization.t(content.description);
-            htmlBuffer += `<div class="modal-desc" style="margin-top: 0;">${desc}</div>`;
-        }
-
-        // --- B. Video YouTube ---
+        // --- A. Video YouTube ---
         if (content.youtube_id) {
             htmlBuffer += this._buildYoutube(content.youtube_id, content.video_caption);
         }
 
-        // --- C. Galería de Fotos ---
+        // --- B. Galería de Fotos ---
         if (content.gallery && content.gallery.length > 0) {
             htmlBuffer += this._buildGallery(content.gallery);
         }
 
-        // --- D. Gráficos ---
+        // --- C. Gráficos ---
         if (content.image_chart) {
             htmlBuffer += this._buildChart(content.image_chart, content.chart_caption);
+        }
+
+        // --- D. Descripción (Texto) ---
+        if (content.description) {
+            const desc = ROV.localization.t(content.description);
+            htmlBuffer += `<div class="modal-desc">${desc}</div>`;
         }
 
         // Inyectar al DOM
