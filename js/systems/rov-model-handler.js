@@ -99,6 +99,9 @@ ROV.modelHandler = {
         if (typeof ROV.blender !== 'undefined') {
             const maskData = ROV.blender.generateSilhouetteMask(mesh);
             ROV.blender.applyMaskFade(mesh, maskData);
+
+            // C. Terrain Heightmap (terrain-following floor collision)
+            ROV.config.heightmap = ROV.blender.generateHeightmap(mesh);
         }
 
 

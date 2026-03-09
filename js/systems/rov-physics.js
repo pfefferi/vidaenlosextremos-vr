@@ -50,10 +50,26 @@ ROV.physics = {
             currentPos.y += heave * currentSpeed * 0.8;
         }
 
-        // --- SOLID FLOOR BOUNDARY ---
-        // Priority: 1) JSON override (floor_limit), 2) geometry-computed (floorLimit), 3) spawn Y
+        // --- TERRAIN-FOLLOWING FLOOR BOUNDARY ---
+        // Sample the heightmap at the ROV's current XZ position for terrain collision.
+        // Falls back to flat floorLimit if heightmap not yet generated.
         let floorLimit;
-        if (ROV.config.floorLimitOverride !== undefined) {
+        const hm = ROV.config.heightmap;
+
+        if (hm && hm.data) {
+            // Map ROV world XZ to heightmap grid cell
+            const u = (currentPos.x - hm.bounds.minX) / (hm.bounds.maxX - hm.bounds.minX);
+            const v = (currentPos.z - hm.bounds.minZ) / (hm.bounds.maxZ - hm.bounds.minZ);
+
+            if (u >= 0 && u <= 1 && v >= 0 && v <= 1) {
+                const cx = Math.min(Math.floor(u * (hm.resolution - 1)), hm.resolution - 1);
+                const cz = Math.min(Math.floor(v * (hm.resolution - 1)), hm.resolution - 1);
+                floorLimit = hm.data[cz * hm.resolution + cx];
+            } else {
+                // Outside model bounds — use global minimum
+                floorLimit = hm.minY + 0.15;
+            }
+        } else if (ROV.config.floorLimitOverride !== undefined) {
             floorLimit = ROV.config.floorLimitOverride;
         } else if (ROV.config.floorLimit !== undefined) {
             floorLimit = ROV.config.floorLimit;

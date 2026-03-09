@@ -166,6 +166,87 @@ ROV.blender = {
   },
 
   /**
+   * Generates a terrain heightmap from the model's geometry.
+   * For each XZ cell, stores the maximum Y value of any vertex projecting there.
+   * Used for terrain-following floor collision in physics.
+   *
+   * @param {THREE.Object3D} mesh - The loaded GLTF model.
+   * @param {number} resolution - Grid resolution (default 128 — smaller than mask, sufficient for collision).
+   * @param {number} hoverOffset - Y offset above the terrain surface (default 0.15m).
+   * @returns {{ data: Float32Array, resolution: number, bounds: Object, minY: number, maxY: number }}
+   */
+  generateHeightmap: function (mesh, resolution = 128, hoverOffset = 0.15) {
+    mesh.updateWorldMatrix(true, true);
+
+    // Compute XZ bounds and Y range from all vertices
+    let wMinX = Infinity, wMaxX = -Infinity;
+    let wMinZ = Infinity, wMaxZ = -Infinity;
+    let wMinY = Infinity, wMaxY = -Infinity;
+    const tmpV = new THREE.Vector3();
+
+    mesh.traverse((node) => {
+      if (!node.isMesh || !node.geometry) return;
+      node.updateWorldMatrix(true, false);
+      const posAttr = node.geometry.attributes.position;
+      if (!posAttr) return;
+
+      for (let i = 0; i < posAttr.count; i++) {
+        tmpV.set(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
+        tmpV.applyMatrix4(node.matrixWorld);
+        if (tmpV.x < wMinX) wMinX = tmpV.x;
+        if (tmpV.x > wMaxX) wMaxX = tmpV.x;
+        if (tmpV.y < wMinY) wMinY = tmpV.y;
+        if (tmpV.y > wMaxY) wMaxY = tmpV.y;
+        if (tmpV.z < wMinZ) wMinZ = tmpV.z;
+        if (tmpV.z > wMaxZ) wMaxZ = tmpV.z;
+      }
+    });
+
+    const bounds = { minX: wMinX, maxX: wMaxX, minZ: wMinZ, maxZ: wMaxZ };
+    const bWidth = wMaxX - wMinX;
+    const bHeight = wMaxZ - wMinZ;
+
+    // Initialize heightmap with -Infinity (no terrain)
+    const data = new Float32Array(resolution * resolution);
+    data.fill(-Infinity);
+
+    // Project vertices and store max Y per cell
+    mesh.traverse((node) => {
+      if (!node.isMesh || !node.geometry) return;
+      const posAttr = node.geometry.attributes.position;
+      if (!posAttr) return;
+
+      for (let i = 0; i < posAttr.count; i++) {
+        tmpV.set(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
+        tmpV.applyMatrix4(node.matrixWorld);
+
+        const cx = Math.floor(((tmpV.x - wMinX) / bWidth) * (resolution - 1));
+        const cz = Math.floor(((tmpV.z - wMinZ) / bHeight) * (resolution - 1));
+
+        if (cx >= 0 && cx < resolution && cz >= 0 && cz < resolution) {
+          const idx = cz * resolution + cx;
+          if (tmpV.y > data[idx]) {
+            data[idx] = tmpV.y;
+          }
+        }
+      }
+    });
+
+    // Fill gaps: cells with no vertices get the global minimum Y
+    for (let i = 0; i < data.length; i++) {
+      if (data[i] === -Infinity) {
+        data[i] = wMinY;
+      }
+      // Apply hover offset
+      data[i] += hoverOffset;
+    }
+
+    console.log(`[Blender] Heightmap generated (${resolution}x${resolution}), Y range: ${wMinY.toFixed(2)} to ${wMaxY.toFixed(2)}`);
+
+    return { data, resolution, bounds, minY: wMinY, maxY: wMaxY };
+  },
+
+  /**
    * DEBUG: Creates a visible wireframe rectangle in the 3D scene at the mask bounds.
    */
   _debugDrawBounds: function (bounds) {
