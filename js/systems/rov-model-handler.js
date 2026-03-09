@@ -98,13 +98,13 @@ ROV.modelHandler = {
 
 
 
-        // Ajustar niebla según escala (Para que en modelos grandes no se vea el borde)
-        const scene = document.querySelector('a-scene');
-        if (scene) {
-            const fogFar = Math.max(30, targetSize * 1.5);
-            const fogNear = fogFar * 0.1;
-            scene.setAttribute('fog', { far: fogFar, near: fogNear });
-        }
+        // Fog disabled during edge-fade tuning
+        // const scene = document.querySelector('a-scene');
+        // if (scene) {
+        //     const fogFar = Math.max(30, targetSize * 1.5);
+        //     const fogNear = fogFar * 0.1;
+        //     scene.setAttribute('fog', { far: fogFar, near: fogNear });
+        // }
 
         // 4. Ajuste dinámico de velocidad base según el tamaño del modelo
         // Modelos grandes necesitan moverse más rápido
