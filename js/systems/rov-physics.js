@@ -51,13 +51,16 @@ ROV.physics = {
         }
 
         // --- SOLID FLOOR BOUNDARY ---
-        // Extraemos el límite de la configuración. loader.js debería estar inyectando
-        // ROV.config.startPosition.y desde el JSON de la misión.
-        // Si no existe, usamos ROV.config.baseDepth (que por defecto es 0).
-        let floorLimit = ROV.config.baseDepth || 0;
-        if (ROV.config.startPosition && typeof ROV.config.startPosition.y !== 'undefined') {
-            // Limite estricto: no puede bajar más de 0.05 metros desde su spawn original
+        // Priority: 1) JSON override (floor_limit), 2) geometry-computed (floorLimit), 3) spawn Y
+        let floorLimit;
+        if (ROV.config.floorLimitOverride !== undefined) {
+            floorLimit = ROV.config.floorLimitOverride;
+        } else if (ROV.config.floorLimit !== undefined) {
+            floorLimit = ROV.config.floorLimit;
+        } else if (ROV.config.startPosition) {
             floorLimit = ROV.config.startPosition.y - 0.05;
+        } else {
+            floorLimit = 0;
         }
 
         if (currentPos.y < floorLimit) {

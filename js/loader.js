@@ -38,6 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 ROV.config.startPosition = diveData.start_position || { x: 0, y: 2, z: 10 };
                 ROV.config.startRotation = diveData.start_rotation || { x: 0, y: 0, z: 0 };
                 ROV.config.floorColor = diveData.floor_color || '#4e5846';
+                if (diveData.floor_limit !== undefined) {
+                    ROV.config.floorLimitOverride = diveData.floor_limit;
+                }
             }
 
             // 2. Aplicar Posición Inicial Inmediatamente

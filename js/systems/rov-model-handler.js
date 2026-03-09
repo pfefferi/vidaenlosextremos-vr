@@ -79,6 +79,9 @@ ROV.modelHandler = {
         // 3. Capas de Continuidad Visual (Advanced Shader Injection)
         const floorY = finalPosY - (size.y * scaleFactor / 2);
 
+        // Store computed floor limit for physics (derived from geometry bottom)
+        ROV.config.floorLimit = floorY;
+
         // A. Suelo Infinito
         const extendedFloor = document.getElementById('extended-floor');
         if (extendedFloor) {
