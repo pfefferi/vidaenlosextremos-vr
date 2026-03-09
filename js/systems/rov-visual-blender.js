@@ -20,7 +20,10 @@ ROV.blender = {
    * @returns {{ texture: THREE.CanvasTexture, bounds: {minX: number, maxX: number, minZ: number, maxZ: number} }}
    */
   generateSilhouetteMask: function (mesh, resolution = 512, blurPasses = 4, blurRadius = 8, padding = 0.05) {
-    // 1. Compute world-space bounding box
+    // 1. Ensure world matrices are up-to-date (critical after entity scale/position changes)
+    mesh.updateWorldMatrix(true, true);
+
+    // Compute world-space bounding box
     const bbox = new THREE.Box3().setFromObject(mesh);
     const minX = bbox.min.x;
     const maxX = bbox.max.x;

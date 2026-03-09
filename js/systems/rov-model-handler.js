@@ -86,6 +86,9 @@ ROV.modelHandler = {
             extendedFloor.setAttribute('animation', 'property: material.opacity; from: 0; to: 1; dur: 2000');
         }
 
+        // Force world matrix propagation so blender sees correct transformed coordinates
+        mapEntity.object3D.updateMatrixWorld(true);
+
         // B. Auto-Generated Silhouette Mask (Edge Fade from actual geometry)
         if (typeof ROV.blender !== 'undefined') {
             const maskData = ROV.blender.generateSilhouetteMask(mesh);
