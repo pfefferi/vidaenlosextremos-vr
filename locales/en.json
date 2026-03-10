@@ -24,7 +24,7 @@
         "system_navigation": "System Navigation",
         "mission_controls": "Mission Controls",
         "toggle_gyro": "Toggle Gyroscope",
-        "return_to_fleet": "Return to Fleet",
+        "return_to_home": "Return to Home",
         "explore": "EXPLORE",
         "reset_position": "Reset Position",
         "speed": "SPD",

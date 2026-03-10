@@ -24,7 +24,7 @@
         "system_navigation": "Navegación del Sistema",
         "mission_controls": "Controles de Misión",
         "toggle_gyro": "Alternar Giroscopio",
-        "return_to_fleet": "Volver a la Flota",
+        "return_to_home": "Volver al Inicio",
         "explore": "EXPLORAR",
         "reset_position": "Restablecer Posición",
         "speed": "VEL",

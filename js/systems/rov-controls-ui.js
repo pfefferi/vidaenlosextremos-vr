@@ -21,13 +21,13 @@ ROV.controlsUI = {
         });
 
         // Menu items
-        const menuFleet = document.getElementById('menu-fleet');
+        const menuHome = document.getElementById('menu-home');
         const menuControls = document.getElementById('menu-controls');
         const menuGyro = document.getElementById('menu-gyro');
 
-        if (menuFleet) {
-            menuFleet.onclick = () => {
-                window.location.href = '../index.html';
+        if (menuHome) {
+            menuHome.onclick = () => {
+                window.location.href = './index.html';
             };
         }
 
