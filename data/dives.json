@@ -30,9 +30,9 @@
     "date": "2026-01-05",
     "model_path": "assets/models/clam-bed/scene.gltf",
     "start_position": {
-      "x": 0,
-      "y": 8,
-      "z": 10
+      "x": 6.78,
+      "y": -1.4,
+      "z": -14.16
     },
     "start_rotation": {
       "x": 0,
