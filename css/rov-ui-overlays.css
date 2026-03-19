@@ -584,3 +584,43 @@
     fill: none;
     stroke-width: 2.5;
 }
+
+/* ==========================================================================
+   RESPONSIVE OVERLAYS
+   ========================================================================== */
+@media (max-width: 768px) {
+    .mapping-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    #controls-overlay {
+        overflow-y: auto;
+        justify-content: flex-start;
+        padding-top: 60px;
+    }
+
+    .controls-header {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .controls-title {
+        font-size: 20px;
+    }
+    
+    #system-menu {
+        width: clamp(260px, 85vw, 320px);
+        padding: 50px 20px 20px 20px;
+    }
+    
+    .menu-title {
+        font-size: 10px;
+    }
+    
+    .menu-item {
+        padding: 14px 15px;
+        font-size: 12px;
+    }
+}

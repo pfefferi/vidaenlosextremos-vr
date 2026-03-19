@@ -36,8 +36,8 @@
 
 .top-left-ctrls {
     position: absolute;
-    top: 30px;
-    left: 30px;
+    top: max(30px, env(safe-area-inset-top, 30px));
+    left: max(30px, env(safe-area-inset-left, 30px));
     display: flex;
     gap: 15px;
     pointer-events: auto;
@@ -45,8 +45,8 @@
 
 .top-right-ctrls {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: max(30px, env(safe-area-inset-top, 30px));
+    right: max(30px, env(safe-area-inset-right, 30px));
     display: flex;
     gap: 15px;
     align-items: center;
@@ -68,6 +68,53 @@
 
 @media (orientation: landscape) {
     #telemetry-block {
-        bottom: 150px;
+        bottom: max(150px, env(safe-area-inset-bottom, 150px));
+    }
+}
+
+/* Portrait mobile: shift telemetry to top, below the HUD toggle icon */
+@media (max-width: 768px) and (orientation: portrait) {
+    #telemetry-block {
+        bottom: auto;
+        top: 90px;
+        left: max(20px, env(safe-area-inset-left, 20px));
+        transform: scale(0.8);
+        transform-origin: top left;
+    }
+
+    /* Debug console hides on mobile — error text is not useful for end users */
+    #debug-console {
+        display: none;
+    }
+}
+
+/* Landscape mobile: hide telemetry to prevent D-pad overlap — controls priority */
+@media (max-width: 1024px) and (orientation: landscape) and (max-height: 600px) {
+    #telemetry-block {
+        display: none;
+    }
+
+    /* Hide debug console on mobile landscape entirely */
+    #debug-console {
+        display: none;
+    }
+
+    /* Date and coords overlap controls in landscape — hide them on short screens */
+    #date-block,
+    #coords-block {
+        display: none;
+    }
+}
+
+/* Shared small-screen adjustments */
+@media (max-width: 768px) {
+    #date-block {
+        bottom: 30px;
+        font-size: 11px;
+    }
+
+    #coords-block {
+        bottom: 12px;
+        font-size: 10px;
     }
 }

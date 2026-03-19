@@ -77,3 +77,25 @@ body {
     font-weight: bold;
     text-shadow: 1px 1px 2px #000;
 }
+
+/* Mobile: reduce icon-btn sizes to avoid crowding */
+@media (max-width: 768px) {
+    .icon-btn {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .btn svg,
+    .icon-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Short landscape: further compress */
+@media (max-height: 500px) and (orientation: landscape) {
+    .icon-btn {
+        width: 34px;
+        height: 34px;
+    }
+}

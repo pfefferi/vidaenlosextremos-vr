@@ -1,9 +1,9 @@
 /* CONTROLES TÁCTILES / ON-SCREEN */
 #controls-container {
     position: absolute;
-    bottom: 60px;
-    left: 20px;
-    right: 20px;
+    bottom: max(60px, calc(env(safe-area-inset-bottom, 0px) + 20px));
+    left: max(20px, env(safe-area-inset-left, 20px));
+    right: max(20px, env(safe-area-inset-right, 20px));
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -21,8 +21,8 @@
 }
 
 .right-side-grid {
-    grid-template-columns: repeat(4, 60px);
-    /* Strict parity between all columns */
+    grid-template-columns: repeat(4, clamp(42px, 12.5vw, 60px));
+    /* Strict parity between all columns, now fluid for mobile */
     justify-content: end;
     align-items: center;
 }
@@ -48,7 +48,7 @@
     /* Match beacon color */
     text-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
     font-weight: 900;
-    width: 60px;
+    width: clamp(42px, 12.5vw, 60px);
     /* Match column width */
     overflow: visible;
     /* Allow text to overflow symmetrically if long */
@@ -122,8 +122,25 @@
 
 @media (orientation: landscape) {
     #controls-container {
-        bottom: 25px;
-        left: 40px;
-        right: 40px;
+        bottom: max(25px, env(safe-area-inset-bottom, 25px));
+        left: max(40px, env(safe-area-inset-left, 40px));
+        right: max(40px, env(safe-area-inset-right, 40px));
+    }
+}
+
+@media (max-width: 768px) {
+    .control-grid {
+        gap: clamp(4px, 1.5vw, 10px);
+    }
+}
+
+/* Short landscape screens: shrink vertical footprint of controls */
+@media (max-height: 500px) and (orientation: landscape) {
+    #controls-container {
+        bottom: max(10px, env(safe-area-inset-bottom, 10px));
+    }
+    
+    .control-grid {
+        gap: 5px;
     }
 }
