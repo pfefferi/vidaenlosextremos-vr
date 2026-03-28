@@ -53,12 +53,12 @@
         "whale_fall": {
             "vertebra": {
                 "title": "La Vértebra de Ballena",
-                "description": "Cuando una ballena muere y se hunde, su esqueleto se convierte en una fuente de nutrientes que sustenta la vida de las profundidades durante décadas. Esta vértebra fue hallada a 3.895 m de profundidad, en agua a 2,4 °C, durante una etapa tardía de sucesión ecológica. El hueso se está mineralizando lentamente de vuelta al lecho marino, y su superficie dura proporciona un punto de anclaje para corales y otros organismos sésiles en un entorno dominado por sedimentos blandos.",
+                "description": "Cuando una ballena muere y se hunde, su esqueleto se convierte en una fuente de nutrientes que sustenta la vida de las profundidades durante décadas. Esta vértebra fue hallada a 3.895 m de profundidad, durante una etapa tardía de sucesión ecológica. El hueso se está mineralizando lentamente de vuelta al lecho marino, y su superficie dura proporciona un punto de anclaje para corales y otros organismos sésiles en un entorno dominado por sedimentos blandos.",
                 "caption": "Clip: Momento de la extracción - R/V Falkor (too)"
             },
             "isopods": {
                 "title": "El Trencito de Isópodos",
-                "description": "Estos pequeños crustáceos, de menos de 2 cm, fueron observados alineados a lo largo de una rama de coral batial unida al hueso de ballena durante la inmersión S0883. Forman parte de una comunidad bentónica especializada, adaptada a las condiciones de alta presión y baja energía del Atlántico Sur profundo.",
+                "description": "Estos pequeños crustáceos, de menos de 2 cm, fueron observados alineados a lo largo de una rama de coral unido al hueso de ballena. Forman parte de una comunidad bentónica especializada, adaptada a las condiciones de alta presión y baja energía del Atlántico Sur profundo.",
                 "caption": "Macrofotografía in situ"
             },
             "subastian": {
@@ -67,14 +67,14 @@
             },
             "lab": {
                 "title": "Del Lecho Marino al Laboratorio",
-                "description": "Una vez que una muestra llega a la superficie, se traslada de inmediato a la Sala Fría para preservar sus firmas biológicas y químicas. Un equipo multidisciplinario gestiona la recuperación y el análisis; los equipos de Ecología y Taxonomía Bentónica luego trabajan para identificar especies y estudiar la biodiversidad de las profundidades, manteniendo todo en almacenamiento en frío a +2 °C.",
+                "description": "Una vez que una muestra llega a la superficie, se traslada de inmediato a la Sala Fría. Un equipo multidisciplinario gestiona la recuperación y el análisis; los equipos de Ecología y Taxonomía Bentónica luego trabajan para identificar especies y estudiar la biodiversidad de las profundidades, manteniendo todo en almacenamiento en frío a +2 °C.",
                 "thumb1": "José Isola y Daniel Lauretta manipulando la vértebra tras la recuperación.",
                 "thumb2": "Detalle de la vértebra de ballena.",
                 "thumb3": "Detalle de la estructura ósea en el laboratorio."
             },
             "mission": {
                 "title": "Expedición FKt251206",
-                "description": "Liderada por la científica jefa María Emilia Bravo, esta expedición estudió cómo las comunidades de las profundidades ayudan a regular el clima al consumir metano del fondo marino antes de que llegue a la atmósfera. La investigación vincula la llanura abisal del Atlántico sudoccidental con los procesos climáticos globales y destaca la importancia de mapear estos ecosistemas."
+                "description": "La campaña liderada por Maria Emilia Bravo tuvo como objetivo describir y clasificar la amplia diversidad de paisajes y ecosistemas bentónicos del mar profundo argentino. Esto incluyó la identificación de áreas prioritarias para futuras investigaciones y la toma de acciones de manejo ambiental."
             }
         }
     }
