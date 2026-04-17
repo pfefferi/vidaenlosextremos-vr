@@ -145,6 +145,9 @@ function triggerDebounce(key) {
             ROV.state.activeAction = id;
         };
 
+        // Evita selección de texto/context menu por long-press
+        b.addEventListener('contextmenu', (e) => e.preventDefault());
+
         b.addEventListener('touchstart', start, { passive: false });
         b.addEventListener('mousedown', start);
     };
@@ -153,6 +156,7 @@ function triggerDebounce(key) {
 
     const clear = () => { ROV.state.activeAction = null; };
     window.addEventListener('touchend', clear);
+    window.addEventListener('touchcancel', clear);
     window.addEventListener('mouseup', clear);
 })();
 
@@ -192,6 +196,7 @@ function initRotationControls() {
         if (e.button !== 0) return; // Solo click izquierdo
         if (e.target.closest('.ui-clickable') || e.target.tagName === 'BUTTON' || e.target.closest('#btn-scan')) return;
 
+        if (e.cancelable) e.preventDefault();
         dragData.active = true;
         dragData.lastX = e.clientX;
         dragData.lastY = e.clientY;
@@ -218,6 +223,7 @@ function initRotationControls() {
     zone.addEventListener('touchstart', (e) => {
         if (e.target.closest('.ui-clickable') || e.target.tagName === 'BUTTON' || e.target.closest('#btn-scan')) return;
 
+        if (e.cancelable) e.preventDefault();
         const touch = e.touches[0];
         dragData.active = true;
         dragData.lastX = touch.clientX;
@@ -240,6 +246,10 @@ function initRotationControls() {
     }, { passive: false });
 
     zone.addEventListener('touchend', () => {
+        dragData.active = false;
+    });
+
+    zone.addEventListener('touchcancel', () => {
         dragData.active = false;
     });
 }

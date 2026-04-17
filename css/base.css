@@ -15,6 +15,35 @@ body {
     color: var(--text-main);
     font-family: var(--font-main);
     overflow-x: hidden;
+    overscroll-behavior: none;
+}
+
+/* Evita selección de texto accidental y menús por long-press en controles táctiles */
+#ui-layer,
+#controls-container,
+.btn,
+.icon-btn,
+.tab-btn,
+.menu-item,
+.menu-close-btn,
+.modal-close-btn,
+.lang-btn,
+#explore-label,
+#btn-scan {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.btn,
+.icon-btn,
+.tab-btn,
+.menu-item,
+.menu-close-btn,
+.modal-close-btn,
+.lang-btn,
+#btn-scan {
+    touch-action: manipulation;
 }
 
 /* Layout Utilities */

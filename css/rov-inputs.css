@@ -129,8 +129,34 @@
 }
 
 @media (max-width: 768px) {
+    #controls-container {
+        bottom: max(28px, calc(env(safe-area-inset-bottom, 0px) + 10px));
+        left: max(12px, env(safe-area-inset-left, 12px));
+        right: max(12px, env(safe-area-inset-right, 12px));
+    }
+
     .control-grid {
         gap: clamp(4px, 1.5vw, 10px);
+    }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+    .right-side-grid {
+        grid-template-columns: repeat(4, clamp(34px, 11vw, 48px));
+    }
+
+    .right-side-grid .label {
+        font-size: 9px;
+    }
+
+    .grid-header-explore {
+        width: clamp(34px, 11vw, 48px);
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .grid-header-explore div[data-i18n="ui.explore"] {
+        padding: 4px 10px;
     }
 }
 
