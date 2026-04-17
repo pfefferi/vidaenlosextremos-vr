@@ -165,6 +165,11 @@ function triggerDebounce(key) {
 function initRotationControls() {
     const zone = document.body;
 
+    const isInteractiveTarget = (target) => {
+        if (!target) return false;
+        return !!target.closest('.ui-clickable, .btn, .icon-btn, .tab-btn, .menu-item, .menu-close-btn, .lang-btn, #btn-scan, button, a, input, label, select, textarea, [onclick], .toggle-switch');
+    };
+
     // Estado compartido para el arrastre
     const dragData = {
         active: false,
@@ -194,7 +199,7 @@ function initRotationControls() {
     // --- MOUSE EVENTS ---
     zone.addEventListener('mousedown', (e) => {
         if (e.button !== 0) return; // Solo click izquierdo
-        if (e.target.closest('.ui-clickable') || e.target.tagName === 'BUTTON' || e.target.closest('#btn-scan')) return;
+        if (isInteractiveTarget(e.target)) return;
 
         if (e.cancelable) e.preventDefault();
         dragData.active = true;
@@ -221,7 +226,7 @@ function initRotationControls() {
 
     // --- TOUCH EVENTS ---
     zone.addEventListener('touchstart', (e) => {
-        if (e.target.closest('.ui-clickable') || e.target.tagName === 'BUTTON' || e.target.closest('#btn-scan')) return;
+        if (isInteractiveTarget(e.target)) return;
 
         if (e.cancelable) e.preventDefault();
         const touch = e.touches[0];
