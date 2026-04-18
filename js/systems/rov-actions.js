@@ -49,6 +49,49 @@ ROV.actions = {
         }
     },
 
+    toggleGyro: async function () {
+        const cameraEl = ROV.refs.cam || document.getElementById('main-camera');
+        const debugConsole = ROV.refs.debug || document.getElementById('debug-console');
+        if (!cameraEl) return;
+
+        const currentCfg = cameraEl.getAttribute('look-controls') || {};
+        const isEnabled = !!currentCfg.magicWindowTrackingEnabled;
+
+        // iOS requiere permiso explícito solo al activar
+        if (!isEnabled && typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+            try {
+                const permissionState = await DeviceOrientationEvent.requestPermission();
+                if (permissionState !== 'granted') {
+                    if (debugConsole) debugConsole.textContent = 'SYSTEM: Gyro permission denied.';
+                    return;
+                }
+            } catch (error) {
+                console.error('[Gyro] Permission error:', error);
+                return;
+            }
+        }
+
+        const controls = cameraEl.components['look-controls'];
+
+        if (isEnabled) {
+            // Al desactivar, conservar orientación actual para evitar “snap”
+            const currentRotationX = cameraEl.object3D.rotation.x;
+            const currentRotationY = cameraEl.object3D.rotation.y;
+
+            cameraEl.setAttribute('look-controls', { magicWindowTrackingEnabled: false });
+
+            if (controls) {
+                controls.pitch = currentRotationX;
+                controls.yaw = currentRotationY;
+            }
+
+            if (debugConsole) debugConsole.textContent = 'SYSTEM: Gyroscope OFF';
+        } else {
+            cameraEl.setAttribute('look-controls', { magicWindowTrackingEnabled: true });
+            if (debugConsole) debugConsole.textContent = 'SYSTEM: Gyroscope ON';
+        }
+    },
+
     changeSpeed: function (direction) {
         // direction: 1 (subir), -1 (bajar)
         const levels = ROV.config.speedLevels;

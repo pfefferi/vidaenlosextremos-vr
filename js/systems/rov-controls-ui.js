@@ -48,32 +48,43 @@ ROV.controlsUI = {
             });
         });
 
+        const bindPress = (el, handler) => {
+            if (!el) return;
+            let lastFire = 0;
+            const run = (e) => {
+                if (e && e.cancelable) e.preventDefault();
+                if (e) e.stopPropagation();
+
+                const now = Date.now();
+                if (now - lastFire < 250) return; // Evita doble disparo pointerup+click
+                lastFire = now;
+                handler();
+            };
+
+            el.addEventListener('pointerup', run);
+            el.addEventListener('click', run);
+        };
+
         // Menu items
         const menuHome = document.getElementById('menu-home');
         const menuControls = document.getElementById('menu-controls');
         const menuGyro = document.getElementById('menu-gyro');
 
-        if (menuHome) {
-            menuHome.onclick = () => {
-                window.location.href = './index.html';
-            };
-        }
+        bindPress(menuHome, () => {
+            window.location.href = './index.html';
+        });
 
-        if (menuControls) {
-            menuControls.onclick = () => {
+        bindPress(menuControls, () => {
+            this.toggleMenu(false);
+            this.toggle(true);
+        });
+
+        bindPress(menuGyro, () => {
+            if (window.ROV && ROV.actions && ROV.actions.toggleGyro) {
+                ROV.actions.toggleGyro();
                 this.toggleMenu(false);
-                this.toggle(true);
-            };
-        }
-
-        if (menuGyro) {
-            menuGyro.onclick = () => {
-                if (window.ROV && ROV.actions && ROV.actions.toggleGyro) {
-                    ROV.actions.toggleGyro();
-                    this.toggleMenu(false);
-                }
-            };
-        }
+            }
+        });
     },
 
     toggle: function (show) {
