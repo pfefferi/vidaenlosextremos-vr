@@ -5,11 +5,39 @@ ROV.controlsUI = {
     menu: null,
     currentTab: 'gamepad',
     _lastStart: false,
+    _historyHooked: false,
 
     init: function () {
         this.overlay = document.getElementById('controls-overlay');
         this.menu = document.getElementById('system-menu');
         this.setupEventListeners();
+        this.setupBackHandler();
+    },
+
+    setupBackHandler: function () {
+        if (this._historyHooked) return;
+
+        window.addEventListener('popstate', () => {
+            if (ROV.state.isLogbookOpen && ROV.modal) {
+                ROV.modal.close();
+                return;
+            }
+            if (ROV.state.isControlsOpen) {
+                this.toggle(false);
+                return;
+            }
+            if (ROV.state.isMenuOpen) {
+                this.toggleMenu(false);
+            }
+        });
+
+        this._historyHooked = true;
+    },
+
+    pushUIHistory: function (layer) {
+        const state = history.state || {};
+        if (state.rovUI === layer) return;
+        history.pushState({ ...state, rovUI: layer, ts: Date.now() }, '', window.location.href);
     },
 
     setupEventListeners: function () {
@@ -50,11 +78,13 @@ ROV.controlsUI = {
 
     toggle: function (show) {
         if (!this.overlay) this.init();
-        const force = (show !== undefined) ? show : !this.overlay.classList.contains('active');
+        const wasOpen = this.overlay.classList.contains('active');
+        const force = (show !== undefined) ? show : !wasOpen;
 
         if (force) {
             this.overlay.classList.add('active');
             ROV.state.isControlsOpen = true;
+            if (!wasOpen) this.pushUIHistory('controls');
             // Default to gamepad if available
             const gamepads = navigator.getGamepads();
             let hasGP = false;
@@ -68,9 +98,11 @@ ROV.controlsUI = {
 
     toggleMenu: function (show) {
         if (!this.menu) this.init();
-        const force = (show !== undefined) ? show : !this.menu.classList.contains('active');
+        const wasOpen = this.menu.classList.contains('active');
+        const force = (show !== undefined) ? show : !wasOpen;
         this.menu.classList.toggle('active', force);
         ROV.state.isMenuOpen = force;
+        if (force && !wasOpen) this.pushUIHistory('menu');
     },
 
     switchTab: function (tabName) {

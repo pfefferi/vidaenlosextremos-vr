@@ -260,6 +260,31 @@
     font-family: 'Inter', sans-serif;
 }
 
+.controls-close-btn {
+    position: absolute;
+    top: max(20px, env(safe-area-inset-top, 20px));
+    right: max(20px, env(safe-area-inset-right, 20px));
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.controls-close-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+}
+
 #controls-overlay.active {
     opacity: 1;
     pointer-events: auto;
@@ -414,7 +439,7 @@
     -webkit-backdrop-filter: none;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 2500;
-    padding: 60px 30px 30px 30px;
+    padding: 78px 30px 30px 30px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -616,7 +641,7 @@
     
     #system-menu {
         width: clamp(260px, 85vw, 320px);
-        padding: 50px 20px 20px 20px;
+        padding: 74px 20px 20px 20px;
     }
     
     .menu-title {
