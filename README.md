@@ -1,133 +1,117 @@
-
 # VIDA EN LOS EXTREMOS: ROV Mission Control
 
-**Visualizador interactivo 3D y simulador de ROV para la exploración de hábitats marinos profundos.**
-
-Este proyecto permite navegar modelos de fotogrametría de alta resolución recolectados durante la campaña científica **FKt251206** a bordo del R/V Falkor (too). La interfaz emula el sistema de telemetría y control de un ROV (Remotely Operated Vehicle) real, integrando datos de profundidad, rumbo y condiciones ambientales en una experiencia optimizada tanto para escritorio como para dispositivos móviles.
+Visualizador 3D interactivo para explorar hábitats marinos profundos con una interfaz estilo telemetría de ROV.
 
 ---
 
-## 🌊 Ambientes Explorables
+## 📌 Estado de documentación
 
-El simulador carga dinámicamente los datos de inmersión basados en registros reales:
+- **Docs sincronizadas con Git:** `009ccad`  
+- **Fecha del commit base:** `2026-04-19 17:03:16 -0300`
+- **Archivo de build interno:** `data/version.json` (puede quedar desfasado respecto a `HEAD`)
 
-* **S0883 - The Whale Fall:** Caída de ballena a 3895m de profundidad.
-* **S0889 - Clam Bed:** Banco de almejas *Vesicomyidae* (618m).
-* **S0892 - Giant Corals:** Jardines de corales *Paragorgia sp.* (483m).
+> Al actualizar documentación, reemplazar este bloque con el nuevo hash de `HEAD`.
 
----
+Comandos útiles:
 
-## 🚀 Características Técnicas
-
-* **Arquitectura Modular:** Código en capas lógicas (Core, Systems, Input) para escalabilidad y mantenimiento.
-* **Motor Gráfico:** Basado en **A-Frame (Three.js)**, garantizando compatibilidad con WebVR.
-* **Física Vectorial:** Sistema de movimiento con inercia, cálculo de vectores de empuje y gestión de colisiones básica.
-* **Soporte Multi-Input:** Control transparente mediante Pantalla Táctil, Teclado o Gamepad (Joystick) conectado por USB/Bluetooth.
-* **Telemetría Dinámica:** HUD (Heads-Up Display) inspirado en el Schmidt Ocean Institute con actualización de datos en tiempo real optimizada para rendimiento (Throttling).
-* **Texture Patching:** Sistema `model-handler` que inyecta texturas y corrige escalas de modelos GLTF/GLB al vuelo.
+```bash
+git rev-parse --short HEAD
+git show -s --format=%ci HEAD
+```
 
 ---
 
-## 🎮 Manual de Operaciones (Controles)
+## 🌊 Misiones disponibles
 
-El ROV se puede pilotar de tres formas distintas. El sistema detecta automáticamente la entrada activa.
+- `whale-fall` — **S0883: The Whale Fall**
+- `clam-bed` — **S0889: Vesicomyidae Clam Bed**
+- `giant-corals` — **S0892: Giant Corals (Paragorgia sp.)**
 
-### 1. Teclado (Escritorio)
-| Acción | Teclas (Opción A) | Teclas (Opción B) |
-| :--- | :--- | :--- |
-| **Moverse (Plano)** | `W` `A` `S` `D` | - |
-| **Ascender / Descender** | `Espacio` / `Shift` | `E` / `Q` |
-| **Girar Cámara** | `Flechas Dirección` | Mouse Drag |
-| **Velocidad** | `1` (Disminuir) | `2` (Aumentar) |
-| **Luces** | `L` | - |
-| **HUD (Interfaz)** | `H` | - |
-| **Reset Posición** | `R` | - |
-| **Pantalla Completa** | `F` | - |
-
-### 2. Táctil (Móvil / Tablet)
-* **Joystick Virtual:** Mantén presionado los botones en la zona inferior izquierda para moverte.
-* **Touch Look:** Arrastra el dedo en cualquier zona vacía de la pantalla para girar la cámara.
-* **Acciones:** Botones dedicados en pantalla para Zoom, Luces y HUD.
-* **Giroscopio:** Icono disponible en móviles para controlar la cámara con el movimiento del dispositivo.
-
-### 3. Gamepad (Xbox / PlayStation)
-Conecta tu mando y presiona cualquier botón para activar.
-* **Stick Izquierdo:** Desplazamiento horizontal.
-* **Stick Derecho:** Cámara (Con estabilización "Winner Takes All").
-* **Gatillos (L2/R2):** Ascender y Descender (Analógico).
-* **Botones Faciales:** `A` (HUD), `Y` (Luces), `X` (Reset).
+La app se abre desde `index.html` y navega al visor en `habitat.html?site=<mission_key>`.
 
 ---
 
-## 📂 Estructura del Proyecto
+## 🧱 Arquitectura actual
 
-```text
-VIDA-EN-LOS-EXTREMOS/
-├── index.html                  # Menú principal de selección de misiones
-├── habitats/                   # Visores (Entry points)
-│   ├── whale_fall.html         
-│   ├── clam_bed.html           
-│   └── giant_corals.html       
-├── js/                         # Lógica de la Aplicación
-│   ├── core/                   # Inicialización y Estado
-│   │   ├── rov-init.js
-│   │   ├── rov-settings.js
-│   │   ├── rov-state.js
-│   │   └── rov-dom.js
-│   ├── systems/                # Lógica de Negocio y Física
-│   │   ├── rov-physics.js
-│   │   ├── rov-actions.js
-│   │   └── rov-model-handler.js
-│   ├── input/                  # Controladores
-│   │   ├── rov-controls.js
-│   │   └── rov-input-keyboard.js
-│   ├── loader.js               # Ingesta de datos y enrutamiento
-│   └── rov-main.js             # Bucle principal (Game Loop)
-├── data/
-│   └── dives.json              # Base de datos de las misiones
-├── css/
-│   └── rov-styles.css          # Estilos de la interfaz HUD
-├── assets/                     
-│   ├── images/                 
-│   └── models/                 # Modelos 3D (GLTF/GLB + Texturas)
-└── README.md                   
+### Entry points
+- `index.html` → menú de selección
+- `habitat.html` → runtime del simulador
 
-🛠️ Instalación y Uso
-Debido a las políticas de seguridad de los navegadores (CORS) para cargar modelos 3D y texturas locales, este proyecto requiere un servidor local.
- * Clona el repositorio.
- * Abre la terminal en la carpeta del proyecto.
- * Inicia un servidor simple (ejemplo con Python):
-   python -m http.server
+### JavaScript
+- `js/core/` → init, config, estado mutable, refs DOM
+- `js/systems/` → física, acciones, waypoints, modal, localización, model pipeline
+- `js/input/` → teclado, gamepad, touch/drag look
+- `js/loader.js` → carga datos de misión y modelo
+- `js/rov-main.js` → game loop y orquestación
 
- * Abre tu navegador en http://localhost:8000.
+### Datos
+- `data/dives.json` → configuración por misión (telemetría, spawn, modelo, color de piso)
+- `data/waypoints.json` → puntos de interés y contenido
+- `locales/es.json`, `locales/en.json` → traducciones
+- `data/version.json` → metadata de build/log
 
+---
 
-🎓 Créditos y Reconocimientos
-Este desarrollo es parte de las iniciativas de divulgación científica asociadas a la campaña FKt251206 Bravo (2025-2026).
- * Institución: Schmidt Ocean Institute (SOI) - R/V Falkor (too) & ROV SuBastian.
- * Datos y Modelos 3D: Ben Erwin.
- * Dirección Científica: María Emilia Bravo.
- * Desarrollo y Programación: Lisandro Scarrone, estudiante de Ciencias Biológicas (UBA).
+## 🎮 Controles principales
 
+### Teclado
+- Movimiento: `W A S D`
+- Cámara: `Flechas`
+- Subir/Bajar: `Espacio` / `Shift`
+- Zoom: `E` (in) / `Q` (out)
+- Velocidad: `1` / `2`
+- Escanear waypoint: `Enter`
+- HUD: `H`
+- Reset posición: `R`
+- Menú sistema: `M` o `Esc`
 
-> Nota: Este software es un prototipo educativo y una herramienta de apoyo para la visualización de datos del mar profundo argentino.
-> 
+### Gamepad
+- Move/strafe: `Stick izquierdo`
+- Cámara: `Stick derecho`
+- Subir/Bajar: `L1 / R1`
+- Zoom: `L2 / R2`
+- Velocidad: `D-pad ↑ / ↓`
+- Escanear waypoint: `Cross / A` (cuando hay waypoint activo)
+- HUD: `Square / X`
+- Reset posición: `Select / Share`
+- Menú sistema: `Start / Options`
 
+### Touch / móvil
+- D-pad virtual + botones laterales para movimiento/acciones
+- Drag en zona libre para rotación de cámara
+- Menú y panel de controles en overlay
 
+---
 
+## ▶️ Ejecución local
 
+Por CORS, usar servidor local.
 
+```bash
+# opción Python
+python -m http.server 8000
+```
 
+Abrir en navegador:
 
+- `http://localhost:8000/index.html`
 
+---
 
+## 🛠️ Mantenimiento de docs
 
+Cuando cambie arquitectura/controles:
+1. Actualizar `README.md` y `docs/DOCUMENTACION-TECNICA.md`.
+2. Reemplazar el hash en “Estado de documentación”.
+3. Verificar que rutas y nombres de archivo coincidan con el árbol real del repo.
 
+---
 
+## Créditos
 
+Proyecto educativo/científico asociado a la campaña FKt251206 Bravo.
 
-
-
-
-
-
+- Schmidt Ocean Institute — R/V Falkor (too), ROV SuBastian
+- Datos/Modelos 3D: Ben Erwin
+- Dirección científica: María Emilia Bravo
+- Desarrollo: Lisandro Scarrone

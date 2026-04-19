@@ -1,7 +1,14 @@
 # Pre-Baked Navigation Assets
 
+## Documentation Sync
+- Synced against commit: `009ccad`
+- Sync date: `2026-04-19`
+- Status: Future optimization (not implemented in production flow)
+
+---
+
 ## Status: Future Optimization
-**Priority**: Low — runtime generation adds ~250ms to load time, negligible vs model download (2-5s).
+**Priority**: Low — runtime generation adds ~250ms to load time, negligible vs model download (2-5s).  
 **Trigger**: Implement when manual control over navigation boundaries is needed.
 
 ## Concept
@@ -21,10 +28,10 @@ Both use the same two-pass vertex projection in `rov-visual-blender.js`.
 ## Pre-Baked Pipeline (Future)
 
 ### Export Phase (one-time per model)
-1. Uncomment debug canvas in `rov-visual-blender.js` (lines ~148-157)
+1. Enable debug canvas in `rov-visual-blender.js`
 2. Load the habitat in browser
-3. Right-click the debug canvas → "Save Image As" → `mask.png`
-4. Export heightmap as grayscale PNG (add export button or console command)
+3. Save debug canvas as `mask.png`
+4. Export heightmap as grayscale PNG
 5. Place files in `assets/models/{habitat}/`
 
 ### Load Phase (runtime)
@@ -35,12 +42,12 @@ dives.json has "mask_path" and "heightmap_path"?
 ```
 
 ### Manual Editing Benefits
-- **Paint no-go zones** onto the heightmap in Photoshop (invisible walls)
-- **Smooth jagged collision** areas without changing the model
-- **Artificially raise terrain** where the ROV shouldn't reach
-- **Add visual-only boundaries** to the silhouette mask (custom fade shapes)
+- Paint no-go zones onto the heightmap in Photoshop (invisible walls)
+- Smooth jagged collision areas without changing the model
+- Artificially raise terrain where the ROV shouldn't reach
+- Add visual-only boundaries to the silhouette mask
 
-## File Structure
+## File Structure (proposal)
 ```
 assets/models/whale-fall/
   ├── scene.gltf
@@ -49,7 +56,7 @@ assets/models/whale-fall/
   └── heightmap.png     ← pre-baked terrain heightmap (optional)
 ```
 
-## dives.json Schema Addition
+## `dives.json` Schema Addition (proposal)
 ```json
 {
   "whale-fall": {
@@ -60,7 +67,7 @@ assets/models/whale-fall/
 ```
 
 ## Implementation Notes
-- Silhouette mask: standard RGBA PNG, only red channel used
-- Heightmap: grayscale PNG, 0=lowest point (bbox.min.y), 255=highest (bbox.max.y)
-- Both must store their bounds metadata (minX, maxX, minZ, maxZ) — embed in dives.json or as PNG metadata
-- Fallback to runtime generation ensures new models work immediately without assets
+- Silhouette mask: RGBA PNG, red channel used.
+- Heightmap: grayscale PNG, 0=lowest point, 255=highest.
+- Bounds metadata is still required (`minX`, `maxX`, `minZ`, `maxZ`) via JSON or metadata sidecar.
+- Keep runtime fallback so new models work immediately.
