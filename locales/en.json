@@ -53,12 +53,12 @@
         "whale_fall": {
             "vertebra": {
                 "title": "The Whale Vertebra",
-                "description": "When a whale dies and sinks, its skeleton becomes a nutrient source that sustains deep-sea life for decades. This vertebra was found at 3,895 m depth, in water at 2.4 °C, during a late stage of ecological succession. The bone is slowly mineralizing back into the seafloor, and its hard surface provides an anchor point for corals and other sessile organisms in an otherwise soft-sediment environment.",
+                "description": "When a whale dies and sinks, its skeleton becomes a nutrient source that sustains deep-sea life for decades. This vertebra was found at 3,895 m depth, during a late stage of ecological succession. The bone is slowly mineralizing back into the seafloor, and its hard surface provides an anchor point for corals and other sessile organisms in an environment dominated by soft sediments.",
                 "caption": "Clip: Moment of extraction - R/V Falkor (too)"
             },
             "isopods": {
                 "title": "The Isopod Train",
-                "description": "These tiny crustaceans, each under 2 cm, were spotted lined up along a branch of bathyal coral attached to the whale bone during Dive S0883. They are part of a specialized benthic community adapted to the high-pressure, low-energy conditions of the deep South Atlantic.",
+                "description": "These tiny crustaceans, each under 2 cm, were observed lined up along a branch of coral attached to the whale bone. They are part of a specialized benthic community adapted to the high-pressure, low-energy conditions of the deep South Atlantic.",
                 "caption": "In-situ macrophotography"
             },
             "subastian": {
@@ -67,14 +67,14 @@
             },
             "lab": {
                 "title": "From Seafloor to Lab",
-                "description": "Once a sample surfaces, it is moved to the Cold Room immediately to preserve its biological and chemical signatures. A multidisciplinary team handles the recovery and analysis; the Benthic Ecology and Taxonomy teams then work to identify species and study deep-sea biodiversity, keeping everything in cold storage at +2 °C.",
+                "description": "Once a sample reaches the surface, it is immediately moved to the Cold Room. A multidisciplinary team handles recovery and analysis; the Benthic Ecology and Taxonomy teams then work to identify species and study deep-sea biodiversity, keeping everything in cold storage at +2 °C.",
                 "thumb1": "José Isola and Daniel Lauretta handling the vertebra after recovery.",
                 "thumb2": "Detail of the whale vertebra.",
                 "thumb3": "Detail of the bone structure in the laboratory."
             },
             "mission": {
                 "title": "Expedition FKt251206",
-                "description": "Led by Chief Scientist María Emilia Bravo, this expedition studied how deep-sea communities help regulate climate by consuming methane from the seafloor before it reaches the atmosphere. The research links the abyssal plain of the SW Atlantic to global climate processes and highlights the importance of mapping these ecosystems."
+                "description": "Led by María Emilia Bravo, the FKt251206 campaign aimed to describe and classify the broad diversity of deep-sea benthic landscapes and ecosystems in the Argentine Sea. This included identifying priority areas for future research and taking environmental management actions."
             }
         }
     }
