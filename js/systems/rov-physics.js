@@ -9,12 +9,15 @@ ROV.physics = {
      * @param {number} heave - Movimiento vertical arriba/abajo (-1 a 1)
      * @param {boolean} isTurbo - Si se aplica multiplicador extra (ej. stick analógico)
      */
-    applyMove: function (surge, sway, heave, isTurbo = false) {
+    applyMove: function (surge, sway, heave, isTurbo = false, timeDelta = 16.6) {
         const refs = ROV.refs;
         const conf = ROV.config;
         const state = ROV.state;
 
         if (!refs.rig || !refs.cam) return;
+
+        // Normalizamos el timeDelta a un factor (asumiendo 60fps = ~16.6ms)
+        const timeScale = timeDelta / 16.6;
 
         // Datos actuales
         const rot = refs.cam.getAttribute('rotation'); // Rotación cámara
@@ -23,10 +26,10 @@ ROV.physics = {
         const fov = refs.cam.getAttribute('camera').fov;
 
         // 1. Calcular Velocidad actual
-        // Fórmula: Base * (Zoom/80) * NivelVelocidad * (Turbo si aplica)
+        // Añadimos el timeScale para hacer el movimiento independiente de los FPS
         const speedMult = conf.speedLevels[state.currentLevelIndex];
         const turboMult = isTurbo ? 1.5 : 1.0;
-        const currentSpeed = conf.baseMoveSpeed * (fov / 80) * speedMult * turboMult;
+        const currentSpeed = conf.baseMoveSpeed * (fov / 80) * speedMult * turboMult * timeScale;
 
         // 2. Calcular Angulo Total (Rig + Cámara)
         const totalAngleY = (rigRot.y + rot.y) * (Math.PI / 180);

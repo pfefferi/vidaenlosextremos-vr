@@ -43,7 +43,7 @@ window.addEventListener('keyup', (e) => {
     keyState[e.code] = false;
 });
 
-ROV.updateKeyboard = function () {
+ROV.updateKeyboard = function (timeDelta) {
     // 1. Bloqueo si el usuario escribe en un input
     if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
 
@@ -68,14 +68,16 @@ ROV.updateKeyboard = function () {
 
     // 5. ZOOM (NUEVO: E / Q)
     let fov = ROV.refs.cam.getAttribute('camera').fov;
-    if (keyState['KeyE']) fov = Math.max(5, fov - 1); // Zoom In
-    if (keyState['KeyQ']) fov = Math.min(140, fov + 1); // Zoom Out
+    const timeScale = timeDelta ? (timeDelta / 16.6) : 1;
+    
+    if (keyState['KeyE']) fov = Math.max(5, fov - (1 * timeScale)); // Zoom In
+    if (keyState['KeyQ']) fov = Math.min(140, fov + (1 * timeScale)); // Zoom Out
     if (fov !== ROV.refs.cam.getAttribute('camera').fov) {
         ROV.refs.cam.setAttribute('camera', 'fov', fov);
     }
 
     if (surge !== 0 || sway !== 0 || heave !== 0) {
-        ROV.physics.applyMove(surge, sway, heave, false);
+        ROV.physics.applyMove(surge, sway, heave, false, timeDelta);
     }
 
     // 6. ROTACIÓN DE CÁMARA

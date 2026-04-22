@@ -1,7 +1,7 @@
 // rov-controls.js
 
 // --- 1. GAMEPAD INPUT ---
-function updateGamepad() {
+function updateGamepad(timeDelta) {
     const gamepads = navigator.getGamepads();
     let anyActive = false;
 
@@ -15,11 +15,11 @@ function updateGamepad() {
         }
 
         anyActive = true;
-        processGamepadInput(gp);
+        processGamepadInput(gp, timeDelta);
     }
 }
 
-function processGamepadInput(gp) {
+function processGamepadInput(gp, timeDelta) {
     // BLOQUEO POR MODAL (Prioridad Máxima)
     if (ROV.state.isLogbookOpen) {
         // Permitir cerrar con botón B (índice 1) o Start (9)
@@ -36,6 +36,7 @@ function processGamepadInput(gp) {
     // --- LÓGICA NORMAL DE JUEGO ---
 
     const { state, config } = ROV;
+    const timeScale = timeDelta ? (timeDelta / 16.6) : 1;
 
     // A. MOVIMIENTO (Sway/Surge con LS)
     const lx = Math.abs(gp.axes[0]) > 0.1 ? gp.axes[0] : 0;
@@ -47,19 +48,19 @@ function processGamepadInput(gp) {
     if (gp.buttons[5].pressed) heave = 1;  // R1 (Ascend)
 
     if (lx !== 0 || ly !== 0 || heave !== 0) {
-        ROV.physics.applyMove(ly, lx, heave, true);
+        ROV.physics.applyMove(ly, lx, heave, true, timeDelta);
     }
 
     // B. ROTACIÓN (RS - Invertido Y por petición de usuario)
-    handleGamepadRotation(gp);
+    handleGamepadRotation(gp, timeScale);
 
     // C. ACCIONES DISCRETAS
     const db = state.debounce;
 
     // ZOOM (Ahora en L2/R2 - Indices 6/7 para mayor control analógico/suave)
     let fov = ROV.refs.cam.getAttribute('camera').fov;
-    if (gp.buttons[7].pressed) fov = Math.max(5, fov - 1); // R2 (Zoom In)
-    if (gp.buttons[6].pressed) fov = Math.min(140, fov + 1); // L2 (Zoom Out)
+    if (gp.buttons[7].pressed) fov = Math.max(5, fov - (1 * timeScale)); // R2 (Zoom In)
+    if (gp.buttons[6].pressed) fov = Math.min(140, fov + (1 * timeScale)); // L2 (Zoom Out)
     if (fov !== ROV.refs.cam.getAttribute('camera').fov) {
         ROV.refs.cam.setAttribute('camera', 'fov', fov);
     }
@@ -90,7 +91,7 @@ function processGamepadInput(gp) {
     // pero mantenemos debounce aquí si fuera necesario para otras lógicas.
 }
 
-function handleGamepadRotation(gp) {
+function handleGamepadRotation(gp, timeScale = 1) {
     const { rig, pivot } = ROV.refs;
     let rawRx = gp.axes[2];
     let rawRy = -gp.axes[3]; // <--- INVERTIDO POR PETICIÓN DE USUARIO
@@ -110,7 +111,7 @@ function handleGamepadRotation(gp) {
     }
 
     if (finalRx !== 0 || finalRy !== 0) {
-        ROV.actions.look(-finalRx * 2.0, finalRy * 1.5);
+        ROV.actions.look(-finalRx * 2.0 * timeScale, finalRy * 1.5 * timeScale);
     }
 }
 
