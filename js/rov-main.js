@@ -67,7 +67,7 @@ AFRAME.registerComponent('rov-engine', {
 
         // 3. Touch Virtual
         if (activeAction) {
-            let fov = cam.getAttribute('camera').fov;
+            let fov = cam.components.camera.data.fov;
             let surge = 0, sway = 0, heave = 0;
 
             // Mapeo
@@ -88,7 +88,7 @@ AFRAME.registerComponent('rov-engine', {
             if (activeAction === 'zoom-in') fov = Math.max(5, fov - (zoomSpd * (fov / 80)));
             if (activeAction === 'zoom-out') fov = Math.min(150, fov + (zoomSpd * (fov / 80)));
 
-            if (fov !== cam.getAttribute('camera').fov) {
+            if (fov !== cam.components.camera.data.fov) {
                 cam.setAttribute('camera', 'fov', fov);
             }
         }
@@ -103,12 +103,15 @@ AFRAME.registerComponent('rov-engine', {
         }
 
         // Lecturas lentas
-        const rot = cam.getAttribute('rotation');
-        const rigRot = rig.getAttribute('rotation') || { y: 0 };
-        const pos = rig.getAttribute('position');
+        const rot = cam.object3D.rotation;
+        const rigRot = rig.object3D.rotation;
+        const pos = rig.object3D.position;
 
         if (headText) {
-            const h = Math.floor((360 - ((rot.y + rigRot.y) % 360)) % 360);
+            // THREE.Euler rotations are in radians, convert to degrees for HUD
+            const rotYDeg = THREE.MathUtils.radToDeg(rot.y);
+            const rigRotYDeg = THREE.MathUtils.radToDeg(rigRot.y);
+            const h = Math.floor((360 - ((rotYDeg + rigRotYDeg) % 360)) % 360);
             headText.innerText = h.toString().padStart(3, '0');
         }
 

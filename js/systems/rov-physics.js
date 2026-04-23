@@ -20,10 +20,10 @@ ROV.physics = {
         const timeScale = timeDelta / 16.6;
 
         // Datos actuales
-        const rot = refs.cam.getAttribute('rotation'); // Rotación cámara
-        const rigRot = refs.rig.getAttribute('rotation') || { x: 0, y: 0, z: 0 };
-        const currentPos = refs.rig.getAttribute('position');
-        const fov = refs.cam.getAttribute('camera').fov;
+        const rot = refs.cam.object3D.rotation; // Rotación cámara
+        const rigRot = refs.rig.object3D.rotation;
+        const currentPos = refs.rig.object3D.position;
+        const fov = refs.cam.components.camera.data.fov;
 
         // 1. Calcular Velocidad actual
         // Añadimos el timeScale para hacer el movimiento independiente de los FPS
@@ -32,7 +32,7 @@ ROV.physics = {
         const currentSpeed = conf.baseMoveSpeed * (fov / 80) * speedMult * turboMult * timeScale;
 
         // 2. Calcular Angulo Total (Rig + Cámara)
-        const totalAngleY = (rigRot.y + rot.y) * (Math.PI / 180);
+        const totalAngleY = rigRot.y + rot.y;
 
         // 3. Calcular desplazamientos
         // Surge (Adelante/Atrás)
@@ -86,8 +86,8 @@ ROV.physics = {
             currentPos.y = floorLimit;
         }
 
-        // 4. Aplicar al DOM
-        refs.rig.setAttribute('position', currentPos);
+        // 4. Update the actual Three.js object instead of calling setAttribute
+        // Note: we don't need to reassign currentPos because we modified the object3D.position directly.
     },
 
     // Helper para UI de velocidad
