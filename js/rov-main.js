@@ -135,5 +135,4 @@ window.addEventListener("gamepadconnected", (e) => {
     }
 });
 
-// Arrancar
-initSystem();
+
