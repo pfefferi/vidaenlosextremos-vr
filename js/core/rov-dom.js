@@ -28,8 +28,7 @@ ROV.refs = {
     resetBtn: document.getElementById('reset-pos'),
 
     // Luces
-    rovOmni: document.getElementById('rov-omni'),
-    rovPoint: document.getElementById('rov-point'),
+    // (rov-omni, rov-point exist in HTML but are static — no runtime manipulation needed)
 
     // Grupos
     hidableElements: document.querySelectorAll('.hidable')

@@ -12,7 +12,14 @@ ROV.localization = {
 
     async init() {
         // 1. Get saved language or default to browser language or 'es'
-        const savedLang = localStorage.getItem('rov-language');
+        let savedLang;
+        try {
+            savedLang = localStorage.getItem('rov-language');
+        } catch (e) {
+            // localStorage unavailable (private browsing, quota exceeded)
+            savedLang = null;
+        }
+
         const browserLang = navigator.language.split('-')[0];
 
         if (savedLang && this.supportedLanguages.includes(savedLang)) {
@@ -51,7 +58,11 @@ ROV.localization = {
         if (this.currentLang === lang) return;
 
         this.currentLang = lang;
-        localStorage.setItem('rov-language', lang);
+        try {
+            localStorage.setItem('rov-language', lang);
+        } catch (e) {
+            // localStorage unavailable — language preference won't persist
+        }
 
         await this.loadLocales();
         this.updateDOM();

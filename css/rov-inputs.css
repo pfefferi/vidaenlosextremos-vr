@@ -115,10 +115,6 @@
 }
 
 /* Interaction States */
-#btn-scan.scan-active {
-    background-color: #fff !important;
-    color: #000 !important;
-}
 
 @media (orientation: landscape) {
     #controls-container {

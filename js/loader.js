@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => {
             console.error("[Loader] Critical Error:", err);
-            if (debugConsole) debugConsole.innerHTML = `ERROR: ${err.message}`;
+            if (debugConsole) debugConsole.textContent = `ERROR: ${err.message}`;
             alert("Error cargando la misión. Revisa la consola.");
         });
 });

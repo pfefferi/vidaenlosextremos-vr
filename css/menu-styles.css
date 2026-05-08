@@ -184,11 +184,6 @@ h1 {
     transition: all 0.2s ease;
 }
 
-.launch-btn.upcoming {
-    border-color: var(--border-white);
-    opacity: 0.6;
-}
-
 .mission-card:not(.disabled):hover .launch-btn,
 .mission-card:not(.disabled).is-touching .launch-btn {
     background: #fff;
