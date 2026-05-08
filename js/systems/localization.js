@@ -11,7 +11,10 @@ ROV.localization = {
     supportedLanguages: ['en', 'es'],
 
     async init() {
-        // 1. Get saved language or default to browser language or 'es'
+        // Always default to Spanish (ignoring browser language preference)
+        this.currentLang = 'es';
+
+        // 1. Get saved language or default to Spanish
         let savedLang;
         try {
             savedLang = localStorage.getItem('rov-language');
@@ -20,14 +23,8 @@ ROV.localization = {
             savedLang = null;
         }
 
-        const browserLang = navigator.language.split('-')[0];
-
         if (savedLang && this.supportedLanguages.includes(savedLang)) {
             this.currentLang = savedLang;
-        } else if (this.supportedLanguages.includes(browserLang)) {
-            this.currentLang = browserLang;
-        } else {
-            this.currentLang = 'es';
         }
 
         // 2. Load locales
