@@ -25,9 +25,7 @@ ROV.refs = {
 
     // Botones UI
     hudToggle: document.getElementById('hud-toggle'),
-    fsToggle: document.getElementById('fullscreen-toggle'),
     resetBtn: document.getElementById('reset-pos'),
-    gyroToggle: document.getElementById('gyro-toggle'),
 
     // Luces
     rovOmni: document.getElementById('rov-omni'),
@@ -36,21 +34,3 @@ ROV.refs = {
     // Grupos
     hidableElements: document.querySelectorAll('.hidable')
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

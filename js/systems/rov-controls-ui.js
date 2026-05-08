@@ -191,9 +191,6 @@ window.addEventListener('keydown', (e) => {
     if (e.code === 'Escape') {
         // Handled in rov-input-keyboard.js
     }
-    if (e.code === 'KeyM') {
-        ROV.controlsUI.toggleMenu();
-    }
     if (e.code === 'Tab' && ROV.state.isControlsOpen) {
         e.preventDefault();
         const next = ROV.controlsUI.currentTab === 'gamepad' ? 'keyboard' : 'gamepad';

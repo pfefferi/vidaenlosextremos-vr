@@ -34,9 +34,9 @@ ROV.localization = {
 
     async loadLocales() {
         try {
-            // Get base path depending on location (root or habitats/)
-            const isHabitat = window.location.pathname.includes('/habitats/');
-            const basePath = isHabitat ? '../locales/' : 'locales/';
+            // Get base path depending on location (root, or subdirectory deployments)
+            const isNested = window.location.pathname.split('/').filter(Boolean).length > 1;
+            const basePath = isNested ? '../locales/' : 'locales/';
 
             const response = await fetch(`${basePath}${this.currentLang}.json`);
             if (!response.ok) throw new Error(`Could not load ${this.currentLang} locale`);

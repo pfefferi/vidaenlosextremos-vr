@@ -2,6 +2,11 @@
 // Se encarga exclusivamente de cargar modelos, aplicar texturas manuales y ajustar escalas.
 
 ROV.modelHandler = {
+    // Visual positioning offsets — move model below camera and forward
+    MODEL_Y_OFFSET: -2,
+    MODEL_Z_OFFSET: -10,
+    // Target size in meters for auto-scaling
+    TARGET_SIZE: 20,
     /**
      * Se ejecuta cuando el modelo .glb/.gltf termina de cargar.
      * Busca texturas 'materialX_diffuse' y las aplica, luego centra y escala.
@@ -58,7 +63,7 @@ ROV.modelHandler = {
         bbox.getSize(size);
 
         const maxDim = Math.max(size.x, size.y, size.z);
-        const targetSize = 20; // Tamaño objetivo en metros aprox
+        const targetSize = this.TARGET_SIZE;
         const scaleFactor = targetSize / maxDim;
 
         // Aplicar escala
@@ -68,12 +73,12 @@ ROV.modelHandler = {
         const center = new THREE.Vector3();
         bbox.getCenter(center);
 
-        // Ajuste de posición (El -2 en Y y -10 en Z son offsets estéticos para que quede frente a cámara)
-        const finalPosY = (-center.y * scaleFactor) - 2;
+        // Ajuste de posición (offsets estéticos para que quede frente a cámara)
+        const finalPosY = (-center.y * scaleFactor) + this.MODEL_Y_OFFSET;
         mapEntity.setAttribute('position', {
             x: -center.x * scaleFactor,
             y: finalPosY,
-            z: (-center.z * scaleFactor) - 10
+            z: (-center.z * scaleFactor) + this.MODEL_Z_OFFSET
         });
 
         // 3. Capas de Continuidad Visual (Advanced Shader Injection)
@@ -106,13 +111,8 @@ ROV.modelHandler = {
 
 
 
-        // Fog disabled during edge-fade tuning
-        // const scene = document.querySelector('a-scene');
-        // if (scene) {
-        //     const fogFar = Math.max(30, targetSize * 1.5);
-        //     const fogNear = fogFar * 0.1;
-        //     scene.setAttribute('fog', { far: fogFar, near: fogNear });
-        // }
+        // Fog: static exponential fog set in habitat.html <a-scene> tag.
+        // No runtime override needed — low density (0.05) yields consistent deep-sea ambiance.
 
         // 4. Ajuste dinámico de velocidad base según el tamaño del modelo
         // Modelos grandes necesitan moverse más rápido

@@ -235,13 +235,15 @@ ROV.waypoints = {
     },
 
     missionComplete: function () {
-        if (this.missionHUD) {
+        if (this.missionHUD && !this._missionCompleteShown) {
+            this._missionCompleteShown = true;
             this.missionHUD.style.borderColor = this.config.colorVisited;
             this.missionHUD.style.boxShadow = `0 0 20px ${this.config.colorVisited}44`;
             const msg = ROV.localization.t("ui.mission_complete");
-            this.missionHUD.innerHTML += `<br><span style="color:${this.config.colorVisited}; display:block; margin-top:5px;">${msg}</span>`;
-
-            // Auto-hide complete message if mode is switched off? No, leave it.
+            const completeMsg = document.createElement('span');
+            completeMsg.style.cssText = `color:${this.config.colorVisited}; display:block; margin-top:5px;`;
+            completeMsg.textContent = msg;
+            this.missionHUD.appendChild(completeMsg);
             this.missionHUD.style.display = ROV.state.gamifiedMode ? 'block' : 'none';
         }
         console.log("MISSION COMPLETE!");

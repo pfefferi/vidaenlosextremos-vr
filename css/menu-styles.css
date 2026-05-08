@@ -96,7 +96,15 @@ h1 {
 
 .mission-card.disabled {
     cursor: not-allowed;
-    opacity: 0.8;
+    opacity: 0.6;
+    pointer-events: none;
+    filter: grayscale(0.8);
+}
+
+.mission-card.disabled .launch-btn {
+    background: #444;
+    border-color: #666;
+    color: #aaa;
 }
 
 /* Images Container */

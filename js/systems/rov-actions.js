@@ -106,39 +106,38 @@ ROV.actions = {
 
     // --- ACCIÓN CONTEXTUAL: SCAN ---
     scanWaypoint: function () {
+        if (!ROV.waypoints || !ROV.modal) return;
+
         const wpId = ROV.state.activeWaypoint;
 
         if (wpId) {
             // 1. Recuperar DATOS COMPLETOS desde la memoria de Waypoints
             let fullData = null;
-            if (ROV.waypoints && ROV.waypoints.getDataById) {
+            if (ROV.waypoints.getDataById) {
                 fullData = ROV.waypoints.getDataById(wpId);
             }
 
             // 2. Abrir Modal con datos (o fallback si falla)
-            if (ROV.modal) {
-                ROV.modal.open(fullData || { title: "UNKNOWN DATA", content: {} });
-            }
+            ROV.modal.open(fullData || { title: "UNKNOWN DATA", content: {} });
 
             // 3. Gamification: Marcar como visitado
-            if (ROV.waypoints && ROV.waypoints.markAsVisited) {
+            if (ROV.waypoints.markAsVisited) {
                 ROV.waypoints.markAsVisited(wpId);
             }
 
             // 4. Feedback Visual: Parpadeo del botón
             const btn = document.getElementById('btn-scan');
             if (btn) {
-                // Flash blanco momentáneo
                 btn.style.backgroundColor = "#FFFFFF";
                 btn.style.color = "#000";
 
                 setTimeout(() => {
-                    btn.style.backgroundColor = ""; // Volver al CSS (rgba)
+                    btn.style.backgroundColor = "";
                     btn.style.color = "#FFFFFF";
                 }, 150);
             }
 
-            // 4. Explore Button Success Animation
+            // 5. Explore Button Success Animation
             const exploreLabel = document.querySelector('.grid-header-explore div[data-i18n="ui.explore"]');
             if (exploreLabel) {
                 exploreLabel.classList.add('explore-success');

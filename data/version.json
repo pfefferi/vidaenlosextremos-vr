@@ -1,5 +1,5 @@
-﻿{
-    "message":  "feat(core): Reinstate spotlight abstraction, scale tweaks, and strict floor boundaries",
-    "timestamp":  "2026-03-03 18:10:28",
-    "hash":  "6711e73"
+{
+    "message": "docs: sync README and technical docs with current architecture",
+    "timestamp": "2026-05-03 14:22:00",
+    "hash": "5dd8752"
 }
