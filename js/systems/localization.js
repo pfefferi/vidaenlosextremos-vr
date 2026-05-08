@@ -11,16 +11,20 @@ ROV.localization = {
     supportedLanguages: ['en', 'es'],
 
     async init() {
-        // 1. Get saved language or default to browser language or 'es'
-        const savedLang = localStorage.getItem('rov-language');
-        const browserLang = navigator.language.split('-')[0];
+        // Always default to Spanish (ignoring browser language preference)
+        this.currentLang = 'es';
+
+        // 1. Get saved language or default to Spanish
+        let savedLang;
+        try {
+            savedLang = localStorage.getItem('rov-language');
+        } catch (e) {
+            // localStorage unavailable (private browsing, quota exceeded)
+            savedLang = null;
+        }
 
         if (savedLang && this.supportedLanguages.includes(savedLang)) {
             this.currentLang = savedLang;
-        } else if (this.supportedLanguages.includes(browserLang)) {
-            this.currentLang = browserLang;
-        } else {
-            this.currentLang = 'es';
         }
 
         // 2. Load locales
