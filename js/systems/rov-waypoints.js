@@ -49,7 +49,8 @@ ROV.waypoints = {
             .then(res => res.json())
             .then(data => {
                 const points = data[missionKey];
-                if (points && points.length > 0) this.spawn(points);
+                // TEMPORARILY DISABLED: All waypoints hidden for testing
+                // if (points && points.length > 0) this.spawn(points);
             })
             .catch(err => console.error("[Waypoints] Error:", err));
     },
