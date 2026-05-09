@@ -3,9 +3,9 @@
 ## Estado de sincronización
 
 - **Versión del documento:** 2.0
-- **Sincronizado contra commit:** `009ccad`
-- **Fecha commit base:** `2026-04-19 17:03:16 -0300`
-- **Última actualización docs:** `2026-04-19`
+- **Sincronizado contra commit:** `286cbc8`
+- **Fecha commit base:** `2026-05-08 13:45:30 -0300`
+- **Última actualización docs:** `2026-05-08`
 
 > Esta documentación describe el estado real del código en el commit indicado arriba.
 
@@ -130,11 +130,18 @@ Claves deben mantenerse en paridad entre ambos idiomas.
 Antes de cerrar cambios de documentación:
 
 ```bash
-git rev-parse --short HEAD
-git show -s --format=%ci HEAD
+bash scripts/update_version.sh
 ```
 
 Luego:
 1. Reemplazar hash/fecha en este archivo y en `README.md`.
 2. Confirmar que los controles listados coincidan con `js/input/*` y `js/systems/rov-controls-ui.js`.
 3. Confirmar rutas/estructura contra árbol real del repo.
+
+---
+
+## 7) Documentos relacionados
+
+- [README.md](../README.md) — Visión general del proyecto
+- [AUDIT-2026-05-08.md](./AUDIT-2026-05-08.md) — Auditoría completa del código (Mayo 2026)
+- [future-features/pre-baked-navigation-assets.md](./future-features/pre-baked-navigation-assets.md) — Optimización futura

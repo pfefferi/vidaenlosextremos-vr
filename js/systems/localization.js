@@ -11,16 +11,20 @@ ROV.localization = {
     supportedLanguages: ['en', 'es'],
 
     async init() {
-        // 1. Get saved language or default to browser language or 'es'
-        const savedLang = localStorage.getItem('rov-language');
-        const browserLang = navigator.language.split('-')[0];
+        // Always default to Spanish (ignoring browser language preference)
+        this.currentLang = 'es';
+
+        // 1. Get saved language or default to Spanish
+        let savedLang;
+        try {
+            savedLang = localStorage.getItem('rov-language');
+        } catch (e) {
+            // localStorage unavailable (private browsing, quota exceeded)
+            savedLang = null;
+        }
 
         if (savedLang && this.supportedLanguages.includes(savedLang)) {
             this.currentLang = savedLang;
-        } else if (this.supportedLanguages.includes(browserLang)) {
-            this.currentLang = browserLang;
-        } else {
-            this.currentLang = 'es';
         }
 
         // 2. Load locales
@@ -34,9 +38,9 @@ ROV.localization = {
 
     async loadLocales() {
         try {
-            // Get base path depending on location (root or habitats/)
-            const isHabitat = window.location.pathname.includes('/habitats/');
-            const basePath = isHabitat ? '../locales/' : 'locales/';
+            // Get base path depending on location (root, or subdirectory deployments)
+            const isNested = window.location.pathname.split('/').filter(Boolean).length > 1;
+            const basePath = isNested ? '../locales/' : 'locales/';
 
             const response = await fetch(`${basePath}${this.currentLang}.json`);
             if (!response.ok) throw new Error(`Could not load ${this.currentLang} locale`);
@@ -51,7 +55,11 @@ ROV.localization = {
         if (this.currentLang === lang) return;
 
         this.currentLang = lang;
-        localStorage.setItem('rov-language', lang);
+        try {
+            localStorage.setItem('rov-language', lang);
+        } catch (e) {
+            // localStorage unavailable — language preference won't persist
+        }
 
         await this.loadLocales();
         this.updateDOM();

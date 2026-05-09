@@ -42,19 +42,6 @@
     transform: scale(0.95);
 }
 
-/* Icons within buttons */
-.btn svg,
-.icon-btn svg,
-.menu-item svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
 /* Labels */
 .label {
     font-size: 10px;
@@ -68,17 +55,6 @@
 }
 
 /* Glassmorphism Classes */
-.glass-panel {
-    background: var(--glass-bg);
-    border: 1px solid var(--border-white);
-    backdrop-filter: blur(var(--blur-strength));
-    -webkit-backdrop-filter: blur(var(--blur-strength));
-}
-
-.dark-overlay {
-    background: var(--glass-bg-dark);
-    backdrop-filter: blur(var(--overlay-blur));
-}
 
 /* MODULAR LAYOUT COMPONENTS */
 
