@@ -56,14 +56,17 @@
                 "description": "Cuando una ballena muere y se hunde, su esqueleto se convierte en una fuente de nutrientes que sustenta la vida de las profundidades durante décadas. Esta vértebra fue hallada a 3.895 m de profundidad, durante una etapa tardía de sucesión ecológica. El hueso se está mineralizando lentamente de vuelta al lecho marino, y su superficie dura proporciona un punto de anclaje para corales y otros organismos sésiles en un entorno dominado por sedimentos blandos.",
                 "caption": "Clip: Momento de la extracción - R/V Falkor (too)"
             },
-            "isopods": {
-                "title": "El Trencito de Isópodos",
-                "description": "Estos pequeños crustáceos, de menos de 2 cm, fueron observados alineados a lo largo de una rama de coral unida al hueso de ballena.",
-                "caption": "Macrofotografía in situ"
+            "fauna": {
+                "title": "Fauna del Whale Fall",
+                "description": "Un whale fall se convierte en un oasis en el fondo marino. A medida que el esqueleto se recicla lentamente, es colonizado por una sucesión de organismos que encuentran refugio y alimento en los huesos expuestos: los crinoideos (estrellas plumosas) se anclan a las vértebras, los pequeños isópodos forman trenes a lo largo del hueso, y las esponjas pedunculadas filtran el agua circundante.",
+                "caption": "El trencito de isópodos — macrofotografía in situ",
+                "caption2": "Un crinoideo (estrella plumosa) anclado a la vértebra de ballena",
+                "caption3": "Una esponja pedunculada colonizada por pequeños artrópodos"
             },
             "subastian": {
                 "title": "ROV SuBastian",
-                "description": "SuBastian es el ROV utilizado para explorar y muestrear estos sitios. El modelo 3D que estás navegando es un gemelo digital construido mediante fotogrametría — miles de imágenes de alta resolución procesadas bajo la dirección del piloto Ben Erwin. Los brazos robóticos de SuBastian permiten la recolección precisa de muestras biológicas frágiles con mínima perturbación del ecosistema circundante."
+                "description": "SuBastian es el ROV utilizado para explorar y muestrear estos sitios. El modelo 3D que estás navegando es un gemelo digital construido mediante fotogrametría — miles de imágenes de alta resolución procesadas bajo la dirección del piloto Ben Erwin. Los brazos robóticos de SuBastian permiten la recolección precisa de muestras biológicas frágiles con mínima perturbación del ecosistema circundante.",
+                "caption": "Los brazos manipuladores de SuBastian en acción en el fondo marino"
             },
             "lab": {
                 "title": "Del Lecho Marino al Laboratorio",

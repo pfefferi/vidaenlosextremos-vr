@@ -41,19 +41,27 @@
       }
     },
     {
-      "id": "wp-isopods",
+      "id": "wp-fauna",
       "position": {
         "x": 6.26,
         "y": -1.84,
         "z": -10.44
       },
-      "title": "waypoints.whale_fall.isopods.title",
+      "title": "waypoints.whale_fall.fauna.title",
       "content": {
-        "description": "waypoints.whale_fall.isopods.description",
+        "description": "waypoints.whale_fall.fauna.description",
         "gallery": [
           {
             "src": "./assets/photos/isopods_macro.jpg",
-            "caption": "waypoints.whale_fall.isopods.caption"
+            "caption": "waypoints.whale_fall.fauna.caption"
+          },
+          {
+            "src": "./assets/photos/whalefall_crinoid_vertebra.jpg",
+            "caption": "waypoints.whale_fall.fauna.caption2"
+          },
+          {
+            "src": "./assets/photos/whalefall_sponge_arthropods.jpg",
+            "caption": "waypoints.whale_fall.fauna.caption3"
           }
         ]
       }
@@ -67,7 +75,13 @@
       },
       "title": "waypoints.whale_fall.subastian.title",
       "content": {
-        "description": "waypoints.whale_fall.subastian.description"
+        "description": "waypoints.whale_fall.subastian.description",
+        "gallery": [
+          {
+            "src": "./assets/photos/rov_subastian_arms.jpg",
+            "caption": "waypoints.whale_fall.subastian.caption"
+          }
+        ]
       }
     },
     {

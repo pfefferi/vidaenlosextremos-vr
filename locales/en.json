@@ -56,14 +56,17 @@
                 "description": "When a whale dies and sinks, its skeleton becomes a nutrient source that sustains deep-sea life for decades. This vertebra was found at 3,895 m depth, during a late stage of ecological succession. The bone is slowly mineralizing back into the seafloor, and its hard surface provides an anchor point for corals and other sessile organisms in an environment dominated by soft sediments.",
                 "caption": "Clip: Moment of extraction - R/V Falkor (too)"
             },
-            "isopods": {
-                "title": "The Isopod Train",
-                "description": "These tiny crustaceans, each under 2 cm, were observed lined up along a branch of coral attached to the whale bone.",
-                "caption": "In-situ macrophotography"
+            "fauna": {
+                "title": "Whale-Fall Fauna",
+                "description": "A whale fall becomes an oasis on the seafloor. As the skeleton is slowly recycled, it is colonized by a succession of organisms that find shelter and food on the exposed bones: feather stars (crinoids) anchor to the vertebrae, small isopods gather in 'trains' along the bone, and stalked sponges filter the surrounding water.",
+                "caption": "The isopod train — in-situ macrophotography",
+                "caption2": "A crinoid (feather star) anchored to the whale vertebra",
+                "caption3": "A stalked sponge colonized by small arthropods"
             },
             "subastian": {
                 "title": "ROV SuBastian",
-                "description": "SuBastian is the ROV used to explore and sample these sites. The 3D model you are navigating is a digital twin built from photogrammetry — thousands of high-resolution images processed under the lead of pilot Ben Erwin. SuBastian's robotic arms enable precise collection of fragile biological samples with minimal disturbance to the surrounding ecosystem."
+                "description": "SuBastian is the ROV used to explore and sample these sites. The 3D model you are navigating is a digital twin built from photogrammetry — thousands of high-resolution images processed under the lead of pilot Ben Erwin. SuBastian's robotic arms enable precise collection of fragile biological samples with minimal disturbance to the surrounding ecosystem.",
+                "caption": "SuBastian's manipulator arms at work on the seafloor"
             },
             "lab": {
                 "title": "From Seafloor to Lab",
