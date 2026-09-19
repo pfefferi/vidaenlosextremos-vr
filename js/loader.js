@@ -126,6 +126,9 @@ function checkVersion() {
                 "color: #888; font-style: italic;",
                 "color: #888; font-size: 10px;"
             );
+
+            const versionEl = document.getElementById('version-display');
+            if (versionEl) versionEl.textContent = `VER. ${ver.hash}`;
         })
         .catch(() => console.warn("[Loader] Version tracking not found"));
 }

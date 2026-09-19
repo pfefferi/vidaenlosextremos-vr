@@ -47,6 +47,9 @@ async function initSystem() {
         ROV.waypoints.init();
     }
 
+    // 6. Sincronizar HUD de velocidad con el nivel inicial
+    if (ROV.physics && ROV.physics.updateSpeedUI) ROV.physics.updateSpeedUI();
+
     // Iniciar el loop
     updateLoop();
 }
