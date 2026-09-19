@@ -6,8 +6,8 @@ Visualizador 3D interactivo para explorar hábitats marinos profundos con una in
 
 ## 📌 Estado de documentación
 
-- **Docs sincronizadas con Git:** `009ccad`  
-- **Fecha del commit base:** `2026-04-19 17:03:16 -0300`
+- **Docs sincronizadas con Git:** `aa37179`  
+- **Fecha del commit base:** `2026-09-19 12:19:22 -0300`
 - **Archivo de build interno:** `data/version.json` (puede quedar desfasado respecto a `HEAD`)
 
 > Al actualizar documentación, reemplazar este bloque con el nuevo hash de `HEAD`.

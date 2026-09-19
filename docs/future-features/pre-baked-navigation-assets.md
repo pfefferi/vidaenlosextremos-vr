@@ -1,8 +1,8 @@
 # Pre-Baked Navigation Assets
 
 ## Documentation Sync
-- Synced against commit: `009ccad`
-- Sync date: `2026-04-19`
+- Synced against commit: `aa37179`
+- Sync date: `2026-09-19`
 - Status: Future optimization (not implemented in production flow)
 
 ---
@@ -20,7 +20,7 @@ The runtime-generated heightmap and silhouette mask can be exported as static im
 ```
 Model loads → vertex traversal → generates:
   1. Silhouette mask (512x512 canvas → CanvasTexture) — used for edge fade
-  2. Heightmap (512x512 Float32Array) — used for terrain-following floor
+  2. Heightmap (128x128 Float32Array) — used for terrain-following floor
 ```
 
 Both use the same two-pass vertex projection in `rov-visual-blender.js`.

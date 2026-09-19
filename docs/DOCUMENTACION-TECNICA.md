@@ -3,9 +3,9 @@
 ## Estado de sincronización
 
 - **Versión del documento:** 2.0
-- **Sincronizado contra commit:** `009ccad`
-- **Fecha commit base:** `2026-04-19 17:03:16 -0300`
-- **Última actualización docs:** `2026-04-19`
+- **Sincronizado contra commit:** `aa37179`
+- **Fecha commit base:** `2026-09-19 12:19:22 -0300`
+- **Última actualización docs:** `2026-09-19`
 
 > Esta documentación describe el estado real del código en el commit indicado arriba.
 
@@ -19,8 +19,9 @@ El proyecto usa una arquitectura modular en JavaScript vanilla sobre A-Frame/Thr
 1. `index.html` (selección)
 2. `habitat.html` (runtime)
 3. Carga scripts en este orden:
+   - `js/systems/localization.js` (primero, tanto `ROV` como i18n deben estar listos)
    - `js/core/*`
-   - `js/systems/*`
+   - `js/systems/*` (resto)
    - `js/input/*`
    - `js/loader.js`
    - `js/rov-main.js`
@@ -72,7 +73,7 @@ Define cada misión:
 
 ### 3.2 `data/waypoints.json`
 Lista de waypoints por misión:
-- `id`, `position`, `title`, `icon`
+- `id`, `position`, `title`
 - `content` (descripción, video, galería, etc.)
 
 ### 3.3 Locales
