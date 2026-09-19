@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono:wght@500&display=swap"
         rel="stylesheet">
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script defer src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
@@ -152,6 +152,7 @@
 
     </div>
 
+    <template id="scene-template">
     <a-scene renderer="antialias: true; alpha: true; colorManagement: true;" vr-mode-ui="enabled: false"
         fog="type: exponential; color: #001529; density: 0.05">
 
@@ -185,6 +186,8 @@
 
         <a-light type="hemisphere" intensity="0.4" groundColor="#000"></a-light>
     </a-scene>
+    </template>
+
     <!-- SYSTEM MENU -->
     <div id="system-menu">
         <div class="menu-close-btn" onclick="ROV.controlsUI.toggleMenu(false)"><svg>
@@ -345,24 +348,25 @@
 
     <!-- SVG Icons are now loaded dynamically from assets/icons.html -->
 
-    <script src="js/systems/localization.js"></script>
-    <script src="js/core/rov-init.js"></script>
-    <script src="js/core/rov-settings.js"></script>
-    <script src="js/core/rov-state.js"></script>
-    <script src="js/core/rov-dom.js"></script>
+    <script defer src="js/scene-boot.js"></script>
+    <script defer src="js/systems/localization.js"></script>
+    <script defer src="js/core/rov-init.js"></script>
+    <script defer src="js/core/rov-settings.js"></script>
+    <script defer src="js/core/rov-state.js"></script>
+    <script defer src="js/core/rov-dom.js"></script>
 
-    <script src="js/systems/rov-physics.js"></script>
-    <script src="js/systems/rov-actions.js"></script>
-    <script src="js/systems/rov-visual-blender.js"></script>
-    <script src="js/systems/rov-model-handler.js"></script>
-    <script src="js/systems/rov-waypoints.js"></script>
-    <script src="js/systems/rov-modal.js"></script>
-    <script src="js/input/rov-input-keyboard.js"></script>
-    <script src="js/input/rov-controls.js"></script>
+    <script defer src="js/systems/rov-physics.js"></script>
+    <script defer src="js/systems/rov-actions.js"></script>
+    <script defer src="js/systems/rov-visual-blender.js"></script>
+    <script defer src="js/systems/rov-model-handler.js"></script>
+    <script defer src="js/systems/rov-waypoints.js"></script>
+    <script defer src="js/systems/rov-modal.js"></script>
+    <script defer src="js/input/rov-input-keyboard.js"></script>
+    <script defer src="js/input/rov-controls.js"></script>
 
-    <script src="js/systems/rov-controls-ui.js"></script>
-    <script src="js/loader.js"></script>
-    <script src="js/rov-main.js"></script>
+    <script defer src="js/systems/rov-controls-ui.js"></script>
+    <script defer src="js/loader.js"></script>
+    <script defer src="js/rov-main.js"></script>
 
 </body>
 
