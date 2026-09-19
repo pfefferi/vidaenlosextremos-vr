@@ -8,5 +8,6 @@ $json = @{
     hash = $hash
 } | ConvertTo-Json
 
-$json | Out-File -FilePath "./data/version.json" -Encoding utf8
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+[System.IO.File]::WriteAllText((Join-Path (Get-Location) "data/version.json"), $json, $utf8NoBom)
 Write-Host "Build Base Hash set to: $hash ($msg)"
