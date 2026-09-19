@@ -98,6 +98,21 @@ Abrir en navegador:
 
 ---
 
+## 🏷️ Build y versión
+
+`data/version.json` se regenera con el script de versión:
+
+```bash
+# Linux / macOS / WSL (recomendado; escribe UTF-8 sin BOM)
+./scripts/update_version.sh
+```
+
+En Windows también está disponible `scripts/update_version.ps1` (también escribe UTF-8 sin BOM).
+
+`loader.js` refleja el hash resultante en `#version-display` dentro del visor.
+
+---
+
 ## 🛠️ Mantenimiento de docs
 
 Cuando cambie arquitectura/controles:
