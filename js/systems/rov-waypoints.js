@@ -199,8 +199,6 @@ ROV.waypoints = {
                     wp.sphere.removeAttribute('animation');
                     wp.sphere.object3D.rotation.set(0, 0, 0);
 
-                    wp.sphere.object3D.rotation.set(0, 0, 0);
-
                     wp.beam.setAttribute('visible', ROV.state.gamifiedMode);
                     wp.ring.setAttribute('visible', ROV.state.gamifiedMode);
                 }

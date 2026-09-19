@@ -96,7 +96,7 @@ function updateLoop() {
     }
 
     // --- B. LÓGICA DE UI Y SISTEMAS LENTOS (Prioridad Baja - Throttled) ---
-    // Solo actualizamos 1 de cada 10 frames para mejorar rendimiento en móvil
+    // Solo actualizamos 1 de cada 4 frames para mejorar rendimiento en móvil
 
     frameCounter++;
     if (frameCounter % 4 !== 0) return; // Saltamos actualización

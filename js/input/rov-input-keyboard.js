@@ -32,6 +32,7 @@ window.addEventListener('keydown', (e) => {
         switch (e.code) {
             case 'Enter': ROV.actions.scanWaypoint(); break;
             case 'KeyH': ROV.actions.cycleHUD(); break;
+            case 'KeyM': ROV.controlsUI.toggleMenu(); break;
             case 'KeyR': ROV.actions.resetPosition(); break;
             case 'Digit1': ROV.actions.changeSpeed(-1); break;
             case 'Digit2': ROV.actions.changeSpeed(1); break;
