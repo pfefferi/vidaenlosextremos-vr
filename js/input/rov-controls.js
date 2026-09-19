@@ -131,7 +131,6 @@ function triggerDebounce(key) {
     };
 
     bindClick('hud-toggle', ROV.actions.cycleHUD);
-    bindClick('fullscreen-toggle', ROV.actions.toggleFullscreen);
     bindClick('reset-pos', ROV.actions.resetPosition);
     bindClick('speed-plus', () => ROV.actions.changeSpeed(1));
     bindClick('speed-minus', () => ROV.actions.changeSpeed(-1));

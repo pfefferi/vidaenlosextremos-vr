@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const debugConsole = document.getElementById('debug-console');
 
-    initGyroToggle();
     loadIcons();
     checkVersion();
     if (ROV.controlsUI) ROV.controlsUI.init();
@@ -66,56 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-function initGyroToggle() {
-    const gyroBtn = document.getElementById('gyro-toggle');
-    const cameraEl = document.getElementById('main-camera');
-    const debugConsole = document.getElementById('debug-console');
-
-    if (!gyroBtn || !cameraEl) return;
-
-    gyroBtn.addEventListener('click', async () => {
-        // Manejo de permisos para iOS
-        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-            try {
-                const permissionState = await DeviceOrientationEvent.requestPermission();
-                if (permissionState !== 'granted') {
-                    if (debugConsole) debugConsole.textContent = "SYSTEM: Gyro permission denied.";
-                    return;
-                }
-            } catch (error) {
-                console.error(error);
-                return;
-            }
-        }
-
-        const controls = cameraEl.components['look-controls'];
-        const isEnabled = cameraEl.getAttribute('look-controls').magicWindowTrackingEnabled;
-
-        if (isEnabled) {
-            // --- AL DESACTIVAR (Solución al Snap) ---
-            const currentRotationX = cameraEl.object3D.rotation.x;
-            const currentRotationY = cameraEl.object3D.rotation.y;
-
-            cameraEl.setAttribute('look-controls', { magicWindowTrackingEnabled: false });
-
-            if (controls) {
-                controls.pitch = currentRotationX;
-                controls.yaw = currentRotationY;
-            }
-
-            gyroBtn.classList.remove('active');
-            if (debugConsole) debugConsole.textContent = "SYSTEM: Gyroscope OFF";
-
-        } else {
-            // --- AL ACTIVAR ---
-            cameraEl.setAttribute('look-controls', { magicWindowTrackingEnabled: true });
-
-            gyroBtn.classList.add('active');
-            if (debugConsole) debugConsole.textContent = "SYSTEM: Gyroscope ON";
-        }
-    });
-}
-
 function updateUI(data) {
     const setText = (id, val) => {
         const el = document.getElementById(id);
@@ -124,7 +73,6 @@ function updateUI(data) {
 
     setText('ui-title', data.title);
     setText('ui-id', data.id);
-    setText('ui-depth', data.depth); // Esto es visual inicial, luego la física toma el control
     setText('ui-temp', data.temp);
     setText('ui-salinity', data.salinity);
     setText('ui-o2', data.o2_con);
