@@ -93,7 +93,13 @@
       },
       "title": "waypoints.whale_fall.mission.title",
       "content": {
-        "description": "waypoints.whale_fall.mission.description"
+        "description": "waypoints.whale_fall.mission.description",
+        "gallery": [
+          {
+            "src": "./assets/photos/fkt251206_crew.jpg",
+            "caption": "waypoints.whale_fall.mission.caption"
+          }
+        ]
       }
     }
   ],
