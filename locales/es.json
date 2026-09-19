@@ -10,6 +10,10 @@
         "gaming_mode": "MODO MISIÓN",
         "language": "IDIOMA"
     },
+    "credits": {
+        "assets": "Recursos visuales © Schmidt Ocean Institute (FKt251206), adaptados (recortados, redimensionados) y utilizados bajo",
+        "sharealike": ". Este proyecto educativo no comercial se comparte bajo la misma licencia."
+    },
     "habitats": {
         "whale_fall": "Whale Fall (Caída de Ballena)",
         "clam_bed": "Bancos de Almejas Vesicomyidae",
@@ -78,7 +82,7 @@
             "mission": {
                 "title": "Expedición FKt251206",
                 "description": "La campaña liderada por Maria Emilia Bravo tuvo como objetivo describir y clasificar la amplia diversidad de paisajes y ecosistemas bentónicos del mar profundo argentino. Esto incluyó la identificación de áreas prioritarias para futuras investigaciones y la toma de acciones de manejo ambiental.",
-                "caption": "El equipo científico y la tripulación de la expedición FKt251206 a bordo del R/V Falkor (too)"
+                "caption": "El equipo científico y la tripulación de la expedición FKt251206 a bordo del R/V Falkor (too). Foto: Vallejo Prut / Schmidt Ocean Institute"
             }
         }
     }

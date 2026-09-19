@@ -10,6 +10,10 @@
         "gaming_mode": "MISSION MODE",
         "language": "LANGUAGE"
     },
+    "credits": {
+        "assets": "Visual assets © Schmidt Ocean Institute (FKt251206), adapted (cropped, resized) and used under",
+        "sharealike": ". This non-commercial educational project is shared under the same license."
+    },
     "habitats": {
         "whale_fall": "The Whale Fall",
         "clam_bed": "Vesicomyidae Clam Bed",
@@ -78,7 +82,7 @@
             "mission": {
                 "title": "Expedition FKt251206",
                 "description": "Led by María Emilia Bravo, the FKt251206 campaign aimed to describe and classify the broad diversity of deep-sea benthic landscapes and ecosystems in the Argentine Sea. This included identifying priority areas for future research and taking environmental management actions.",
-                "caption": "The FKt251206 team and crew aboard the R/V Falkor (too)"
+                "caption": "The FKt251206 team and crew aboard the R/V Falkor (too). Photo: Vallejo Prut / Schmidt Ocean Institute"
             }
         }
     }

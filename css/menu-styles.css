@@ -200,6 +200,18 @@ footer {
     opacity: 0.4;
 }
 
+footer .credits {
+    margin: 8px auto 0;
+    max-width: 640px;
+    line-height: 1.7;
+    letter-spacing: 1px;
+}
+
+footer .credits a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 /* ==========================================================================
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */
