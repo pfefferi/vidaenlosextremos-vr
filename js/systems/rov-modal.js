@@ -75,9 +75,10 @@ ROV.modal = {
     // --- BUILDERS (HTML Generators) ---
 
     _buildYoutube: function (id, caption) {
+        const videoId = String(id || '').split(/[?&#]/)[0];
         return `
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/${id}?rel=0&modestbranding=1" 
+                <iframe src="https://www.youtube.com/embed/${encodeURIComponent(videoId)}?rel=0&modestbranding=1" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen></iframe>
             </div>
