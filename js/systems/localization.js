@@ -55,7 +55,11 @@ ROV.localization = {
         if (this.currentLang === lang) return;
 
         this.currentLang = lang;
-        localStorage.setItem('rov-language', lang);
+        try {
+            localStorage.setItem('rov-language', lang);
+        } catch (e) {
+            // localStorage unavailable (private browsing, quota exceeded)
+        }
 
         await this.loadLocales();
         this.updateDOM();
