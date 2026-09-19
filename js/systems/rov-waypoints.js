@@ -15,6 +15,7 @@ ROV.waypoints = {
     init: function () {
         ROV.state.activeWaypoint = null;
         this.totalVisited = 0;
+        this.hasWaypoints = false;
 
         // Referencias DOM
         this.uiBtn = document.getElementById('btn-scan');
@@ -33,7 +34,7 @@ ROV.waypoints = {
         // Sync initial state to UI
         const checkbox = document.getElementById('gamified-mode-check');
         if (checkbox) checkbox.checked = ROV.state.gamifiedMode;
-        if (this.missionHUD) this.missionHUD.style.display = ROV.state.gamifiedMode ? 'block' : 'none';
+        if (this.missionHUD) this.missionHUD.style.display = (ROV.state.gamifiedMode && this.hasWaypoints) ? 'block' : 'none';
 
         const urlParams = new URLSearchParams(window.location.search);
         let site = urlParams.get('site');
@@ -49,7 +50,11 @@ ROV.waypoints = {
             .then(res => res.json())
             .then(data => {
                 const points = data[missionKey];
-                if (points && points.length > 0) this.spawn(points);
+                if (points && points.length > 0) {
+                    this.spawn(points);
+                } else if (this.missionHUD) {
+                    this.missionHUD.style.display = 'none';
+                }
             })
             .catch(err => console.error("[Waypoints] Error:", err));
     },
@@ -90,6 +95,8 @@ ROV.waypoints = {
         }
 
         this.missionHUD = hud;
+        hud.classList.add('hidable');
+        ROV.refs.hidableElements = document.querySelectorAll('.hidable');
 
         // Forzar actualización de traducciones en el nuevo elemento
         if (ROV.localization) ROV.localization.updateDOM();
@@ -99,6 +106,7 @@ ROV.waypoints = {
         const scene = document.querySelector('a-scene');
         const totalCountEl = document.getElementById('total-count');
         if (totalCountEl) totalCountEl.innerText = data.length;
+        this.hasWaypoints = true;
 
         data.forEach(wpData => {
             // Container Entity
@@ -251,7 +259,7 @@ ROV.waypoints = {
 
         // Update HUD
         if (this.missionHUD) {
-            this.missionHUD.style.display = enabled ? 'block' : 'none';
+            this.missionHUD.style.display = (enabled && this.hasWaypoints) ? 'block' : 'none';
         }
 
         // Update all active waypoints helpers
