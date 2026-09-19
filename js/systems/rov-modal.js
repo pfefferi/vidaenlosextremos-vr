@@ -35,6 +35,7 @@ ROV.modal = {
         // --- B. Galería de Fotos ---
         if (content.gallery && content.gallery.length > 0) {
             htmlBuffer += this._buildGallery(content.gallery);
+            htmlBuffer += this._buildGalleryCredits();
         }
 
         // --- C. Gráficos ---
@@ -109,6 +110,12 @@ ROV.modal = {
         const thumbsHtml = `<div class="gallery-thumbs-row">${thumbs}</div>`;
 
         return `<div class="modal-gallery-v2">${mainHtml}${thumbsHtml}</div>`;
+    },
+
+    _buildGalleryCredits: function () {
+        const assets = ROV.localization.t('credits.assets');
+        const share = ROV.localization.t('credits.sharealike');
+        return `<div class="gallery-credits">${assets} <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">CC BY-NC-SA 4.0</a>${share}</div>`;
     },
 
     updateGalleryFocus: function (src, caption, thumbEl) {

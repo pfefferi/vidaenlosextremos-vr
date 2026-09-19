@@ -200,6 +200,19 @@
     border-radius: 4px;
 }
 
+.gallery-credits {
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 400;
+}
+
+.gallery-credits a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 .gallery-thumb {
     width: 100px;
     aspect-ratio: 16/9;

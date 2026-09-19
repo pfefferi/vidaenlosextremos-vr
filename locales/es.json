@@ -12,7 +12,8 @@
     },
     "credits": {
         "assets": "Recursos visuales © Schmidt Ocean Institute (FKt251206), adaptados (recortados, redimensionados) y utilizados bajo",
-        "sharealike": ". Este proyecto educativo no comercial se comparte bajo la misma licencia."
+        "sharealike": ". Este proyecto educativo no comercial se comparte bajo la misma licencia.",
+        "models_title": "Modelos 3D"
     },
     "habitats": {
         "whale_fall": "Whale Fall (Caída de Ballena)",

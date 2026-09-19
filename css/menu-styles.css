@@ -212,6 +212,30 @@ footer .credits a {
     text-decoration: underline;
 }
 
+footer .credits-models {
+    margin: 10px auto 0;
+    max-width: 640px;
+}
+
+footer .credits-models summary {
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+footer .credits-models ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    text-align: left;
+    line-height: 1.7;
+    letter-spacing: 0.5px;
+}
+
+footer .credits-models a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 /* ==========================================================================
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */

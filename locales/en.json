@@ -12,7 +12,8 @@
     },
     "credits": {
         "assets": "Visual assets © Schmidt Ocean Institute (FKt251206), adapted (cropped, resized) and used under",
-        "sharealike": ". This non-commercial educational project is shared under the same license."
+        "sharealike": ". This non-commercial educational project is shared under the same license.",
+        "models_title": "3D models"
     },
     "habitats": {
         "whale_fall": "The Whale Fall",
