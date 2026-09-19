@@ -8,7 +8,6 @@
         "z": -10.91
       },
       "title": "waypoints.whale_fall.vertebra.title",
-      "icon": "video",
       "content": {
         "description": "waypoints.whale_fall.vertebra.description",
         "youtube_id": "NqnWDBwp-k8",
@@ -23,7 +22,6 @@
         "z": -10.50
       },
       "title": "waypoints.whale_fall.lab.title",
-      "icon": "image",
       "content": {
         "description": "waypoints.whale_fall.lab.description",
         "gallery": [
@@ -50,7 +48,6 @@
         "z": -10.44
       },
       "title": "waypoints.whale_fall.isopods.title",
-      "icon": "eye",
       "content": {
         "description": "waypoints.whale_fall.isopods.description",
         "gallery": [
@@ -69,7 +66,6 @@
         "z": -9.14
       },
       "title": "waypoints.whale_fall.subastian.title",
-      "icon": "tool",
       "content": {
         "description": "waypoints.whale_fall.subastian.description"
       }
@@ -82,7 +78,6 @@
         "z": -10.0
       },
       "title": "waypoints.whale_fall.mission.title",
-      "icon": "award",
       "content": {
         "description": "waypoints.whale_fall.mission.description"
       }
