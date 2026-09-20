@@ -221,6 +221,14 @@
                     <use href="#icon-exit"></use>
                 </svg><span data-i18n="ui.return_to_home">Return to Home</span></div>
         </div>
+
+        <!-- TEST MODEL SELECTOR (visible only on site=model_test, see rov-model-test.js) -->
+        <div id="model-select-row" style="display: none;">
+            <div class="menu-title" data-i18n="menu.test_model">TEST MODEL</div>
+            <div class="model-selector">
+                <select id="model-select" class="model-select" onchange="ROV.modelTest.swap(this.value)"></select>
+            </div>
+        </div>
     </div>
 
     <!-- CONTROLS OVERLAY -->
@@ -359,6 +367,7 @@
     <script defer src="js/systems/rov-actions.js"></script>
     <script defer src="js/systems/rov-visual-blender.js"></script>
     <script defer src="js/systems/rov-model-handler.js"></script>
+    <script defer src="js/systems/rov-model-test.js"></script>
     <script defer src="js/systems/rov-waypoints.js"></script>
     <script defer src="js/systems/rov-modal.js"></script>
     <script defer src="js/input/rov-input-keyboard.js"></script>

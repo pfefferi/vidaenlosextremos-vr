@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadIcons();
     checkVersion();
     if (ROV.controlsUI) ROV.controlsUI.init();
+    if (ROV.modelTest) ROV.modelTest.init();
 
     fetch('data/dives.json')
         .then(res => {
@@ -56,7 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 3. Actualizar UI y cargar modelo
             updateUI(diveData);
-            loadModelDirectly(diveData.model_path);
+            // En model_test, ?model= puede redirigir al OBJ (sin efecto en otros sitios)
+            const modelPath = (window.ROV && ROV.modelTest)
+                ? ROV.modelTest.resolve(diveData.model_path)
+                : diveData.model_path;
+            const mtlPath = (window.ROV && ROV.modelTest)
+                ? ROV.modelTest.currentMtlPath()
+                : null;
+            loadModelDirectly(modelPath, mtlPath);
         })
         .catch(err => {
             console.error("[Loader] Critical Error:", err);
@@ -80,7 +88,7 @@ function updateUI(data) {
     document.title = `ROV: ${data.title}`;
 }
 
-function loadModelDirectly(url) {
+function loadModelDirectly(url, mtlUrl) {
     const mapEntity = document.getElementById('map-entity');
     const debugConsole = document.getElementById('debug-console');
 
@@ -88,6 +96,7 @@ function loadModelDirectly(url) {
 
     debugConsole.textContent = "SYSTEM: Loading 3D Model...";
     mapEntity.removeAttribute('gltf-model');
+    mapEntity.removeAttribute('obj-model');
 
     mapEntity.addEventListener('model-loaded', () => {
         console.log("[Loader] Model loaded successfully!");
@@ -99,7 +108,13 @@ function loadModelDirectly(url) {
         debugConsole.textContent = "SYSTEM ERROR: Could not load 3D model.";
     }, { once: true });
 
-    mapEntity.setAttribute('gltf-model', url);
+    // model_test puede pedir OBJ (?model=obj): usa obj-model + mtl. Resto intacto.
+    if (url.toLowerCase().endsWith('.obj')) {
+        const mtl = mtlUrl || url.replace(/\.obj$/i, '.mtl');
+        mapEntity.setAttribute('obj-model', `obj: url(${url}); mtl: url(${mtl})`);
+    } else {
+        mapEntity.setAttribute('gltf-model', url);
+    }
 }
 
 function loadIcons() {

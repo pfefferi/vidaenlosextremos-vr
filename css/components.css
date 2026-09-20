@@ -153,6 +153,27 @@
     border-color: #fff;
 }
 
+/* Test-habitat model selector (ESC menu, site=model_test only) */
+.model-selector {
+    display: flex;
+    z-index: 10;
+}
+
+.model-select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-white);
+    color: #fff;
+    padding: 6px 8px;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.model-select option {
+    background: #001529;
+    color: #fff;
+}
+
 .lang-btn.active {
     opacity: 1;
     background: #fff;

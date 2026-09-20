@@ -10,8 +10,13 @@ ROV.modelHandler = {
         if (!mesh) return;
 
         const mapEntity = ROV.refs.mapEntity;
-        const currentSrc = mapEntity.getAttribute('gltf-model');
-        const basePath = currentSrc.substring(0, currentSrc.lastIndexOf('/') + 1);
+        // En model_test el loader puede montar OBJ (sin atributo gltf-model);
+        // modelTest.activeBase indica la carpeta en ese caso. Resto intacto.
+        let basePath = (ROV.modelTest && ROV.modelTest.activeBase) || null;
+        if (!basePath) {
+            const currentSrc = mapEntity.getAttribute('gltf-model');
+            basePath = currentSrc.substring(0, currentSrc.lastIndexOf('/') + 1);
+        }
 
         console.log(`[ModelHandler] Path base detectado: ${basePath}`);
 
@@ -30,6 +35,10 @@ ROV.modelHandler = {
                     mat.transparent = true;
                     mat.depthWrite = true;
                     mat.opacity = 1.0; // Override any GLTF-baked opacity
+
+                    // Si el modelo ya trae textura (GLB/OBJ con mapas), no sobreescribir.
+                    // Los hábitats existentes llegan sin mapa: comportamiento intacto.
+                    if (mat.map) return;
 
                     // Buscar patrón "materialXX" en el nombre del nodo
                     const match = node.name.match(/material(\d+)/i);

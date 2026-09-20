@@ -8,7 +8,8 @@
         "coming_soon": "PRÓXIMAMENTE",
         "footer": "EST. 2026 | Lisandro Scarrone",
         "gaming_mode": "MODO MISIÓN",
-        "language": "IDIOMA"
+        "language": "IDIOMA",
+        "test_model": "MODELO DE PRUEBA"
     },
     "credits": {
         "assets": "Recursos visuales © Schmidt Ocean Institute (FKt251206), adaptados (recortados, redimensionados) y utilizados bajo",
@@ -18,7 +19,8 @@
     "habitats": {
         "whale_fall": "Whale Fall (Caída de Ballena)",
         "clam_bed": "Bancos de Almejas Vesicomyidae",
-        "giant_corals": "Lecho de Corales Gigantes"
+        "giant_corals": "Lecho de Corales Gigantes",
+        "model_test": "Hábitat de Prueba"
     },
     "ui": {
         "loading": "CARGANDO...",

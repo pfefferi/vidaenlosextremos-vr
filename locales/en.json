@@ -8,7 +8,8 @@
         "coming_soon": "COMING SOON",
         "footer": "EST. 2026 | Lisandro Scarrone",
         "gaming_mode": "MISSION MODE",
-        "language": "LANGUAGE"
+        "language": "LANGUAGE",
+        "test_model": "TEST MODEL"
     },
     "credits": {
         "assets": "Visual assets © Schmidt Ocean Institute (FKt251206), adapted (cropped, resized) and used under",
@@ -18,7 +19,8 @@
     "habitats": {
         "whale_fall": "The Whale Fall",
         "clam_bed": "Vesicomyidae Clam Bed",
-        "giant_corals": "Giant Corals Bed"
+        "giant_corals": "Giant Corals Bed",
+        "model_test": "Test Habitat"
     },
     "ui": {
         "loading": "LOADING...",
