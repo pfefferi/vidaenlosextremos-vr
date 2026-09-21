@@ -19,10 +19,27 @@ ROV.blender = {
    * @param {number} padding - Fraction of bounds to add as padding for fade space (default 0.15).
    * @returns {{ texture: THREE.CanvasTexture, bounds: Object }}
    */
-  generateSilhouetteMask: function (mesh, resolution = 512, blurPasses = 4, blurRadius = 6, padding = 0.10) {
+  generateSilhouetteMask: function (mesh, resolution = 512, blurPasses = 4, blurRadius = 6, padding = 0.10, boundsOverride = null) {
     // 1. Ensure world matrices are fully up-to-date
     mesh.updateWorldMatrix(true, true);
 
+    let bounds;
+    if (boundsOverride) {
+      // Encuadre impuesto por el llamador (model_test: ignora outliers).
+      // Se aplica el mismo padding que al cálculo normal.
+      const padX = (boundsOverride.maxX - boundsOverride.minX) * padding;
+      const padZ = (boundsOverride.maxZ - boundsOverride.minZ) * padding;
+      bounds = {
+        minX: boundsOverride.minX - padX,
+        maxX: boundsOverride.maxX + padX,
+        minZ: boundsOverride.minZ - padZ,
+        maxZ: boundsOverride.maxZ + padZ
+      };
+      console.log('[Blender] Using caller-provided bounds:', JSON.stringify({
+        minX: bounds.minX.toFixed(2), maxX: bounds.maxX.toFixed(2),
+        minZ: bounds.minZ.toFixed(2), maxZ: bounds.maxZ.toFixed(2)
+      }));
+    } else {
     // ========== PASS 1: Compute bounds from EXACT same vertices used for drawing ==========
     let wMinX = Infinity, wMaxX = -Infinity;
     let wMinZ = Infinity, wMaxZ = -Infinity;
@@ -50,15 +67,12 @@ ROV.blender = {
     const padX = rangeX * padding;
     const padZ = rangeZ * padding;
 
-    const bounds = {
+    bounds = {
       minX: wMinX - padX,
       maxX: wMaxX + padX,
       minZ: wMinZ - padZ,
       maxZ: wMaxZ + padZ
     };
-
-    const bWidth = bounds.maxX - bounds.minX;
-    const bHeight = bounds.maxZ - bounds.minZ;
 
     // DEBUG
     console.log('[Blender] Vertex extents:', JSON.stringify({
@@ -70,6 +84,10 @@ ROV.blender = {
       minX: bounds.minX.toFixed(2), maxX: bounds.maxX.toFixed(2),
       minZ: bounds.minZ.toFixed(2), maxZ: bounds.maxZ.toFixed(2)
     }));
+    } // end else (pass 1 normal)
+
+    const bWidth = bounds.maxX - bounds.minX;
+    const bHeight = bounds.maxZ - bounds.minZ;
 
     // ========== PASS 2: Project and draw triangles ==========
     const canvas = document.createElement('canvas');

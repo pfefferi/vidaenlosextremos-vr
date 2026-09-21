@@ -73,8 +73,8 @@
     "model_path": "assets/models/model-test/odm_textured_model_geo.glb",
     "start_position": {
       "x": 0,
-      "y": 2,
-      "z": 10
+      "y": -1,
+      "z": 6
     },
     "start_rotation": {
       "x": 0,
