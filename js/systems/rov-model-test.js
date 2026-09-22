@@ -6,8 +6,10 @@ ROV.modelTest = {
     siteKey: 'model-test',
     base: 'assets/models/model-test/',
     models: [
-        { id: 'glb', file: 'odm_textured_model_geo.glb', label: 'S0883 Whale Fall — GLB' },
-        { id: 'obj', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Whale Fall — OBJ' }
+        { id: 'glb', file: 'odm_textured_model_geo.glb', label: 'S0883 Hero (skeleton) — GLB' },
+        { id: 'obj', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Hero (skeleton) — OBJ' },
+        { id: 'full-glb', base: 'assets/models/model-full/', file: 'odm_textured_model_geo.glb', label: 'S0883 Full track — GLB' },
+        { id: 'full-obj', base: 'assets/models/model-full/', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Full track — OBJ' }
     ],
     current: 'glb',
     // Carpeta base del modelo activo; la usa rov-model-handler para centrar/escalar.
@@ -31,9 +33,13 @@ ROV.modelTest = {
         return this.models.find(m => m.id === id) || null;
     },
 
+    dirFor: function (m) {
+        return (m && m.base) || this.base;
+    },
+
     pathFor: function (id) {
         const m = this.find(id);
-        return m ? this.base + m.file : null;
+        return m ? this.dirFor(m) + m.file : null;
     },
 
     /**
@@ -45,8 +51,8 @@ ROV.modelTest = {
         const wanted = new URLSearchParams(window.location.search).get('model');
         const m = this.find(wanted) || this.find('glb');
         this.current = m.id;
-        this.activeBase = this.base;
-        return this.base + m.file;
+        this.activeBase = this.dirFor(m);
+        return this.dirFor(m) + m.file;
     },
 
     init: function () {
@@ -74,7 +80,7 @@ ROV.modelTest = {
     currentMtlPath: function () {
         if (!this.isActiveSite()) return null;
         const m = this.find(this.current);
-        return (m && m.mtl) ? this.base + m.mtl : null;
+        return (m && m.mtl) ? this.dirFor(m) + m.mtl : null;
     },
 
     /**
@@ -94,12 +100,12 @@ ROV.modelTest = {
         mapEntity.removeAttribute('obj-model');
 
         this.current = m.id;
-        this.activeBase = this.base;
+        this.activeBase = this.dirFor(m);
 
         if (m.mtl) {
-            mapEntity.setAttribute('obj-model', `obj: url(${this.base + m.file}); mtl: url(${this.base + m.mtl})`);
+            mapEntity.setAttribute('obj-model', `obj: url(${this.dirFor(m) + m.file}); mtl: url(${this.dirFor(m) + m.mtl})`);
         } else {
-            mapEntity.setAttribute('gltf-model', this.base + m.file);
+            mapEntity.setAttribute('gltf-model', this.dirFor(m) + m.file);
         }
 
         // Feedback de error solo para este swap (el listener inicial es {once:true})
@@ -116,6 +122,6 @@ ROV.modelTest = {
         url.searchParams.set('model', m.id);
         window.history.replaceState(null, '', url.toString());
 
-        console.log(`[ModelTest] Swapped to ${m.id}: ${this.base + m.file}`);
+        console.log(`[ModelTest] Swapped to ${m.id}: ${this.dirFor(m) + m.file}`);
     }
 };
