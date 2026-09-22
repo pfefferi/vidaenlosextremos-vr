@@ -18,6 +18,12 @@ ROV.modelTest = {
         { id: 'clean-v2-glb', base: 'assets/models/model-clean-v2/', file: 'odm_textured_model_geo_v2.glb', label: 'S0883 Clean V2 (truth frame) — GLB' }
     ],
     current: 'glb',
+    // Standing rule: the newest model (last entry) is the default on load.
+    // Append new models at the end and they become the default automatically.
+    // An explicit ?model= id always wins over the default.
+    defaultId: function () {
+        return this.models[this.models.length - 1].id;
+    },
     // Carpeta base del modelo activo; la usa rov-model-handler para centrar/escalar.
     activeBase: null,
 
@@ -55,7 +61,7 @@ ROV.modelTest = {
     resolve: function (defaultPath) {
         if (!this.isActiveSite()) return defaultPath;
         const wanted = new URLSearchParams(window.location.search).get('model');
-        const m = this.find(wanted) || this.find('glb');
+        const m = this.find(wanted) || this.find(this.defaultId());
         this.current = m.id;
         this.activeBase = this.dirFor(m);
         return this.dirFor(m) + m.file;
@@ -75,7 +81,8 @@ ROV.modelTest = {
             opt.textContent = m.label;
             select.appendChild(opt);
         });
-        select.value = this.current;
+        const wanted = new URLSearchParams(window.location.search).get('model');
+        select.value = this.find(wanted) ? wanted : this.defaultId();
         row.style.display = 'block';
     },
 
