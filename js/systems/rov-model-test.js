@@ -15,7 +15,8 @@ ROV.modelTest = {
         { id: 'full-alt-glb', base: 'assets/models/model-full-alt/', file: 'odm_textured_model_geo.glb', label: 'S0883 Full-alt (experimental) — GLB' },
         { id: 'full-alt-obj', base: 'assets/models/model-full-alt/', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Full-alt (experimental) — OBJ' },
         { id: 'clean-glb', base: 'assets/models/model-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Clean (ghost cut, leveled) — GLB' },
-        { id: 'clean-v2-glb', base: 'assets/models/model-clean-v2/', file: 'odm_textured_model_geo_v2.glb', label: 'S0883 Clean V2 (truth frame) — GLB' }
+        { id: 'clean-v2-glb', base: 'assets/models/model-clean-v2/', file: 'odm_textured_model_geo_v2.glb', label: 'S0883 Clean V2 (truth frame) — GLB' },
+        { id: 'loose-glb', base: 'assets/models/model-loose/', file: 'odm_textured_model_geo.glb', label: 'S0883 Loose-100 (experimental) — GLB' }
     ],
     current: 'glb',
     // Standing rule: the newest model (last entry) is the default on load.
