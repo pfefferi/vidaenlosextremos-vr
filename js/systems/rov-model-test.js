@@ -9,7 +9,9 @@ ROV.modelTest = {
         { id: 'glb', file: 'odm_textured_model_geo.glb', label: 'S0883 Hero (skeleton) — GLB' },
         { id: 'obj', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Hero (skeleton) — OBJ' },
         { id: 'full-glb', base: 'assets/models/model-full/', file: 'odm_textured_model_geo.glb', label: 'S0883 Full track — GLB' },
-        { id: 'full-obj', base: 'assets/models/model-full/', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Full track — OBJ' }
+        { id: 'full-obj', base: 'assets/models/model-full/', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Full track — OBJ' },
+        { id: 'merged-glb', base: 'assets/models/model-merged/', file: 'odm_textured_model_geo.glb', label: 'S0883 Layers merged — GLB' },
+        { id: 'merged-obj', base: 'assets/models/model-merged/', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Layers merged — OBJ' }
     ],
     current: 'glb',
     // Carpeta base del modelo activo; la usa rov-model-handler para centrar/escalar.
