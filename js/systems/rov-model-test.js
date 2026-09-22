@@ -13,7 +13,8 @@ ROV.modelTest = {
         { id: 'merged-glb', base: 'assets/models/model-merged/', file: 'odm_textured_model_geo.glb', label: 'S0883 Layers merged — GLB' },
         { id: 'merged-obj', base: 'assets/models/model-merged/', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Layers merged — OBJ' },
         { id: 'full-alt-glb', base: 'assets/models/model-full-alt/', file: 'odm_textured_model_geo.glb', label: 'S0883 Full-alt (experimental) — GLB' },
-        { id: 'full-alt-obj', base: 'assets/models/model-full-alt/', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Full-alt (experimental) — OBJ' }
+        { id: 'full-alt-obj', base: 'assets/models/model-full-alt/', file: 'odm_textured_model_geo.obj', mtl: 'odm_textured_model_geo.mtl', label: 'S0883 Full-alt (experimental) — OBJ' },
+        { id: 'clean-glb', base: 'assets/models/model-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Clean (ghost cut, leveled) — GLB' }
     ],
     current: 'glb',
     // Carpeta base del modelo activo; la usa rov-model-handler para centrar/escalar.
