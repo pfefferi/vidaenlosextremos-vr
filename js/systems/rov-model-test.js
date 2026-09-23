@@ -21,8 +21,9 @@ ROV.modelTest = {
         { id: 'full-loose-clean-glb', base: 'assets/models/model-full-loose-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Full-loose clean — GLB' },
         { id: 'noflip-clean-glb', base: 'assets/models/model-noflip-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Noflip clean — GLB' },
         { id: 'layers-clean-glb', base: 'assets/models/model-layers-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Layers clean — GLB' },
-        { id: 'scalefix-glb', base: 'assets/models/model-scalefix/', file: 'odm_textured_model_geo.glb', label: 'S0883 Scalefix (experimental) — GLB (NEW)' },
-        { id: 'hero3-glb', base: 'assets/models/model-hero3/', file: 'odm_textured_model_geo.glb', label: 'S0883 Hero3 island (VR candidate) — GLB (NEW)' }
+        { id: 'scalefix-glb', base: 'assets/models/model-scalefix/', file: 'odm_textured_model_geo.glb', label: 'S0883 Scalefix (experimental) — GLB' },
+        { id: 'hero3-glb', base: 'assets/models/model-hero3/', file: 'odm_textured_model_geo.glb', label: 'S0883 Hero3 island (VR candidate) — GLB' },
+        { id: 'navonly-glb', base: 'assets/models/model-navonly/', file: 'odm_textured_model_geo.glb', label: 'S0883 Navonly full-track (ghost-free) — GLB (NEW)' }
     ],
     current: 'glb',
     // Standing rules: (1) the newest model (last entry) is the default on load —
