@@ -27,6 +27,21 @@
             border-color: #666;
             color: #aaa;
         }
+
+        /* Botón invisible (easter egg): 5 toques rápidos revelan el hábitat de pruebas */
+        #test-habitat-unlock {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            width: 64px;
+            height: 64px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            opacity: 0;
+            cursor: default;
+            z-index: 9999;
+        }
     </style>
 </head>
 
@@ -74,7 +89,7 @@
             </div>
         </a>
 
-        <a href="habitat.html?site=model_test" class="mission-card">
+        <a href="habitat.html?site=model_test" class="mission-card" id="test-habitat-card" style="display: none;">
             <div class="card-img-container">
                 <img src="assets/images/whale_fall.jpg" alt="Ambiente Test Habitat" class="card-img img-env">
                 <img src="assets/images/whale_fall_close.jpg" alt="Detalle Test Habitat" class="card-img img-closeup">
@@ -120,12 +135,34 @@
         </details>
     </footer>
 
+    <!-- Desbloqueo oculto del hábitat de pruebas: 5 toques rápidos en esta zona invisible -->
+    <button id="test-habitat-unlock" type="button" tabindex="-1" aria-hidden="true"></button>
+
     <script src="js/systems/localization.js"></script>
     <script>
         // Initialize localization
         document.addEventListener('DOMContentLoaded', () => {
             ROV.localization.init();
         });
+
+        // Easter egg: 5 toques rápidos en la esquina invisible revelan el hábitat de pruebas.
+        (function () {
+            var REQUIRED_TAPS = 5;
+            var WINDOW_MS = 2000;
+            var taps = [];
+            var btn = document.getElementById('test-habitat-unlock');
+            var card = document.getElementById('test-habitat-card');
+            if (!btn || !card) return;
+            btn.addEventListener('click', function () {
+                var now = Date.now();
+                taps.push(now);
+                if (taps.length > REQUIRED_TAPS) taps.shift();
+                if (taps.length === REQUIRED_TAPS && (taps[REQUIRED_TAPS - 1] - taps[0]) <= WINDOW_MS) {
+                    card.style.display = '';
+                    taps = [];
+                }
+            });
+        })();
 
         document.querySelectorAll('.mission-card:not(.disabled)').forEach(card => {
             card.addEventListener('touchstart', function () { this.classList.add('is-touching'); }, { passive: true });
