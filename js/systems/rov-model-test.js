@@ -17,12 +17,17 @@ ROV.modelTest = {
         { id: 'clean-glb', base: 'assets/models/model-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Clean (ghost cut, leveled) — GLB' },
         { id: 'clean-v2-glb', base: 'assets/models/model-clean-v2/', file: 'odm_textured_model_geo_v2.glb', label: 'S0883 Clean V2 (truth frame) — GLB' },
         { id: 'loose-glb', base: 'assets/models/model-loose/', file: 'odm_textured_model_geo.glb', label: 'S0883 Loose-100 (experimental) — GLB' },
-        { id: 'noflip-glb', base: 'assets/models/model-noflip/', file: 'odm_textured_model_geo.glb', label: 'S0883 Noflip (experimental) — GLB' }
+        { id: 'noflip-glb', base: 'assets/models/model-noflip/', file: 'odm_textured_model_geo.glb', label: 'S0883 Noflip (experimental) — GLB' },
+        { id: 'full-loose-clean-glb', base: 'assets/models/model-full-loose-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Full-loose clean — GLB (NEW)' },
+        { id: 'noflip-clean-glb', base: 'assets/models/model-noflip-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Noflip clean — GLB (NEW)' },
+        { id: 'layers-clean-glb', base: 'assets/models/model-layers-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Layers clean — GLB (NEW)' }
     ],
     current: 'glb',
-    // Standing rule: the newest model (last entry) is the default on load.
-    // Append new models at the end and they become the default automatically.
-    // An explicit ?model= id always wins over the default.
+    // Standing rules: (1) the newest model (last entry) is the default on load —
+    // append new models at the end and they become the default automatically.
+    // (2) the newest upload batch carries a ' (NEW)' suffix in switcher labels;
+    // recompute every upload (older batches shed it). An explicit ?model= id
+    // always wins over the default.
     defaultId: function () {
         return this.models[this.models.length - 1].id;
     },
