@@ -18,9 +18,11 @@ ROV.modelTest = {
         { id: 'clean-v2-glb', base: 'assets/models/model-clean-v2/', file: 'odm_textured_model_geo_v2.glb', label: 'S0883 Clean V2 (truth frame) — GLB' },
         { id: 'loose-glb', base: 'assets/models/model-loose/', file: 'odm_textured_model_geo.glb', label: 'S0883 Loose-100 (experimental) — GLB' },
         { id: 'noflip-glb', base: 'assets/models/model-noflip/', file: 'odm_textured_model_geo.glb', label: 'S0883 Noflip (experimental) — GLB' },
-        { id: 'full-loose-clean-glb', base: 'assets/models/model-full-loose-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Full-loose clean — GLB (NEW)' },
-        { id: 'noflip-clean-glb', base: 'assets/models/model-noflip-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Noflip clean — GLB (NEW)' },
-        { id: 'layers-clean-glb', base: 'assets/models/model-layers-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Layers clean — GLB (NEW)' }
+        { id: 'full-loose-clean-glb', base: 'assets/models/model-full-loose-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Full-loose clean — GLB' },
+        { id: 'noflip-clean-glb', base: 'assets/models/model-noflip-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Noflip clean — GLB' },
+        { id: 'layers-clean-glb', base: 'assets/models/model-layers-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Layers clean — GLB' },
+        { id: 'scalefix-glb', base: 'assets/models/model-scalefix/', file: 'odm_textured_model_geo.glb', label: 'S0883 Scalefix (experimental) — GLB (NEW)' },
+        { id: 'hero3-glb', base: 'assets/models/model-hero3/', file: 'odm_textured_model_geo.glb', label: 'S0883 Hero3 island (VR candidate) — GLB (NEW)' }
     ],
     current: 'glb',
     // Standing rules: (1) the newest model (last entry) is the default on load —
