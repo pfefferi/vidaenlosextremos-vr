@@ -14,7 +14,8 @@ ROV.modelTest = {
         { id: 'navonly-optA-glb', base: 'assets/models/model-navonly-optA/', file: 'optA_settled_yup.glb', label: 'S0883 Navonly optA (settled overlay, double-surface) — GLB' },
         { id: 'hero3-clean-yup-glb', base: 'assets/models/model-hero3-clean-yup/', file: 'hero3_clean_yup.glb', label: 'S0883 Hero3 clean Y-up (island detail) — GLB' },
         { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' },
-        { id: 'navonly-sheet-ds-glb', base: 'assets/models/model-navonly-sheet-ds/', file: 'sheet_yup_ds.glb', label: 'S0883 Navonly sheet Y-up DoubleSided (ultra detail, leveled) — GLB (NEW)' }
+        { id: 'layers-yup-ds-glb', base: 'assets/models/model-layers-yup-ds/', file: 'layers_yup_ds.glb', label: 'S0883 Layers Y-up DoubleSided (bone row, 24deg grade) — GLB (NEW)' },
+        { id: 'navonly-sheet-ds-glb', base: 'assets/models/model-navonly-sheet-ds/', file: 'sheet_yup_ds.glb', label: 'S0883 Navonly sheet Y-up DoubleSided (ultra detail, leveled) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
     // loading list. Inert data only — find()/resolve()/init()/swap() read `models`
