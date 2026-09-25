@@ -17,7 +17,8 @@ ROV.modelTest = {
         { id: 'loose-yup-ds-glb', base: 'assets/models/model-loose-yup-ds/', file: 'loose_yup_ds.glb', label: 'S0883 Loose Y-up DoubleSided (bent terrain, experimental) — GLB' },
         { id: 'noflip-yup-ds-glb', base: 'assets/models/model-noflip-yup-ds/', file: 'noflip_yup_ds.glb', label: 'S0883 Noflip Y-up DoubleSided (bent terrain, experimental) — GLB' },
         { id: 'navonly-sheet-ds-glb', base: 'assets/models/model-navonly-sheet-ds/', file: 'sheet_yup_ds.glb', label: 'S0883 Navonly sheet Y-up DoubleSided (ultra detail, leveled) — GLB' },
-        { id: 'navonly-sheet-trim-glb', base: 'assets/models/model-navonly-sheet-trim/', file: 'sheet_trim1m_ds.glb', label: 'S0883 Navonly sheet trim 1m (tail-trimmed, experimental) — GLB (NEW)' },
+        { id: 'navonly-sheet-trim-glb', base: 'assets/models/model-navonly-sheet-trim/', file: 'sheet_trim1m_ds.glb', label: 'S0883 Navonly sheet trim 1m (tail-trimmed, experimental) — GLB' },
+        { id: 'hero3nav-glb', base: 'assets/models/model-hero3nav/', file: 'hero3nav_yup.glb', label: 'S0883 Hero3 NAV-only island (level, 3deg) — GLB (NEW)' },
         { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
