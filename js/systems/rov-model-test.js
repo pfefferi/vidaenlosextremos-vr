@@ -7,7 +7,7 @@ ROV.modelTest = {
     base: 'assets/models/model-test/',
     models: [
         { id: 'navonly-glb', base: 'assets/models/model-navonly/', file: 'odm_textured_model_geo.glb', label: 'S0883 Navonly full-track (ghost-free) — GLB' },
-        { id: 'navonly-ribbon-glb', base: 'assets/models/model-navonly-ribbon/', file: 'ribbon_leveled.glb', label: 'S0883 Navonly ribbon (leveled, floating) — GLB (NEW)' },
+        { id: 'navonly-ribbon-glb', base: 'assets/models/model-navonly-ribbon/', file: 'ribbon_leveled.glb', label: 'S0883 Navonly ribbon (leveled, floating) — GLB' },
         { id: 'navonly-clean-glb', base: 'assets/models/model-navonly-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Navonly clean (curl-cut, ghost-free) — GLB' },
         { id: 'navonly-clean-yup-glb', base: 'assets/models/model-navonly-clean-yup/', file: 'odm_textured_model_geo_yup.glb', label: 'S0883 Navonly clean Y-up (level, ghost-free) — GLB (NEW)' }
     ],
