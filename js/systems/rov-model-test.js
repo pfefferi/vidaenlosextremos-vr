@@ -12,14 +12,15 @@ ROV.modelTest = {
         { id: 'navonly-clean-yup-glb', base: 'assets/models/model-navonly-clean-yup/', file: 'odm_textured_model_geo_yup.glb', label: 'S0883 Navonly clean Y-up (level, ghost-free) — GLB' },
         { id: 'navonly-sheet-yup-glb', base: 'assets/models/model-navonly-sheet-yup/', file: 'sheet_leveled_yup.glb', label: 'S0883 Navonly sheet Y-up (ultra detail, leveled) — GLB' },
         { id: 'navonly-optA-glb', base: 'assets/models/model-navonly-optA/', file: 'optA_settled_yup.glb', label: 'S0883 Navonly optA (settled overlay, double-surface) — GLB' },
-        { id: 'hero3-clean-yup-glb', base: 'assets/models/model-hero3-clean-yup/', file: 'hero3_clean_yup.glb', label: 'S0883 Hero3 clean Y-up (island detail) — GLB (NEW)' },
-        { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
+        { id: 'hero3-clean-yup-glb', base: 'assets/models/model-hero3-clean-yup/', file: 'hero3_clean_yup.glb', label: 'S0883 Hero3 clean Y-up (island detail) — GLB' },
+        { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' },
+        { id: 'navonly-sheet-ds-glb', base: 'assets/models/model-navonly-sheet-ds/', file: 'sheet_yup_ds.glb', label: 'S0883 Navonly sheet Y-up DoubleSided (ultra detail, leveled) — GLB (NEW)' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
     // loading list. Inert data only — find()/resolve()/init()/swap() read `models`
     // above, so archived ids no longer load (?model=<archived> falls back to default).
     // GLB files stay in the repo untouched. To restore, move entries back into `models`.
-    // Explicit default pin: navonly-ultra-yup is LAST so defaultId() keeps resolving to it
+    // Explicit default pin: navonly-sheet-ds is LAST so defaultId() keeps resolving to it
     // (newest-default rule survives verbatim — future uploads append after it and take
     // over as default automatically). Do NOT reorder without a user order.
     archived: [
