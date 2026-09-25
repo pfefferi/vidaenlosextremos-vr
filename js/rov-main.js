@@ -30,11 +30,13 @@ async function initSystem() {
 
     // Configurar cámara (Desactivar conflictos nativos)
     if (ROV.refs.cam) {
+        // Gyro (magicWindow) OFF by default on load — user enables explicitly via menu.
         ROV.refs.cam.setAttribute('look-controls', {
             touchEnabled: false,
             mouseEnabled: false,
-            magicWindowTrackingEnabled: true
+            magicWindowTrackingEnabled: false
         });
+        if (ROV.controlsUI && ROV.controlsUI.syncGyroButton) ROV.controlsUI.syncGyroButton(false);
     }
 
     // 4. Inicializar Localización (Vital: Await para evitar race conditions en UI)

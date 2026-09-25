@@ -86,9 +86,13 @@ ROV.actions = {
             }
 
             if (debugConsole) debugConsole.textContent = 'SYSTEM: Gyroscope OFF';
+            if (ROV.controlsUI && ROV.controlsUI.syncGyroButton) ROV.controlsUI.syncGyroButton(false);
+            return false;
         } else {
             cameraEl.setAttribute('look-controls', { magicWindowTrackingEnabled: true });
             if (debugConsole) debugConsole.textContent = 'SYSTEM: Gyroscope ON';
+            if (ROV.controlsUI && ROV.controlsUI.syncGyroButton) ROV.controlsUI.syncGyroButton(true);
+            return true;
         }
     },
 

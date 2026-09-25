@@ -12,6 +12,31 @@ ROV.controlsUI = {
         this.menu = document.getElementById('system-menu');
         this.setupEventListeners();
         this.setupBackHandler();
+        // Gyro defaults OFF on load — reflect that until user toggles.
+        this.syncGyroButton(false);
+    },
+
+    // Gyro toggle affordance: press flash + persistent ON/OFF state.
+    syncGyroButton: function (isOn) {
+        const btn = document.getElementById('menu-gyro');
+        if (!btn) return;
+        if (typeof isOn !== 'boolean') {
+            const cam = (window.ROV && ROV.refs && ROV.refs.cam) || document.getElementById('main-camera');
+            const cfg = cam ? cam.getAttribute('look-controls') : null;
+            isOn = !!(cfg && cfg.magicWindowTrackingEnabled);
+        }
+        btn.classList.toggle('gyro-on', isOn);
+        btn.classList.toggle('gyro-off', !isOn);
+        btn.setAttribute('aria-pressed', isOn ? 'true' : 'false');
+        const pill = document.getElementById('gyro-state');
+        if (pill) pill.textContent = isOn ? 'ON' : 'OFF';
+    },
+
+    flashGyroPress: function () {
+        const btn = document.getElementById('menu-gyro');
+        if (!btn) return;
+        btn.classList.add('gyro-pressed');
+        setTimeout(() => btn.classList.remove('gyro-pressed'), 180);
     },
 
     setupBackHandler: function () {
@@ -81,6 +106,7 @@ ROV.controlsUI = {
 
         bindPress(menuGyro, () => {
             if (window.ROV && ROV.actions && ROV.actions.toggleGyro) {
+                this.flashGyroPress();
                 ROV.actions.toggleGyro();
                 this.toggleMenu(false);
             }
