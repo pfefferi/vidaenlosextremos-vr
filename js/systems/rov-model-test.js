@@ -11,7 +11,8 @@ ROV.modelTest = {
         { id: 'navonly-clean-glb', base: 'assets/models/model-navonly-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Navonly clean (curl-cut, ghost-free) — GLB' },
         { id: 'navonly-clean-yup-glb', base: 'assets/models/model-navonly-clean-yup/', file: 'odm_textured_model_geo_yup.glb', label: 'S0883 Navonly clean Y-up (level, ghost-free) — GLB' },
         { id: 'navonly-sheet-yup-glb', base: 'assets/models/model-navonly-sheet-yup/', file: 'sheet_leveled_yup.glb', label: 'S0883 Navonly sheet Y-up (ultra detail, leveled) — GLB' },
-        { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB (NEW)' }
+        { id: 'navonly-optA-glb', base: 'assets/models/model-navonly-optA/', file: 'optA_settled_yup.glb', label: 'S0883 Navonly optA (settled overlay, double-surface) — GLB (NEW)' },
+        { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
     // loading list. Inert data only — find()/resolve()/init()/swap() read `models`
