@@ -165,8 +165,8 @@ ROV.modelHandler = {
         // }
 
         // 4. Ajuste dinámico de velocidad base según el tamaño del modelo
-        // Modelos grandes necesitan moverse más rápido
-        ROV.config.baseMoveSpeed = 0.02 + (Math.log10(maxDim + 1) * 0.03);
+        // Modelos grandes necesitan moverse más rápido (x10 forward-speed boost)
+        ROV.config.baseMoveSpeed = 10 * (0.02 + (Math.log10(maxDim + 1) * 0.03));
 
         console.log(`[ModelHandler] Modelo listo. Escala: ${scaleFactor.toFixed(4)}. Fog Far: ${Math.max(30, targetSize * 1.5)}`);
     },

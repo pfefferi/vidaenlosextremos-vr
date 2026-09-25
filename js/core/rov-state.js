@@ -2,7 +2,7 @@
 // Estado mutable de la aplicación
 ROV.state = {
     activeAction: null,    // Para controles táctiles de movimiento
-    currentLevelIndex: 5,  // Nivel de velocidad actual (0.5 en speedLevels)
+    currentLevelIndex: 7,  // Nivel de velocidad actual (0.5 en speedLevels)
     hudMode: 0,            // 0: Todo | 1: Telemetría | 2: Nada
     debounce: {
         hud: false,
