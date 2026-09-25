@@ -8,13 +8,14 @@ ROV.modelTest = {
     models: [
         { id: 'navonly-glb', base: 'assets/models/model-navonly/', file: 'odm_textured_model_geo.glb', label: 'S0883 Navonly full-track (ghost-free) — GLB' },
         { id: 'navonly-ribbon-glb', base: 'assets/models/model-navonly-ribbon/', file: 'ribbon_leveled.glb', label: 'S0883 Navonly ribbon (leveled, floating) — GLB (NEW)' },
-        { id: 'navonly-clean-glb', base: 'assets/models/model-navonly-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Navonly clean (curl-cut, ghost-free) — GLB' }
+        { id: 'navonly-clean-glb', base: 'assets/models/model-navonly-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Navonly clean (curl-cut, ghost-free) — GLB' },
+        { id: 'navonly-clean-yup-glb', base: 'assets/models/model-navonly-clean-yup/', file: 'odm_textured_model_geo_yup.glb', label: 'S0883 Navonly clean Y-up (level, ghost-free) — GLB (NEW)' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
     // loading list. Inert data only — find()/resolve()/init()/swap() read `models`
     // above, so archived ids no longer load (?model=<archived> falls back to default).
     // GLB files stay in the repo untouched. To restore, move entries back into `models`.
-    // Explicit default pin: navonly-clean is LAST so defaultId() keeps resolving to it
+    // Explicit default pin: navonly-clean-yup is LAST so defaultId() keeps resolving to it
     // (newest-default rule survives verbatim — future uploads append after it and take
     // over as default automatically). Do NOT reorder without a user order.
     archived: [
