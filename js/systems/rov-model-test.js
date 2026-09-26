@@ -53,6 +53,16 @@ ROV.modelTest = {
         { id: 'scalefix-clean-glb', base: 'assets/models/model-scalefix-clean/', file: 'odm_textured_model_geo_clean.glb', label: 'S0883 Scalefix clean — GLB' }
     ],
     current: 'glb',
+    // Load serialization: A-Frame 1.4.2 gltf-model has no stale-load guard —
+    // every in-flight load attaches on arrival (last arrival wins). A swap
+    // issued while another load is in flight would lose to the older bytes:
+    // console shows model-loaded but the OLD mesh stays on screen. So only
+    // one load flies at a time; a pick made mid-load is queued (latest wins)
+    // and initiates when the in-flight load settles. `loading` is also set
+    // by loader.js for the initial test-site load.
+    loading: false,
+    _pending: null,
+    _wired: false,
     // Standing rules: (1) the newest model (last entry) is the default on load —
     // append new models at the end and they become the default automatically.
     // (2) the newest upload batch carries a ' (NEW)' suffix in switcher labels;
@@ -121,6 +131,31 @@ ROV.modelTest = {
         const wanted = new URLSearchParams(window.location.search).get('model');
         select.value = this.find(wanted) ? wanted : this.defaultId();
         row.style.display = 'block';
+
+        // Settlement hook (once): clears the in-flight flag on every load or
+        // error and starts a queued pick, if any. loader.js sets `loading`
+        // for the initial test-site load so an early pick queues instead of
+        // racing it.
+        if (!this._wired) {
+            this._wired = true;
+            const mapEntity = document.getElementById('map-entity');
+            if (mapEntity) {
+                mapEntity.addEventListener('model-loaded', () => this._settle());
+                mapEntity.addEventListener('model-error', () => this._settle());
+            }
+        }
+    },
+
+    _settle: function () {
+        this.loading = false;
+        const next = this._pending;
+        this._pending = null;
+        if (next && next !== this.current) {
+            this.swap(next);
+        } else {
+            const sel = document.getElementById('model-select');
+            if (sel) sel.value = this.current;
+        }
     },
 
     /**
@@ -143,6 +178,18 @@ ROV.modelTest = {
         const mapEntity = document.getElementById('map-entity');
         if (!m || !mapEntity) return;
 
+        // A pick made while a load is in flight is queued (latest wins) —
+        // initiating it now would race and the older bytes could win.
+        if (this._wired && this.loading) {
+            this._pending = m.id;
+            const queued = document.getElementById('model-select');
+            if (queued) queued.value = m.id;
+            const debugQ = document.getElementById('debug-console');
+            if (debugQ) debugQ.textContent = `SYSTEM: Queued model ${m.label}...`;
+            console.log(`[ModelTest] Queued ${m.id} (load in flight)`);
+            return;
+        }
+
         const debug = document.getElementById('debug-console');
         if (debug) debug.textContent = `SYSTEM: Loading model ${m.label}...`;
 
@@ -151,6 +198,7 @@ ROV.modelTest = {
 
         this.current = m.id;
         this.activeBase = this.dirFor(m);
+        this.loading = true;
 
         if (m.mtl) {
             mapEntity.setAttribute('obj-model', `obj: url(${this.dirFor(m) + m.file}); mtl: url(${this.dirFor(m) + m.mtl})`);

@@ -64,6 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const mtlPath = (window.ROV && ROV.modelTest)
                 ? ROV.modelTest.currentMtlPath()
                 : null;
+            // Mark the test-site load in flight so an early pick queues
+            // instead of racing it (A-Frame attaches last arrival wins).
+            if (window.ROV && ROV.modelTest && ROV.modelTest.isActiveSite()) ROV.modelTest.loading = true;
             loadModelDirectly(modelPath, mtlPath);
         })
         .catch(err => {
