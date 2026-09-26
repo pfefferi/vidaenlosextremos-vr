@@ -70,10 +70,13 @@ ROV.modelHandler = {
         // escalar y el modelo se vuelve invisible). Resto de hábitats: intacto.
         let fitBox = robustFit
             ? (function () {
-                // Reset previo: en un swap el entity aún trae la escala del modelo
-                // anterior; sin esto el re-encuadre mediría mundo ya escalado y el
-                // factor saldría ~1.0 (modelo gigante). Solo model_test.
+                // Reset previo: en un swap el entity aún trae la escala Y la
+                // posición del modelo anterior; sin esto el re-encuadre mediría
+                // mundo desplazado y el centro saldría con el offset viejo
+                // incluido (el modelo nuevo caía a kilómetros, invisible).
+                // Solo model_test.
                 mapEntity.setAttribute('scale', '1 1 1');
+                mapEntity.setAttribute('position', '0 0 0');
                 mapEntity.object3D.updateMatrixWorld(true, true);
                 return ROV.modelHandler.densityFitBox(mesh);
             })()
