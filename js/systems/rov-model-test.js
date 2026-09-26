@@ -21,7 +21,10 @@ ROV.modelTest = {
         { id: 'hero3nav-glb', base: 'assets/models/model-hero3nav/', file: 'hero3nav_yup.glb', label: 'S0883 Hero3 NAV-only island (level, 3deg) — GLB' },
         { id: 'hero3sift-glb', base: 'assets/models/model-hero3sift/', file: 'hero3sift_yup.glb', label: 'S0883 Hero3 SIFT island (flattest, 1.5deg) — GLB' },
         { id: 'ribbon-tuned-glb', base: 'assets/models/model-ribbon-tuned/', file: 'ribbon_tuned_yup.glb', label: 'S0883 Ribbon vertebrae pieces (16fr, tuned) — GLB' },
-        { id: 'ribbon-tuned-fs-glb', base: 'assets/models/model-ribbon-tuned-fs/', file: 'tuned_yup_fs.glb', label: 'S0883 Ribbon tuned FrontSide clean (Erwin, texture-top) — GLB (NEW)' },
+        { id: 'ribbon-tuned-fs-glb', base: 'assets/models/model-ribbon-tuned-fs/', file: 'tuned_yup_fs.glb', label: 'S0883 Ribbon tuned FrontSide clean (Erwin, texture-top) — GLB' },
+        { id: 'ribbon-standalone-tuned-glb', base: 'assets/models/model-ribbon-standalone/', file: 'ribbon_standalone_fs.glb', label: 'S0883 Ribbon standalone tuned (flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-standalone-base-glb', base: 'assets/models/model-ribbon-standalone-base/', file: 'ribbon_standalone_base_fs.glb', label: 'S0883 Ribbon standalone baseline (minimal, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-standalone-lit-glb', base: 'assets/models/model-ribbon-standalone-lit/', file: 'ribbon_standalone_lit_fs.glb', label: 'S0883 Ribbon standalone lighting-leveled (flipped FrontSide) — GLB (NEW)' },
         { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
