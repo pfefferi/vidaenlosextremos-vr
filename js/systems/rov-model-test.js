@@ -41,7 +41,10 @@ ROV.modelTest = {
         { id: 'ribbon-join-c10-s345-glb', base: 'assets/models/model-ribbon-join-c10/', file: 'join_c10_s-3.45.glb', label: 'S0883 Ribbon join C10 seat s-3.45 (sweep, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c11-glb', base: 'assets/models/model-ribbon-join-c11/', file: 'join_c11_attempt.glb', label: 'S0883 Ribbon join C11 NE-gap transplant (attempt NEGATIVE scar-not-socket, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c12-glb', base: 'assets/models/model-ribbon-join-c12/', file: 'join_c12_attempt.glb', label: 'S0883 Ribbon join C12 all-window-x-interruption (variant CLOSED, flipped FrontSide) — GLB' },
-        { id: 'ribbon-join-c15-glb', base: 'assets/models/model-ribbon-join-c15/', file: 'join_c15_attempt.glb', label: 'S0883 Ribbon join C15 attitude-free fit (leveling NOT the blocker, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c15-glb', base: 'assets/models/model-ribbon-join-c15/', file: 'join_c15_attempt.glb', label: 'S0883 Ribbon join C15 attitude-free fit (leveling NOT the blocker, flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c16a-glb', base: 'assets/models/model-ribbon-join-c16/', file: 'join_c16_a_incolumn.glb', label: 'S0883 Ribbon join C16 control in-column seat (discriminator control, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c16b-glb', base: 'assets/models/model-ribbon-join-c16/', file: 'join_c16_b_patch.glb', label: 'S0883 Ribbon join C16 control flush-patch seat (discriminator control, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c17-glb', base: 'assets/models/model-ribbon-join-c17/', file: 'join_c17_attempt.glb', label: 'S0883 Ribbon join C17 micro-bit refit (split verdict, flipped FrontSide) — GLB (NEW)' },
         { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
