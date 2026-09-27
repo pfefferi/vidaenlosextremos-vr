@@ -22,9 +22,12 @@ ROV.modelTest = {
         { id: 'hero3sift-glb', base: 'assets/models/model-hero3sift/', file: 'hero3sift_yup.glb', label: 'S0883 Hero3 SIFT island (flattest, 1.5deg) — GLB' },
         { id: 'ribbon-tuned-glb', base: 'assets/models/model-ribbon-tuned/', file: 'ribbon_tuned_yup.glb', label: 'S0883 Ribbon vertebrae pieces (16fr, tuned) — GLB' },
         { id: 'ribbon-tuned-fs-glb', base: 'assets/models/model-ribbon-tuned-fs/', file: 'tuned_yup_fs.glb', label: 'S0883 Ribbon tuned FrontSide clean (Erwin, texture-top) — GLB' },
-        { id: 'ribbon-standalone-tuned-glb', base: 'assets/models/model-ribbon-standalone/', file: 'ribbon_standalone_fs.glb', label: 'S0883 Ribbon standalone tuned (flipped FrontSide) — GLB (NEW)' },
-        { id: 'ribbon-standalone-base-glb', base: 'assets/models/model-ribbon-standalone-base/', file: 'ribbon_standalone_base_fs.glb', label: 'S0883 Ribbon standalone baseline (minimal, flipped FrontSide) — GLB (NEW)' },
-        { id: 'ribbon-standalone-lit-glb', base: 'assets/models/model-ribbon-standalone-lit/', file: 'ribbon_standalone_lit_fs.glb', label: 'S0883 Ribbon standalone lighting-leveled (flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-standalone-tuned-glb', base: 'assets/models/model-ribbon-standalone/', file: 'ribbon_standalone_fs.glb', label: 'S0883 Ribbon standalone tuned (flipped FrontSide) — GLB' },
+        { id: 'ribbon-standalone-base-glb', base: 'assets/models/model-ribbon-standalone-base/', file: 'ribbon_standalone_base_fs.glb', label: 'S0883 Ribbon standalone baseline (minimal, flipped FrontSide) — GLB' },
+        { id: 'ribbon-standalone-lit-glb', base: 'assets/models/model-ribbon-standalone-lit/', file: 'ribbon_standalone_lit_fs.glb', label: 'S0883 Ribbon standalone lighting-leveled (flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c1-substrip-glb', base: 'assets/models/model-ribbon-join-c1/', file: 'c1_substrip_placed.glb', label: 'S0883 Ribbon join C1 narrow-fit sub-strip (attempt, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c1-full-glb', base: 'assets/models/model-ribbon-join-c1/', file: 'c1_ribbon_placed_full.glb', label: 'S0883 Ribbon join C1 full ribbon in place (attempt, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c2-glb', base: 'assets/models/model-ribbon-join-c2/', file: 'ribbon_join_c2.glb', label: 'S0883 Ribbon join C2 broad-fit (attempt, flipped FrontSide) — GLB (NEW)' },
         { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
