@@ -56,8 +56,9 @@ ROV.modelTest = {
         { id: 'ribbon-join-c32-glb', base: 'assets/models/model-ribbon-join-c32/', file: 'join_c32_attempt.glb', label: 'S0883 Ribbon join C32 twin-x-NE-slots (NEGATIVE harder, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c33-glb', base: 'assets/models/model-ribbon-join-c33/', file: 'join_c33_attempt.glb', label: 'S0883 Ribbon join C33 fragment restack (INSIDE envelope, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c35-glb', base: 'assets/models/model-ribbon-join-c35/', file: 'join_c35_attempt.glb', label: 'S0883 Ribbon join C35 twin in-column control (matrix complete, flipped FrontSide) — GLB' },
-        { id: 'ribbon-join-c37-glb', base: 'assets/models/model-ribbon-join-c37/', file: 'join_c37_attempt.glb', label: 'S0883 Ribbon join C37 fragment transplant (NEGATIVE genuine misfit, flipped FrontSide) — GLB (NEW)' },
-        { id: 'ribbon-join-c38-glb', base: 'assets/models/model-ribbon-join-c38/', file: 'join_c38_attempt.glb', label: 'S0883 Ribbon join C38 twin at flush patch (matrix complete, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c37-glb', base: 'assets/models/model-ribbon-join-c37/', file: 'join_c37_attempt.glb', label: 'S0883 Ribbon join C37 fragment transplant (NEGATIVE genuine misfit, flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c38-glb', base: 'assets/models/model-ribbon-join-c38/', file: 'join_c38_attempt.glb', label: 'S0883 Ribbon join C38 twin at flush patch (matrix complete, flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c41-glb', base: 'assets/models/model-ribbon-join-c41/', file: 'join_c41_attempt.glb', label: 'S0883 Ribbon join C41 near-miss donor (NEGATIVE class closed, flipped FrontSide) — GLB (NEW)' },
         { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
