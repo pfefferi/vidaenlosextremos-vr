@@ -33,9 +33,14 @@ ROV.modelTest = {
         { id: 'ribbon-join-c4-glb', base: 'assets/models/model-ribbon-join-c4/', file: 'join_c4_attempt.glb', label: 'S0883 Ribbon join C4 A2-x-interruption (attempt NEGATIVE, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c5-glb', base: 'assets/models/model-ribbon-join-c5/', file: 'join_c5_attempt.glb', label: 'S0883 Ribbon join C5 bright-half (attempt NEGATIVE, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c6-glb', base: 'assets/models/model-ribbon-join-c6/', file: 'join_c6_attempt.glb', label: 'S0883 Ribbon join C6 max-dark-x-interruption (attempt NEGATIVE, flipped FrontSide) — GLB' },
-        { id: 'ribbon-join-c7-glb', base: 'assets/models/model-ribbon-join-c7/', file: 'join_c7_attempt.glb', label: 'S0883 Ribbon join C7 east-x-interruption (attempt NEGATIVE, donor axis closed, flipped FrontSide) — GLB (NEW)' },
-        { id: 'ribbon-join-c8-glb', base: 'assets/models/model-ribbon-join-c8/', file: 'join_c8_attempt.glb', label: 'S0883 Ribbon join C8 single-block transplant (COMPATIBLE, flipped FrontSide) — GLB (NEW)' },
-        { id: 'ribbon-join-c9-glb', base: 'assets/models/model-ribbon-join-c9/', file: 'join_c9_attempt.glb', label: 'S0883 Ribbon join C9 all-window-x-stumps (variant CLOSED, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c7-glb', base: 'assets/models/model-ribbon-join-c7/', file: 'join_c7_attempt.glb', label: 'S0883 Ribbon join C7 east-x-interruption (attempt NEGATIVE, donor axis closed, flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c8-glb', base: 'assets/models/model-ribbon-join-c8/', file: 'join_c8_attempt.glb', label: 'S0883 Ribbon join C8 single-block transplant (COMPATIBLE, flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c9-glb', base: 'assets/models/model-ribbon-join-c9/', file: 'join_c9_attempt.glb', label: 'S0883 Ribbon join C9 all-window-x-stumps (variant CLOSED, flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c10-s300-glb', base: 'assets/models/model-ribbon-join-c10/', file: 'join_c10_s-3.00.glb', label: 'S0883 Ribbon join C10 seat s-3.00 (sweep center, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c10-s255-glb', base: 'assets/models/model-ribbon-join-c10/', file: 'join_c10_s-2.55.glb', label: 'S0883 Ribbon join C10 seat s-2.55 (sweep, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c10-s345-glb', base: 'assets/models/model-ribbon-join-c10/', file: 'join_c10_s-3.45.glb', label: 'S0883 Ribbon join C10 seat s-3.45 (sweep, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c11-glb', base: 'assets/models/model-ribbon-join-c11/', file: 'join_c11_attempt.glb', label: 'S0883 Ribbon join C11 NE-gap transplant (attempt NEGATIVE scar-not-socket, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c12-glb', base: 'assets/models/model-ribbon-join-c12/', file: 'join_c12_attempt.glb', label: 'S0883 Ribbon join C12 all-window-x-interruption (variant CLOSED, flipped FrontSide) — GLB (NEW)' },
         { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
