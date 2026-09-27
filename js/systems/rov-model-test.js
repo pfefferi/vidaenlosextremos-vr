@@ -52,8 +52,10 @@ ROV.modelTest = {
         { id: 'ribbon-join-c27-glb', base: 'assets/models/model-ribbon-join-c27/', file: 'join_c27_attempt.glb', label: 'S0883 Ribbon join C27 vertical restack (NEGATIVE too tall, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c28-glb', base: 'assets/models/model-ribbon-join-c28/', file: 'join_c28_attempt.glb', label: 'S0883 Ribbon join C28 wall-conforming fit (NEGATIVE level vindicated, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c29-glb', base: 'assets/models/model-ribbon-join-c29/', file: 'join_c29_attempt.glb', label: 'S0883 Ribbon join C29 twin-dome donor (COMPATIBLE, flipped FrontSide) — GLB' },
-        { id: 'ribbon-join-c30-glb', base: 'assets/models/model-ribbon-join-c30/', file: 'join_c30_attempt.glb', label: 'S0883 Ribbon join C30 cap restack (BORDERLINE, flipped FrontSide) — GLB (NEW)' },
-        { id: 'ribbon-join-c32-glb', base: 'assets/models/model-ribbon-join-c32/', file: 'join_c32_attempt.glb', label: 'S0883 Ribbon join C32 twin-x-NE-slots (NEGATIVE harder, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c30-glb', base: 'assets/models/model-ribbon-join-c30/', file: 'join_c30_attempt.glb', label: 'S0883 Ribbon join C30 cap restack (BORDERLINE, flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c32-glb', base: 'assets/models/model-ribbon-join-c32/', file: 'join_c32_attempt.glb', label: 'S0883 Ribbon join C32 twin-x-NE-slots (NEGATIVE harder, flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c33-glb', base: 'assets/models/model-ribbon-join-c33/', file: 'join_c33_attempt.glb', label: 'S0883 Ribbon join C33 fragment restack (INSIDE envelope, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c35-glb', base: 'assets/models/model-ribbon-join-c35/', file: 'join_c35_attempt.glb', label: 'S0883 Ribbon join C35 twin in-column control (matrix complete, flipped FrontSide) — GLB (NEW)' },
         { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
