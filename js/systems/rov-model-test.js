@@ -48,7 +48,10 @@ ROV.modelTest = {
         { id: 'ribbon-join-c18-glb', base: 'assets/models/model-ribbon-join-c18/', file: 'join_c18_attempt.glb', label: 'S0883 Ribbon join C18 A2-donor control (NEGATIVE on substance, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c19-glb', base: 'assets/models/model-ribbon-join-c19/', file: 'join_c19_attempt.glb', label: 'S0883 Ribbon join C19 contact congruence (INCONCLUSIVE-by-control, flipped FrontSide) — GLB' },
         { id: 'ribbon-join-c20-glb', base: 'assets/models/model-ribbon-join-c20/', file: 'join_c20_attempt.glb', label: 'S0883 Ribbon join C20 A2 donor control (NEGATIVE, flipped FrontSide) — GLB' },
-        { id: 'ribbon-join-c21-glb', base: 'assets/models/model-ribbon-join-c21/', file: 'join_c21_attempt.glb', label: 'S0883 Ribbon join C21 fracture-site receiver (site OCCUPIED, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c21-glb', base: 'assets/models/model-ribbon-join-c21/', file: 'join_c21_attempt.glb', label: 'S0883 Ribbon join C21 fracture-site receiver (site OCCUPIED, flipped FrontSide) — GLB' },
+        { id: 'ribbon-join-c27-glb', base: 'assets/models/model-ribbon-join-c27/', file: 'join_c27_attempt.glb', label: 'S0883 Ribbon join C27 vertical restack (NEGATIVE too tall, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c28-glb', base: 'assets/models/model-ribbon-join-c28/', file: 'join_c28_attempt.glb', label: 'S0883 Ribbon join C28 wall-conforming fit (NEGATIVE level vindicated, flipped FrontSide) — GLB (NEW)' },
+        { id: 'ribbon-join-c29-glb', base: 'assets/models/model-ribbon-join-c29/', file: 'join_c29_attempt.glb', label: 'S0883 Ribbon join C29 twin-dome donor (COMPATIBLE, flipped FrontSide) — GLB (NEW)' },
         { id: 'navonly-ultra-yup-glb', base: 'assets/models/model-navonly-ultra-yup/', file: 'odm_textured_model_geo_ultra_yup.glb', label: 'S0883 Navonly ultra Y-up (raw, densest) — GLB' }
     ],
     // ARCHIVED 2026-09-24 (user order): all pre-navonly entries moved OUT of the
